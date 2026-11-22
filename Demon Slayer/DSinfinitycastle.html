@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demon Slayer: Kimetsu no Yaiba — Infinity Castle</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Noto Serif JP, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['"Noto Serif JP"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        taisho: {
+                            black: '#09090b',
+                            surface: '#141418',
+                            card: '#1b1b22',
+                            crimson: '#b91c1c',
+                            flame: '#ea580c',
+                            gold: '#eab308',
+                            wisteria: '#a855f7',
+                            water: '#0284c7',
+                            thunder: '#facc15',
+                            beast: '#14b8a6',
+                            castle: '#7c3aed'
+                        }
+                    },
+                    backgroundImage: {
+                        'ichimatsu': 'repeating-conic-gradient(#121216 0% 25%, #18181f 0% 50%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Traditional Japanese Geometric Motifs & Custom Styles */
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+            overflow-x: hidden;
+        }
+
+        /* Asanoha (Hemp Leaf) Subtle Pattern Overlay */
+        .pattern-asanoha {
+            background-color: #111116;
+            background-image: radial-gradient(rgba(234, 179, 8, 0.08) 1px, transparent 1px),
+                              radial-gradient(rgba(185, 28, 28, 0.08) 1px, #111116 1px);
+            background-size: 28px 28px;
+            background-position: 0 0, 14px 14px;
+        }
+
+        /* Seigaiha (Wave) Pattern for Water & Mugen Night */
+        .pattern-seigaiha {
+            background-color: #0d1117;
+            background-image: radial-gradient(circle at 100% 150%, #0d1117 24%, rgba(234, 88, 12, 0.09) 25%, rgba(234, 88, 12, 0.09) 28%, #0d1117 29%, #0d1117 36%, rgba(234, 88, 12, 0.09) 36%, rgba(234, 88, 12, 0.09) 40%, transparent 40%),
+                              radial-gradient(circle at 0 150%, #0d1117 24%, rgba(234, 88, 12, 0.09) 25%, rgba(234, 88, 12, 0.09) 28%, #0d1117 29%, #0d1117 36%, rgba(234, 88, 12, 0.09) 36%, rgba(234, 88, 12, 0.09) 40%, transparent 40%),
+                              radial-gradient(circle at 50% 100%, rgba(234, 88, 12, 0.06) 10%, #0d1117 11%, #0d1117 23%, rgba(234, 88, 12, 0.06) 24%, rgba(234, 88, 12, 0.06) 30%, #0d1117 31%, #0d1117 43%, rgba(234, 88, 12, 0.06) 44%, rgba(234, 88, 12, 0.06) 50%, #0d1117 51%, #0d1117 63%, rgba(234, 88, 12, 0.06) 64%, rgba(234, 88, 12, 0.06) 71%, transparent 71%);
+            background-size: 64px 32px;
+        }
+
+        /* Uroko (Triangle Scale) Pattern */
+        .pattern-uroko {
+            background-color: #121217;
+            background-image: linear-gradient(135deg, rgba(185, 28, 28, 0.12) 25%, transparent 25%),
+                              linear-gradient(225deg, rgba(185, 28, 28, 0.12) 25%, transparent 25%),
+                              linear-gradient(45deg, rgba(234, 179, 8, 0.06) 25%, transparent 25%),
+                              linear-gradient(315deg, rgba(234, 179, 8, 0.06) 25%, #121217 25%);
+            background-position: 22px 0, 22px 0, 0 0, 0 0;
+            background-size: 44px 44px;
+            background-repeat: repeat;
+        }
+
+        /* Gold Shimmer Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #fef08a 0%, #eab308 45%, #ea580c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+
+        /* Card Hover Lift */
+        .nichirin-card {
+            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+        .nichirin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 32px -12px rgba(234, 88, 12, 0.24), 0 0 0 1px rgba(234, 179, 8, 0.25);
+        }
+
+        /* Hero Title Entrance & Flame Slash */
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slashPulse {
+            0%, 100% {
+                opacity: 0.7;
+                transform: scaleX(0.92);
+            }
+            50% {
+                opacity: 1;
+                transform: scaleX(1.06);
+            }
+        }
+        @keyframes hearthGlow {
+            0%, 100% {
+                opacity: 0.55;
+                transform: scale(0.98);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(1.04);
+            }
+        }
+        .animate-hero-rise {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+        .animate-slash-pulse {
+            animation: slashPulse 2.8s ease-in-out infinite;
+        }
+        .animate-hearth-glow {
+            animation: hearthGlow 4.2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-taisho-black text-zinc-100 font-sans antialiased selection:bg-orange-600 selection:text-white">
+
+    <!-- Atmospheric Particle Canvas (Wisteria Petals & Hinokami Embers) -->
+    <canvas id="atmosphereCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-[1]"></canvas>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-zinc-950/85 border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Emblem -->
+                <a href="#top" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-red-700 via-purple-600 to-amber-500 p-[1.5px] shadow-md shadow-purple-950/50">
+                        <div class="w-full h-full bg-zinc-950 rounded-[7px] flex items-center justify-center font-jpSerif font-black text-amber-400 text-sm tracking-tighter">
+                            城
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold text-sm sm:text-base tracking-wider text-white group-hover:text-amber-400 transition-colors">
+                            INFINITY CASTLE
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-zinc-400 font-jpSerif">
+                            劇場版「鬼滅の刃」無限城編
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-300">
+                    <a href="#characters" class="hover:text-amber-400 transition-colors">Characters</a>
+                    <a href="#breathing" class="hover:text-amber-400 transition-colors">Breathing Forms</a>
+                    <a href="#episodes" class="hover:text-amber-400 transition-colors">Castle Acts</a>
+                    <a href="#videos" class="hover:text-amber-400 transition-colors">Trailers &amp; Links</a>
+                    <a href="#factions" class="hover:text-amber-400 transition-colors">Upper Ranks &amp; Hashira</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700/80 hover:border-amber-500/50 transition-all cursor-pointer"
+                        title="Switch background particle effect">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-purple-400"></span>
+                        <span id="particleLabel">Wisteria Petals</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 hover:bg-zinc-800 text-amber-300 border border-amber-500/30 hover:border-amber-400/70 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <span id="adminStatusIcon">🔒</span>
+                        <span id="adminStatusText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Hero Section: Shifting Infinity Castle & Final Battle Dawn -->
+    <section id="top" class="relative overflow-hidden border-b border-zinc-800/80 bg-[#09090d]">
+        <!-- Infinity Castle Lantern & Dawn Backlight -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(147,51,234,0.22),rgba(234,88,12,0.12)_45%,transparent_75%)]"></div>
+        <div class="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-purple-900/20 via-red-950/15 to-transparent animate-hearth-glow pointer-events-none"></div>
+
+        <!-- Layered Castle & Mountain Silhouette Backdrop -->
+        <svg class="absolute inset-x-0 bottom-0 w-full h-56 sm:h-72 text-zinc-950/90 pointer-events-none" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="currentColor" fill-opacity="0.7" d="M0,224L180,156L360,202L560,118L760,188L980,104L1210,176L1440,126L1440,320L0,320Z"></path>
+            <path fill="#09090b" d="M0,256L220,192L450,238L690,164L930,222L1180,158L1440,210L1440,320L0,320Z"></path>
+            <rect x="640" y="96" width="160" height="14" fill="rgba(168,85,247,0.16)"></rect>
+            <rect x="665" y="72" width="110" height="24" fill="rgba(234,179,8,0.12)"></rect>
+        </svg>
+
+        <!-- Decorative Taisho Border Accent -->
+        <div class="h-1.5 w-full bg-gradient-to-r from-purple-700 via-amber-500 to-red-700 relative z-10"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
+            <div class="max-w-3xl">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-purple-950/55 border border-purple-500/35 text-amber-300 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-purple-950/50">
+                    <span class="font-jpSerif text-purple-300 font-black">城</span>
+                    <span>Demon Slayer: Kimetsu no Yaiba</span>
+                    <span class="px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-400/30 font-jpSerif text-[11px] text-amber-200">無限城編</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.85)]">INFINITY</span>
+                    <span class="text-gold-gradient block drop-shadow-[0_4px_24px_rgba(168,85,247,0.28)]">CASTLE ARC</span>
+                </h1>
+
+                <!-- Slash Divider -->
+                <div class="animate-hero-rise-delay-1 flex items-center gap-3 my-5">
+                    <span class="h-[2px] w-24 sm:w-36 rounded-full bg-gradient-to-r from-purple-400 via-amber-300 to-transparent animate-slash-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.28em] text-amber-300/90 uppercase">無限の城 · Final Stronghold Showdown</span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-zinc-300 mb-6">
+                    劇場版「鬼滅の刃」無限城編 — 鬼殺隊と上弦の鬼たちの決戦
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+                    Pulled into <strong class="text-white">Nakime's</strong> ever-shifting labyrinth, the Demon Slayer Corps and Hashira confront <strong class="text-amber-300">Muzan Kibutsuji</strong> and the surviving <strong class="text-red-400">Upper Rank Demons</strong>—Akaza, Doma, and Kokushibo—in a relentless battle for dawn.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-700 via-red-700 to-amber-600 hover:from-purple-600 hover:to-amber-500 text-white font-semibold text-sm shadow-lg shadow-purple-950/50 transition-all">
+                        Explore Castle Acts
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-amber-200 border border-amber-500/30 font-semibold text-sm transition-all">
+                        ▶ Trailers &amp; Links
+                    </a>
+                    <a href="#breathing" class="px-6 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-100 border border-zinc-700 font-semibold text-sm transition-all">
+                        Breathing Forms
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Arc Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-zinc-800/80 pt-8">
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-400">8 Acts</div>
+                    <div class="text-xs text-zinc-400 mt-1">Labyrinth Chronicle</div>
+                </div>
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-purple-400">3 Upper</div>
+                    <div class="text-xs text-zinc-400 mt-1">Akaza · Doma · Kokushibo</div>
+                </div>
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-red-400">5 Forms</div>
+                    <div class="text-xs text-zinc-400 mt-1">Stone Breathing Kata</div>
+                </div>
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-cyan-400">10 Forms</div>
+                    <div class="text-xs text-zinc-400 mt-1">Water Breathing Kata</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 sm:py-24 pattern-asanoha border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-purple-400">Inside the Labyrinth</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Featured Combatants</h2>
+                </div>
+                <p class="text-zinc-400 text-sm max-w-md">
+                    Select a character card to inspect their role inside the Infinity Castle, sword style, and resolve.
+                </p>
+            </div>
+
+            <div id="characterGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Populated via JS -->
+            </div>
+
+            <!-- Active Character Spotlight Drawer -->
+            <div id="characterSpotlight" class="mt-8 bg-zinc-900/90 border border-zinc-800 rounded-2xl p-6 sm:p-8 transition-all">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Breathing Styles Explorer -->
+    <section id="breathing" class="relative z-[2] py-24 lg:py-28 overflow-x-clip pattern-seigaiha border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Pinnacle Swordsmanship</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Breathing Styles</h2>
+                <p class="text-zinc-400 text-sm sm:text-base mt-2">
+                    Explore the crushing power of Stone Breathing, the flowing precision of Water Breathing, and the sacred forms of Hinokami Kagura.
+                </p>
+            </div>
+
+            <!-- Style Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-10" role="tablist">
+                <button data-style="stone" class="breathing-tab active px-5 py-2.5 rounded-xl text-sm font-semibold bg-purple-600 text-white shadow-md shadow-purple-950/60 transition-all cursor-pointer">
+                    Stone Breathing (岩の呼吸)
+                </button>
+                <button data-style="water" class="breathing-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-sky-400/60 transition-all cursor-pointer">
+                    Water Breathing (水の呼吸)
+                </button>
+                <button data-style="hinokami" class="breathing-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-red-500/60 transition-all cursor-pointer">
+                    Hinokami Kagura (ヒノカミ神楽)
+                </button>
+            </div>
+
+            <!-- Breathing Style Content Panel -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left: Visual Crest & Style Summary -->
+                <div class="lg:col-span-4 min-w-0 bg-zinc-900/85 border border-zinc-800 rounded-2xl p-6 text-center">
+                    <div id="breathingArt" class="w-44 h-44 mx-auto mb-5 flex items-center justify-center">
+                        <!-- Animated SVG injected via JS -->
+                    </div>
+                    <h3 id="breathingTitle" class="font-serifDisplay text-2xl font-bold text-white"></h3>
+                    <p id="breathingJp" class="font-jpSerif text-sm text-amber-400 mt-1"></p>
+                    <p id="breathingDesc" class="text-zinc-400 text-sm mt-4 leading-relaxed"></p>
+                </div>
+
+                <!-- Right: Forms Grid -->
+                <div class="lg:col-span-8 min-w-0">
+                    <div id="breathingFormsList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Infinity Castle Acts & Navigation Guide -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 overflow-x-clip bg-zinc-950 border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-purple-400">Labyrinth Chronicle</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Infinity Castle Acts Guide</h2>
+                    <p class="text-zinc-400 text-sm mt-1.5">Showing all <strong class="text-amber-300">8 acts</strong> across the shifting rooms and Upper Rank confrontations.</p>
+                </div>
+
+                <!-- Search & Arc Filter -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="relative">
+                        <input id="episodeSearch" type="text" placeholder="Search act, character, or title..."
+                            class="w-full sm:w-64 bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-500 outline-none transition-colors">
+                    </div>
+                    <div id="arcFilters" class="flex flex-wrap gap-1.5">
+                        <button data-arc="All" class="arc-btn active px-3 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-zinc-950 cursor-pointer">All</button>
+                        <button data-arc="Castle Descent" class="arc-btn px-3 py-2 rounded-xl text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-amber-400/60 cursor-pointer">Descent</button>
+                        <button data-arc="Upper Rank Clash" class="arc-btn px-3 py-2 rounded-xl text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-amber-400/60 cursor-pointer">Upper Ranks</button>
+                        <button data-arc="Dawn Surge" class="arc-btn px-3 py-2 rounded-xl text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-amber-400/60 cursor-pointer">Dawn Surge</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Act & Arc Navigation Strip -->
+            <div class="mb-8 bg-zinc-900/75 border border-zinc-800 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <button id="prevEpisodeStepBtn" type="button"
+                        class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition-colors cursor-pointer">
+                        ← Prev Act
+                    </button>
+                    <button id="nextEpisodeStepBtn" type="button"
+                        class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition-colors cursor-pointer">
+                        Next Act →
+                    </button>
+                    <span id="episodeNavIndicator" class="ml-2 text-xs text-zinc-400 font-medium">Act 01 – 08</span>
+                </div>
+                <div id="episodeQuickJump" class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Acts Grid (All 8 visible immediately) -->
+            <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Theme Songs & Related Pages (External Navigation Only) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 overflow-x-clip pattern-uroko border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Official Pages &amp; Releases</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Trailers &amp; Page Links</h2>
+                </div>
+                <p class="text-zinc-400 text-sm max-w-md">
+                    Navigate directly to official Infinity Castle trailers, announcement hubs, and companion Demon Slayer pages.
+                </p>
+            </div>
+
+            <!-- PIN-Protected Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-zinc-900/95 border border-amber-500/40 rounded-2xl p-6 shadow-xl shadow-black/50">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-zinc-800">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400">Admin Mode Active</span>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-0.5">External Navigation Link Manager</h3>
+                        <p class="text-xs text-zinc-400 mt-1">Update page URLs for the 4 Trailers &amp; Themes, 4 Related Pages, and all 8 Infinity Castle Acts.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="saveAllAdminLinksBtn" type="button"
+                            class="px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500 hover:bg-amber-400 text-zinc-950 transition-colors cursor-pointer">
+                            Save All Links
+                        </button>
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminStudioBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/70 hover:bg-red-900/70 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminSaveBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-medium"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                    <!-- Trailers & Related Pages Link Editor -->
+                    <div class="bg-zinc-950/80 border border-zinc-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">Trailers, Themes &amp; Related Pages</h4>
+                        <div id="adminMediaAndPagesList" class="space-y-3 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+
+                    <!-- All 8 Acts Link Editor -->
+                    <div class="bg-zinc-950/80 border border-zinc-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-purple-400 mb-3">Infinity Castle Acts Links (Act 01 – 08)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Main Trailer & Theme Navigation Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7 min-w-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div id="trailerCardsList" class="contents">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Related Demon Slayer Pages -->
+                <div class="lg:col-span-5 min-w-0 bg-zinc-900/90 border border-zinc-800 rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-serifDisplay text-lg font-bold text-white">Related Pages</h3>
+                        <span class="text-xs text-zinc-400">External Links</span>
+                    </div>
+                    <div id="relatedPagesList" class="space-y-2.5">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Upper Rank Threat & The Nine Hashira -->
+    <section id="factions" class="relative z-[2] py-20 sm:py-24 bg-zinc-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <!-- Left Column: Key Infinity Castle Foes -->
+                <div class="lg:col-span-5">
+                    <span class="text-xs font-bold uppercase tracking-widest text-red-500">Demon Lord &amp; Upper Ranks</span>
+                    <h2 class="font-serifDisplay text-3xl font-bold text-white mt-1 mb-6">Castle Antagonists</h2>
+
+                    <div id="antagonistsList" class="space-y-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Right Column: The Nine Hashira -->
+                <div class="lg:col-span-7">
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Demon Slayer Corps Pillars</span>
+                    <h2 class="font-serifDisplay text-3xl font-bold text-white mt-1 mb-6">The Nine Hashira</h2>
+
+                    <div id="hashiraGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- Selected Hashira Quote Box -->
+                    <div id="hashiraQuoteBox" class="mt-5 bg-zinc-900/90 border border-amber-500/30 rounded-2xl p-5">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-zinc-800/90 bg-[#070709] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-amber-400 font-bold">城</span>
+                <span>Demon Slayer: Kimetsu no Yaiba — Infinity Castle Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface inspired by Taishō-era aesthetics • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Act Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-zinc-900 border border-zinc-700 rounded-2xl max-w-lg w-full p-6 sm:p-7 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button id="closeModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center cursor-pointer"
+                aria-label="Close modal">
+                ✕
+            </button>
+            <div id="modalBadge" class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-orange-950 text-amber-300 border border-orange-700/50 mb-3"></div>
+            <h3 id="modalTitle" class="font-serifDisplay text-2xl font-bold text-white"></h3>
+            <p id="modalJpTitle" class="font-jpSerif text-sm text-zinc-400 mt-0.5 mb-4"></p>
+            <p id="modalSynopsis" class="text-zinc-300 text-sm leading-relaxed mb-5"></p>
+            <div class="bg-zinc-950/80 border border-zinc-800 rounded-xl p-3.5 mb-5">
+                <div class="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold mb-1">Key Highlight</div>
+                <div id="modalHighlight" class="text-xs sm:text-sm text-amber-300 font-medium"></div>
+            </div>
+
+            <!-- External Navigation Link for This Act -->
+            <div class="mb-5">
+                <a id="modalActLink" href="#" target="_blank" rel="noopener noreferrer"
+                    class="w-full inline-flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-red-800/80 to-orange-700/80 hover:from-red-700 hover:to-orange-600 text-white text-xs sm:text-sm font-semibold border border-amber-400/30 transition-all">
+                    <span id="modalActLinkLabel">Open Act Page</span>
+                    <span>↗</span>
+                </a>
+            </div>
+
+            <!-- Inline Admin Quick URL Editor (Visible when Admin PIN 1960 is unlocked) -->
+            <div id="modalAdminLinkBox" class="hidden mb-5 bg-zinc-950 border border-amber-500/35 rounded-xl p-3.5">
+                <label for="modalAdminUrlInput" class="block text-[11px] font-bold uppercase tracking-wider text-amber-400 mb-1.5">
+                    Admin: Edit Act Navigation URL
+                </label>
+                <div class="flex gap-2">
+                    <input id="modalAdminUrlInput" type="url" placeholder="https://..."
+                        class="flex-1 bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                    <button id="modalAdminSaveUrlBtn" type="button"
+                        class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-amber-500 hover:bg-amber-400 text-zinc-950 cursor-pointer">
+                        Save
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+                <button id="modalDoneBtn" type="button" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-semibold text-sm cursor-pointer">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Login Modal (PIN: 1960, no hints shown) -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-zinc-900 border border-zinc-700 rounded-2xl max-w-sm w-full p-6 relative shadow-2xl">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center cursor-pointer"
+                aria-label="Close admin login">
+                ✕
+            </button>
+            <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400">Restricted Access</span>
+            <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Admin Link Manager</h3>
+            <p class="text-xs text-zinc-400 mt-1 mb-4">Enter administrator PIN to edit external navigation links.</p>
+
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" autocomplete="off" placeholder="Enter PIN"
+                    class="w-full bg-zinc-950 border border-zinc-700 focus:border-amber-400 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-500 outline-none">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Invalid PIN.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button id="cancelPinBtn" type="button" class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-semibold cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. INFINITY CASTLE DATA (Characters, Breathing Forms, Acts, Links, Factions)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'kimetsu_infinity_castle_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'tanjiro',
+                name: 'Tanjiro Kamado',
+                jpName: '竈門 炭治郎',
+                role: 'Demon Slayer',
+                breathing: 'Hinokami Kagura & Water Breathing',
+                nichirin: 'Jet Black',
+                accent: 'from-red-700 to-orange-600',
+                badgeColor: 'bg-red-950/90 text-red-300 border-red-700/40',
+                quote: 'We will end this night—and bring everyone back to the morning sun.',
+                bio: 'Advancing deep into the shifting stronghold with Giyu Tomioka, Tanjiro hones his Hinokami Kagura and Transparent World perception to face Upper Rank Three Akaza and Muzan Kibutsuji.'
+            },
+            {
+                id: 'giyu',
+                name: 'Giyu Tomioka',
+                jpName: '冨岡 義勇',
+                role: 'Water Hashira',
+                breathing: 'Water Breathing',
+                nichirin: 'Deep Blue',
+                accent: 'from-sky-600 to-blue-800',
+                badgeColor: 'bg-sky-950/90 text-sky-300 border-sky-700/40',
+                quote: 'I stand beside you, Kamado. Do not hesitate.',
+                bio: 'Fighting shoulder to shoulder with Tanjiro, the Water Hashira unlocks the Demon Slayer Mark and counters Akaza\'s relentless martial onslaught with tranquil precision.'
+            },
+            {
+                id: 'gyomei',
+                name: 'Gyomei Himejima',
+                jpName: '悲鳴嶼 行冥',
+                role: 'Stone Hashira',
+                breathing: 'Stone Breathing',
+                nichirin: 'Flail & Axe (Grey Stone)',
+                accent: 'from-purple-700 to-amber-700',
+                badgeColor: 'bg-purple-950/90 text-purple-300 border-purple-600/40',
+                quote: 'Namu Amida Butsu... let every strike carry our unbreakable vow.',
+                bio: 'The strongest Pillar of the Demon Slayer Corps wields a spiked flail and battle axe with devastating force against Upper Rank One Kokushibo inside the Infinity Castle.'
+            },
+            {
+                id: 'shinobu',
+                name: 'Shinobu Kocho',
+                jpName: '胡蝶 しのぶ',
+                role: 'Insect Hashira',
+                breathing: 'Insect Breathing (Wisteria Poison)',
+                nichirin: 'Wisteria-Tipped Thrust Blade',
+                accent: 'from-purple-600 to-fuchsia-800',
+                badgeColor: 'bg-purple-950/90 text-purple-300 border-purple-700/40',
+                quote: 'A quiet smile can conceal a blade prepared for years.',
+                bio: 'Confronting Upper Rank Two Doma in the dimensional hall of the Infinity Castle, Shinobu deploys years of calculated wisteria poison research and swift thrusts.'
+            },
+            {
+                id: 'zenitsu',
+                name: 'Zenitsu Agatsuma',
+                jpName: '我妻 善逸',
+                role: 'Demon Slayer',
+                breathing: 'Thunder Breathing (Seventh Form)',
+                nichirin: 'Pale Gold / Lightning',
+                accent: 'from-yellow-500 to-amber-600',
+                badgeColor: 'bg-yellow-950/90 text-yellow-300 border-yellow-600/40',
+                quote: 'This isn\'t a dream... and I\'m wide awake.',
+                bio: 'Stepping forward with newfound solemnity inside the Infinity Castle, Zenitsu faces former fellow disciple Kaigaku and unleashes his self-created Seventh Form: Flaming Thunder God.'
+            }
+        ];
+
+        const breathingStylesData = {
+            stone: {
+                title: 'Stone Breathing',
+                jp: '岩の呼吸 (Iwa no Kokyū)',
+                desc: 'A monumental, earth-shattering style combining a spiked flail and axe to crush armor and seismic shockwaves.',
+                color: '#a855f7',
+                forms: [
+                    { num: 'I', name: 'Serpentinite Bipolar', jp: '蛇紋岩・双極', desc: 'Hurls both the spiked flail and axe in a pincer trajectory to pin and smash the target.' },
+                    { num: 'II', name: 'Upper Smash', jp: '天面砕き', desc: 'A heavy two-weapon impact designed to shatter defenses from above.' },
+                    { num: 'III', name: 'Stone Skin', jp: '岩軀の膚', desc: 'A defensive stance using the chain and weapons to deflect incoming strikes.' },
+                    { num: 'IV', name: 'Volcanic Rock, Rapid Conquest', jp: '流紋岩・速征', desc: 'Sweeps the flail and axe across a wide arc to clear surrounding threats.' },
+                    { num: 'V', name: 'Arcs of Justice', jp: '瓦輪刑部', desc: 'A devastating chain-driven barrage that crushes foes in a roaring vortex.' }
+                ]
+            },
+            water: {
+                title: 'Water Breathing',
+                jp: '水の呼吸 (Mizu no Kokyū)',
+                desc: 'Adaptable, fluid swordsmanship that shifts effortlessly between defensive flow and high-speed strikes.',
+                color: '#0284c7',
+                forms: [
+                    { num: 'I', name: 'Water Surface Slash', jp: '水面斬り', desc: 'A focused horizontal slash executed with calm momentum.' },
+                    { num: 'II', name: 'Water Wheel', jp: '水車', desc: 'A spinning vertical arc that cuts cleanly through obstacles.' },
+                    { num: 'III', name: 'Flowing Dance', jp: '流流舞い', desc: 'Weaves past attacks while delivering continuous slashes.' },
+                    { num: 'IV', name: 'Striking Tide', jp: '打ち潮', desc: 'Chains multiple slashes together like surging waves.' },
+                    { num: 'V', name: 'Blessed Rain After the Drought', jp: '干天の慈雨', desc: 'A merciful, swift strike with minimal pain.' },
+                    { num: 'X', name: 'Constant Flux', jp: '生生流転', desc: 'A continuous rotating slash whose power compounds with every spin.' }
+                ]
+            },
+            hinokami: {
+                title: 'Hinokami Kagura',
+                jp: 'ヒノカミ神楽',
+                desc: 'The inherited solar dance refined through combat against the strongest demons in the Infinity Castle.',
+                color: '#ef4444',
+                forms: [
+                    { num: '01', name: 'Waltz', jp: '円舞', desc: 'A powerful leaping slash that cleaves through tough resistance.' },
+                    { num: '02', name: 'Clear Blue Sky', jp: '碧羅の天', desc: 'A full 360-degree spin that slices through incoming attacks.' },
+                    { num: '03', name: 'Raging Sun', jp: '烈日紅鏡', desc: 'Rapid twisting double slashes launched in succession.' },
+                    { num: '07', name: 'Sunflower Thrust', jp: '陽華突', desc: 'A single high-velocity thrust aimed straight at the target.' },
+                    { num: '12', name: 'Flame Dance', jp: '炎舞', desc: 'A two-part strike that restrains and severs in a blazing flow.' },
+                    { num: '13', name: 'Thirteenth Form', jp: '拾参ノ型', desc: 'The continuous linking of all twelve forms in an unbroken cycle.' }
+                ]
+            }
+        };
+
+        const defaultActsData = [
+            {
+                num: 1,
+                arc: 'Castle Descent',
+                title: 'Shifting Walls & The Infinity Castle',
+                jpTitle: '無限城への転落',
+                synopsis: 'As the Demon Slayer Corps converges on Muzan Kibutsuji, Nakime\'s biwa strums warp the architecture and scatter the Slayers and Hashira across endless rooms.',
+                highlight: 'Nakime\'s spatial manipulation separating the Corps into decisive duels.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                num: 2,
+                arc: 'Castle Descent',
+                title: 'Silent Pursuit in the Labyrinth',
+                jpTitle: '迷宮の追撃',
+                synopsis: 'Tamayo\'s poison and Yushiro\'s talismans assist the Corps from the shadows as Slayers navigate suspended bridges and inverted halls.',
+                highlight: 'Talisman recon mapping the shifting layout of the castle.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                num: 3,
+                arc: 'Upper Rank Clash',
+                title: 'Lotus Hall: Shinobu vs. Doma',
+                jpTitle: '上弦の弐・童磨戦',
+                synopsis: 'Shinobu Kocho faces Upper Rank Two Doma in a chamber ringed with lotus imagery, testing her wisteria poisons against his chilling Blood Demon Art.',
+                highlight: 'Shinobu\'s speed and layered wisteria poison strategy.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                num: 4,
+                arc: 'Upper Rank Clash',
+                title: 'Flash of Lightning: Zenitsu\'s Resolve',
+                jpTitle: '霹靂の覚悟',
+                synopsis: 'Alone in a shattered corridor, Zenitsu confronts a fallen ally turned demon and reveals a strike born from his own training.',
+                highlight: 'Zenitsu\'s solemn resolve and Seventh Form lightning.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                num: 5,
+                arc: 'Upper Rank Clash',
+                title: 'Compass Needle & The Demon Slayer Mark',
+                jpTitle: '羅針と痣の覚醒',
+                synopsis: 'Tanjiro and Giyu Tomioka clash against Upper Rank Three Akaza in a fierce martial duel where awakened Demon Slayer Marks surge to life.',
+                highlight: 'Tanjiro and Giyu\'s coordinated stand against Akaza.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                num: 6,
+                arc: 'Upper Rank Clash',
+                title: 'Echoes of Past & Red Blade',
+                jpTitle: '記憶の彼方と赫刀',
+                synopsis: 'Pushed to the brink, Tanjiro glimpses ancestral memories and unlocks a deeper understanding of battle spirit and blade resonance.',
+                highlight: 'Breaking through Akaza\'s Compass Needle detection.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                num: 7,
+                arc: 'Dawn Surge',
+                title: 'Crescent Moon Pillars: Upper Rank One',
+                jpTitle: '上弦の壱・黒死牟襲来',
+                synopsis: 'Gyomei Himejima and fellow Hashira confront Upper Rank One Kokushibo, whose Moon Breathing blades echo with ancient samurai mastery.',
+                highlight: 'Stone Breathing and allied Hashira clashing with Moon Breathing.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                num: 8,
+                arc: 'Dawn Surge',
+                title: 'Toward the Final Breakthrough',
+                jpTitle: '夜明けへの進軍',
+                synopsis: 'With the Infinity Castle trembling under coordinated strikes, the Demon Slayer Corps presses forward toward Muzan Kibutsuji\'s stronghold.',
+                highlight: 'Unrelenting Corps momentum toward the final confrontation.',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-main',
+                tag: 'Official Trailer',
+                title: 'Infinity Castle Official Trailer',
+                jp: '劇場版「鬼滅の刃」無限城編 本予告',
+                desc: 'Official trailer highlighting the shifting Infinity Castle, Hashira matchups, and theatrical release.',
+                url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Infinity+Castle+official+trailer'
+            },
+            {
+                id: 'trailer-teaser',
+                tag: 'Announcement',
+                title: 'Infinity Castle Trilogy Teaser',
+                jp: '「鬼滅の刃」無限城編 劇場版三部作 告知',
+                desc: 'Browse official announcement coverage for the three-part Infinity Castle theatrical event.',
+                url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Infinity+Castle+trilogy+teaser'
+            },
+            {
+                id: 'theme-main',
+                tag: 'Theme Song',
+                title: 'Infinity Castle Theme & OST',
+                jp: '主題歌・劇伴 情報',
+                desc: 'Explore official music releases and soundtrack updates for the Infinity Castle film.',
+                url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Infinity+Castle+theme+song'
+            },
+            {
+                id: 'scene-hashira',
+                tag: 'Special Feature',
+                title: 'Hashira & Upper Ranks Showcase',
+                jp: '柱・上弦の鬼 特別映像',
+                desc: 'Visit official previews and cast spotlights for the Hashira and Upper Rank demons.',
+                url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Infinity+Castle+Hashira+Upper+Ranks'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Official Anime Portal',
+                subtitle: 'kimetsu.com — News, cast & announcements',
+                url: 'https://kimetsu.com/'
+            },
+            {
+                id: 'page-castle',
+                title: 'Infinity Castle Official Hub',
+                subtitle: '劇場版「鬼滅の刃」無限城編 portal',
+                url: 'https://kimetsu.com/anime/mugenchenghen/'
+            },
+            {
+                id: 'page-hashira',
+                title: 'Demon Slayer Corps & Hashira',
+                subtitle: 'Explore the nine pillars of the Corps',
+                url: 'https://kimetsu.com/anime/'
+            },
+            {
+                id: 'page-manga',
+                title: 'Shonen Jump Manga Hub',
+                subtitle: 'Koyoharu Gotouge original series info',
+                url: 'https://www.shonenjump.com/j/rensai/kimetsu.html'
+            }
+        ];
+
+        const antagonistsData = [
+            {
+                name: 'Muzan Kibutsuji',
+                jp: '鬼舞辻 無惨',
+                rank: 'Demon Progenitor',
+                bda: 'Biokinesis & Cellular Control',
+                desc: 'The progenitor of all demons who retreats into the Infinity Castle to orchestrate the final battle against the Demon Slayer Corps.'
+            },
+            {
+                name: 'Kokushibo',
+                jp: '黒死牟',
+                rank: 'Upper Rank One',
+                bda: 'Moon Breathing & Flesh Blades',
+                desc: 'A terrifyingly skilled swordsman of the Twelve Kizuki who wields Moon Breathing techniques with lethal precision.'
+            },
+            {
+                name: 'Doma & Akaza',
+                jp: '童磨・猗窩座',
+                rank: 'Upper Rank Two & Three',
+                bda: 'Cryokinesis & Destructive Death',
+                desc: 'Two of the most formidable Upper Rank demons standing guard inside the shifting halls of the Infinity Castle.'
+            }
+        ];
+
+        const hashiraData = [
+            { name: 'Giyu Tomioka', title: 'Water Hashira', quote: 'Stand firm and press forward—every second counts.' },
+            { name: 'Shinobu Kocho', title: 'Insect Hashira', quote: 'Every ounce of poison and resolve is aimed at victory.' },
+            { name: 'Kyojuro Rengoku', title: 'Flame Hashira', quote: 'Set your heart ablaze—your spirit lights the way.' },
+            { name: 'Tengen Uzui', title: 'Sound Hashira', quote: 'Make it a grand, flashy triumph for the Corps!' },
+            { name: 'Muichiro Tokito', title: 'Mist Hashira', quote: 'Clear away the mist and strike with conviction.' },
+            { name: 'Mitsuri Kanroji', title: 'Love Hashira', quote: 'I\'ll protect everyone with all the strength I have!' },
+            { name: 'Gyomei Himejima', title: 'Stone Hashira', quote: 'Namu Amida Butsu... let us shatter the darkness together.' },
+            { name: 'Sanemi Shinazugawa', title: 'Wind Hashira', quote: 'Not a single demon leaves this castle standing!' },
+            { name: 'Obanai Iguro', title: 'Serpent Hashira', quote: 'Keep your eyes sharp—never drop your guard.' }
+        ];
+
+        // =========================================================================
+        // 2. PERSISTENT EXTERNAL LINK STATE (Admin PIN: 1960)
+        // =========================================================================
+        function cloneDefaults() {
+            return {
+                trailers: defaultTrailersData.map(item => ({ id: item.id, url: item.url })),
+                pages: defaultRelatedPagesData.map(item => ({ id: item.id, url: item.url })),
+                acts: defaultActsData.map(act => ({ num: act.num, url: act.url }))
+            };
+        }
+
+        function loadSavedLinks() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return cloneDefaults();
+                const parsed = JSON.parse(raw);
+                const base = cloneDefaults();
+
+                if (Array.isArray(parsed.trailers)) {
+                    base.trailers = base.trailers.map(def => {
+                        const found = parsed.trailers.find(x => x.id === def.id);
+                        return found && typeof found.url === 'string' && found.url.trim() ? { id: def.id, url: found.url.trim() } : def;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    base.pages = base.pages.map(def => {
+                        const found = parsed.pages.find(x => x.id === def.id);
+                        return found && typeof found.url === 'string' && found.url.trim() ? { id: def.id, url: found.url.trim() } : def;
+                    });
+                }
+                if (Array.isArray(parsed.acts)) {
+                    base.acts = base.acts.map(def => {
+                        const found = parsed.acts.find(x => Number(x.num) === Number(def.num));
+                        return found && typeof found.url === 'string' && found.url.trim() ? { num: def.num, url: found.url.trim() } : def;
+                    });
+                }
+                return base;
+            } catch (_) {
+                return cloneDefaults();
+            }
+        }
+
+        let savedLinks = loadSavedLinks();
+        let isAdminUnlocked = false;
+        let currentModalActNum = null;
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (_) {
+                // Ignore storage quota errors
+            }
+        }
+
+        function getTrailerUrl(id) {
+            const found = savedLinks.trailers.find(t => t.id === id);
+            if (found && found.url) return found.url;
+            const def = defaultTrailersData.find(t => t.id === id);
+            return def ? def.url : 'https://kimetsu.com/';
+        }
+
+        function getPageUrl(id) {
+            const found = savedLinks.pages.find(p => p.id === id);
+            if (found && found.url) return found.url;
+            const def = defaultRelatedPagesData.find(p => p.id === id);
+            return def ? def.url : 'https://kimetsu.com/';
+        }
+
+        function getActUrl(num) {
+            const found = savedLinks.acts.find(a => Number(a.num) === Number(num));
+            if (found && found.url) return found.url;
+            const def = defaultActsData.find(a => Number(a.num) === Number(num));
+            return def ? def.url : 'https://kimetsu.com/anime/mugenchenghen/';
+        }
+
+        function isValidHttpUrl(value) {
+            try {
+                const u = new URL(value.trim());
+                return u.protocol === 'https:' || u.protocol === 'http:';
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // =========================================================================
+        // 3. CHARACTERS RENDERING
+        // =========================================================================
+        const characterGrid = document.getElementById('characterGrid');
+        const characterSpotlight = document.getElementById('characterSpotlight');
+        let activeCharacterId = 'tanjiro';
+
+        function renderCharacters() {
+            if (!characterGrid || !characterSpotlight) return;
+
+            characterGrid.innerHTML = charactersData.map(char => {
+                const isSelected = char.id === activeCharacterId;
+                return `
+                    <button type="button" data-char="${char.id}"
+                        class="char-card text-left nichirin-card rounded-2xl p-5 bg-zinc-900/90 border ${isSelected ? 'border-amber-400 ring-2 ring-amber-400/25' : 'border-zinc-800'} flex flex-col justify-between cursor-pointer">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-white text-lg shadow-md mb-4">
+                                ${char.jpName.slice(0, 1)}
+                            </div>
+                            <span class="inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${char.badgeColor} mb-2">
+                                ${char.role}
+                            </span>
+                            <h3 class="font-serifDisplay font-bold text-lg text-white">${char.name}</h3>
+                            <p class="font-jpSerif text-xs text-zinc-400 mt-0.5">${char.jpName}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-800/80 text-xs text-amber-300/90 font-medium">
+                            View Dossier →
+                        </div>
+                    </button>
+                `;
+            }).join('');
+
+            const selected = charactersData.find(c => c.id === activeCharacterId) || charactersData[0];
+            characterSpotlight.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <div class="md:col-span-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border ${selected.badgeColor} mb-2">
+                            <span>${selected.role}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">${selected.name}</h3>
+                        <p class="font-jpSerif text-base text-amber-400 mt-0.5">${selected.jpName}</p>
+                        <div class="mt-4 space-y-1.5 text-xs text-zinc-300">
+                            <div><span class="text-zinc-500">Breathing / Style:</span> <strong class="text-white">${selected.breathing}</strong></div>
+                            <div><span class="text-zinc-500">Blade / Weapon:</span> <strong class="text-white">${selected.nichirin}</strong></div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-8 space-y-4">
+                        <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">${selected.bio}</p>
+                        <blockquote class="border-l-4 border-amber-400 pl-4 py-1 italic text-amber-200/95 text-sm sm:text-base bg-zinc-950/50 rounded-r-xl">
+                            “${selected.quote}”
+                        </blockquote>
+                    </div>
+                </div>
+            `;
+
+            characterGrid.querySelectorAll('.char-card').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activeCharacterId = btn.dataset.char;
+                    renderCharacters();
+                });
+            });
+        }
+
+        // =========================================================================
+        // 4. BREATHING STYLES EXPLORER
+        // =========================================================================
+        const breathingArt = document.getElementById('breathingArt');
+        const breathingTitle = document.getElementById('breathingTitle');
+        const breathingJp = document.getElementById('breathingJp');
+        const breathingDesc = document.getElementById('breathingDesc');
+        const breathingFormsList = document.getElementById('breathingFormsList');
+        let activeBreathingKey = 'stone';
+
+        function getBreathingSvg(key, color) {
+            const symbol = key === 'stone' ? '岩' : key === 'water' ? '水' : '陽';
+            return `
+                <svg viewBox="0 0 160 160" class="w-full h-full">
+                    <circle cx="80" cy="80" r="66" fill="none" stroke="${color}" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="6 6"></circle>
+                    <circle cx="80" cy="80" r="46" fill="${color}" fill-opacity="0.1" stroke="${color}" stroke-opacity="0.55" stroke-width="1.5"></circle>
+                    <polygon points="80,20 132,50 132,110 80,140 28,110 28,50" fill="none" stroke="${color}" stroke-width="2"></polygon>
+                    <text x="80" y="88" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="800" font-family="Noto Serif JP, serif">
+                        ${symbol}
+                    </text>
+                </svg>
+            `;
+        }
+
+        function renderBreathing(key) {
+            activeBreathingKey = key;
+            const style = breathingStylesData[key] || breathingStylesData.stone;
+
+            document.querySelectorAll('.breathing-tab').forEach(tab => {
+                const isActive = tab.dataset.style === key;
+                tab.classList.toggle('active', isActive);
+                if (isActive) {
+                    tab.className = 'breathing-tab active px-5 py-2.5 rounded-xl text-sm font-semibold bg-purple-600 text-white shadow-md shadow-purple-950/60 transition-all cursor-pointer';
+                } else {
+                    tab.className = 'breathing-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-amber-400/60 transition-all cursor-pointer';
+                }
+            });
+
+            if (breathingArt) breathingArt.innerHTML = getBreathingSvg(key, style.color);
+            if (breathingTitle) breathingTitle.textContent = style.title;
+            if (breathingJp) breathingJp.textContent = style.jp;
+            if (breathingDesc) breathingDesc.textContent = style.desc;
+
+            if (breathingFormsList) {
+                breathingFormsList.innerHTML = style.forms.map(form => `
+                    <div class="h-full bg-zinc-900/90 border border-zinc-800 hover:border-amber-500/40 rounded-2xl p-5 transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-zinc-950 text-amber-400 border border-zinc-800">
+                                    Form ${form.num}
+                                </span>
+                                <span class="font-jpSerif text-xs text-zinc-400">${form.jp}</span>
+                            </div>
+                            <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${form.name}</h4>
+                            <p class="text-xs text-zinc-400 leading-relaxed">${form.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        document.querySelectorAll('.breathing-tab').forEach(btn => {
+            btn.addEventListener('click', () => renderBreathing(btn.dataset.style));
+        });
+
+        // =========================================================================
+        // 5. INFINITY CASTLE ACTS GUIDE & NAVIGATION (All 8 Acts Shown Immediately)
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const episodeQuickJump = document.getElementById('episodeQuickJump');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+        let selectedArc = 'All';
+        let highlightedActNum = null;
+
+        function getFilteredActs() {
+            const query = (episodeSearch ? episodeSearch.value : '').trim().toLowerCase();
+            return defaultActsData.filter(act => {
+                const matchesArc = selectedArc === 'All' || act.arc === selectedArc;
+                const matchesQuery = !query ||
+                    String(act.num).includes(query) ||
+                    act.title.toLowerCase().includes(query) ||
+                    act.jpTitle.toLowerCase().includes(query) ||
+                    act.synopsis.toLowerCase().includes(query) ||
+                    act.highlight.toLowerCase().includes(query);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderQuickJump() {
+            if (!episodeQuickJump) return;
+            episodeQuickJump.innerHTML = defaultActsData.map(act => {
+                const isCurrent = highlightedActNum === act.num;
+                return `
+                    <button type="button" data-jump-act="${act.num}"
+                        class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors cursor-pointer shrink-0 ${isCurrent ? 'bg-amber-500 text-zinc-950' : 'bg-zinc-950 text-zinc-300 hover:bg-zinc-800 border border-zinc-800'}">
+                        ${String(act.num).padStart(2, '0')}
+                    </button>
+                `;
+            }).join('');
+
+            episodeQuickJump.querySelectorAll('[data-jump-act]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const num = Number(btn.dataset.jumpAct);
+                    highlightedActNum = num;
+                    renderEpisodes();
+                    const card = episodesGrid?.querySelector(`[data-act-card="${num}"]`);
+                    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                });
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredActs();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultActsData.length
+                    ? 'Showing All Acts 01 – 08'
+                    : `Showing ${list.length} of ${defaultActsData.length} Acts`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-zinc-900/70 border border-zinc-800 rounded-2xl p-8 text-center">
+                        <p class="text-zinc-300 font-medium">No Infinity Castle acts match your filter.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-amber-500 text-zinc-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    selectedArc = 'All';
+                    if (episodeSearch) episodeSearch.value = '';
+                    document.querySelectorAll('.arc-btn').forEach(b => {
+                        const isAll = b.dataset.arc === 'All';
+                        b.className = isAll
+                            ? 'arc-btn active px-3 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-zinc-950 cursor-pointer'
+                            : 'arc-btn px-3 py-2 rounded-xl text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-amber-400/60 cursor-pointer';
+                    });
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(act => {
+                const actUrl = getActUrl(act.num);
+                const isFocused = highlightedActNum === act.num;
+                return `
+                    <article data-act-card="${act.num}"
+                        class="nichirin-card rounded-2xl bg-zinc-900/90 border ${isFocused ? 'border-amber-400 ring-2 ring-amber-400/25' : 'border-zinc-800'} p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="font-serifDisplay font-extrabold text-xs tracking-wider px-2.5 py-1 rounded-md bg-gradient-to-r from-purple-800/80 to-red-800/80 text-amber-200 border border-amber-500/25">
+                                    ACT ${String(act.num).padStart(2, '0')}
+                                </span>
+                                <span class="text-[11px] font-medium text-zinc-400">${act.arc}</span>
+                            </div>
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug">${act.title}</h3>
+                            <p class="font-jpSerif text-xs text-zinc-400 mt-0.5 mb-2.5">${act.jpTitle}</p>
+                            <p class="text-xs text-zinc-300 leading-relaxed line-clamp-3">${act.synopsis}</p>
+                        </div>
+
+                        <div class="mt-4 pt-3.5 border-t border-zinc-800/80 flex items-center justify-between gap-2">
+                            <button type="button" data-open-act="${act.num}"
+                                class="text-xs font-semibold text-amber-300 hover:text-amber-200 transition-colors cursor-pointer">
+                                Details →
+                            </button>
+                            <a href="${actUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-100 text-[11px] font-semibold border border-zinc-700 transition-colors">
+                                <span>Visit</span>
+                                <span>↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('[data-open-act]').forEach(btn => {
+                btn.addEventListener('click', () => openEpisodeModal(Number(btn.dataset.openAct)));
+            });
+
+            renderQuickJump();
+        }
+
+        document.querySelectorAll('.arc-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedArc = btn.dataset.arc;
+                document.querySelectorAll('.arc-btn').forEach(b => {
+                    const active = b.dataset.arc === selectedArc;
+                    b.className = active
+                        ? 'arc-btn active px-3 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-zinc-950 cursor-pointer'
+                        : 'arc-btn px-3 py-2 rounded-xl text-xs font-semibold bg-zinc-900 text-zinc-300 border border-zinc-700 hover:border-amber-400/60 cursor-pointer';
+                });
+                renderEpisodes();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', () => renderEpisodes());
+
+        document.getElementById('prevEpisodeStepBtn')?.addEventListener('click', () => {
+            const current = highlightedActNum ?? 1;
+            highlightedActNum = current <= 1 ? defaultActsData.length : current - 1;
+            renderEpisodes();
+            episodesGrid?.querySelector(`[data-act-card="${highlightedActNum}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        document.getElementById('nextEpisodeStepBtn')?.addEventListener('click', () => {
+            const current = highlightedActNum ?? 0;
+            highlightedActNum = current >= defaultActsData.length ? 1 : current + 1;
+            renderEpisodes();
+            episodesGrid?.querySelector(`[data-act-card="${highlightedActNum}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // =========================================================================
+        // 6. ACT DETAIL MODAL
+        // =========================================================================
+        const episodeModal = document.getElementById('episodeModal');
+        const modalBadge = document.getElementById('modalBadge');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalJpTitle = document.getElementById('modalJpTitle');
+        const modalSynopsis = document.getElementById('modalSynopsis');
+        const modalHighlight = document.getElementById('modalHighlight');
+        const modalActLink = document.getElementById('modalActLink');
+        const modalActLinkLabel = document.getElementById('modalActLinkLabel');
+        const modalAdminLinkBox = document.getElementById('modalAdminLinkBox');
+        const modalAdminUrlInput = document.getElementById('modalAdminUrlInput');
+
+        function openEpisodeModal(actNum) {
+            const act = defaultActsData.find(a => a.num === actNum);
+            if (!act || !episodeModal) return;
+
+            currentModalActNum = act.num;
+            const url = getActUrl(act.num);
+
+            if (modalBadge) modalBadge.textContent = `ACT ${String(act.num).padStart(2, '0')} • ${act.arc}`;
+            if (modalTitle) modalTitle.textContent = act.title;
+            if (modalJpTitle) modalJpTitle.textContent = act.jpTitle;
+            if (modalSynopsis) modalSynopsis.textContent = act.synopsis;
+            if (modalHighlight) modalHighlight.textContent = act.highlight;
+            if (modalActLink) modalActLink.href = url;
+            if (modalActLinkLabel) modalActLinkLabel.textContent = `Open Act ${String(act.num).padStart(2, '0')} Page`;
+        function getActUrl(num) {
+            const found = savedLinks.acts.find(a => Number(a.num) === Number(num));
+            if (found && found.url) return found.url;
+            const def = defaultActsData.find(a => Number(a.num) === Number(num));
+            return def ? def.url : 'https://kimetsu.com/anime/mugenchenghen/';
+        }
+
+            episodeModal.classList.remove('hidden');
+            episodeModal.classList.add('flex');
+        }
+
+        function closeEpisodeModal() {
+            if (!episodeModal) return;
+            episodeModal.classList.add('hidden');
+            episodeModal.classList.remove('flex');
+            currentModalActNum = null;
+        }
+
+        document.getElementById('closeModalBtn')?.addEventListener('click', closeEpisodeModal);
+        document.getElementById('modalDoneBtn')?.addEventListener('click', closeEpisodeModal);
+        episodeModal?.addEventListener('click', (e) => {
+            if (e.target === episodeModal) closeEpisodeModal();
+        });
+
+        document.getElementById('modalAdminSaveUrlBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked || currentModalActNum === null || !modalAdminUrlInput) return;
+            const nextUrl = modalAdminUrlInput.value.trim();
+            if (!isValidHttpUrl(nextUrl)) return;
+
+            const existing = savedLinks.acts.find(a => Number(a.num) === Number(currentModalActNum));
+            if (existing) existing.url = nextUrl;
+            else savedLinks.acts.push({ num: currentModalActNum, url: nextUrl });
+
+            persistLinks();
+            if (modalActLink) modalActLink.href = nextUrl;
+            renderEpisodes();
+            renderAdminStudio();
+        });
+
+        // =========================================================================
+        // 7. TRAILERS, RELATED PAGES & ADMIN LINK MANAGER (PIN: 1960)
+        // =========================================================================
+        const trailerCardsList = document.getElementById('trailerCardsList');
+        const relatedPagesList = document.getElementById('relatedPagesList');
+        const adminLinkStudio = document.getElementById('adminLinkStudio');
+        const adminMediaAndPagesList = document.getElementById('adminMediaAndPagesList');
+        const adminEpisodesLinksList = document.getElementById('adminEpisodesLinksList');
+        const adminSaveBanner = document.getElementById('adminSaveBanner');
+        const adminStatusIcon = document.getElementById('adminStatusIcon');
+        const adminStatusText = document.getElementById('adminStatusText');
+
+        function renderTrailersAndPages() {
+            if (trailerCardsList) {
+                trailerCardsList.innerHTML = defaultTrailersData.map(item => {
+                    const href = getTrailerUrl(item.id);
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="nichirin-card rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-amber-400/50 p-5 flex flex-col justify-between group">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-orange-950/80 text-amber-300 border border-orange-600/30">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-xs text-zinc-400 group-hover:text-amber-300 transition-colors">Open ↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-amber-300 transition-colors">${item.title}</h3>
+                                <p class="font-jpSerif text-xs text-zinc-400 mt-0.5 mb-2">${item.jp}</p>
+                                <p class="text-xs text-zinc-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (relatedPagesList) {
+                relatedPagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const href = getPageUrl(page.id);
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-zinc-950/80 hover:bg-zinc-800/80 border border-zinc-800/90 hover:border-amber-500/40 transition-all group">
+                            <div class="min-w-0">
+                                <div class="text-sm font-semibold text-white group-hover:text-amber-300 transition-colors truncate">${page.title}</div>
+                                <div class="text-xs text-zinc-400 truncate">${page.subtitle}</div>
+                            </div>
+                            <span class="text-amber-400 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        function renderAdminStudio() {
+            if (!adminLinkStudio) return;
+            adminLinkStudio.classList.toggle('hidden', !isAdminUnlocked);
+
+            if (adminStatusIcon) adminStatusIcon.textContent = isAdminUnlocked ? '🔓' : '🔒';
+            if (adminStatusText) adminStatusText.textContent = isAdminUnlocked ? 'Admin (Unlocked)' : 'Admin';
+
+            if (!isAdminUnlocked) return;
+
+            if (adminMediaAndPagesList) {
+                const trailerInputs = defaultTrailersData.map(t => `
+                    <div class="space-y-1">
+                        <label class="block text-[11px] font-semibold text-zinc-300">${t.title} (${t.tag})</label>
+                        <input type="url" data-admin-trailer="${t.id}" value="${getTrailerUrl(t.id)}"
+                            class="w-full bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                    </div>
+                `).join('');
+
+                const pageInputs = defaultRelatedPagesData.map(p => `
+                    <div class="space-y-1">
+                        <label class="block text-[11px] font-semibold text-zinc-300">${p.title}</label>
+                        <input type="url" data-admin-page="${p.id}" value="${getPageUrl(p.id)}"
+                            class="w-full bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                    </div>
+                `).join('');
+
+                adminMediaAndPagesList.innerHTML = trailerInputs + `<div class="pt-2 border-t border-zinc-800 space-y-3">${pageInputs}</div>`;
+            }
+
+            if (adminEpisodesLinksList) {
+                adminEpisodesLinksList.innerHTML = defaultActsData.map(act => `
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] font-bold text-amber-300 w-14 shrink-0">ACT ${String(act.num).padStart(2, '0')}</span>
+                        <input type="url" data-admin-act="${act.num}" value="${getActUrl(act.num)}"
+                            class="flex-1 bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                    </div>
+                `).join('');
+            }
+        }
+
+        function showAdminBanner(msg, isError = false) {
+            if (!adminSaveBanner) return;
+            adminSaveBanner.textContent = msg;
+            adminSaveBanner.className = isError
+                ? 'mt-4 px-4 py-2.5 rounded-xl bg-red-950/60 border border-red-500/40 text-red-300 text-xs font-medium'
+                : 'mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-medium';
+            adminSaveBanner.classList.remove('hidden');
+        }
+
+        document.getElementById('saveAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+
+            const nextTrailers = [];
+            for (const input of document.querySelectorAll('[data-admin-trailer]')) {
+                const val = input.value.trim();
+                if (!isValidHttpUrl(val)) {
+                    showAdminBanner('Please enter valid http:// or https:// URLs for all trailers.', true);
+                    return;
+                }
+                nextTrailers.push({ id: input.dataset.adminTrailer, url: val });
+            }
+
+            const nextPages = [];
+            for (const input of document.querySelectorAll('[data-admin-page]')) {
+                const val = input.value.trim();
+                if (!isValidHttpUrl(val)) {
+                    showAdminBanner('Please enter valid http:// or https:// URLs for all related pages.', true);
+                    return;
+                }
+                nextPages.push({ id: input.dataset.adminPage, url: val });
+            }
+
+            const nextActs = [];
+            for (const input of document.querySelectorAll('[data-admin-act]')) {
+                const val = input.value.trim();
+                if (!isValidHttpUrl(val)) {
+                    showAdminBanner('Please enter valid http:// or https:// URLs for all movie acts.', true);
+                    return;
+                }
+                nextActs.push({ num: Number(input.dataset.adminAct), url: val });
+            }
+
+            savedLinks = { trailers: nextTrailers, pages: nextPages, acts: nextActs };
+            persistLinks();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('All external navigation links saved.');
+        });
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Infinity Castle links restored.');
+        });
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            if (adminSaveBanner) adminSaveBanner.classList.add('hidden');
+            renderAdminStudio();
+            if (modalAdminLinkBox) modalAdminLinkBox.classList.add('hidden');
+        }
+
+        document.getElementById('lockAdminStudioBtn')?.addEventListener('click', lockAdminSession);
+
+        // Admin PIN Modal Controls
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinForm = document.getElementById('adminPinForm');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function openPinModal() {
+            if (!adminPinModal) return;
+            if (adminPinError) adminPinError.classList.add('hidden');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinModal.classList.remove('hidden');
+            adminPinModal.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 40);
+        }
+
+        function closePinModal() {
+            if (!adminPinModal) return;
+            adminPinModal.classList.add('hidden');
+            adminPinModal.classList.remove('flex');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                lockAdminSession();
+            } else {
+                openPinModal();
+            }
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+        adminPinModal?.addEventListener('click', (e) => {
+            if (e.target === adminPinModal) closePinModal();
+        });
+
+        adminPinForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const entered = (adminPinInput?.value || '').trim();
+            if (entered === ADMIN_PIN) {
+                isAdminUnlocked = true;
+                closePinModal();
+                renderAdminStudio();
+                if (modalAdminLinkBox && currentModalActNum !== null) {
+                    modalAdminLinkBox.classList.remove('hidden');
+                    if (modalAdminUrlInput) modalAdminUrlInput.value = getActUrl(currentModalActNum);
+                }
+                adminLinkStudio?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else if (adminPinError) {
+                adminPinError.classList.remove('hidden');
+            }
+        });
+
+        // =========================================================================
+        // 8. FACTIONS RENDERING (Antagonists & Nine Hashira)
+        // =========================================================================
+        const antagonistsList = document.getElementById('antagonistsList');
+        const hashiraGrid = document.getElementById('hashiraGrid');
+        const hashiraQuoteBox = document.getElementById('hashiraQuoteBox');
+        let activeHashiraIndex = 2; // Kyojuro Rengoku highlighted by default
+
+        function renderFactions() {
+            if (!antagonistsList || !hashiraGrid || !hashiraQuoteBox) return;
+
+            antagonistsList.innerHTML = antagonistsData.map(foe => `
+                <div class="rounded-2xl bg-zinc-900/90 border border-zinc-800 p-5">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <h3 class="font-serifDisplay font-bold text-lg text-white">${foe.name} <span class="font-jpSerif text-sm text-zinc-400">(${foe.jp})</span></h3>
+                        <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-red-950/90 text-red-300 border border-red-700/40">${foe.rank}</span>
+                    </div>
+                    <div class="text-xs text-amber-300/90 font-medium mb-2">${foe.bda}</div>
+                    <p class="text-xs text-zinc-400 leading-relaxed">${foe.desc}</p>
+                </div>
+            `).join('');
+
+            hashiraGrid.innerHTML = hashiraData.map((h, idx) => {
+                const active = idx === activeHashiraIndex;
+                return `
+                    <button type="button" data-hashira-idx="${idx}"
+                        class="text-left rounded-xl p-3.5 border transition-all cursor-pointer ${active ? 'bg-amber-500/15 border-amber-400 text-white' : 'bg-zinc-900/80 border-zinc-800 text-zinc-300 hover:border-zinc-600'}">
+                        <div class="font-semibold text-xs sm:text-sm">${h.name}</div>
+                        <div class="text-[11px] text-amber-300/85 mt-0.5">${h.title}</div>
+                    </button>
+                `;
+            }).join('');
+
+            const h = hashiraData[activeHashiraIndex] || hashiraData[0];
+            hashiraQuoteBox.innerHTML = `
+                <div class="text-xs font-bold uppercase tracking-wider text-amber-400">${h.name} — ${h.title}</div>
+                <p class="text-sm text-zinc-200 italic mt-1.5">“${h.quote}”</p>
+            `;
+
+            hashiraGrid.querySelectorAll('[data-hashira-idx]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activeHashiraIndex = Number(btn.dataset.hashiraIdx);
+                    renderFactions();
+                });
+            });
+        }
+
+        // =========================================================================
+        // 9. ATMOSPHERIC PARTICLE CANVAS (Wisteria Petals / Hinokami Embers)
+        // =========================================================================
+        const canvas = document.getElementById('atmosphereCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        const particleToggleBtn = document.getElementById('particleToggleBtn');
+        const particleDot = document.getElementById('particleDot');
+        const particleLabel = document.getElementById('particleLabel');
+
+        let particleMode = 'wisteria'; // 'wisteria' | 'embers'
+        let particles = [];
+        let width = 0;
+        let height = 0;
+
+        function resizeCanvas() {
+            if (!canvas || !ctx) return;
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function createParticle() {
+            if (particleMode === 'wisteria') {
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.35) * 0.65,
+                    vy: 0.45 + Math.random() * 0.85,
+                    size: 4 + Math.random() * 5,
+                    angle: Math.random() * Math.PI * 2,
+                    spin: (Math.random() - 0.5) * 0.03,
+                    alpha: 0.35 + Math.random() * 0.45,
+                    hue: Math.random() > 0.4 ? '192, 132, 252' : '216, 180, 254'
+                };
+            }
+            return {
+                x: Math.random() * width,
+                y: height + Math.random() * 80,
+                vx: (Math.random() - 0.5) * 0.9,
+                vy: -(0.7 + Math.random() * 1.3),
+                size: 2 + Math.random() * 3.5,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.04,
+                alpha: 0.45 + Math.random() * 0.5,
+                hue: Math.random() > 0.35 ? '251, 146, 60' : '250, 204, 21'
+            };
+        }
+
+        function initParticles() {
+            const count = Math.min(75, Math.max(32, Math.floor((width * height) / 28000)));
+            particles = Array.from({ length: count }, createParticle);
+        }
+
+        function updateParticleModeUI() {
+            if (!particleDot || !particleLabel) return;
+            if (particleMode === 'wisteria') {
+                particleDot.className = 'w-2 h-2 rounded-full bg-purple-400';
+                particleLabel.textContent = 'Wisteria Petals';
+            } else {
+                particleDot.className = 'w-2 h-2 rounded-full bg-orange-400';
+                particleLabel.textContent = 'Hinokami Embers';
+            }
+        }
+
+        particleToggleBtn?.addEventListener('click', () => {
+            particleMode = particleMode === 'wisteria' ? 'embers' : 'wisteria';
+            updateParticleModeUI();
+            initParticles();
+        });
+
+        function animateAtmosphere() {
+            if (ctx && width > 0 && height > 0) {
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx + Math.sin(p.angle) * 0.25;
+                    p.y += p.vy;
+                    p.angle += p.spin;
+
+                    const outOfBounds = particleMode === 'wisteria'
+                        ? (p.y > height + 24 || p.x < -30 || p.x > width + 30)
+                        : (p.y < -24 || p.x < -30 || p.x > width + 30);
+
+                    if (outOfBounds) {
+                        particles[i] = createParticle();
+                        if (particleMode === 'wisteria') particles[i].y = -16;
+                        else particles[i].y = height + 16;
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.angle);
+                    ctx.fillStyle = `rgba(${p.hue}, ${p.alpha})`;
+
+                    if (particleMode === 'wisteria') {
+                        ctx.beginPath();
+                        ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                }
+            }
+            requestAnimationFrame(animateAtmosphere);
+        }
+
+        // =========================================================================
+        // 10. INITIALIZATION
+        // =========================================================================
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            resizeCanvas();
+            initParticles();
+            updateParticleModeUI();
+            renderCharacters();
+            renderBreathing(activeBreathingKey);
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderFactions();
+            animateAtmosphere();
+        });
+    </script>
+</body>
+</html>
