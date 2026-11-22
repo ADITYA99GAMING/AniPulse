@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demon Slayer: Kimetsu no Yaiba — Season 2 | Mugen Train &amp; Entertainment District Arc</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Playfair Display, Noto Serif JP & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Serif+JP:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['"Noto Serif JP"', 'serif'],
+                        sansBody: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        taisho: {
+                            black: '#09090b',
+                            charcoal: '#121216',
+                            surface: '#191920',
+                            crimson: '#b91c1c',
+                            blood: '#7f1d1d',
+                            gold: '#d4af37',
+                            goldLight: '#f3d98b',
+                            wisteria: '#a855f7',
+                            water: '#0284c7',
+                            thunder: '#eab308',
+                            beast: '#3b82f6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Taisho Theme & Custom Patterns */
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Traditional Japanese Ichimatsu (Tanjiro's Checkered Pattern) */
+        .pattern-ichimatsu {
+            background-color: rgba(14, 24, 21, 0.78);
+            background-image: 
+                linear-gradient(45deg, rgba(16, 185, 129, 0.08) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(16, 185, 129, 0.08) 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, rgba(16, 185, 129, 0.08) 75%), 
+                linear-gradient(-45deg, transparent 75%, rgba(16, 185, 129, 0.08) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+        }
+
+        /* Traditional Japanese Asanoha (Hemp Leaf - Nezuko's Motif) */
+        .pattern-asanoha {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Cpath d='M30 0 L30 60 M0 30 L60 30 M15 15 L45 45 M45 15 L15 45'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Traditional Japanese Seigaiha (Blue Ocean Waves - Water Breathing Motif) */
+        .pattern-seigaiha {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='40' viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2338bdf8' stroke-opacity='0.07' stroke-width='1.2'%3E%3Ccircle cx='40' cy='40' r='36'/%3E%3Ccircle cx='40' cy='40' r='26'/%3E%3Ccircle cx='40' cy='40' r='16'/%3E%3Ccircle cx='0' cy='40' r='36'/%3E%3Ccircle cx='0' cy='40' r='26'/%3E%3Ccircle cx='0' cy='40' r='16'/%3E%3Ccircle cx='80' cy='40' r='36'/%3E%3Ccircle cx='80' cy='40' r='26'/%3E%3Ccircle cx='80' cy='40' r='16'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Traditional Japanese Uroko (Triangle Scales - Zenitsu's Motif) */
+        .pattern-uroko {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='35' viewBox='0 0 40 35' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='20,0 40,35 0,35' fill='none' stroke='%23eab308' stroke-opacity='0.07' stroke-width='1'/%3E%3C/svg%3E");
+        }
+
+        /* Gold Shimmer Border & Text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3d98b 0%, #d4af37 50%, #997a15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .crimson-glow {
+            box-shadow: 0 0 35px rgba(185, 28, 28, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #450a0a;
+            border-radius: 4px;
+            border: 1px solid #d4af3744;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b91c1c;
+        }
+
+        /* SVG Animation Keyframes */
+        @keyframes pulseSlow {
+            0%, 100% { transform: scale(1); opacity: 0.85; }
+            50% { transform: scale(1.04); opacity: 1; }
+        }
+        @keyframes dashFlow {
+            to { stroke-dashoffset: -120; }
+        }
+        @keyframes heroRise {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes hearthPulse {
+            0%, 100% { opacity: 0.55; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.06); }
+        }
+        @keyframes slashSweep {
+            0% { transform: scaleX(0.2); opacity: 0.35; }
+            50% { transform: scaleX(1.08); opacity: 1; }
+            100% { transform: scaleX(1); opacity: 0.9; }
+        }
+        .animate-dash {
+            stroke-dasharray: 12 8;
+            animation: dashFlow 3s linear infinite;
+        }
+        .animate-pulse-slow {
+            animation: pulseSlow 4s ease-in-out infinite;
+        }
+        .hero-stagger-1 {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+        }
+        .hero-stagger-2 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+        }
+        .hero-stagger-3 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both;
+        }
+        .hero-stagger-4 {
+            animation: heroRise 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.48s both;
+        }
+        .hearth-glow-layer {
+            animation: hearthPulse 5.5s ease-in-out infinite;
+        }
+        .flame-slash-line {
+            animation: slashSweep 2.8s ease-in-out infinite;
+        }
+
+        /* Modal Transitions */
+        .modal-backdrop {
+            backdrop-filter: blur(8px);
+            background-color: rgba(5, 5, 8, 0.85);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="antialiased selection:bg-red-800 selection:text-amber-200 relative">
+
+    <!-- Interactive Particle Canvas (Embers & Wisteria Petals) -->
+    <canvas id="atmosphereCanvas" class="fixed inset-0 w-screen h-screen pointer-events-none z-[1]"></canvas>
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-taisho-black/85 backdrop-blur-md border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Nichirin Guard SVG Emblem -->
+                <svg class="w-8 h-8 text-red-600 group-hover:rotate-45 transition-transform duration-500" viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" stroke="#d4af37" stroke-width="1.5"/>
+                    <circle cx="20" cy="20" r="13" stroke="#b91c1c" stroke-width="2" stroke-dasharray="4 2"/>
+                    <polygon points="20,4 23,17 36,20 23,23 20,36 17,23 4,20 17,17" fill="#b91c1c" stroke="#f3d98b" stroke-width="0.8"/>
+                    <rect x="18.5" y="15" width="3" height="10" rx="1" fill="#09090b"/>
+                </svg>
+                <div>
+                    <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-zinc-100 block leading-none">KIMETSU NO YAIBA</span>
+                    <span class="font-jpSerif text-[11px] text-amber-400/90 tracking-widest">鬼滅の刃 • 無限列車編・遊郭編</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-300">
+                <a href="#story" class="hover:text-amber-400 transition-colors">Story</a>
+                <a href="#characters" class="hover:text-amber-400 transition-colors">Slayers</a>
+                <a href="#breathing" class="hover:text-amber-400 transition-colors">Breathing Styles</a>
+                <a href="#episodes" class="hover:text-amber-400 transition-colors">Episodes</a>
+                <a href="#videos" class="hover:text-amber-400 transition-colors">Trailers & Links</a>
+                <a href="#factions" class="hover:text-amber-400 transition-colors">Hashira & Demons</a>
+            </nav>
+
+            <!-- Particle Theme Toggle & Admin Link Access -->
+            <div class="flex items-center gap-2">
+                <button type="button" id="adminToggleBtn" class="px-3 py-1.5 rounded-full text-xs font-semibold border border-red-500/40 bg-zinc-900/90 text-amber-300 hover:bg-red-950/70 transition flex items-center gap-1.5">
+                    <span id="adminToggleIcon">🔒</span>
+                    <span id="adminToggleLabel">Admin</span>
+                </button>
+                <button type="button" id="toggleParticleBtn" title="Switch Atmospheric Particles" class="px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-500/40 bg-zinc-900/90 text-amber-300 hover:bg-red-950/60 transition flex items-center gap-1.5">
+                    <span id="particleDot" class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+                    <span id="particleLabel">🌸 Wisteria</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section id="story" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-amber-500/20 pattern-asanoha">
+        <!-- Kamado Hearth & Hinokami Dawn Atmospheric Backlight -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_68%,rgba(234,88,12,0.22)_0%,rgba(185,28,28,0.14)_36%,rgba(9,9,11,0.78)_76%,rgba(9,9,11,0.92)_100%)] pointer-events-none"></div>
+        <div class="hearth-glow-layer absolute -bottom-24 left-1/2 -translate-x-1/2 w-[46rem] h-[22rem] rounded-full bg-gradient-to-t from-red-700/35 via-amber-500/15 to-transparent blur-3xl pointer-events-none"></div>
+
+        <!-- Multi-Layered Snowy Mount Sagiri Silhouette & Dawn Sun Disc -->
+        <div aria-hidden="true" class="absolute inset-x-0 bottom-0 pointer-events-none select-none overflow-hidden">
+            <svg viewBox="0 0 1440 420" preserveAspectRatio="none" class="w-full h-56 sm:h-72 md:h-80 opacity-85">
+                <defs>
+                    <linearGradient id="sagiriDawnSun" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#fef08a" stop-opacity="0.32"/>
+                        <stop offset="55%" stop-color="#f97316" stop-opacity="0.16"/>
+                        <stop offset="100%" stop-color="#991b1b" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="farPeakGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#1e293b" stop-opacity="0.72"/>
+                        <stop offset="100%" stop-color="#09090b" stop-opacity="0.95"/>
+                    </linearGradient>
+                    <linearGradient id="nearRidgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#11131a" stop-opacity="0.9"/>
+                        <stop offset="100%" stop-color="#09090b" stop-opacity="1"/>
+                    </linearGradient>
+                </defs>
+                <!-- Hinokami Dawn Sun Disc -->
+                <circle cx="720" cy="175" r="105" fill="url(#sagiriDawnSun)"/>
+                <!-- Distant Snowy Mountain Range -->
+                <polygon points="0,340 240,150 470,290 720,95 990,275 1210,135 1440,310 1440,420 0,420" fill="url(#farPeakGrad)"/>
+                <!-- Snow Caps on Far Peaks -->
+                <polygon points="240,150 292,182 256,192 240,180 222,194 192,188" fill="#e2e8f0" fill-opacity="0.22"/>
+                <polygon points="720,95 792,143 744,156 720,138 692,158 648,146" fill="#fef3c7" fill-opacity="0.26"/>
+                <polygon points="1210,135 1268,172 1228,182 1210,168 1188,184 1156,175" fill="#e2e8f0" fill-opacity="0.2"/>
+                <!-- Foreground Snowy Ridge & Hearth Silhouette -->
+                <path d="M0 365 Q210 250 430 330 T880 285 T1440 345 L1440 420 L0 420 Z" fill="url(#nearRidgeGrad)"/>
+                <path d="M520 308 Q720 225 940 292" fill="none" stroke="#f59e0b" stroke-opacity="0.25" stroke-width="2"/>
+            </svg>
+        </div>
+
+        <!-- Giant Decorative Background Kanji Watermark -->
+        <div aria-hidden="true" class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+            <span class="font-jpSerif font-black text-[22rem] sm:text-[30rem] text-red-950/20 leading-none tracking-tighter">滅</span>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+            <!-- Subtle Kanji Seal Stamp & Opening Scene Tag -->
+            <div class="hero-stagger-1 inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-taisho-surface/85 border border-amber-500/35 backdrop-blur-sm mb-5 shadow-lg">
+                <span class="w-7 h-7 rounded border border-red-400/70 bg-red-900/75 text-amber-200 font-jpSerif font-black text-sm flex items-center justify-center shadow-inner" title="Destroy Seal">滅</span>
+                <span class="font-jpSerif text-xs sm:text-sm text-amber-300 tracking-[0.22em]">鬼滅の刃 • 無限の汽笛と歓楽の夜</span>
+            </div>
+
+            <!-- Japanese Title Subtitle -->
+            <p class="hero-stagger-2 font-jpSerif text-lg sm:text-2xl md:text-3xl font-bold text-amber-400 tracking-[0.25em] mb-3 drop-shadow">
+                鬼滅の刃 無限列車編・遊郭編
+            </p>
+
+            <!-- Main Dramatic Title with Golden Edge Shimmer & Flame-Slash Accent -->
+            <div class="hero-stagger-2">
+                <h1 class="font-serifDisplay font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white leading-tight">
+                    DEMON SLAYER:<br>
+                    <span class="gold-gradient-text drop-shadow-[0_2px_18px_rgba(212,175,55,0.28)]">KIMETSU NO YAIBA</span>
+                    <span class="block text-lg sm:text-2xl md:text-3xl font-bold text-red-500 tracking-widest mt-3">
+                        SEASON 2 — MUGEN TRAIN &amp; ENTERTAINMENT DISTRICT
+                    </span>
+                </h1>
+                <!-- Subtle Flame-Slash Accent Line -->
+                <div class="mx-auto mt-5 mb-6 max-w-md flex items-center justify-center gap-2">
+                    <span class="flame-slash-line h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-amber-400 to-red-600 shadow-[0_0_12px_rgba(249,115,22,0.75)]"></span>
+                    <span class="w-2 h-2 rotate-45 bg-amber-300 shrink-0"></span>
+                    <span class="flame-slash-line h-[2px] w-full rounded-full bg-gradient-to-l from-transparent via-amber-400 to-red-600 shadow-[0_0_12px_rgba(249,115,22,0.75)]"></span>
+                </div>
+            </div>
+
+            <!-- Atmospheric Overview -->
+            <p class="hero-stagger-3 max-w-2xl mx-auto text-zinc-300 text-base sm:text-lg leading-relaxed mb-10">
+                Boarding the <strong class="text-white">Mugen Train</strong> beside Flame Hashira <strong class="text-amber-300">Kyojuro Rengoku</strong> before infiltrating the neon quarters of <strong class="text-rose-300">Yoshiwara</strong> with Sound Hashira <strong class="text-amber-300">Tengen Uzui</strong>, Tanjiro and his comrades confront Upper Rank demons in a blaze of steel and resolve.
+            </p>
+
+            <!-- Quick Stats Bar -->
+            <div class="hero-stagger-3 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 max-w-2xl mx-auto mb-10">
+                <div class="bg-taisho-surface/85 border border-amber-500/25 rounded-xl p-3.5 backdrop-blur-sm">
+                    <div class="font-serifDisplay font-extrabold text-2xl sm:text-3xl text-amber-400">18</div>
+                    <div class="text-[11px] uppercase tracking-wider text-zinc-400 mt-0.5">Episodes</div>
+                </div>
+                <div class="bg-taisho-surface/85 border border-amber-500/25 rounded-xl p-3.5 backdrop-blur-sm">
+                    <div class="font-serifDisplay font-extrabold text-2xl sm:text-3xl text-red-400">2</div>
+                    <div class="text-[11px] uppercase tracking-wider text-zinc-400 mt-0.5">Major Arcs</div>
+                </div>
+                <div class="bg-taisho-surface/85 border border-amber-500/25 rounded-xl p-3.5 backdrop-blur-sm">
+                    <div class="font-serifDisplay font-extrabold text-2xl sm:text-3xl text-orange-400">5</div>
+                    <div class="text-[11px] uppercase tracking-wider text-zinc-400 mt-0.5">Flame Forms</div>
+                </div>
+                <div class="bg-taisho-surface/85 border border-amber-500/25 rounded-xl p-3.5 backdrop-blur-sm">
+                    <div class="font-serifDisplay font-extrabold text-2xl sm:text-3xl text-amber-200">3</div>
+                    <div class="text-[11px] uppercase tracking-wider text-zinc-400 mt-0.5">Sound Forms</div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hero-stagger-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#episodes" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-red-800 via-red-700 to-red-900 hover:from-red-700 hover:to-red-800 text-white font-serifDisplay font-bold tracking-wider text-sm uppercase border border-amber-400/50 crimson-glow transition-all duration-300 flex items-center justify-center gap-2">
+                    <span>Explore 18 Episodes</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </a>
+                <a href="#videos" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-amber-950/80 via-zinc-900/90 to-red-950/75 hover:from-amber-900/80 hover:to-red-900/80 text-amber-300 font-serifDisplay font-bold tracking-wider text-sm uppercase border border-amber-400/45 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg">
+                    <span>↗ Trailers &amp; Related Pages</span>
+                </a>
+                <a href="#breathing" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-900/85 hover:bg-zinc-800 text-zinc-200 font-serifDisplay font-bold tracking-wider text-sm uppercase border border-amber-500/30 hover:border-amber-400/50 transition-all duration-300">
+                    Breathing Forms
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. MAIN CHARACTERS SHOWCASE -->
+    <section id="characters" class="relative z-10 py-24 lg:py-28 border-b border-amber-500/15 bg-taisho-charcoal/85 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <span class="font-jpSerif text-amber-400 text-sm tracking-[0.3em] uppercase block mb-2">登場人物 • 無限と遊郭</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                    SEASON 2 <span class="gold-gradient-text">CHARACTERS</span>
+                </h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                    Select a character to inspect their Nichirin blade, breathing style, and defining battles across Season 2.
+                </p>
+            </div>
+
+            <!-- Interactive Character Selector Tabs + Detail Spotlight -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Column: Character Selector Cards -->
+                <div id="characterTabs" class="lg:col-span-5 min-w-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5">
+                    <!-- Populated via JavaScript -->
+                </div>
+
+                <!-- Right Column: Active Character Dossier -->
+                <div id="characterDetailCard" class="lg:col-span-7 min-w-0">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. BREATHING STYLES INTERACTIVE EXPLORER -->
+    <section id="breathing" class="relative z-10 py-24 lg:py-28 border-b border-amber-500/15 pattern-seigaiha overflow-x-clip">
+        <div class="absolute inset-0 bg-taisho-black/72 pointer-events-none"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="font-jpSerif text-amber-400 text-sm tracking-[0.3em] uppercase block mb-2">全集中の呼吸</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                    TOTAL CONCENTRATION <span class="gold-gradient-text">BREATHING</span>
+                </h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                    By maximizing oxygen intake, Demon Slayers elevate their physical prowess to rival supernatural demons. Explore Season 1's iconic swordsmanship styles.
+                </p>
+            </div>
+
+            <!-- Style Switcher Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12" id="breathingStyleTabs">
+                <button data-style="flame" class="breathing-tab px-5 py-3 rounded-xl font-serifDisplay font-bold text-sm tracking-wider uppercase border transition-all flex items-center gap-2 bg-orange-950/80 border-orange-400 text-orange-200 shadow-lg shadow-orange-950/50">
+                    <span>🔥</span> Flame Breathing
+                </button>
+                <button data-style="sound" class="breathing-tab px-5 py-3 rounded-xl font-serifDisplay font-bold text-sm tracking-wider uppercase border transition-all flex items-center gap-2 bg-zinc-900/90 border-zinc-700 text-zinc-400 hover:border-amber-400/50 hover:text-amber-300">
+                    <span>💥</span> Sound Breathing
+                </button>
+                <button data-style="hinokami" class="breathing-tab px-5 py-3 rounded-xl font-serifDisplay font-bold text-sm tracking-wider uppercase border transition-all flex items-center gap-2 bg-zinc-900/90 border-zinc-700 text-zinc-400 hover:border-red-400/50 hover:text-red-300">
+                    <span>☀️</span> Hinokami Kagura
+                </button>
+            </div>
+
+            <!-- Interactive Breathing Showcase + Forms Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left: Custom Animated SVG Art Display -->
+                <div class="lg:col-span-5 min-w-0 rounded-2xl bg-taisho-surface/95 border border-amber-500/25 p-6 flex flex-col justify-between relative overflow-hidden">
+                    <div id="breathingVisualHeader" class="relative z-10">
+                        <!-- Dynamic Header -->
+                    </div>
+                    <div id="breathingSvgStage" class="my-6 flex items-center justify-center min-h-[240px] relative z-10">
+                        <!-- Custom Animated SVG Canvas -->
+                    </div>
+                    <div id="activeFormBanner" class="relative z-10 bg-black/60 border border-white/10 rounded-xl p-4">
+                        <!-- Dynamic Active Form Description -->
+                    </div>
+                </div>
+
+                <!-- Right: Clickable Forms Grid -->
+                <div class="lg:col-span-7 min-w-0 bg-taisho-surface/90 border border-amber-500/20 rounded-2xl p-6">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-5 pb-3 border-b border-zinc-800">
+                        <h3 id="formsListTitle" class="font-serifDisplay font-bold text-lg text-amber-300">Forms & Techniques</h3>
+                        <span class="text-xs text-zinc-400">Click any form to inspect technique</span>
+                    </div>
+                    <div id="breathingFormsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-h-[520px] overflow-y-auto pr-1">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 18-EPISODE GUIDE & NAVIGATION -->
+    <section id="episodes" class="relative z-10 py-24 lg:py-28 border-b border-amber-500/15 bg-taisho-charcoal/85 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="font-jpSerif text-amber-400 text-sm tracking-[0.3em] uppercase block mb-2">全十八話 • 無限列車編・遊郭編</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                        18-EPISODE <span class="gold-gradient-text">CHRONICLE</span>
+                    </h2>
+                    <p class="text-zinc-400 mt-2 text-sm sm:text-base">
+                        All 18 Season 2 episodes are displayed below with episode numbers, arc filters, and quick navigation controls.
+                    </p>
+                </div>
+                <div class="text-xs font-semibold text-amber-300 bg-taisho-surface border border-amber-500/30 rounded-xl px-4 py-2.5 self-start md:self-auto">
+                    Showing <span id="episodeCountBadge" class="font-serifDisplay font-bold text-sm text-white">18</span> / 18 Episodes
+                </div>
+            </div>
+
+            <!-- Arc Navigation & Filter Bar -->
+            <div class="rounded-2xl bg-taisho-surface/90 border border-amber-500/20 p-4 sm:p-5 mb-6 space-y-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" id="arcNavPrevBtn" class="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition">
+                            ← Prev Arc
+                        </button>
+                        <button type="button" id="arcNavNextBtn" class="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition">
+                            Next Arc →
+                        </button>
+                    </div>
+
+                    <!-- Quick Episode Navigator -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" id="epNavPrevBtn" class="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition">
+                            ‹ Ep
+                        </button>
+                        <select id="episodeJumpSelect" aria-label="Jump to episode" class="px-3 py-1.5 rounded-lg bg-taisho-black border border-amber-500/35 text-xs font-semibold text-amber-200 focus:outline-none">
+                            <!-- Populated via JS -->
+                        </select>
+                        <button type="button" id="epNavNextBtn" class="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition">
+                            Ep ›
+                        </button>
+                        <button type="button" id="epNavOpenSelectedBtn" class="px-3.5 py-1.5 rounded-lg bg-red-900/75 hover:bg-red-800 border border-amber-400/40 text-xs font-bold text-white transition">
+                            Details
+                        </button>
+                        <a id="epNavExternalLinkBtn" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-lg bg-amber-600/20 hover:bg-amber-600/35 border border-amber-400/50 text-xs font-bold text-amber-300 transition">
+                            Ep 01 Link ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Arc Filter Buttons & Search Input -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-3 border-t border-zinc-800">
+                    <div id="arcFilterContainer" class="flex flex-wrap gap-2">
+                        <!-- Populated via JS -->
+                    </div>
+                    <div class="w-full md:w-72 shrink-0">
+                        <input id="episodeSearchInput" type="search" placeholder="Search episode #, title, arc..." class="w-full px-3.5 py-2 rounded-xl bg-taisho-black border border-zinc-700 focus:border-amber-400 focus:outline-none text-xs text-white placeholder-zinc-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- All 26 Episodes Grid -->
+            <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. TRAILERS, OPENINGS & RELATED PAGES NAVIGATION -->
+    <section id="videos" class="relative z-10 py-24 lg:py-28 border-b border-amber-500/15 pattern-uroko overflow-x-clip">
+        <div class="absolute inset-0 bg-taisho-black/80 pointer-events-none"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="font-jpSerif text-amber-400 text-sm tracking-[0.3em] uppercase block mb-2">予告編 • 関連ページ</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                    TRAILERS, OPENINGS &amp; <span class="gold-gradient-text">RELATED PAGES</span>
+                </h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                    Navigate directly to external pages for Season 1 trailers, opening themes, iconic scenes, and companion resources.
+                </p>
+            </div>
+
+            <!-- 4 Trailers & Openings Navigation Cards -->
+            <div id="featuredVideoPlaylist" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <!-- Populated via JS -->
+            </div>
+
+            <!-- 4 Related Pages Navigation Cards -->
+            <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Populated via JS -->
+            </div>
+
+            <!-- Protected Admin Link Manager Studio (Unlocked with PIN 1960) -->
+            <div id="adminLinkStudio" class="hidden mt-12 rounded-2xl bg-taisho-surface/95 border border-amber-400/50 p-6 sm:p-8 shadow-2xl space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+                    <div>
+                        <span class="font-jpSerif text-xs text-amber-400 tracking-widest block">管理者リンク設定</span>
+                        <h3 class="font-serifDisplay text-xl sm:text-2xl font-bold text-white">Admin Navigation Link Manager</h3>
+                        <p id="adminStudioStatus" class="text-xs text-amber-300/90 mt-1">Update navigation URLs for trailers, related pages, and episodes 1–26.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" id="resetDefaultLinksBtn" class="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition">
+                            Reset Defaults
+                        </button>
+                        <button type="button" id="lockAdminBtn" class="px-3.5 py-2 rounded-xl bg-red-950 hover:bg-red-900 border border-red-500/50 text-xs font-bold text-amber-200 transition">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Trailers & Openings Link Editor -->
+                <div>
+                    <h4 class="font-serifDisplay font-bold text-sm uppercase tracking-wider text-amber-300 mb-3">Trailers &amp; Openings Links</h4>
+                    <div id="adminTrailersEditorGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Related Pages Link Editor -->
+                <div>
+                    <h4 class="font-serifDisplay font-bold text-sm uppercase tracking-wider text-amber-300 mb-3">Related Pages Links</h4>
+                    <div id="adminRelatedEditorGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Episodes 1-18 Link Editor -->
+                <div class="rounded-xl bg-taisho-black/75 border border-zinc-800 p-4 sm:p-5 space-y-3">
+                    <h4 class="font-serifDisplay font-bold text-sm uppercase tracking-wider text-amber-300">Episode 1–18 Navigation Link</h4>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <button type="button" id="adminEpPrevBtn" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition shrink-0">
+                            ‹ Prev Ep
+                        </button>
+                        <select id="adminEpisodeSelect" aria-label="Select episode to edit link" class="flex-1 px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-700 text-xs text-white focus:border-amber-400 focus:outline-none">
+                            <!-- Populated via JS -->
+                        </select>
+                        <button type="button" id="adminEpNextBtn" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition shrink-0">
+                            Next Ep ›
+                        </button>
+                    </div>
+                    <div>
+                        <label id="adminEpisodeUrlLabel" for="adminEpisodeUrlInput" class="block text-xs font-medium text-zinc-300 mb-1.5">Episode 01 Link</label>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input id="adminEpisodeUrlInput" type="url" class="flex-1 px-3.5 py-2 rounded-lg bg-zinc-950 border border-zinc-700 focus:border-amber-400 focus:outline-none text-xs text-zinc-100">
+                            <button type="button" id="saveAdminEpisodeUrlBtn" class="px-4 py-2 rounded-lg bg-red-800 hover:bg-red-700 border border-amber-400/50 text-xs font-bold text-white transition shrink-0">
+                                Save Episode Link
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. TWELVE KIZUKI & THE NINE HASHIRA -->
+    <section id="factions" class="relative z-10 py-24 lg:py-28 border-b border-amber-500/20 bg-taisho-charcoal/85 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <span class="font-jpSerif text-red-500 text-sm tracking-[0.3em] uppercase block mb-2">上弦の鬼 • 柱</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                    UPPER RANKS &amp; <span class="gold-gradient-text">THE NINE HASHIRA</span>
+                </h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                    Contrast the demons of the Mugen Train and Entertainment District with the nine Pillars of the Demon Slayer Corps.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left: Season 2 Demons & Upper Ranks -->
+                <div class="lg:col-span-6 min-w-0">
+                    <h3 class="font-serifDisplay font-bold text-xl text-red-400 mb-4 flex items-center gap-2">
+                        <span>👹</span> Season 2 Demons &amp; Upper Ranks
+                    </h3>
+                    <div id="antagonistsList" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Right: The Nine Hashira -->
+                <div class="lg:col-span-6 min-w-0 rounded-2xl bg-taisho-surface/95 border border-amber-500/25 p-6">
+                    <h3 class="font-serifDisplay font-bold text-xl text-amber-300 mb-4 flex items-center gap-2">
+                        <span>⚔️</span> The Nine Hashira (Pillars)
+                    </h3>
+                    <div id="hashiraGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-5">
+                        <!-- Populated via JS -->
+                    </div>
+                    <div id="hashiraQuoteBox" class="p-4 rounded-xl bg-taisho-black/80 border border-amber-500/20 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                        Select a Hashira above to inspect their role and signature trait in Season 1.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN PIN MODAL (PIN 1960, NO HINTS) -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
+        <div class="bg-taisho-surface border border-amber-500/45 rounded-2xl max-w-sm w-full p-6 relative shadow-2xl">
+            <button type="button" id="closeAdminPinModalBtn" aria-label="Close admin login" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-zinc-300 hover:text-white flex items-center justify-center text-xs transition">
+                ✕
+            </button>
+            <span class="font-jpSerif text-xs text-amber-400 tracking-widest block mb-1">管理者認証</span>
+            <h3 class="font-serifDisplay text-xl font-bold text-white mb-4">Admin Access</h3>
+            <form id="adminPinForm" class="space-y-4">
+                <div>
+                    <label for="adminPinInput" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">PIN</label>
+                    <input id="adminPinInput" type="password" inputmode="numeric" autocomplete="off" required placeholder="••••" class="w-full px-4 py-2.5 rounded-xl bg-taisho-black border border-zinc-700 focus:border-amber-400 focus:outline-none text-sm text-white tracking-widest">
+                    <p id="adminPinError" class="hidden text-xs text-red-400 mt-1.5">Invalid PIN.</p>
+                </div>
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-red-800 to-red-700 hover:from-red-700 hover:to-red-600 border border-amber-400/50 text-white font-serifDisplay font-bold text-xs uppercase tracking-wider transition">
+                    Unlock Link Manager
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- EPISODE DETAIL MODAL -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop overflow-y-auto">
+        <div class="bg-taisho-surface border border-amber-500/40 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl transform transition-all my-8">
+            <button id="closeModalBtn" aria-label="Close modal" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-zinc-900 border border-zinc-700 hover:border-amber-400 text-zinc-300 hover:text-white flex items-center justify-center transition z-10">
+                ✕
+            </button>
+            <div id="modalContent">
+                <!-- Dynamic Episode Modal Details & External Navigation Links -->
+            </div>
+            <div class="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between">
+                <button id="prevEpBtn" class="px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-semibold text-zinc-200 transition">
+                    ← Previous Episode
+                </button>
+                <button id="nextEpBtn" class="px-4 py-2 rounded-lg bg-red-900/70 hover:bg-red-800 border border-amber-500/40 text-xs font-semibold text-amber-200 transition">
+                    Next Episode →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & DATA -->
+    <script>
+        /* ==========================================================================
+           1. DATA REPOSITORY (SEASON 2: MUGEN TRAIN & ENTERTAINMENT DISTRICT)
+           ========================================================================== */
+
+        const featuredVideosData = [
+            {
+                id: 's2-mugen-pv',
+                badge: 'Mugen Train PV',
+                source: 'ufotable • Arc 1',
+                title: 'Demon Slayer: Mugen Train Arc TV — Trailer Page',
+                jp: 'テレビアニメ「鬼滅の刃」無限列車編 PV',
+                desc: 'Navigate to trailers and clips for the Mugen Train Arc, following Rengoku, Tanjiro, Nezuko, Zenitsu, and Inosuke aboard the demon train.',
+                url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Mugen+Train+Arc+TV+Trailer',
+                ctaLabel: 'Open Mugen Train Page',
+                extraLinks: [
+                    { label: 'Akeboshi OP', url: 'https://www.youtube.com/results?search_query=LiSA+Akeboshi+Demon+Slayer+Opening' },
+                    { label: 'Rengoku vs Akaza', url: 'https://www.youtube.com/results?search_query=Rengoku+vs+Akaza+Demon+Slayer' }
+                ]
+            },
+            {
+                id: 's2-ed-pv',
+                badge: 'Entertainment District PV',
+                source: 'ufotable • Arc 2',
+                title: 'Entertainment District Arc — Official Trailer Page',
+                jp: 'テレビアニメ「鬼滅の刃」遊郭編 PV',
+                desc: 'Navigate to trailers and previews for the Entertainment District Arc as Tengen Uzui leads the squad into Yoshiwara.',
+                url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Entertainment+District+Arc+Trailer',
+                ctaLabel: 'Open ED Arc Page',
+                extraLinks: [
+                    { label: 'Zankyosanka OP', url: 'https://www.youtube.com/results?search_query=Aimer+Zankyosanka+Demon+Slayer' },
+                    { label: 'Asa ga Kuru ED', url: 'https://www.youtube.com/results?search_query=Aimer+Asa+ga+Kuru+Demon+Slayer' }
+                ]
+            },
+            {
+                id: 's2-rengoku-scene',
+                badge: 'Iconic Battle',
+                source: 'Mugen Train Climax',
+                title: '“Set Your Heart Ablaze” — Kyojuro Rengoku',
+                jp: '心を燃やせ • 煉獄杏寿郎',
+                desc: 'Navigate to external pages celebrating Flame Hashira Kyojuro Rengoku’s unyielding stand against Upper Rank Three Akaza.',
+                url: 'https://www.youtube.com/results?search_query=Kyojuro+Rengoku+Set+Your+Heart+Ablaze',
+                ctaLabel: 'Open Rengoku Page',
+                extraLinks: [
+                    { label: 'Flame Breathing Forms', url: 'https://www.youtube.com/results?search_query=Flame+Breathing+Forms+Rengoku' },
+                    { label: 'Akaza Appearance', url: 'https://www.youtube.com/results?search_query=Akaza+Demon+Slayer+Mugen+Train' }
+                ]
+            },
+            {
+                id: 's2-yoshiwara-climax',
+                badge: 'Flamboyant Climax',
+                source: 'Entertainment District Climax',
+                title: 'Tengen Uzui, Tanjiro & Nezuko vs. Upper Six',
+                jp: '遊郭決戦 • 宇髄天元と上弦の陸',
+                desc: 'Navigate to external pages covering Sound Breathing musical scores, Hinokami Kagura combinations, and Nezuko’s awakened form.',
+                url: 'https://www.youtube.com/results?search_query=Tengen+Uzui+vs+Gyutaro+Demon+Slayer',
+                ctaLabel: 'Open Battle Page',
+                extraLinks: [
+                    { label: 'Musical Score', url: 'https://www.youtube.com/results?search_query=Tengen+Uzui+Musical+Score+Demon+Slayer' },
+                    { label: 'Awakened Nezuko', url: 'https://www.youtube.com/results?search_query=Nezuko+Demon+Form+Entertainment+District' }
+                ]
+            }
+        ];
+
+        const relatedPagesData = [
+            {
+                tag: 'Official Site',
+                title: 'Kimetsu.com Official Portal',
+                jp: 'アニメ「鬼滅の刃」公式サイト',
+                desc: 'Visit the official Demon Slayer anime site for series information and announcements.',
+                url: 'https://kimetsu.com/'
+            },
+            {
+                tag: 'Manga Chronicle',
+                title: 'Manga Plus — Koyoharu Gotouge',
+                jp: '少年ジャンプ＋ • 無限列車〜遊郭',
+                desc: 'Navigate to Manga Plus to explore the original Mugen Train and Entertainment District chapters.',
+                url: 'https://mangaplus.shueisha.co.jp/'
+            },
+            {
+                tag: 'Flame & Sound',
+                title: 'Flame & Sound Breathing Guide',
+                jp: '炎の呼吸・音の呼吸',
+                desc: 'Open external guides and breakdowns for Flame Breathing and Sound Breathing techniques.',
+                url: 'https://www.youtube.com/results?search_query=Flame+Breathing+Sound+Breathing+Demon+Slayer'
+            },
+            {
+                tag: 'Next Arc',
+                title: 'Swordsmith Village Arc Overview',
+                jp: '刀鍛冶の里編 • 次の任務へ',
+                desc: 'Explore links for the arc following the Entertainment District battle in Season 2.',
+                url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Swordsmith+Village+Arc+Trailer'
+            }
+        ];
+
+        const charactersData = [
+            {
+                id: 'rengoku',
+                name: 'Kyojuro Rengoku',
+                jpName: '煉獄 杏寿郎',
+                role: 'Flame Hashira • Pillar of the Corps',
+                style: 'Flame Breathing (Honō no Kokyū)',
+                bladeColor: 'Crimson-Flame Nichirin Blade',
+                accentHex: '#f97316',
+                patternClass: 'pattern-asanoha',
+                badgeBg: 'bg-orange-950/80 text-orange-300 border-orange-500/40',
+                quote: '“Set your heart ablaze. Go beyond your limits, even if it’s just a little bit.”',
+                bio: 'The charismatic, booming-voiced Flame Hashira who leads the Mugen Train investigation. Protecting every passenger on board while holding off Upper Rank Three Akaza until dawn, Rengoku passes his torch of resolve directly to Tanjiro.',
+                svgEmblem: `
+                    <svg viewBox="0 0 120 120" class="w-28 h-28">
+                        <circle cx="60" cy="60" r="54" fill="#7c2d12" fill-opacity="0.38" stroke="#fb923c" stroke-width="2"/>
+                        <path d="M60 18 C74 36, 86 48, 82 68 C79 82, 68 92, 60 96 C46 90, 36 78, 38 60 C40 44, 52 34, 60 18 Z" fill="#ea580c" stroke="#fde047" stroke-width="2"/>
+                        <circle cx="60" cy="68" r="10" fill="#fef08a"/>
+                    </svg>`
+            },
+            {
+                id: 'tengen',
+                name: 'Tengen Uzui',
+                jpName: '宇髄 天元',
+                role: 'Sound Hashira • Ex-Shinobi',
+                style: 'Sound Breathing & Musical Score',
+                bladeColor: 'Twin Chained Cleaver Nichirin Blades',
+                accentHex: '#f59e0b',
+                patternClass: 'pattern-uroko',
+                badgeBg: 'bg-amber-950/80 text-amber-300 border-amber-500/40',
+                quote: '“I’ll live my life flamboyantly—with pride, style, and all three of my wives!”',
+                bio: 'A towering, flamboyant Sound Hashira with a shinobi background who infiltrates the Entertainment District alongside his three kunoichi wives. Using explosive slashes and rhythm analysis, he battles Upper Sixes Daki and Gyutaro.',
+                svgEmblem: `
+                    <svg viewBox="0 0 120 120" class="w-28 h-28">
+                        <circle cx="60" cy="60" r="54" fill="#78350f" fill-opacity="0.38" stroke="#fbbf24" stroke-width="2"/>
+                        <circle cx="60" cy="60" r="24" fill="none" stroke="#fde047" stroke-width="2.5"/>
+                        <line x1="22" y1="60" x2="98" y2="60" stroke="#f59e0b" stroke-width="3"/>
+                        <line x1="60" y1="22" x2="60" y2="98" stroke="#f59e0b" stroke-width="3"/>
+                    </svg>`
+            },
+            {
+                id: 'tanjiro',
+                name: 'Tanjiro Kamado',
+                jpName: '竈門 炭治郎',
+                role: 'Demon Slayer • Mizunoto Rank',
+                style: 'Hinokami Kagura & Water Breathing',
+                bladeColor: 'Jet-Black Nichirin Blade',
+                accentHex: '#ef4444',
+                patternClass: 'pattern-ichimatsu',
+                badgeBg: 'bg-red-950/80 text-red-300 border-red-500/40',
+                quote: '“Keep moving forward! Even if it hurts, don’t stop breathing!”',
+                bio: 'Having mastered Total Concentration Constant by the end of Season 1, Tanjiro links Hinokami Kagura dances seamlessly in Season 2 to survive Enmu’s dream manipulation on the Mugen Train and clash fiercely against Daki and Gyutaro.',
+                svgEmblem: `
+                    <svg viewBox="0 0 120 120" class="w-28 h-28">
+                        <circle cx="60" cy="60" r="54" fill="#7f1d1d" fill-opacity="0.35" stroke="#f87171" stroke-width="2"/>
+                        <path d="M60 16 L66 48 L98 42 L72 60 L98 78 L66 72 L60 104 L54 72 L22 78 L48 60 L22 42 L54 48 Z" fill="#18181b" stroke="#f59e0b" stroke-width="2"/>
+                        <circle cx="60" cy="60" r="11" fill="#991b1b" stroke="#fde047" stroke-width="2"/>
+                    </svg>`
+            },
+            {
+                id: 'nezuko',
+                name: 'Nezuko Kamado',
+                jpName: '竈門 禰豆子',
+                role: 'Demon Sister • Awakened Form',
+                style: 'Exploding Blood (Bakketu)',
+                bladeColor: 'Burning Rose-Crimson Demon Flames',
+                accentHex: '#ec4899',
+                patternClass: 'pattern-asanoha',
+                badgeBg: 'bg-pink-950/80 text-pink-300 border-pink-500/40',
+                quote: '“Protect Tanjiro—and stop the demon’s poison!”',
+                bio: 'Purifying dream-tethers on the Mugen Train with her flames, Nezuko later unleashes a fierce, horn-crowned demon form in the Entertainment District whose Exploding Blood incinerates Gyutaro’s deadly poison.',
+                svgEmblem: `
+                    <svg viewBox="0 0 120 120" class="w-28 h-28">
+                        <circle cx="60" cy="60" r="54" fill="#831843" fill-opacity="0.38" stroke="#f472b6" stroke-width="2"/>
+                        <polygon points="60,20 74,48 98,44 80,66 88,94 60,78 32,94 40,66 22,44 46,48" fill="#db2777" stroke="#fbcfe8" stroke-width="1.5"/>
+                    </svg>`
+            },
+            {
+                id: 'zenitsu_inosuke',
+                name: 'Zenitsu & Inosuke',
+                jpName: '我妻 善逸 & 嘴平 伊之助',
+                role: 'Demon Slayers • Frontline Trio',
+                style: 'Thunderclap & Flash / Beast Breathing',
+                bladeColor: 'Yellow & Indigo-Gray Serrated Blades',
+                accentHex: '#38bdf8',
+                patternClass: 'pattern-seigaiha',
+                badgeBg: 'bg-sky-950/80 text-sky-300 border-sky-500/40',
+                quote: '“We’re not dying in a place like this—we’re taking their heads!”',
+                bio: 'Disguised inside the Entertainment District as Maiko and girls’ attendants, Zenitsu and Inosuke push past their limits against Upper Six’s obi sashes and sickles, with Inosuke even shifting his internal organs to survive a lethal chest wound.',
+                svgEmblem: `
+                    <svg viewBox="0 0 120 120" class="w-28 h-28">
+                        <circle cx="60" cy="60" r="54" fill="#0c4a6e" fill-opacity="0.38" stroke="#38bdf8" stroke-width="2"/>
+                        <polygon points="64,20 40,60 58,60 50,98 82,54 62,54" fill="#facc15"/>
+                        <path d="M28 84 L88 32 M88 84 L28 32" stroke="#93c5fd" stroke-width="4" stroke-linecap="round"/>
+                    </svg>`
+            }
+        ];
+
+        const breathingStylesData = {
+            flame: {
+                title: 'Flame Breathing',
+                jp: '炎の呼吸 (Honō no Kokyū)',
+                user: 'Kyojuro Rengoku',
+                color: '#fb923c',
+                description: 'A powerful style that unleashes fierce, searing sword arcs reminiscent of raging fire. Rengoku’s mastery culminates in sweeping slashes and a devastating ninth-form charge.',
+                svgGraphic: `
+                    <svg viewBox="0 0 320 200" class="w-full max-w-xs">
+                        <defs>
+                            <linearGradient id="flameGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#dc2626"/>
+                                <stop offset="55%" stop-color="#f97316"/>
+                                <stop offset="100%" stop-color="#fef08a"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M25 145 C85 110, 145 45, 295 35" fill="none" stroke="url(#flameGrad)" stroke-width="10" stroke-linecap="round" class="animate-pulse-slow"/>
+                        <path d="M40 165 C105 135, 165 80, 285 68" fill="none" stroke="#fdba74" stroke-width="4" stroke-dasharray="12 6" class="animate-dash"/>
+                        <text x="160" y="185" text-anchor="middle" fill="#fdba74" font-family="Noto Serif JP" font-size="14" letter-spacing="4">炎の呼吸 • 壱ノ型〜玖ノ型</text>
+                    </svg>`,
+                forms: [
+                    { num: 'First Form', name: 'Unknowing Fire', jp: '壱ノ型 不知火', desc: 'A high-speed dash that twists the body in a spiral to decapitate the target in a single strike.' },
+                    { num: 'Second Form', name: 'Rising Scorching Sun', jp: '弐ノ型 昇り炎天', desc: 'An upward crescent slash that severs incoming strikes and rises toward the foe.' },
+                    { num: 'Fourth Form', name: 'Blooming Flame Undulation', jp: '肆ノ型 盛炎のうねり', desc: 'A sweeping circular slash used to deflect multiple attacks or sever surrounding threats.' },
+                    { num: 'Fifth Form', name: 'Flame Tiger', jp: '伍ノ型 炎虎', desc: 'Unleashes a series of ferocious, leaping slashes shaped like a roaring tiger of fire.' },
+                    { num: 'Ninth Form', name: 'Rengoku', jp: '玖ノ型 煉獄', desc: 'A devastating high-speed piercing charge wreathed in blazing flames capable of carving deep into the earth.' }
+                ]
+            },
+            sound: {
+                title: 'Sound Breathing',
+                jp: '音の呼吸 (Oto no Kokyū)',
+                user: 'Tengen Uzui',
+                color: '#fbbf24',
+                description: 'Derived from Thunder Breathing, Sound Breathing pairs twin cleaver blades with explosive blasts and keen auditory perception to read an enemy’s rhythm like a musical score.',
+                svgGraphic: `
+                    <svg viewBox="0 0 320 200" class="w-full max-w-xs">
+                        <circle cx="160" cy="95" r="24" fill="none" stroke="#fbbf24" stroke-width="3" class="animate-pulse-slow"/>
+                        <circle cx="160" cy="95" r="46" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="10 8" class="animate-dash"/>
+                        <circle cx="160" cy="95" r="70" fill="none" stroke="#fde047" stroke-width="1.5" stroke-dasharray="6 10"/>
+                        <text x="160" y="185" text-anchor="middle" fill="#fde047" font-family="Noto Serif JP" font-size="14" letter-spacing="4">音の呼吸 • 譜面と爆撃</text>
+                    </svg>`,
+                forms: [
+                    { num: 'First Form', name: 'Roar', jp: '壱ノ型 轟', desc: 'Slams the twin blades together while kicking up explosive shockwaves and sound bursts.' },
+                    { num: 'Fourth Form', name: 'Constant Resounding Slashes', jp: '肆ノ型 響斬無間', desc: 'Leaps airborne and chains simultaneous slashes with detonations to hold off relentless attacks.' },
+                    { num: 'Fifth Form', name: 'String Performance', jp: '伍ノ型 鳴弦奏々', desc: 'Spins one blade by its chain while swinging the other, creating a sweeping gale of slashes and blasts.' },
+                    { num: 'Combat Technique', name: 'Musical Score', jp: '譜面', desc: 'Translates an opponent’s movements and attacks into musical notes so Tengen can counter with pinpoint precision.' }
+                ]
+            },
+            hinokami: {
+                title: 'Hinokami Kagura',
+                jp: 'ヒノカミ神楽',
+                user: 'Tanjiro Kamado',
+                color: '#f87171',
+                description: 'Passed down generations within the Kamado family, Hinokami Kagura links continuous breath-and-dance forms to sustain stamina and strike with solar warmth.',
+                svgGraphic: `
+                    <svg viewBox="0 0 320 200" class="w-full max-w-xs">
+                        <circle cx="160" cy="95" r="42" fill="#991b1b" fill-opacity="0.35" stroke="#f87171" stroke-width="2.5"/>
+                        <path d="M160 40 L172 80 L212 95 L172 110 L160 150 L148 110 L108 95 L148 80 Z" fill="#ef4444" stroke="#fde047" stroke-width="2" class="animate-pulse-slow"/>
+                        <text x="160" y="185" text-anchor="middle" fill="#fca5a5" font-family="Noto Serif JP" font-size="14" letter-spacing="4">ヒノカミ神楽 • 連舞</text>
+                    </svg>`,
+                forms: [
+                    { num: 'Dance', name: 'Clear Blue Sky', jp: '碧羅の天', desc: 'A single-rotation vertical slash that slices cleanly through demonic defenses.' },
+                    { num: 'Dance', name: 'Setting Sun Transformation', jp: '日暈の龍・頭舞', desc: 'Leaps and twists in midair while weaving a fiery dragon arc around the blade.' },
+                    { num: 'Dance', name: 'Sun Halo Dragon: Head Dance', jp: '陽光陽華突', desc: 'Delivers a high-speed piercing thrust combined with a twisting solar flame spiral.' },
+                    { num: 'Linkage', name: 'Continuous Dance Linking', jp: '連舞繋ぎ', desc: 'Connects consecutive dance steps without pause to keep pace against Upper Rank foes.' }
+                ]
+            }
+        };
+
+        const episodesData = [
+            { num: 1, title: 'Flame Hashira Kyojuro Rengoku', jp: '炎柱・煉獄杏寿郎', arc: 'Mugen Train Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+1+Kyojuro+Rengoku', summary: 'Before boarding the Mugen Train, Kyojuro Rengoku tracks a slasher demon in the mountains and settles affairs with his family before heading toward the train.', highlight: 'Rengoku’s solo mission & resolve before boarding.' },
+            { num: 2, title: 'Deep Sleep', jp: '深い眠り', arc: 'Mugen Train Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+2+Deep+Sleep', summary: 'Tanjiro, Nezuko, Zenitsu, and Inosuke reunite with Rengoku aboard the Mugen Train as Lower Rank One Enmu begins luring passengers into slumber.', highlight: 'Boarding the Mugen Train & Enmu’s dream trap.' },
+            { num: 3, title: 'Should It Be Real', jp: '本当なら', arc: 'Mugen Train Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+3+Should+It+Be+Real', summary: 'Trapped inside fabricated dreams of their happiest memories, the Demon Slayers must recognize the illusion and sever their own dream-selves to wake up.', highlight: 'Confronting dream illusions & waking up.' },
+            { num: 4, title: 'Insult', jp: '侮辱', arc: 'Mugen Train Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+4+Insult', summary: 'Waking inside the train cars, Tanjiro and Inosuke battle Enmu’s flesh and tendrils while Rengoku guards sleeping passengers across multiple coaches.', highlight: 'Tanjiro & Inosuke fight Enmu across the train.' },
+            { num: 5, title: 'Move Forward!', jp: '前へ進め！', arc: 'Mugen Train Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+5+Move+Forward', summary: 'As the Mugen Train derails, Tanjiro fights to reach Enmu’s neck while Inosuke and Rengoku protect the crew and passengers.', highlight: 'Derailment & Hinokami Kagura against Enmu.' },
+            { num: 6, title: 'Akaza', jp: '猗窩座', arc: 'Mugen Train Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+6+Akaza', summary: 'Just as Enmu falls, Upper Rank Three Akaza arrives in the wreckage and challenges Rengoku to become a demon.', highlight: 'Upper Rank Three Akaza’s arrival & clash.' },
+            { num: 7, title: 'Set Your Heart Ablaze', jp: '心を燃やせ', arc: 'Mugen Train Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+7+Set+Your+Heart+Ablaze', summary: 'Refusing Akaza’s offer, Rengoku unleashes his full power until dawn breaks, leaving a lasting charge to Tanjiro and the corps.', highlight: 'Rengoku’s final stand at dawn.' },
+            { num: 8, title: 'Sound Hashira Tengen Uzui', jp: '音柱・宇髄天元', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+8+Tengen+Uzui', summary: 'Sound Hashira Tengen Uzui recruits Tanjiro, Zenitsu, and Inosuke for an infiltration mission into the Yoshiwara Entertainment District where demons have gone undetected.', highlight: 'Tengen Uzui’s flamboyant recruitment.' },
+            { num: 9, title: 'Infiltrating the Entertainment District', jp: '遊郭潜入', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+9+Infiltrating+Entertainment+District', summary: 'Disguised as maids and attendants across three houses, the trio searches for clues while Upper Rank Six Daki moves through the district.', highlight: 'Undercover infiltration & Daki’s presence.' },
+            { num: 10, title: 'What Are You?', jp: '何者？', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+10+What+Are+You', summary: 'Tracking missing women to the Ogimoto House, Tanjiro confronts Daki and her razor-sharp obi sashes in a fierce clash.', highlight: 'First direct battle against Upper Six Daki.' },
+            { num: 11, title: 'Tonight', jp: '今夜', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+11+Tonight', summary: 'As the district burns, Nezuko awakens her fierce demon form and clashes with Daki while Tengen Uzui arrives to turn the tide.', highlight: 'Nezuko’s awakened form & Tengen’s entrance.' },
+            { num: 12, title: 'Things Are Gonna Get Real Flashy!!', jp: '派手にいくぜ!!', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+12+Flashy', summary: 'Tengen overpowers Daki with Sound Breathing—only for her brother Gyutaro, the true Upper Rank Six threat, to emerge from her body.', highlight: 'Gyutaro emerges & poison blades strike.' },
+            { num: 13, title: 'Layered Memories', jp: '重なる記憶', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+13+Layered+Memories', summary: 'As Gyutaro’s flying blood sickles ravage the battlefield, Tanjiro links Hinokami Kagura dances while Tengen races to complete his Musical Score.', highlight: 'Hinokami Kagura linkage & Tengen’s rhythm.' },
+            { num: 14, title: 'I Will Never Give Up', jp: '絶対諦めない', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+14+Never+Give+Up', summary: 'Severely wounded by poison, Tengen, Tanjiro, Zenitsu, and Inosuke coordinate a coordinated push to sever both Daki and Gyutaro at once.', highlight: 'Coordinated assault against Upper Six.' },
+            { num: 15, title: 'Gathering', jp: '集結', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+15+Gathering', summary: 'Zenitsu and Inosuke target Daki’s head while Tanjiro and Tengen press Gyutaro in an all-out synchronized strike.', highlight: 'Simultaneous decapitation attempt.' },
+            { num: 16, title: 'Defeating an Upper Rank Demon', jp: '上弦の鬼を倒したら', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+16+Defeating+Upper+Rank', summary: 'Even after losing their heads, Daki and Gyutaro unleash a final wave of destruction until Nezuko’s Exploding Blood burns away the poison.', highlight: 'Nezuko’s flames save the fighters.' },
+            { num: 17, title: 'I Will Never Be Anyone Else', jp: '絶対誰にもならない', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+17+Never+Be+Anyone+Else', summary: 'Amid the ruins of the Entertainment District, Gyutaro and Daki’s shared past and bitter bond unfold as the battle draws to a close.', highlight: 'Gyutaro & Daki’s final exchange.' },
+            { num: 18, title: 'No Matter How Many Lives', jp: '何度生まれ変わっても', arc: 'Entertainment District Arc', url: 'https://www.youtube.com/results?search_query=Demon+Slayer+Season+2+Episode+18+No+Matter+How+Many+Lives', summary: 'Recovering from their wounds, Tengen retires from active duty with his wives while Tanjiro, Nezuko, Zenitsu, and Inosuke prepare for their next mission.', highlight: 'Season 2 finale & path to Swordsmith Village.' }
+        ];
+
+        const antagonistsData = [
+            {
+                name: 'Enmu',
+                jp: '魘夢',
+                rank: 'Lower Rank One • Twelve Kizuki',
+                ability: 'Forced Sleep & Dream Manipulation',
+                desc: 'Merges with the Mugen Train to trap passengers and slayers in tailored dreams while attacking from the train’s core.'
+            },
+            {
+                name: 'Akaza',
+                jp: '阿伎座 • 上弦の参',
+                rank: 'Upper Rank Three • Twelve Kizuki',
+                ability: 'Destructive Death Martial Arts & Compass Needle',
+                desc: 'A battle-obsessed martial artist demon who tests Rengoku’s limits on the Mugen Train and respects strong warriors.'
+            },
+            {
+                name: 'Daki',
+                jp: '堕姫 • 上弦の陸',
+                rank: 'Upper Rank Six • Twelve Kizuki',
+                ability: 'Razor Obi Sashes & Flesh Manipulation',
+                desc: 'Operating covertly inside the Yoshiwara Entertainment District, Daki attacks with lethal obi ribbons linked to her brother Gyutaro.'
+            },
+            {
+                name: 'Gyutaro',
+                jp: '妓夫太郎 • 上弦の陸',
+                rank: 'Upper Rank Six • Twelve Kizuki',
+                ability: 'Blood Sickles & Deadly Demon Poison',
+                desc: 'The true power behind Upper Six who fights with twin blood sickles and fast-acting poison, sharing a fierce bond with Daki.'
+            }
+        ];
+
+        const hashiraData = [
+            { name: 'Kyojuro Rengoku', title: 'Flame Hashira (炎柱)', trait: 'Leads the Mugen Train battle and inspires Tanjiro’s resolve.' },
+            { name: 'Tengen Uzui', title: 'Sound Hashira (音柱)', trait: 'Leads the Entertainment District mission against Upper Six.' },
+            { name: 'Giyu Tomioka', title: 'Water Hashira (水柱)', trait: 'Calm Pillar of Water Breathing within the Corps.' },
+            { name: 'Shinobu Kocho', title: 'Insect Hashira (蟲柱)', trait: 'Agile Pillar wielding wisteria poison.' },
+            { name: 'Mitsuri Kanroji', title: 'Love Hashira (戀柱)', trait: 'High-flexibility Pillar of Love Breathing.' },
+            { name: 'Muichiro Tokito', title: 'Mist Hashira (霞柱)', trait: 'Young prodigy of Mist Breathing.' },
+            { name: 'Gyomei Himejima', title: 'Stone Hashira (岩柱)', trait: 'Towering Pillar of Stone Breathing.' },
+            { name: 'Sanemi Shinazugawa', title: 'Wind Hashira (風柱)', trait: 'Fierce Pillar of Wind Breathing.' },
+            { name: 'Obanai Iguro', title: 'Serpent Hashira (蛇柱)', trait: 'Calculated Pillar of Serpent Breathing.' }
+        ];
+
+        /* ==========================================================================
+           2. STATE & NAVIGATION HELPERS
+           ========================================================================== */
+
+        const TOTAL_EPISODES = episodesData.length;
+
+        const ARC_ORDER = [
+            'All',
+            'Mugen Train Arc',
+            'Entertainment District Arc'
+        ];
+
+        const ADMIN_PIN = '1960';
+        const LINK_STORAGE_KEY = 'kimetsu_s2_admin_links_v1';
+
+        const DEFAULT_TRAILER_URLS = featuredVideosData.map((v) => v.url);
+        const DEFAULT_RELATED_URLS = relatedPagesData.map((p) => p.url);
+        const DEFAULT_EPISODE_URLS = episodesData.map((e) => e.url);
+
+        let isAdminUnlocked = false;
+        let activeCharId = 'rengoku';
+        let activeBreathingStyle = 'flame';
+        let activeArcFilter = 'All';
+        let currentModalEpNum = 1;
+        let activeAdminEpNum = 1;
+
+        function isSafeNavigationUrl(rawUrl) {
+            const trimmed = (rawUrl || '').trim();
+            if (!trimmed) return false;
+            try {
+                const parsed = new URL(trimmed);
+                return parsed.protocol === 'https:' || parsed.protocol === 'http:';
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function persistCustomLinks() {
+            try {
+                const payload = {
+                    trailers: featuredVideosData.map((v) => v.url),
+                    related: relatedPagesData.map((p) => p.url),
+                    episodes: episodesData.map((e) => e.url)
+                };
+                localStorage.setItem(LINK_STORAGE_KEY, JSON.stringify(payload));
+            } catch (_) {
+                // Ignore storage quota or restricted context errors
+            }
+        }
+
+        function loadCustomLinks() {
+            try {
+                const raw = localStorage.getItem(LINK_STORAGE_KEY);
+                if (!raw) return;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach((u, idx) => {
+                        if (featuredVideosData[idx] && isSafeNavigationUrl(u)) {
+                            featuredVideosData[idx].url = u.trim();
+                        }
+                    });
+                }
+                if (Array.isArray(parsed.related)) {
+                    parsed.related.forEach((u, idx) => {
+                        if (relatedPagesData[idx] && isSafeNavigationUrl(u)) {
+                            relatedPagesData[idx].url = u.trim();
+                        }
+                    });
+                }
+                if (Array.isArray(parsed.episodes)) {
+                    parsed.episodes.forEach((u, idx) => {
+                        if (episodesData[idx] && isSafeNavigationUrl(u)) {
+                            episodesData[idx].url = u.trim();
+                        }
+                    });
+                }
+            } catch (_) {
+                // Fallback to defaults if storage is malformed
+            }
+        }
+
+        function resetAllLinksToDefault() {
+            featuredVideosData.forEach((v, idx) => {
+                if (DEFAULT_TRAILER_URLS[idx]) v.url = DEFAULT_TRAILER_URLS[idx];
+            });
+            relatedPagesData.forEach((p, idx) => {
+                if (DEFAULT_RELATED_URLS[idx]) p.url = DEFAULT_RELATED_URLS[idx];
+            });
+            episodesData.forEach((e, idx) => {
+                if (DEFAULT_EPISODE_URLS[idx]) e.url = DEFAULT_EPISODE_URLS[idx];
+            });
+            try {
+                localStorage.removeItem(LINK_STORAGE_KEY);
+            } catch (_) {
+                // Ignore
+            }
+            renderTrailersAndPages();
+            renderEpisodes();
+            syncSelectedEpisodeJumpLink(currentModalEpNum);
+            renderAdminLinkEditors();
+            setAdminStatus('All links restored to default URLs.');
+        }
+
+        function getEpisodeExternalUrl(ep) {
+            return ep.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`Demon Slayer Season 1 Episode ${ep.num} ${ep.title}`)}`;
+        }
+
+        /* ==========================================================================
+           3. ATMOSPHERIC CANVAS PARTICLE SYSTEM (WISTERIA PETALS & HINOKAMI EMBERS)
+           ========================================================================== */
+
+        const canvas = document.getElementById('atmosphereCanvas');
+        const ctx = canvas.getContext('2d');
+        const toggleParticleBtn = document.getElementById('toggleParticleBtn');
+        const particleLabel = document.getElementById('particleLabel');
+        const particleDot = document.getElementById('particleDot');
+
+        let particleMode = 'wisteria'; // 'wisteria' | 'embers'
+        let particles = [];
+        let canvasWidth = 0;
+        let canvasHeight = 0;
+
+        function resizeCanvas() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvasWidth = window.innerWidth;
+            canvasHeight = window.innerHeight;
+            canvas.width = Math.floor(canvasWidth * dpr);
+            canvas.height = Math.floor(canvasHeight * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function createParticle() {
+            const isWisteria = particleMode === 'wisteria';
+            return {
+                x: Math.random() * canvasWidth,
+                y: Math.random() * canvasHeight,
+                size: isWisteria ? (Math.random() * 6 + 5) : (Math.random() * 3.5 + 1.8),
+                speedY: isWisteria ? (Math.random() * 0.75 + 0.35) : -(Math.random() * 1.15 + 0.45),
+                speedX: (Math.random() - 0.5) * 0.85,
+                swayPhase: Math.random() * Math.PI * 2,
+                swaySpeed: Math.random() * 0.025 + 0.01,
+                rotation: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random() - 0.5) * 0.03,
+                alpha: Math.random() * 0.45 + 0.3,
+                hue: isWisteria
+                    ? (Math.random() > 0.4 ? '216, 180, 254' : '192, 132, 252')
+                    : (Math.random() > 0.35 ? '251, 146, 60' : '248, 113, 113')
+            };
+        }
+
+        function initParticles() {
+            const targetCount = canvasWidth < 640 ? 28 : 52;
+            particles = Array.from({ length: targetCount }, createParticle);
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            for (const p of particles) {
+                p.swayPhase += p.swaySpeed;
+                p.x += p.speedX + Math.sin(p.swayPhase) * 0.45;
+                p.y += p.speedY;
+                p.rotation += p.rotSpeed;
+
+                if (particleMode === 'wisteria') {
+                    if (p.y > canvasHeight + 24) {
+                        p.y = -20;
+                        p.x = Math.random() * canvasWidth;
+                    }
+                } else {
+                    if (p.y < -24) {
+                        p.y = canvasHeight + 20;
+                        p.x = Math.random() * canvasWidth;
+                    }
+                }
+
+                if (p.x > canvasWidth + 24) p.x = -20;
+                if (p.x < -24) p.x = canvasWidth + 20;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation);
+
+                if (particleMode === 'wisteria') {
+                    ctx.beginPath();
+                    ctx.moveTo(0, -p.size);
+                    ctx.quadraticCurveTo(p.size * 0.85, -p.size * 0.1, 0, p.size);
+                    ctx.quadraticCurveTo(-p.size * 0.85, -p.size * 0.1, 0, -p.size);
+                    ctx.fillStyle = `rgba(${p.hue}, ${p.alpha})`;
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${p.hue}, ${p.alpha})`;
+                    ctx.shadowColor = `rgba(${p.hue}, 0.85)`;
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+            requestAnimationFrame(drawParticles);
+        }
+
+        toggleParticleBtn.addEventListener('click', () => {
+            if (particleMode === 'wisteria') {
+                particleMode = 'embers';
+                particleLabel.textContent = '🔥 Hinokami';
+                particleDot.className = 'w-2 h-2 rounded-full bg-orange-400 animate-ping';
+            } else {
+                particleMode = 'wisteria';
+                particleLabel.textContent = '🌸 Wisteria';
+                particleDot.className = 'w-2 h-2 rounded-full bg-purple-400 animate-ping';
+            }
+            initParticles();
+        });
+
+        /* ==========================================================================
+           4. CHARACTERS SECTION RENDERING
+           ========================================================================== */
+
+        const characterTabsEl = document.getElementById('characterTabs');
+        const characterDetailCardEl = document.getElementById('characterDetailCard');
+
+        function renderCharacters() {
+            characterTabsEl.innerHTML = charactersData.map((char) => {
+                const isActive = char.id === activeCharId;
+                return `
+                    <button
+                        type="button"
+                        data-char-id="${char.id}"
+                        class="char-tab-btn w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between gap-3 ${
+                            isActive
+                                ? 'bg-taisho-surface border-amber-400/80 shadow-lg shadow-amber-950/30'
+                                : 'bg-taisho-surface/55 border-zinc-800 hover:border-zinc-600'
+                        }">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${char.accentHex}"></span>
+                                <span class="font-serifDisplay font-bold text-base text-white truncate">${char.name}</span>
+                            </div>
+                            <span class="font-jpSerif text-xs text-amber-300/80 block mt-0.5">${char.jpName} • ${char.role.split('•')[0].trim()}</span>
+                        </div>
+                        <span class="text-amber-400 text-sm shrink-0">${isActive ? '◆' : '›'}</span>
+                    </button>
+                `;
+            }).join('');
+
+            const activeChar = charactersData.find((c) => c.id === activeCharId) || charactersData[0];
+            characterDetailCardEl.innerHTML = `
+                <div class="rounded-2xl bg-taisho-surface border border-amber-500/30 p-6 sm:p-8 relative overflow-hidden ${activeChar.patternClass}">
+                    <div class="absolute inset-0 bg-gradient-to-br from-taisho-black/80 via-taisho-surface/90 to-taisho-black/85 pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-6 border-b border-zinc-800/90">
+                            <div>
+                                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold border ${activeChar.badgeBg} mb-2">
+                                    ${activeChar.role}
+                                </span>
+                                <h3 class="font-serifDisplay text-2xl sm:text-3xl font-extrabold text-white">${activeChar.name}</h3>
+                                <p class="font-jpSerif text-base text-amber-400 mt-0.5">${activeChar.jpName}</p>
+                            </div>
+                            <div class="shrink-0 self-start sm:self-center">
+                                ${activeChar.svgEmblem}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                            <div class="p-3.5 rounded-xl bg-black/55 border border-white/10">
+                                <span class="text-[11px] uppercase tracking-wider text-zinc-400 block">Fighting Style / Art</span>
+                                <span class="text-sm font-semibold text-amber-200 mt-1 block">${activeChar.style}</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-black/55 border border-white/10">
+                                <span class="text-[11px] uppercase tracking-wider text-zinc-400 block">Blade / Signature Force</span>
+                                <span class="text-sm font-semibold text-zinc-100 mt-1 block">${activeChar.bladeColor}</span>
+                            </div>
+                        </div>
+
+                        <p class="text-sm sm:text-base text-zinc-300 leading-relaxed mb-6">
+                            ${activeChar.bio}
+                        </p>
+
+                        <blockquote class="p-4 rounded-xl bg-red-950/25 border-l-4 border-amber-400 text-sm italic text-amber-100/95">
+                            ${activeChar.quote}
+                        </blockquote>
+                    </div>
+                </div>
+            `;
+
+            document.querySelectorAll('.char-tab-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    activeCharId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+        }
+
+        /* ==========================================================================
+           5. BREATHING STYLES EXPLORER RENDERING
+           ========================================================================== */
+
+        const breathingVisualHeaderEl = document.getElementById('breathingVisualHeader');
+        const breathingSvgStageEl = document.getElementById('breathingSvgStage');
+        const activeFormBannerEl = document.getElementById('activeFormBanner');
+        const formsListTitleEl = document.getElementById('formsListTitle');
+        const breathingFormsGridEl = document.getElementById('breathingFormsGrid');
+
+        function setActiveFormBanner(form, color) {
+            activeFormBannerEl.innerHTML = `
+                <div class="flex items-center justify-between gap-2 mb-1">
+                    <span class="text-xs font-bold uppercase tracking-wider" style="color:${color}">${form.num}</span>
+                    <span class="font-jpSerif text-xs text-zinc-400">${form.jp}</span>
+                </div>
+                <h4 class="font-serifDisplay font-bold text-base text-white mb-1">${form.name}</h4>
+                <p class="text-xs text-zinc-300 leading-relaxed">${form.desc}</p>
+            `;
+        }
+
+        function renderBreathingStyle(styleKey) {
+            activeBreathingStyle = styleKey;
+            const styleObj = breathingStylesData[styleKey] || breathingStylesData.water;
+
+            document.querySelectorAll('.breathing-tab').forEach((tab) => {
+                const isSelected = tab.getAttribute('data-style') === styleKey;
+                tab.className = `breathing-tab px-5 py-3 rounded-xl font-serifDisplay font-bold text-sm tracking-wider uppercase border transition-all flex items-center gap-2 ${
+                    isSelected
+                        ? 'bg-zinc-900 border-amber-400 text-amber-200 shadow-lg'
+                        : 'bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-amber-400/50 hover:text-amber-300'
+                }`;
+            });
+
+            breathingVisualHeaderEl.innerHTML = `
+                <span class="font-jpSerif text-xs tracking-widest block" style="color:${styleObj.color}">${styleObj.jp}</span>
+                <h3 class="font-serifDisplay text-2xl font-bold text-white mt-0.5">${styleObj.title}</h3>
+                <p class="text-xs text-zinc-400 mt-1">Practitioners: <span class="text-zinc-200">${styleObj.user}</span></p>
+                <p class="text-xs sm:text-sm text-zinc-300 mt-3 leading-relaxed">${styleObj.description}</p>
+            `;
+
+            breathingSvgStageEl.innerHTML = styleObj.svgGraphic;
+            formsListTitleEl.textContent = `${styleObj.title} — Techniques (${styleObj.forms.length})`;
+
+            breathingFormsGridEl.innerHTML = styleObj.forms.map((form, idx) => `
+                <button
+                    type="button"
+                    data-form-idx="${idx}"
+                    class="breathing-form-card h-full text-left p-3.5 rounded-xl bg-taisho-black/75 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/60 transition flex flex-col justify-between">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider block" style="color:${styleObj.color}">${form.num}</span>
+                        <div class="font-serifDisplay font-bold text-sm text-white mt-1 leading-snug">${form.name}</div>
+                    </div>
+                    <span class="font-jpSerif text-[11px] text-zinc-400 mt-2 block">${form.jp}</span>
+                </button>
+            `).join('');
+
+            if (styleObj.forms.length > 0) {
+                setActiveFormBanner(styleObj.forms[0], styleObj.color);
+            }
+
+            document.querySelectorAll('.breathing-form-card').forEach((card) => {
+                card.addEventListener('click', () => {
+                    const idx = Number(card.getAttribute('data-form-idx'));
+                    if (styleObj.forms[idx]) {
+                        setActiveFormBanner(styleObj.forms[idx], styleObj.color);
+                    }
+                });
+            });
+        }
+
+        document.querySelectorAll('.breathing-tab').forEach((tab) => {
+            tab.addEventListener('click', () => {
+                renderBreathingStyle(tab.getAttribute('data-style'));
+            });
+        });
+
+        /* ==========================================================================
+           6. 26-EPISODE GUIDE & ARC + EPISODE NAVIGATION CONTROLS
+           ========================================================================== */
+
+        const arcFilterContainerEl = document.getElementById('arcFilterContainer');
+        const episodesGridEl = document.getElementById('episodesGrid');
+        const episodeSearchInputEl = document.getElementById('episodeSearchInput');
+        const episodeCountBadgeEl = document.getElementById('episodeCountBadge');
+        const episodeJumpSelectEl = document.getElementById('episodeJumpSelect');
+        const epNavPrevBtn = document.getElementById('epNavPrevBtn');
+        const epNavNextBtn = document.getElementById('epNavNextBtn');
+        const epNavOpenSelectedBtn = document.getElementById('epNavOpenSelectedBtn');
+        const epNavExternalLinkBtn = document.getElementById('epNavExternalLinkBtn');
+        const arcNavPrevBtn = document.getElementById('arcNavPrevBtn');
+        const arcNavNextBtn = document.getElementById('arcNavNextBtn');
+
+        function syncSelectedEpisodeJumpLink(epNum) {
+            const ep = episodesData.find((item) => item.num === epNum) || episodesData[0];
+            if (epNavExternalLinkBtn && ep) {
+                epNavExternalLinkBtn.href = getEpisodeExternalUrl(ep);
+                epNavExternalLinkBtn.textContent = `Ep ${String(ep.num).padStart(2, '0')} Link ↗`;
+            }
+        }
+
+        function populateEpisodeJumpSelect() {
+            if (!episodeJumpSelectEl) return;
+            episodeJumpSelectEl.innerHTML = episodesData.map((ep) =>
+                `<option value="${ep.num}">EP ${String(ep.num).padStart(2, '0')} — ${ep.title}</option>`
+            ).join('');
+            episodeJumpSelectEl.value = String(currentModalEpNum);
+            syncSelectedEpisodeJumpLink(currentModalEpNum);
+        }
+
+        function renderArcFilters() {
+            if (!arcFilterContainerEl) return;
+            arcFilterContainerEl.innerHTML = ARC_ORDER.map((arc) => {
+                const isActive = activeArcFilter === arc;
+                return `
+                    <button
+                        type="button"
+                        data-arc="${arc}"
+                        class="arc-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition ${
+                            isActive
+                                ? 'bg-red-800 border-amber-400 text-white shadow'
+                                : 'bg-taisho-black/80 border-zinc-700 text-zinc-300 hover:border-amber-400/50 hover:text-amber-200'
+                        }">
+                        ${arc}
+                    </button>
+                `;
+            }).join('');
+
+            document.querySelectorAll('.arc-filter-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    activeArcFilter = btn.getAttribute('data-arc');
+                    renderArcFilters();
+                    renderEpisodes();
+                });
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGridEl || !episodeSearchInputEl || !episodeCountBadgeEl) return;
+            const query = (episodeSearchInputEl.value || '').trim().toLowerCase();
+            const filtered = episodesData.filter((ep) => {
+                const matchesArc = activeArcFilter === 'All' || ep.arc === activeArcFilter;
+                const matchesQuery = !query ||
+                    String(ep.num).includes(query) ||
+                    ep.title.toLowerCase().includes(query) ||
+                    ep.jp.toLowerCase().includes(query) ||
+                    ep.arc.toLowerCase().includes(query) ||
+                    ep.summary.toLowerCase().includes(query) ||
+                    ep.highlight.toLowerCase().includes(query);
+                return matchesArc && matchesQuery;
+            });
+
+            episodeCountBadgeEl.textContent = String(filtered.length);
+
+            if (filtered.length === 0) {
+                episodesGridEl.innerHTML = `
+                    <div class="col-span-full text-center py-12 rounded-2xl bg-taisho-surface border border-zinc-800">
+                        <p class="text-zinc-300 font-semibold">No episodes match your current filter or search.</p>
+                        <button type="button" id="resetEpisodeFiltersBtn" class="mt-3 px-4 py-2 rounded-lg bg-red-800 text-xs font-bold text-white">
+                            Show All 26 Episodes
+                        </button>
+                    </div>
+                `;
+                const resetBtn = document.getElementById('resetEpisodeFiltersBtn');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        activeArcFilter = 'All';
+                        episodeSearchInputEl.value = '';
+                        renderArcFilters();
+                        renderEpisodes();
+                    });
+                }
+                return;
+            }
+
+            episodesGridEl.innerHTML = filtered.map((ep) => {
+                const epCode = `EP ${String(ep.num).padStart(2, '0')}`;
+                const extUrl = getEpisodeExternalUrl(ep);
+                return `
+                    <article
+                        id="ep-card-${ep.num}"
+                        data-ep-num="${ep.num}"
+                        class="episode-card cursor-pointer rounded-2xl bg-taisho-surface hover:bg-zinc-900/95 border border-zinc-800 hover:border-amber-400/70 p-5 flex flex-col justify-between transition-all shadow-lg group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-md bg-red-950/90 border border-amber-500/40 font-serifDisplay font-bold text-xs text-amber-300 tracking-wider">
+                                    ${epCode}
+                                </span>
+                                <span class="text-[11px] font-medium text-zinc-400 truncate">${ep.arc.replace(' Arc', '')}</span>
+                            </div>
+                            <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-amber-300 transition leading-snug">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-amber-400/80 mt-0.5 mb-2.5">${ep.jp}</p>
+                            <p class="text-xs text-zinc-300 line-clamp-3 leading-relaxed">
+                                ${ep.summary}
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-2 text-[11px]">
+                            <span class="text-amber-200/90 truncate">★ ${ep.highlight}</span>
+                            <a href="${extUrl}" target="_blank" rel="noopener noreferrer" class="ep-direct-nav-link text-amber-400 hover:text-amber-200 font-semibold shrink-0 underline-offset-2 hover:underline">
+                                Go ↗
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            document.querySelectorAll('.ep-direct-nav-link').forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+
+            document.querySelectorAll('.episode-card').forEach((card) => {
+                card.addEventListener('click', () => {
+                    const num = Number(card.getAttribute('data-ep-num'));
+                    openEpisodeModal(num);
+                });
+            });
+        }
+
+        function focusEpisodeCard(epNum, scrollIntoView = true) {
+            const clamped = Math.max(1, Math.min(TOTAL_EPISODES, epNum));
+            currentModalEpNum = clamped;
+            if (episodeJumpSelectEl) episodeJumpSelectEl.value = String(clamped);
+            syncSelectedEpisodeJumpLink(clamped);
+
+            document.querySelectorAll('.episode-card').forEach((el) => {
+                el.classList.remove('ring-2', 'ring-amber-400');
+            });
+            const targetCard = document.getElementById(`ep-card-${clamped}`);
+            if (targetCard) {
+                targetCard.classList.add('ring-2', 'ring-amber-400');
+                if (scrollIntoView) {
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        }
+
+        if (episodeSearchInputEl) {
+            episodeSearchInputEl.addEventListener('input', renderEpisodes);
+        }
+
+        if (episodeJumpSelectEl) {
+            episodeJumpSelectEl.addEventListener('change', (e) => {
+                focusEpisodeCard(Number(e.target.value), true);
+            });
+        }
+
+        if (epNavPrevBtn) {
+            epNavPrevBtn.addEventListener('click', () => {
+                const nextNum = currentModalEpNum > 1 ? currentModalEpNum - 1 : TOTAL_EPISODES;
+                focusEpisodeCard(nextNum, true);
+            });
+        }
+
+        if (epNavNextBtn) {
+            epNavNextBtn.addEventListener('click', () => {
+                const nextNum = currentModalEpNum < TOTAL_EPISODES ? currentModalEpNum + 1 : 1;
+                focusEpisodeCard(nextNum, true);
+            });
+        }
+
+        if (epNavOpenSelectedBtn) {
+            epNavOpenSelectedBtn.addEventListener('click', () => {
+                openEpisodeModal(currentModalEpNum);
+            });
+        }
+
+        if (arcNavPrevBtn) {
+            arcNavPrevBtn.addEventListener('click', () => {
+                const idx = ARC_ORDER.indexOf(activeArcFilter);
+                const prevIdx = idx > 0 ? idx - 1 : ARC_ORDER.length - 1;
+                activeArcFilter = ARC_ORDER[prevIdx];
+                renderArcFilters();
+                renderEpisodes();
+            });
+        }
+
+        if (arcNavNextBtn) {
+            arcNavNextBtn.addEventListener('click', () => {
+                const idx = ARC_ORDER.indexOf(activeArcFilter);
+                const nextIdx = (idx + 1) % ARC_ORDER.length;
+                activeArcFilter = ARC_ORDER[nextIdx];
+                renderArcFilters();
+                renderEpisodes();
+            });
+        }
+
+        /* ==========================================================================
+           7. EPISODE DETAIL MODAL (NAVIGATION LINKS ONLY — NO EMBEDDED PLAYERS)
+           ========================================================================== */
+
+        const episodeModalEl = document.getElementById('episodeModal');
+        const modalContentEl = document.getElementById('modalContent');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const prevEpBtn = document.getElementById('prevEpBtn');
+        const nextEpBtn = document.getElementById('nextEpBtn');
+
+        function openEpisodeModal(epNum) {
+            const ep = episodesData.find((item) => item.num === epNum) || episodesData[0];
+            currentModalEpNum = ep.num;
+            if (episodeJumpSelectEl) episodeJumpSelectEl.value = String(ep.num);
+            syncSelectedEpisodeJumpLink(ep.num);
+
+            const epUrl = getEpisodeExternalUrl(ep);
+            const searchQueryUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`Kimetsu no Yaiba Season 2 Episode ${ep.num} ${ep.title}`)}`;
+
+            modalContentEl.innerHTML = `
+                <div class="flex flex-wrap items-center gap-2 mb-2">
+                    <span class="px-2.5 py-0.5 rounded bg-red-950 border border-amber-500/40 font-serifDisplay font-bold text-xs text-amber-300">
+                        EPISODE ${String(ep.num).padStart(2, '0')}
+                    </span>
+                    <span class="text-xs text-zinc-400">${ep.arc}</span>
+                </div>
+                <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                <p class="font-jpSerif text-sm text-amber-400 mt-0.5 mb-4">${ep.jp}</p>
+
+                <p class="text-sm text-zinc-200 leading-relaxed mb-4">${ep.summary}</p>
+                <div class="p-3.5 rounded-xl bg-black/55 border border-amber-500/20 text-xs text-amber-200 mb-5">
+                    <strong class="uppercase tracking-wider text-amber-400 mr-1">Key Highlight:</strong> ${ep.highlight}
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="${epUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-800 to-red-700 hover:from-red-700 hover:to-red-600 border border-amber-400/50 text-white font-serifDisplay font-bold text-xs uppercase tracking-wider transition">
+                        Open Episode ${String(ep.num).padStart(2, '0')} Page ↗
+                    </a>
+                    <a href="${searchQueryUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-400/50 text-amber-300 font-semibold text-xs transition">
+                        More Episode Results ↗
+                    </a>
+                </div>
+
+                ${isAdminUnlocked ? `
+                    <div class="mt-5 pt-4 border-t border-zinc-800">
+                        <label for="modalEpUrlEditInput" class="block text-[11px] font-bold uppercase tracking-wider text-amber-400 mb-1.5">
+                            Admin: Update Episode ${String(ep.num).padStart(2, '0')} Navigation Link
+                        </label>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input id="modalEpUrlEditInput" type="url" value="${epUrl}" class="flex-1 px-3.5 py-2 rounded-lg bg-taisho-black border border-zinc-700 focus:border-amber-400 focus:outline-none text-xs text-zinc-100">
+                            <button type="button" id="modalSaveEpUrlBtn" class="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-zinc-950 font-bold text-xs transition shrink-0">
+                                Save Link
+                            </button>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+
+            if (isAdminUnlocked) {
+                const saveBtn = document.getElementById('modalSaveEpUrlBtn');
+                const urlInput = document.getElementById('modalEpUrlEditInput');
+                if (saveBtn && urlInput) {
+                    saveBtn.addEventListener('click', () => {
+                        const val = urlInput.value.trim();
+                        if (!isSafeNavigationUrl(val)) return;
+                        ep.url = val;
+                        persistCustomLinks();
+                        renderEpisodes();
+                        syncSelectedEpisodeJumpLink(currentModalEpNum);
+                        renderAdminLinkEditors();
+                        openEpisodeModal(ep.num);
+                    });
+                }
+            }
+
+            episodeModalEl.classList.remove('hidden');
+            episodeModalEl.classList.add('flex');
+        }
+
+        function closeEpisodeModal() {
+            episodeModalEl.classList.add('hidden');
+            episodeModalEl.classList.remove('flex');
+        }
+
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeEpisodeModal);
+        if (episodeModalEl) {
+            episodeModalEl.addEventListener('click', (e) => {
+                if (e.target === episodeModalEl) closeEpisodeModal();
+            });
+        }
+
+        if (prevEpBtn) {
+            prevEpBtn.addEventListener('click', () => {
+                const prevNum = currentModalEpNum > 1 ? currentModalEpNum - 1 : TOTAL_EPISODES;
+                openEpisodeModal(prevNum);
+            });
+        }
+
+        if (nextEpBtn) {
+            nextEpBtn.addEventListener('click', () => {
+                const nextNum = currentModalEpNum < TOTAL_EPISODES ? currentModalEpNum + 1 : 1;
+                openEpisodeModal(nextNum);
+            });
+        }
+
+        /* ==========================================================================
+           8. TRAILERS, OPENINGS & RELATED PAGES NAVIGATION RENDERING
+           ========================================================================== */
+
+        const featuredVideoPlaylistEl = document.getElementById('featuredVideoPlaylist');
+        const relatedPagesGridEl = document.getElementById('relatedPagesGrid');
+
+        function renderTrailersAndPages() {
+            if (!featuredVideoPlaylistEl || !relatedPagesGridEl) return;
+            featuredVideoPlaylistEl.innerHTML = featuredVideosData.map((vid) => {
+                const extras = Array.isArray(vid.extraLinks) ? vid.extraLinks : [];
+                return `
+                    <div class="rounded-2xl bg-taisho-surface/95 border border-amber-500/25 hover:border-amber-400/70 p-5 sm:p-6 flex flex-col justify-between transition-all shadow-xl">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                                <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-red-950 border border-red-700/60 text-amber-300">
+                                    ${vid.badge}
+                                </span>
+                                <span class="text-xs text-zinc-400">${vid.source || ''}</span>
+                            </div>
+                            <h3 class="font-serifDisplay font-bold text-lg sm:text-xl text-white leading-snug">
+                                ${vid.title}
+                            </h3>
+                            ${vid.jp ? `<p class="font-jpSerif text-xs text-amber-400/85 mt-0.5 mb-2.5">${vid.jp}</p>` : ''}
+                            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                                ${vid.desc}
+                            </p>
+                        </div>
+
+                        <div class="mt-5 pt-4 border-t border-zinc-800/90 flex flex-wrap items-center justify-between gap-2">
+                            <a href="${vid.url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-800 to-red-700 hover:from-red-700 hover:to-red-600 border border-amber-400/45 text-white font-serifDisplay font-bold text-xs uppercase tracking-wider transition inline-flex items-center gap-1.5">
+                                <span>${vid.ctaLabel || 'Navigate'}</span>
+                                <span>↗</span>
+                            </a>
+                            <div class="flex flex-wrap gap-1.5">
+                                ${extras.map((ex) => `
+                                    <a href="${ex.url}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-400/50 text-[11px] font-medium text-amber-200 transition">
+                                        ${ex.label} ↗
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            relatedPagesGridEl.innerHTML = relatedPagesData.map((page) => `
+                <a href="${page.url}" target="_blank" rel="noopener noreferrer" class="rounded-xl bg-taisho-black/80 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/65 p-4 flex flex-col justify-between transition group">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 block mb-1">${page.tag}</span>
+                        <h4 class="font-serifDisplay font-bold text-sm sm:text-base text-white group-hover:text-amber-300 transition leading-snug">
+                            ${page.title}
+                        </h4>
+                        <p class="font-jpSerif text-[11px] text-zinc-400 mt-0.5 mb-2">${page.jp}</p>
+                        <p class="text-xs text-zinc-300 leading-relaxed">${page.desc}</p>
+                    </div>
+                    <span class="mt-4 text-xs font-semibold text-amber-400 inline-flex items-center gap-1">
+                        <span>Visit Page</span>
+                        <span>↗</span>
+                    </span>
+                </a>
+            `).join('');
+        }
+
+        /* ==========================================================================
+           9. TWELVE KIZUKI & NINE HASHIRA FACTIONS RENDERING
+           ========================================================================== */
+
+        const antagonistsListEl = document.getElementById('antagonistsList');
+        const hashiraGridEl = document.getElementById('hashiraGrid');
+        const hashiraQuoteBoxEl = document.getElementById('hashiraQuoteBox');
+
+        function renderFactions() {
+            if (!antagonistsListEl || !hashiraGridEl || !hashiraQuoteBoxEl) {
+                return;
+            }
+
+            antagonistsListEl.innerHTML = antagonistsData.map((ant) => `
+                <div class="rounded-2xl bg-taisho-surface/95 border border-red-900/50 hover:border-red-500/60 p-5 transition">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-red-400">${ant.rank}</span>
+                        <span class="font-jpSerif text-xs text-zinc-400">${ant.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-lg text-white">${ant.name}</h4>
+                    <p class="text-xs text-amber-300/90 font-medium mt-1 mb-2.5">Art: ${ant.ability}</p>
+                    <p class="text-xs text-zinc-300 leading-relaxed">${ant.desc}</p>
+                </div>
+            `).join('');
+
+            hashiraGridEl.innerHTML = hashiraData.map((h, idx) => `
+                <button
+                    type="button"
+                    data-hashira-idx="${idx}"
+                    class="hashira-pill-btn text-left p-3 rounded-xl bg-taisho-black/75 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/60 transition">
+                    <div class="font-serifDisplay font-bold text-xs sm:text-sm text-white">${h.name}</div>
+                    <div class="font-jpSerif text-[11px] text-amber-400/90 mt-0.5">${h.title}</div>
+                </button>
+            `).join('');
+
+            document.querySelectorAll('.hashira-pill-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const h = hashiraData[Number(btn.getAttribute('data-hashira-idx'))];
+                    if (h) {
+                        hashiraQuoteBoxEl.innerHTML = `
+                            <span class="text-amber-400 font-bold block mb-1">${h.name} — ${h.title}</span>
+                            <span class="text-zinc-200">${h.trait}</span>
+                        `;
+                    }
+                });
+            });
+        }
+
+        /* ==========================================================================
+           10. ADMIN LINK MANAGER (PIN 1960, NO HINTS)
+           ========================================================================== */
+
+        const adminToggleBtn = document.getElementById('adminToggleBtn');
+        const adminToggleIcon = document.getElementById('adminToggleIcon');
+        const adminToggleLabel = document.getElementById('adminToggleLabel');
+        const adminPinModal = document.getElementById('adminPinModal');
+        const closeAdminPinModalBtn = document.getElementById('closeAdminPinModalBtn');
+        const adminPinForm = document.getElementById('adminPinForm');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+        const adminLinkStudio = document.getElementById('adminLinkStudio');
+        const adminStudioStatus = document.getElementById('adminStudioStatus');
+        const resetDefaultLinksBtn = document.getElementById('resetDefaultLinksBtn');
+        const lockAdminBtn = document.getElementById('lockAdminBtn');
+        const adminTrailersEditorGrid = document.getElementById('adminTrailersEditorGrid');
+        const adminRelatedEditorGrid = document.getElementById('adminRelatedEditorGrid');
+        const adminEpisodeSelect = document.getElementById('adminEpisodeSelect');
+        const adminEpPrevBtn = document.getElementById('adminEpPrevBtn');
+        const adminEpNextBtn = document.getElementById('adminEpNextBtn');
+        const adminEpisodeUrlLabel = document.getElementById('adminEpisodeUrlLabel');
+        const adminEpisodeUrlInput = document.getElementById('adminEpisodeUrlInput');
+        const saveAdminEpisodeUrlBtn = document.getElementById('saveAdminEpisodeUrlBtn');
+
+        function setAdminStatus(msg, isError = false) {
+            if (!adminStudioStatus) return;
+            adminStudioStatus.textContent = msg;
+            adminStudioStatus.className = `text-xs mt-1 ${isError ? 'text-red-400 font-medium' : 'text-amber-300/90'}`;
+        }
+
+        function updateAdminUiState() {
+            if (!adminToggleIcon || !adminToggleLabel || !adminLinkStudio) return;
+            if (isAdminUnlocked) {
+                adminToggleIcon.textContent = '🔓';
+                adminToggleLabel.textContent = 'Admin (Unlocked)';
+                adminLinkStudio.classList.remove('hidden');
+                renderAdminLinkEditors();
+            } else {
+                adminToggleIcon.textContent = '🔒';
+                adminToggleLabel.textContent = 'Admin';
+                adminLinkStudio.classList.add('hidden');
+            }
+        }
+
+        function openAdminPinModal() {
+            if (!adminPinModal || !adminPinError || !adminPinInput) return;
+            adminPinError.classList.add('hidden');
+            adminPinInput.value = '';
+            adminPinModal.classList.remove('hidden');
+            adminPinModal.classList.add('flex');
+            setTimeout(() => adminPinInput.focus(), 40);
+        }
+
+        function closeAdminPinModal() {
+            if (!adminPinModal || !adminPinInput) return;
+            adminPinModal.classList.add('hidden');
+            adminPinModal.classList.remove('flex');
+            adminPinInput.value = '';
+        }
+
+        function populateAdminEpisodeSelector() {
+            if (!adminEpisodeSelect) return;
+            adminEpisodeSelect.innerHTML = episodesData.map((ep) =>
+                `<option value="${ep.num}">EP ${String(ep.num).padStart(2, '0')} — ${ep.title}</option>`
+            ).join('');
+            adminEpisodeSelect.value = String(activeAdminEpNum);
+            syncAdminEpisodeInput();
+        }
+
+        function syncAdminEpisodeInput() {
+            if (!adminEpisodeSelect || !adminEpisodeUrlLabel || !adminEpisodeUrlInput) return;
+            const ep = episodesData.find((e) => e.num === activeAdminEpNum) || episodesData[0];
+            activeAdminEpNum = ep.num;
+            adminEpisodeSelect.value = String(ep.num);
+            adminEpisodeUrlLabel.textContent = `Episode ${String(ep.num).padStart(2, '0')} (${ep.title}) Link`;
+            adminEpisodeUrlInput.value = getEpisodeExternalUrl(ep);
+        }
+
+        function renderAdminLinkEditors() {
+            if (!isAdminUnlocked || !adminTrailersEditorGrid || !adminRelatedEditorGrid) return;
+
+            adminTrailersEditorGrid.innerHTML = featuredVideosData.map((vid, idx) => `
+                <div class="rounded-xl bg-taisho-black/80 border border-zinc-800 p-4 flex flex-col gap-2.5">
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-bold text-amber-300">${vid.badge} — ${vid.title}</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="url" data-trailer-idx="${idx}" value="${vid.url}" class="admin-trailer-input flex-1 px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-700 focus:border-amber-400 focus:outline-none text-xs text-zinc-100">
+                        <button type="button" data-save-trailer-idx="${idx}" class="save-trailer-link-btn px-3.5 py-2 rounded-lg bg-red-800 hover:bg-red-700 border border-amber-500/40 text-xs font-bold text-white transition shrink-0">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            adminRelatedEditorGrid.innerHTML = relatedPagesData.map((page, idx) => `
+                <div class="rounded-xl bg-taisho-black/80 border border-zinc-800 p-3.5 flex flex-col gap-2">
+                    <span class="text-xs font-bold text-amber-300 truncate">${page.title}</span>
+                    <input type="url" data-related-idx="${idx}" value="${page.url}" class="admin-related-input w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-700 focus:border-amber-400 focus:outline-none text-xs text-zinc-100">
+                    <button type="button" data-save-related-idx="${idx}" class="save-related-link-btn self-start px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 border border-amber-500/30 text-xs font-semibold text-amber-200 transition">
+                        Save Page Link
+                    </button>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.save-trailer-link-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const idx = Number(btn.getAttribute('data-save-trailer-idx'));
+                    const input = adminTrailersEditorGrid.querySelector(`.admin-trailer-input[data-trailer-idx="${idx}"]`);
+                    const nextUrl = input ? input.value.trim() : '';
+                    if (!isSafeNavigationUrl(nextUrl)) {
+                        setAdminStatus('Enter a valid http:// or https:// URL.', true);
+                        return;
+                    }
+                    featuredVideosData[idx].url = nextUrl;
+                    persistCustomLinks();
+                    renderTrailersAndPages();
+                    renderAdminLinkEditors();
+                    setAdminStatus(`Updated "${featuredVideosData[idx].title}" link.`);
+                });
+            });
+
+            document.querySelectorAll('.save-related-link-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const idx = Number(btn.getAttribute('data-save-related-idx'));
+                    const input = adminRelatedEditorGrid.querySelector(`.admin-related-input[data-related-idx="${idx}"]`);
+                    const nextUrl = input ? input.value.trim() : '';
+                    if (!isSafeNavigationUrl(nextUrl)) {
+                        setAdminStatus('Enter a valid http:// or https:// URL.', true);
+                        return;
+                    }
+                    relatedPagesData[idx].url = nextUrl;
+                    persistCustomLinks();
+                    renderTrailersAndPages();
+                    renderAdminLinkEditors();
+                    setAdminStatus(`Updated "${relatedPagesData[idx].title}" link.`);
+                });
+            });
+
+            populateAdminEpisodeSelector();
+        }
+
+        if (adminToggleBtn) {
+            adminToggleBtn.addEventListener('click', () => {
+                if (isAdminUnlocked) {
+                    isAdminUnlocked = false;
+                    updateAdminUiState();
+                } else {
+                    openAdminPinModal();
+                }
+            });
+        }
+
+        if (lockAdminBtn) {
+            lockAdminBtn.addEventListener('click', () => {
+                isAdminUnlocked = false;
+                updateAdminUiState();
+            });
+        }
+
+        if (closeAdminPinModalBtn) closeAdminPinModalBtn.addEventListener('click', closeAdminPinModal);
+        if (adminPinModal) {
+            adminPinModal.addEventListener('click', (e) => {
+                if (e.target === adminPinModal) closeAdminPinModal();
+            });
+        }
+
+        if (adminPinForm && adminPinInput && adminPinError && adminLinkStudio) {
+            adminPinForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (adminPinInput.value.trim() === ADMIN_PIN) {
+                    isAdminUnlocked = true;
+                    closeAdminPinModal();
+                    updateAdminUiState();
+                    adminLinkStudio.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    adminPinError.classList.remove('hidden');
+                    adminPinInput.select();
+                }
+            });
+        }
+
+        if (adminEpisodeSelect) {
+            adminEpisodeSelect.addEventListener('change', (e) => {
+                activeAdminEpNum = Number(e.target.value);
+                syncAdminEpisodeInput();
+            });
+        }
+
+        if (adminEpPrevBtn) {
+            adminEpPrevBtn.addEventListener('click', () => {
+                activeAdminEpNum = activeAdminEpNum > 1 ? activeAdminEpNum - 1 : TOTAL_EPISODES;
+                syncAdminEpisodeInput();
+            });
+        }
+
+        if (adminEpNextBtn) {
+            adminEpNextBtn.addEventListener('click', () => {
+                activeAdminEpNum = activeAdminEpNum < TOTAL_EPISODES ? activeAdminEpNum + 1 : 1;
+                syncAdminEpisodeInput();
+            });
+        }
+
+        if (adminEpNextBtn) {
+            adminEpNextBtn.addEventListener('click', () => {
+                activeAdminEpNum = activeAdminEpNum < 26 ? activeAdminEpNum + 1 : 1;
+                syncAdminEpisodeInput();
+            });
+        }
+
+        if (saveAdminEpisodeUrlBtn && adminEpisodeUrlInput) {
+            saveAdminEpisodeUrlBtn.addEventListener('click', () => {
+                const nextUrl = adminEpisodeUrlInput.value.trim();
+                if (!isSafeNavigationUrl(nextUrl)) {
+                    setAdminStatus('Enter a valid http:// or https:// URL for the episode.', true);
+                    return;
+                }
+                const ep = episodesData.find((item) => item.num === activeAdminEpNum);
+                if (!ep) return;
+                ep.url = nextUrl;
+                persistCustomLinks();
+                renderEpisodes();
+                syncSelectedEpisodeJumpLink(currentModalEpNum);
+                setAdminStatus(`Saved link for Episode ${String(ep.num).padStart(2, '0')}: ${ep.title}.`);
+            });
+        }
+
+        if (resetDefaultLinksBtn) {
+            resetDefaultLinksBtn.addEventListener('click', resetAllLinksToDefault);
+        }
+
+        /* ==========================================================================
+           11. INITIALIZATION
+           ========================================================================== */
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCustomLinks();
+            resizeCanvas();
+            initParticles();
+            drawParticles();
+
+            renderCharacters();
+            renderBreathingStyle(activeBreathingStyle);
+            populateEpisodeJumpSelect();
+            renderArcFilters();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderFactions();
+            updateAdminUiState();
+        });
+    </script>
+
+<script>
+// AniPulse shared season-page links. Database RLS permits writes only for the admin role.
+(() => {
+  const PAGE_KEY = 'kimetsu_s2_admin_links_v1';
+  const SB_URL = 'https://khprmojdrqpuxtqpeinc.supabase.co';
+  const SB_PUBLIC_KEY = 'sb_publishable_XFUqaDnarDljoEMKMhe5vg_H-3MO9gS';
+  const sb = window.supabase.createClient(SB_URL, SB_PUBLIC_KEY);
+  const originalSet = Storage.prototype.setItem;
+  const originalRemove = Storage.prototype.removeItem;
+  let applyingRemote = false;
+  let adminSession = false;
+
+  async function publishPageLinks(value) {
+    if (applyingRemote) return;
+    const { data: userData } = await sb.auth.getUser();
+    if (!userData?.user || userData.user.app_metadata?.role !== 'admin') {
+      console.warn('AniPulse: sign in with the Supabase admin account on the homepage before editing shared season links.');
+      return;
+    }
+    const { error } = await sb.from('anipulse_page_content').upsert(
+      { page_key: PAGE_KEY, payload: value, updated_at: new Date().toISOString() },
+      { onConflict: 'page_key' }
+    );
+    if (error) console.error('AniPulse shared season-link publish failed:', error);
+    else console.info('AniPulse season links published for all visitors:', PAGE_KEY);
+  }
+
+  Storage.prototype.setItem = function(key, value) {
+    originalSet.call(this, key, value);
+    if (this === localStorage && key === PAGE_KEY && !applyingRemote) {
+      try { publishPageLinks(JSON.parse(value)); } catch (e) { console.error(e); }
+    }
+  };
+  Storage.prototype.removeItem = function(key) {
+    originalRemove.call(this, key);
+    if (this === localStorage && key === PAGE_KEY && !applyingRemote) publishPageLinks({});
+  };
+
+  async function hydrateFromCloud() {
+    try {
+      const { data, error } = await sb.from('anipulse_page_content').select('payload')
+        .eq('page_key', PAGE_KEY).maybeSingle();
+      if (error) throw error;
+      if (!data || !data.payload) return;
+      const cloudValue = JSON.stringify(data.payload);
+      if (localStorage.getItem(PAGE_KEY) !== cloudValue) {
+        applyingRemote = true;
+        originalSet.call(localStorage, PAGE_KEY, cloudValue);
+        applyingRemote = false;
+        // Existing page scripts read localStorage during startup; reload once to apply cloud values.
+        if (sessionStorage.getItem('anipulse-cloud-refresh-' + PAGE_KEY) !== cloudValue) {
+          sessionStorage.setItem('anipulse-cloud-refresh-' + PAGE_KEY, cloudValue);
+          location.reload();
+        }
+      } else {
+        sessionStorage.removeItem('anipulse-cloud-refresh-' + PAGE_KEY);
+      }
+    } catch (error) { console.error('AniPulse shared season-link load failed:', error); }
+  }
+  sb.auth.getUser().then(({ data }) => { adminSession = !!data?.user && data.user.app_metadata?.role === 'admin'; });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hydrateFromCloud, { once: true });
+  else hydrateFromCloud();
+  window.addEventListener('focus', hydrateFromCloud);
+})();
+</script>
+</body>
+</html>
