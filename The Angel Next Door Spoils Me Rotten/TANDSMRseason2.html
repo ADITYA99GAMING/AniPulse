@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Angel Next Door Spoils Me Rotten — Season 2</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0a10;
+            color: #f4f4f5;
+            overflow-x: clip;
+        }
+
+        /* Subtle warm evening grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(251, 191, 36, 0.08) 1px, transparent 1px),
+                radial-gradient(rgba(244, 114, 182, 0.06) 1px, #0b0a10 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        /* Golden Angelic Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #fef3c7 0%, #fbbf24 35%, #fb7185 70%, #fde68a 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 7s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.98); }
+            50% { opacity: 1; transform: scaleX(1.03); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: left center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0a10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-amber-400 selection:text-zinc-950">
+
+    <!-- Ambient Sakura & Sunlit Dust Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-65"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0b0a10]/85 border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-rose-500 flex items-center justify-center shadow-lg shadow-amber-950/50 border border-amber-200/40">
+                        <span class="font-jpSerif font-black text-zinc-950 text-lg">天</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-amber-100 group-hover:text-amber-300 transition-colors">
+                            THE ANGEL NEXT DOOR
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-zinc-400 font-jpSerif">
+                            お隣の天使様にいつの間にか駄目人間にされていた件 第2期
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-300">
+                    <a href="#characters" class="hover:text-amber-300 transition-colors">Characters</a>
+                    <a href="#routines" class="hover:text-amber-300 transition-colors">Couple Moments</a>
+                    <a href="#episodes" class="hover:text-amber-300 transition-colors">12 Episodes</a>
+                    <a href="#videos" class="hover:text-amber-300 transition-colors">Trailers &amp; Links</a>
+                    <a href="#circles" class="hover:text-amber-300 transition-colors">Dates &amp; Circle</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 text-rose-200 border border-rose-500/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+                        <span id="particleLabel">Sakura Petals</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-zinc-900/90 hover:bg-zinc-800 text-amber-300 border border-amber-500/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-[2] overflow-hidden border-b border-zinc-800/80">
+        <!-- Twilight Apartment & Warm Window Glow Stage -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/3 w-[34rem] h-[34rem] rounded-full bg-amber-400/12 blur-3xl"></div>
+            <div class="absolute top-12 right-10 w-[26rem] h-[26rem] rounded-full bg-rose-500/12 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#0b0a10] via-[#0b0a10]/85 to-transparent"></div>
+            <!-- Stylized Apartment Balcony Silhouette -->
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-45">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#272235"/>
+                        <stop offset="100%" stop-color="#0b0a10"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,180 L140,180 L140,120 L310,120 L310,165 L520,165 L520,95 L760,95 L760,150 L980,150 L980,110 L1220,110 L1220,170 L1440,170 L1440,280 L0,280 Z"/>
+                <rect x="555" y="122" width="26" height="34" rx="4" fill="#fbbf24" fill-opacity="0.24"/>
+                <rect x="595" y="122" width="26" height="34" rx="4" fill="#fbbf24" fill-opacity="0.34"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
+            <div class="max-w-3xl">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-amber-950/55 border border-amber-400/35 text-amber-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-amber-950/40">
+                    <span class="font-jpSerif text-rose-300 font-black">天</span>
+                    <span>Season 2 Complete Guide</span>
+                    <span class="px-1.5 py-0.5 rounded bg-rose-500/15 border border-rose-400/30 font-jpSerif text-[11px] text-rose-200">第2期 全12話</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.85)]">THE ANGEL NEXT DOOR</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_24px_rgba(251,191,36,0.25)]">SEASON 2</span>
+                </h1>
+
+                <!-- Warm Ribbon Divider -->
+                <div class="animate-hero-rise-delay-1 flex items-center gap-3 my-5">
+                    <span class="h-[2px] w-24 sm:w-36 rounded-full bg-gradient-to-r from-amber-300 via-rose-400 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.24em] text-amber-200/90 uppercase">お隣の天使様 · 第2期</span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-zinc-300 mb-6">
+                    お隣の天使様にいつの間にか駄目人間にされていた件 — 第2期
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+                    Now officially a couple after Amane’s heartfelt confession, <strong class="text-white">Amane Fujimiya</strong> and <strong class="text-amber-300">Mahiru Shiina</strong> step into a brand-new chapter—navigating public school life together, summer festival dates, family introductions, and deeper mutual affection.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-rose-400 hover:from-amber-400 hover:to-rose-300 text-zinc-950 font-bold text-sm shadow-lg shadow-amber-950/40 transition-all">
+                        Explore All 12 Episodes
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-amber-200 border border-amber-500/30 font-semibold text-sm transition-all">
+                        ▶ Season 2 PVs &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-100 border border-zinc-700 font-semibold text-sm transition-all">
+                        Couple Moments
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Season 2 Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-zinc-800/80 pt-8">
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-300">12 Eps</div>
+                    <div class="text-xs text-zinc-400 mt-1">Season 2 Episode Guide</div>
+                </div>
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-rose-400">Official</div>
+                    <div class="text-xs text-zinc-400 mt-1">Post-Confession Couple Life</div>
+                </div>
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-sky-400">Summer</div>
+                    <div class="text-xs text-zinc-400 mt-1">Pool, Fireworks &amp; Festival Arcs</div>
+                </div>
+                <div class="bg-zinc-900/65 border border-zinc-800/80 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-200">Project No.9</div>
+                    <div class="text-xs text-zinc-400 mt-1">Continuing TV Anime Series</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Main Cast</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Heart of Season 2</h2>
+            </div>
+            <p class="text-zinc-400 text-sm max-w-md">
+                Select a character card to highlight their Season 2 growth, relationship dynamic, and signature quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Character Spotlight Panel -->
+        <div id="characterSpotlight" class="mt-8 bg-zinc-900/85 border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Couple Moments & Routines Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-zinc-950/70 border-y border-zinc-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-rose-400 text-xs font-bold tracking-widest uppercase">Shared Life &amp; Milestones</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Couple Moments Explorer</h2>
+                </div>
+
+                <!-- Category Switcher Tabs -->
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-zinc-900 border border-zinc-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-400 text-zinc-950 shadow cursor-pointer">
+                        Official Couple
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white cursor-pointer">
+                        Summer &amp; Autumn Dates
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white cursor-pointer">
+                        Deeper Trust
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Visual Card -->
+                <div id="routineVisualCard" class="lg:col-span-4 min-w-0 bg-zinc-900/90 border border-zinc-800 rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Right Grid -->
+                <div id="routineItemsList" class="lg:col-span-8 min-w-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 12 Episodes Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Complete Season 2 Chronicle</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 12 Episodes (EP 01 – EP 12)</h2>
+                <p class="text-zinc-400 text-sm mt-2">Every Season 2 episode is displayed below with instant episode navigation, arc filtering, and external episode links.</p>
+            </div>
+
+            <!-- Arc Filter & Search Controls -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search episode title or number..."
+                    class="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-400 w-full sm:w-64">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-zinc-200 focus:outline-none focus:border-amber-400 cursor-pointer">
+                    <option value="ALL">All Season 2 Arcs (12 Eps)</option>
+                    <option value="Rainy Beginnings">Arc I: New Couple Days (Ep 1–4)</option>
+                    <option value="Holidays & Trust">Arc II: Summer Break &amp; Family (Ep 5–8)</option>
+                    <option value="Spring Confession">Arc III: Autumn Festival &amp; Future (Ep 9–12)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Episode Jump Bar -->
+        <div class="mb-8 bg-zinc-900/75 border border-zinc-800/90 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-1.5" id="quickEpisodePills">
+                <!-- Populated by JS (EP 01 - 12 quick jump pills) -->
+            </div>
+            <div id="episodeNavIndicator" class="text-xs font-semibold text-amber-300 shrink-0">
+                Showing All Season 2 Episodes 01 – 12
+            </div>
+        </div>
+
+        <!-- All 12 Episodes Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-zinc-950/75 border-y border-zinc-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-rose-400 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Trailers, Themes &amp; Official Pages</h2>
+                </div>
+                <p class="text-zinc-400 text-sm max-w-md">
+                    Navigate directly to Season 2 promotional videos, theme songs, and official series pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-zinc-900/95 border border-amber-500/40 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-zinc-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-zinc-400 mt-0.5">Changes save automatically to your browser and update all navigation cards immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-rose-950/80 hover:bg-rose-900 text-rose-200 border border-rose-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <!-- 3-Column Admin Link Editors -->
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 4 Trailers & Themes Editor -->
+                    <div class="bg-zinc-950/80 border border-zinc-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">4 Trailers &amp; Theme Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Related Pages Editor -->
+                    <div class="bg-zinc-950/80 border border-zinc-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-sky-400 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- All 12 Episodes Link Editor -->
+                    <div class="bg-zinc-950/80 border border-zinc-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-rose-400 mb-3">Season 2 Episode Links (EP 01 – 12)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Main Trailer & Theme Navigation Cards -->
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Official & Related Pages Bar -->
+            <div class="bg-zinc-900/75 border border-zinc-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-zinc-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Memorable Settings & Circle -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">World &amp; Relationships</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Season 2 Settings &amp; Circle</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left: Key Season 2 Locations -->
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-2">Iconic Season 2 Locations</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Right: Friends & Family Circle -->
+            <div class="lg:col-span-7 bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Friends &amp; Family Circle</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30 font-semibold">Season 2 Voices</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 text-sm text-zinc-300 italic">
+                    Select anyone above to read their Season 2 reflection on Amane and Mahiru.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-zinc-800/90 bg-[#08070b] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-amber-300 font-bold">天</span>
+                <span>The Angel Next Door Spoils Me Rotten — Season 2 Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-zinc-900 border border-zinc-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-zinc-900 border border-zinc-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-sm">
+                    天
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-zinc-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-sm text-white tracking-widest focus:outline-none focus:border-amber-400">
+                <p id="adminPinError" class="hidden text-xs text-rose-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-amber-400 hover:bg-amber-300 text-zinc-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. SEASON 2 DATA (Characters, Couple Moments, 12 Episodes, Links, Circles)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'angel_next_door_s2_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'mahiru',
+                name: 'Mahiru Shiina',
+                jpName: '椎名 真昼',
+                role: 'Amane’s Girlfriend',
+                specialty: 'Open Affection & Devoted Care',
+                apartment: 'Room 501 / 502',
+                accent: 'from-amber-400 to-rose-400',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-500/40',
+                quote: 'I don’t have to hold back anymore—because I’m officially your girlfriend now, Amane.',
+                bio: 'Free from hiding her feelings, Mahiru becomes even more expressive, playful, and openly affectionate—spoiling Amane while learning to rely on him just as deeply.'
+            },
+            {
+                id: 'amane',
+                name: 'Amane Fujimiya',
+                jpName: '藤宮 周',
+                role: 'Mahiru’s Boyfriend',
+                specialty: 'Unwavering Sincerity & Resolve',
+                apartment: 'Room 502',
+                accent: 'from-sky-500 to-indigo-700',
+                badgeColor: 'bg-sky-950/90 text-sky-300 border-sky-600/40',
+                quote: 'I’ll never let you feel lonely again—I promise to treasure every day with you.',
+                bio: 'Having shed his old self-doubt, Amane stands proudly beside Mahiru at school and home, determined to make her happier than she ever dreamed possible.'
+            },
+            {
+                id: 'itsuki',
+                name: 'Itsuki Akazawa',
+                jpName: '赤澤 樹',
+                role: 'Amane’s Best Friend',
+                specialty: 'Teasing & Double-Date Planner',
+                apartment: 'Class 2-B',
+                accent: 'from-orange-500 to-amber-600',
+                badgeColor: 'bg-orange-950/90 text-orange-300 border-orange-600/40',
+                quote: 'Finally! Now the four of us can hang out without you two dancing around each other!',
+                bio: 'Thrilled that Amane and Mahiru are finally together, Itsuki eagerly organizes summer group outings with Chitose while teasing Amane’s newfound boldness.'
+            },
+            {
+                id: 'chitose',
+                name: 'Chitose Shirakawa',
+                jpName: '白河 千歳',
+                role: 'Mahiru’s Close Friend',
+                specialty: 'Outfit Advice & Cheerleading',
+                apartment: 'Class 2-B',
+                accent: 'from-rose-500 to-pink-700',
+                badgeColor: 'bg-rose-950/90 text-rose-300 border-rose-600/40',
+                quote: 'Mahiru’s dere-dere side is lethal—Amane, you’d better brace yourself!',
+                bio: 'Chitose delights in helping Mahiru pick out yukata, swimsuits, and date outfits, cheering on every milestone in her best friend’s first romance.'
+            },
+            {
+                id: 'shuto',
+                name: 'Shuto & Shihoko Fujimiya',
+                jpName: '藤宮 修斗・志保子',
+                role: 'Amane’s Parents',
+                specialty: 'Warm Family Welcome',
+                apartment: 'Fujimiya Family Home',
+                accent: 'from-emerald-500 to-teal-700',
+                badgeColor: 'bg-emerald-950/90 text-emerald-300 border-emerald-600/40',
+                quote: 'Welcome to the family, Mahiru—thank you for bringing out the best in our son.',
+                bio: 'Amane’s affectionate parents warmly embrace Mahiru as part of the family, offering her the genuine parental warmth she lacked growing up.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'Life as an Official Couple',
+                jp: '恋人同士の日常',
+                desc: 'Once neighbors hiding behind polite distance, Amane and Mahiru now share mornings, school lunches, and evening cuddles openly.',
+                color: '#fbbf24',
+                items: [
+                    { num: '01', name: 'Walking to School Together', jp: '初めての登校', desc: 'No longer walking separately—Amane and Mahiru step through the school gates side by side.' },
+                    { num: '02', name: 'No Cushion Between Them', jp: '縮まった距離', desc: 'On the Room 502 sofa, Mahiru leans right against Amane’s shoulder without hesitation.' },
+                    { num: '03', name: 'Morning Wake-Up Calls', jp: '甘い朝の時間', desc: 'Using her spare key, Mahiru wakes Amane with gentle teasing and shared breakfast.' },
+                    { num: '04', name: 'Couple’s Bento & Tea', jp: 'お揃いのランチ', desc: 'Matching lunchboxes and evening tea sessions filled with honest affection.' },
+                    { num: '05', name: 'Holding Hands in Public', jp: '繋いだ手のひら', desc: 'Interlocking fingers on neighborhood walks without worrying who might see.' },
+                    { num: '06', name: 'Birthday Celebrations', jp: '特別な誕生日', desc: 'Celebrating each other’s birthdays with heartfelt gifts and unforgettable evenings.' }
+                ]
+            },
+            seasons: {
+                title: 'Summer & Autumn Dates',
+                jp: '夏と秋のデート',
+                desc: 'From summer pool outings and firework festivals to cultural festival preparations, Season 2 overflows with memorable dates.',
+                color: '#fb7185',
+                items: [
+                    { num: '01', name: 'Summer Pool & Beach Trip', jp: '夏のプール・海', desc: 'A sunny summer outing with Itsuki and Chitose where Mahiru dazzles Amane.' },
+                    { num: '02', name: 'Yukata & Fireworks Festival', jp: '浴衣と花火大会', desc: 'Watching summer fireworks illuminate the night sky while dressed in yukata.' },
+                    { num: '03', name: 'Visiting Amane’s Hometown', jp: '実家への帰省', desc: 'Mahiru visits Amane’s parents’ home, experiencing true family warmth.' },
+                    { num: '04', name: 'Autumn Cultural Festival', jp: '文化祭の思い出', desc: 'Working together on class preparations and enjoying festival stalls as a couple.' },
+                    { num: '05', name: 'Aquarium & Café Dates', jp: '水族館デート', desc: 'Quiet weekend dates exploring aquariums, bookstores, and cozy cafés.' },
+                    { num: '06', name: 'Stargazing & Night Walks', jp: '夜風の散歩道', desc: 'Slow walks home under autumn stars talking about their future together.' }
+                ]
+            },
+            promises: {
+                title: 'Deeper Trust & Future Dreams',
+                jp: '未来への約束',
+                desc: 'As their relationship deepens, Amane and Mahiru support each other’s dreams and plan for the years ahead.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: 'Meeting the Father', jp: '父との対話', desc: 'Amane earns the heartfelt approval of his father Shuto while protecting Mahiru.' },
+                    { num: '02', name: 'Mutual Spoiling', jp: 'お互いに甘やかす関係', desc: 'Not just Mahiru spoiling Amane—Amane constantly pampers and praises Mahiru too.' },
+                    { num: '03', name: 'Facing Jealousy & Rumors', jp: '揺るがない信頼', desc: 'Standing firm together whenever classmates gossip or try to test their bond.' },
+                    { num: '04', name: 'Career & University Plans', jp: '進路の相談', desc: 'Studying side by side as they look toward university and their shared future.' },
+                    { num: '05', name: 'Matching Accessories', jp: 'お揃いの宝物', desc: 'Exchanging subtle keepsakes that remind them of each other throughout the day.' },
+                    { num: '06', name: 'A Promise for Tomorrow', jp: 'これからも隣で', desc: 'Vowing to stay next door—and in each other’s hearts—for every season to come.' }
+                ]
+            }
+        };
+
+        const defaultEpisodesData = [
+            {
+                num: 1,
+                arc: 'Rainy Beginnings',
+                title: 'The Morning After the Confession',
+                jpTitle: '告白の翌朝の天使様',
+                synopsis: 'Following Amane’s heartfelt confession at the sports festival, he and Mahiru wake up as an official couple—navigating sweet embarrassment and new closeness.',
+                highlight: 'Mahiru’s radiant smile as she greets Amane as his girlfriend.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 2,
+                arc: 'Rainy Beginnings',
+                title: 'Walking Together to School',
+                jpTitle: '天使様との登校',
+                synopsis: 'Amane and Mahiru walk to school together for the first time, drawing astonished stares from classmates as the school’s “Angel” openly walks beside him.',
+                highlight: 'Amane confidently standing beside Mahiru in front of the whole class.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 3,
+                arc: 'Rainy Beginnings',
+                title: 'Spoiling Each Other',
+                jpTitle: '甘やかす天使様と甘やかしたい周',
+                synopsis: 'Now that there is no reason to hold back, Amane begins spoiling Mahiru just as much as she pampers him in Room 502.',
+                highlight: 'Mahiru blushing furiously at Amane’s unfiltered praise and affection.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 4,
+                arc: 'Rainy Beginnings',
+                title: 'Preparing for Summer Vacation',
+                jpTitle: '夏休み前の天使様',
+                synopsis: 'Final exams conclude and summer vacation arrives, bringing shopping trips with Itsuki and Chitose ahead of their group summer outings.',
+                highlight: 'Chitose helping Mahiru pick out summer outfits for Amane.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 5,
+                arc: 'Holidays & Trust',
+                title: 'Summer Poolside with the Angel',
+                jpTitle: 'プールサイドの天使様',
+                synopsis: 'Amane, Mahiru, Itsuki, and Chitose spend a lively summer day at the pool, where Amane keeps a protective eye on Mahiru.',
+                highlight: 'Amane and Mahiru sharing quiet moments away from the crowd.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 6,
+                arc: 'Holidays & Trust',
+                title: 'Fireworks and Yukata',
+                jpTitle: '浴衣姿の天使様',
+                synopsis: 'Dressed in a stunning yukata, Mahiru attends the summer fireworks festival with Amane, creating an unforgettable evening beneath the bursts of light.',
+                highlight: 'Holding hands under the summer fireworks.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 7,
+                arc: 'Holidays & Trust',
+                title: 'Visiting the Fujimiya Home',
+                jpTitle: '藤宮家の天使様',
+                synopsis: 'Amane brings Mahiru to his parents’ home during summer break, where Shihoko and Shuto welcome her with boundless warmth.',
+                highlight: 'Mahiru experiencing the loving family atmosphere she always wished for.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 8,
+                arc: 'Holidays & Trust',
+                title: 'Memories of Summer’s End',
+                jpTitle: '夏の終わりの天使様',
+                synopsis: 'Before the second term starts, Amane and Mahiru enjoy a peaceful aquarium date and reflect on how much their lives have changed.',
+                highlight: 'A quiet conversation beside the glowing aquarium tanks.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 9,
+                arc: 'Spring Confession',
+                title: 'Autumn Cultural Festival',
+                jpTitle: '文化祭の天使様',
+                synopsis: 'As the school cultural festival kicks off, Amane and Mahiru balance class duties while sneaking away to tour the festival together.',
+                highlight: 'Exploring the cultural festival booths side by side.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 10,
+                arc: 'Spring Confession',
+                title: 'A Special Birthday for the Angel',
+                jpTitle: '誕生日の天使様',
+                synopsis: 'Amane plans a heartfelt birthday celebration for Mahiru, determined to make her feel cherished from morning until night.',
+                highlight: 'Amane’s thoughtful birthday surprise in Room 502.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 11,
+                arc: 'Spring Confession',
+                title: 'Warmth in the Chilly Breeze',
+                jpTitle: '秋風と天使様のぬくもり',
+                synopsis: 'As the weather turns crisp again, Amane and Mahiru look back on the rainy day they first met and how far their bond has grown.',
+                highlight: 'Revisiting the neighborhood park swings together as a couple.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                num: 12,
+                arc: 'Spring Confession',
+                title: 'Forever Beside the Angel',
+                jpTitle: 'これからもお隣の天使様と',
+                synopsis: 'Surrounded by close friends and warm memories, Amane and Mahiru reaffirm their promise to walk into the future hand in hand.',
+                highlight: 'A tender Season 2 finale celebration in Room 502.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'Season 2 PV',
+                title: 'Season 2 Announcement & Main PV',
+                jp: 'TVアニメ「お隣の天使様」第2期 PV',
+                desc: 'Official promotional trailer celebrating the return of Mahiru Shiina and Amane Fujimiya for Season 2.',
+                url: 'https://www.youtube.com/results?search_query=The+Angel+Next+Door+Spoils+Me+Rotten+Season+2+PV'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Season 2 OP',
+                title: 'Season 2 Opening Theme Showcase',
+                jp: '第2期 オープニングテーマ',
+                desc: 'Navigate to the official Season 2 opening theme release and credits.',
+                url: 'https://www.youtube.com/results?search_query=The+Angel+Next+Door+Spoils+Me+Rotten+Season+2+Opening'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'Season 2 ED',
+                title: 'Season 2 Ending Theme — Mahiru Shiina',
+                jp: '第2期 エンディングテーマ',
+                desc: 'Navigate to Mahiru Shiina’s Season 2 ending theme performance.',
+                url: 'https://www.youtube.com/results?search_query=The+Angel+Next+Door+Spoils+Me+Rotten+Season+2+Ending'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Season 2 Episode Streaming Page',
+                jp: '第2期 全12話 配信ページ',
+                desc: 'Open the official streaming hub for Season 2 episodes.',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Official Anime Website (Season 2)',
+                subtitle: 'otonarino-tenshisama.jp — Season 2 news & visuals',
+                url: 'https://otonarino-tenshisama.jp/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Series Hub',
+                subtitle: 'Stream Season 1 & Season 2 episodes',
+                url: 'https://www.crunchyroll.com/series/G9VHN91DJ/the-angel-next-door-spoils-me-rotten'
+            },
+            {
+                id: 'page-novel',
+                title: 'GA Bunko Light Novel Portal',
+                subtitle: 'Volumes 5+ covering the post-confession arcs',
+                url: 'https://ga.sbcr.jp/sp/otonarino-tenshisama/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Season 2 Entry',
+                subtitle: 'Cast, staff & episode database',
+                url: 'https://myanimelist.net/anime/56876/Otonari_no_Tenshi-sama_ni_Itsunomanika_Dame_Ningen_ni_Sareteita_Ken_2nd_Season'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: 'Apartment Room 502',
+                jp: '二人の居場所',
+                tag: 'Couple’s Sanctuary',
+                detail: 'Shared Mornings & Cozy Evenings',
+                desc: 'No longer separated by a sofa cushion, Room 502 is where Amane and Mahiru cook together, study, and share unguarded affection.'
+            },
+            {
+                name: 'Summer Festival & Aquarium',
+                jp: '夏祭りと水族館',
+                tag: 'Season 2 Dates',
+                detail: 'Fireworks & Weekend Outings',
+                desc: 'Bustling summer festival stalls, glowing aquarium tunnels, and quiet evening strolls mark their first dates as an official couple.'
+            },
+            {
+                name: 'Fujimiya Family Residence',
+                jp: '藤宮家の実家',
+                tag: 'Family Warmth',
+                detail: 'Welcomed by Shihoko & Shuto',
+                desc: 'Amane’s parents’ home, where Mahiru experiences genuine family love and acceptance.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'Mahiru Shiina', title: 'Amane’s Girlfriend', quote: 'Being able to call you mine makes every single day feel like a dream.' },
+            { name: 'Amane Fujimiya', title: 'Mahiru’s Boyfriend', quote: 'I want to spoil you twice as much as you’ve always spoiled me.' },
+            { name: 'Itsuki Akazawa', title: 'Best Friend', quote: 'Watching you two act all lovey-dovey in class is hilarious—and awesome!' },
+            { name: 'Chitose Shirakawa', title: 'Mahiru’s Bestie', quote: 'You two are officially the sweetest couple in the entire school!' },
+            { name: 'Shihoko Fujimiya', title: 'Amane’s Mother', quote: 'Look after each other well, you two—we couldn’t be happier for you!' },
+            { name: 'Shuto Fujimiya', title: 'Amane’s Father', quote: 'Take good care of Mahiru, Amane. She’s a wonderful young woman.' }
+        ];
+
+        // =========================================================================
+        // 2. PERSISTENT EXTERNAL LINK STATE (Admin PIN: 1960)
+        // =========================================================================
+        function cloneDefaults() {
+            return {
+                trailers: defaultTrailersData.map(t => ({ ...t })),
+                pages: defaultRelatedPagesData.map(p => ({ ...p })),
+                episodes: defaultEpisodesData.reduce((acc, ep) => {
+                    acc[ep.num] = ep.url;
+                    return acc;
+                }, {})
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (parsed.trailers && Array.isArray(parsed.trailers)) {
+                    base.trailers = base.trailers.map((item, idx) => ({
+                        ...item,
+                        url: (parsed.trailers[idx] && parsed.trailers[idx].url) || item.url
+                    }));
+                }
+                if (parsed.pages && Array.isArray(parsed.pages)) {
+                    base.pages = base.pages.map((item, idx) => ({
+                        ...item,
+                        url: (parsed.pages[idx] && parsed.pages[idx].url) || item.url
+                    }));
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(base.episodes).forEach(num => {
+                        if (parsed.episodes[num]) {
+                            base.episodes[num] = parsed.episodes[num];
+                        }
+                    });
+                }
+            } catch (e) {
+                console.warn('Unable to read saved links:', e);
+            }
+            return base;
+        }
+
+        function sanitizeUrl(input, fallback) {
+            const trimmed = (input || '').trim();
+            if (!trimmed) return fallback;
+            if (/^https?:\/\//i.test(trimmed)) return trimmed;
+            return 'https://' + trimmed.replace(/^\/+/, '');
+        }
+
+        let savedLinks = loadSavedLinks();
+        let isAdminUnlocked = false;
+        let selectedCharacterId = charactersData[0].id;
+        let currentRoutineKey = 'cooking';
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (e) {
+                console.warn('Unable to persist links:', e);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-zinc-900 border-amber-400 shadow-lg shadow-amber-950/30 -translate-y-0.5'
+                                : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-bold text-zinc-950 text-lg mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-xs font-jpSerif text-zinc-400">${char.jpName}</div>
+                        <div class="font-serifDisplay font-bold text-base text-white mt-0.5">${char.name}</div>
+                        <div class="mt-3 inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${char.badgeColor}">
+                            ${char.role}
+                        </div>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-2 max-w-2xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.role}</span>
+                            <span class="text-xs text-zinc-400">${current.apartment} • ${current.specialty}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-zinc-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm bg-zinc-950/90 border border-amber-500/25 rounded-2xl p-5">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-1.5">Season 2 Quote</div>
+                        <p class="font-jpSerif text-sm text-zinc-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER COUPLE MOMENTS & ROUTINES
+        // =========================================================================
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const listEl = document.getElementById('routineItemsList');
+            if (!visualCard || !listEl) return;
+
+            const data = routinesData[currentRoutineKey] || routinesData.cooking;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isActive = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = `routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                    isActive
+                        ? 'bg-amber-400 text-zinc-950 shadow'
+                        : 'text-zinc-300 hover:text-white'
+                }`;
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-950 border border-zinc-800 text-amber-300 mb-4">
+                        <span class="w-2 h-2 rounded-full" style="background-color:${data.color}"></span>
+                        <span>${data.jp}</span>
+                    </div>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-zinc-300 text-sm leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="p-4 rounded-xl bg-zinc-950/90 border border-zinc-800 text-xs text-zinc-400 flex items-center justify-between">
+                    <span>Season 2 Highlights</span>
+                    <span class="font-bold text-amber-300">6 Key Moments</span>
+                </div>
+            `;
+
+            listEl.innerHTML = data.items.map(item => `
+                <div class="h-full bg-zinc-900/80 border border-zinc-800 hover:border-amber-400/40 rounded-2xl p-5 flex flex-col justify-between transition-colors">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-0.5 rounded-lg text-xs font-bold bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                                Moment ${item.num}
+                            </span>
+                            <span class="font-jpSerif text-xs text-zinc-400">${item.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-base text-white mb-2">${item.name}</h4>
+                        <p class="text-xs text-zinc-300 leading-relaxed">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 12 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2.5 py-1 rounded-lg text-xs font-bold bg-zinc-950 hover:bg-amber-400 text-zinc-300 hover:text-zinc-950 border border-zinc-800 hover:border-amber-300 transition-colors cursor-pointer">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-amber-400');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-amber-400'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All Season 2 Episodes 01 – 12'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Episodes`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-zinc-900/70 border border-zinc-800 rounded-2xl p-8 text-center">
+                        <p class="text-zinc-300 font-medium">No Season 2 episodes match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-amber-400 text-zinc-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `EP ${String(ep.num).padStart(2, '0')}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-zinc-900/85 border border-zinc-800 hover:border-amber-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-400/15 border border-amber-400/35 text-amber-300 font-bold text-xs tracking-wider">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-zinc-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-rose-300/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-zinc-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-zinc-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `EPISODE ${String(ep.num).padStart(2, '0')}`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-400/15 text-amber-300 border border-amber-400/35">${epBadge}</span>
+                        <span class="text-xs text-zinc-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-rose-300 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-zinc-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-1">Key Scene Highlight</div>
+                        <p class="text-xs text-zinc-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 1 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 cursor-pointer">← EP ${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < defaultEpisodesData.length ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 cursor-pointer">EP ${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-rose-400 hover:from-amber-300 hover:to-rose-300 text-zinc-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Episode Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS & RELATED PAGES (External Navigation Only)
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = savedLinks.trailers.map((item, idx) => `
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer"
+                        class="group h-full bg-zinc-900/90 border border-zinc-800 hover:border-amber-400/60 rounded-2xl p-6 flex flex-col justify-between transition-all shadow-lg hover:-translate-y-0.5">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-500/15 text-rose-300 border border-rose-400/30">
+                                    0${idx + 1} • ${item.tag}
+                                </span>
+                                <span class="w-8 h-8 rounded-full bg-zinc-800 group-hover:bg-amber-400 text-zinc-300 group-hover:text-zinc-950 flex items-center justify-center text-xs font-bold transition-colors">
+                                    ↗
+                                </span>
+                            </div>
+                            <h3 class="font-serifDisplay font-bold text-lg text-white group-hover:text-amber-300 transition-colors mb-1">
+                                ${item.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-amber-200/80 mb-3">${item.jp}</p>
+                            <p class="text-xs text-zinc-400 leading-relaxed">${item.desc}</p>
+                        </div>
+                        <div class="mt-5 pt-3 border-t border-zinc-800/80 flex items-center justify-between text-xs font-semibold text-amber-300">
+                            <span>Open External Link</span>
+                            <span>→</span>
+                        </div>
+                    </a>
+                `).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = savedLinks.pages.map(page => `
+                    <a href="${page.url}" target="_blank" rel="noopener noreferrer"
+                        class="group bg-zinc-950/90 border border-zinc-800 hover:border-sky-400/50 rounded-xl p-4 flex items-center justify-between gap-3 transition-colors">
+                        <div class="min-w-0">
+                            <div class="text-sm font-bold text-white group-hover:text-sky-300 truncate">${page.title}</div>
+                            <div class="text-xs text-zinc-400 truncate mt-0.5">${page.subtitle}</div>
+                        </div>
+                        <span class="text-zinc-400 group-hover:text-sky-300 text-sm shrink-0">↗</span>
+                    </a>
+                `).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. ADMIN LINK STUDIO (PIN: 1960)
+        // =========================================================================
+        function showAdminBanner(message) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = message;
+            banner.classList.remove('hidden');
+            clearTimeout(banner._timer);
+            banner._timer = setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = savedLinks.trailers.map((item, idx) => `
+                    <div class="space-y-1">
+                        <label class="block text-[11px] font-semibold text-zinc-300">0${idx + 1}. ${item.title}</label>
+                        <div class="flex gap-1.5">
+                            <input type="url" data-admin-trailer-idx="${idx}" value="${item.url}"
+                                class="flex-1 min-w-0 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-zinc-100 focus:outline-none focus:border-amber-400">
+                            <button type="button" data-save-trailer-idx="${idx}"
+                                class="px-2.5 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-zinc-950 text-xs font-bold cursor-pointer">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                trailersList.querySelectorAll('button[data-save-trailer-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = Number(btn.getAttribute('data-save-trailer-idx'));
+                        const input = trailersList.querySelector(`input[data-admin-trailer-idx="${idx}"]`);
+                        if (!input) return;
+                        savedLinks.trailers[idx].url = sanitizeUrl(input.value, defaultTrailersData[idx].url);
+                        input.value = savedLinks.trailers[idx].url;
+                        persistLinks();
+                        renderTrailersAndPages();
+                        showAdminBanner(`Updated link for "${savedLinks.trailers[idx].title}".`);
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = savedLinks.pages.map((page, idx) => `
+                    <div class="space-y-1">
+                        <label class="block text-[11px] font-semibold text-zinc-300">${page.title}</label>
+                        <div class="flex gap-1.5">
+                            <input type="url" data-admin-page-idx="${idx}" value="${page.url}"
+                                class="flex-1 min-w-0 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-zinc-100 focus:outline-none focus:border-sky-400">
+                            <button type="button" data-save-page-idx="${idx}"
+                                class="px-2.5 py-1.5 rounded-lg bg-sky-400 hover:bg-sky-300 text-zinc-950 text-xs font-bold cursor-pointer">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                pagesList.querySelectorAll('button[data-save-page-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = Number(btn.getAttribute('data-save-page-idx'));
+                        const input = pagesList.querySelector(`input[data-admin-page-idx="${idx}"]`);
+                        if (!input) return;
+                        savedLinks.pages[idx].url = sanitizeUrl(input.value, defaultRelatedPagesData[idx].url);
+                        input.value = savedLinks.pages[idx].url;
+                        persistLinks();
+                        renderTrailersAndPages();
+                        showAdminBanner(`Updated "${savedLinks.pages[idx].title}" link.`);
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const currentUrl = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-zinc-300">EP ${String(ep.num).padStart(2, '0')} — ${ep.title}</label>
+                            <div class="flex gap-1.5">
+                                <input type="url" data-admin-ep-num="${ep.num}" value="${currentUrl}"
+                                    class="flex-1 min-w-0 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-zinc-100 focus:outline-none focus:border-rose-400">
+                                <button type="button" data-save-ep-num="${ep.num}"
+                                    class="px-2.5 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-300 text-zinc-950 text-xs font-bold cursor-pointer">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('button[data-save-ep-num]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const epNum = Number(btn.getAttribute('data-save-ep-num'));
+                        const input = episodesList.querySelector(`input[data-admin-ep-num="${epNum}"]`);
+                        const defEp = defaultEpisodesData.find(e => e.num === epNum);
+                        if (!input || !defEp) return;
+                        savedLinks.episodes[epNum] = sanitizeUrl(input.value, defEp.url);
+                        input.value = savedLinks.episodes[epNum];
+                        persistLinks();
+                        renderEpisodes();
+                        showAdminBanner(`Updated Episode ${String(epNum).padStart(2, '0')} navigation link.`);
+                    });
+                });
+            }
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (studio) studio.classList.remove('hidden');
+            if (btnText) btnText.textContent = 'Admin (Unlocked)';
+            renderAdminStudio();
+            studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (studio) studio.classList.add('hidden');
+            if (btnText) btnText.textContent = 'Admin';
+        }
+
+        // =========================================================================
+        // 8. RENDER SETTINGS & FRIENDS/FAMILY CIRCLE
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                                ${loc.tag}
+                            </span>
+                            <span class="font-jpSerif text-xs text-zinc-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-rose-300 font-medium mt-0.5 mb-2">${loc.detail}</div>
+                        <p class="text-xs text-zinc-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((person, idx) => `
+                    <button type="button" data-circle-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-zinc-950/90 hover:bg-zinc-800/90 border border-zinc-800 hover:border-amber-400/40 transition-all cursor-pointer">
+                        <div class="text-xs font-bold text-white truncate">${person.name}</div>
+                        <div class="text-[11px] text-zinc-400 truncate mt-0.5">${person.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-circle-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = Number(btn.getAttribute('data-circle-idx'));
+                        const person = castCircleData[idx];
+                        if (!person) return;
+                        quoteBox.innerHTML = `
+                            <span class="not-italic font-bold text-amber-300">${person.name}</span>
+                            <span class="not-italic text-xs text-zinc-500 ml-1">(${person.title})</span>:
+                            “${person.quote}”
+                        `;
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (Sakura Petals / Sunlit Dust)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.25;
+                p.y += particleMode === 'sakura' ? p.vy : -p.vy * 0.55;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(251, 113, 133, 0.55)';
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.r * 1.4, p.r * 0.8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(251, 191, 36, 0.55)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        // Admin PIN Modal Controls
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Season 2 links restored.');
+        });
+
+        // Particle Theme Switcher
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'Sakura Petals' : 'Sunlit Dust';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-rose-400 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-amber-300 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+
+<script>
+// AniPulse shared season-page links. Database RLS permits writes only for the admin role.
+(() => {
+  const PAGE_KEY = 'angel_next_door_s2_nav_links_v1';
+  const SB_URL = 'https://khprmojdrqpuxtqpeinc.supabase.co';
+  const SB_PUBLIC_KEY = 'sb_publishable_XFUqaDnarDljoEMKMhe5vg_H-3MO9gS';
+  const sb = window.supabase.createClient(SB_URL, SB_PUBLIC_KEY);
+  const originalSet = Storage.prototype.setItem;
+  const originalRemove = Storage.prototype.removeItem;
+  let applyingRemote = false;
+  let adminSession = false;
+
+  async function publishPageLinks(value) {
+    if (applyingRemote) return;
+    const { data: userData } = await sb.auth.getUser();
+    if (!userData?.user || userData.user.app_metadata?.role !== 'admin') {
+      console.warn('AniPulse: sign in with the Supabase admin account on the homepage before editing shared season links.');
+      return;
+    }
+    const { error } = await sb.from('anipulse_page_content').upsert(
+      { page_key: PAGE_KEY, payload: value, updated_at: new Date().toISOString() },
+      { onConflict: 'page_key' }
+    );
+    if (error) console.error('AniPulse shared season-link publish failed:', error);
+    else console.info('AniPulse season links published for all visitors:', PAGE_KEY);
+  }
+
+  Storage.prototype.setItem = function(key, value) {
+    originalSet.call(this, key, value);
+    if (this === localStorage && key === PAGE_KEY && !applyingRemote) {
+      try { publishPageLinks(JSON.parse(value)); } catch (e) { console.error(e); }
+    }
+  };
+  Storage.prototype.removeItem = function(key) {
+    originalRemove.call(this, key);
+    if (this === localStorage && key === PAGE_KEY && !applyingRemote) publishPageLinks({});
+  };
+
+  async function hydrateFromCloud() {
+    try {
+      const { data, error } = await sb.from('anipulse_page_content').select('payload')
+        .eq('page_key', PAGE_KEY).maybeSingle();
+      if (error) throw error;
+      if (!data || !data.payload) return;
+      const cloudValue = JSON.stringify(data.payload);
+      if (localStorage.getItem(PAGE_KEY) !== cloudValue) {
+        applyingRemote = true;
+        originalSet.call(localStorage, PAGE_KEY, cloudValue);
+        applyingRemote = false;
+        // Existing page scripts read localStorage during startup; reload once to apply cloud values.
+        if (sessionStorage.getItem('anipulse-cloud-refresh-' + PAGE_KEY) !== cloudValue) {
+          sessionStorage.setItem('anipulse-cloud-refresh-' + PAGE_KEY, cloudValue);
+          location.reload();
+        }
+      } else {
+        sessionStorage.removeItem('anipulse-cloud-refresh-' + PAGE_KEY);
+      }
+    } catch (error) { console.error('AniPulse shared season-link load failed:', error); }
+  }
+  sb.auth.getUser().then(({ data }) => { adminSession = !!data?.user && data.user.app_metadata?.role === 'admin'; });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hydrateFromCloud, { once: true });
+  else hydrateFromCloud();
+  window.addEventListener('focus', hydrateFromCloud);
+})();
+</script>
+</body>
+</html>
