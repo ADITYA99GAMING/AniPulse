@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z Kai — Season 2 (Frieza Saga)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060d14;
+            color: #f0f9ff;
+            overflow-x: clip;
+        }
+
+        /* Subtle Kaioken crimson & solar cyan grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
+                radial-gradient(rgba(244, 63, 94, 0.08) 1px, #060d14 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        /* Kaioken Crimson, Solar Gold & Cyan Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #22d3ee 0%, #fb7185 36%, #facc15 70%, #38bdf8 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.96); }
+            50% { opacity: 1; transform: scaleX(1.04); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060d14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #164e63;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fb7185;
+        }
+    </style>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-rose-500 selection:text-white">
+
+    <!-- Ambient Kaioken & Cyan Ki Spark Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-70"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#060d14]/90 border-b border-cyan-400/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-rose-500 via-amber-400 to-cyan-400 flex items-center justify-center shadow-lg shadow-rose-950/70 border border-cyan-200/50">
+                        <span class="font-jpSerif font-black text-slate-950 text-sm">改</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-fuchsia-100 group-hover:text-amber-300 transition-colors">
+                            DRAGON BALL Z KAI
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-purple-300/75 font-jpSerif">
+                            ドラゴンボール改 — フリーザ編 (第2期)
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#characters" class="hover:text-orange-400 transition-colors">Namek &amp; Frieza Roster</a>
+                    <a href="#routines" class="hover:text-orange-400 transition-colors">Kai &amp; Z-Arts</a>
+                    <a href="#episodes" class="hover:text-orange-400 transition-colors">36 Episodes</a>
+                    <a href="#videos" class="hover:text-orange-400 transition-colors">Trailers &amp; Links</a>
+                    <a href="#circles" class="hover:text-orange-400 transition-colors">Namek &amp; Factions</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-cyan-950/75 hover:bg-cyan-900/80 text-cyan-200 border border-cyan-400/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+                        <span id="particleLabel">Kaioken Crimson Sparks</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-amber-300 border border-amber-400/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section (Centered Title & Kaioken Cyan Aura Stage) -->
+    <section class="relative z-[2] overflow-hidden border-b border-cyan-950/80">
+        <!-- Horizon & Nebula Glow -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] rounded-full bg-rose-500/15 blur-3xl"></div>
+            <div class="absolute top-16 left-1/4 w-[24rem] h-[24rem] rounded-full bg-cyan-400/14 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#060d14] via-[#060d14]/85 to-transparent"></div>
+            <!-- Stylized Mountain Silhouette -->
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-50">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#134e4a"/>
+                        <stop offset="100%" stop-color="#060d14"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,195 L130,195 L175,115 L295,115 L340,185 L520,185 L575,90 L680,90 L735,175 L940,175 L995,110 L1145,110 L1195,190 L1440,190 L1440,280 L0,280 Z"/>
+                <circle cx="720" cy="72" r="24" fill="#22d3ee" fill-opacity="0.22"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 text-center">
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-orange-950/70 border border-orange-400/40 text-orange-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-orange-950/50">
+                    <span class="font-jpSerif text-amber-300 font-black">改</span>
+                    <span>Dragon Ball Z Kai • Season 2</span>
+                    <span class="px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-400/30 font-jpSerif text-[11px] text-sky-200">フリーザ編 全36話</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4 text-center">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">DRAGON BALL Z KAI</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_26px_rgba(249,115,22,0.3)]">SEASON 2 • FRIEZA SAGA</span>
+                </h1>
+
+                <!-- Centered Ki Energy Ribbon Divider -->
+                <div class="animate-hero-rise-delay-1 flex items-center justify-center gap-3 my-5 w-full">
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-l from-orange-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.24em] text-amber-200/95 uppercase">ドラゴンボール改 · ナメック星の7つのドラゴンボールと伝説の超サイヤ人</span>
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-r from-orange-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-slate-300 mb-6 text-center">
+                    ドラゴンボール改 第2期 — 惑星ナメック星の攻防、ギニュー特戦隊、そして伝説の超サイヤ人覚醒へ
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-center">
+                    In <strong class="text-orange-300">Dragon Ball Z Kai Season 2</strong>, <strong class="text-sky-300">Gohan, Krillin, and Bulma</strong> race <strong class="text-fuchsia-300">Vegeta</strong> and <strong class="text-rose-300">Lord Frieza</strong> for Planet Namek’s Dragon Balls—culminating in <strong class="text-amber-300">Goku’s</strong> legendary Super Saiyan awakening.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-400 hover:from-orange-400 hover:to-yellow-300 text-zinc-950 font-bold text-sm shadow-lg shadow-orange-950/50 transition-all">
+                        Explore All 36 Episodes
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-orange-200 border border-orange-500/35 font-semibold text-sm transition-all">
+                        ▶ Dragon Soul &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                        Kai &amp; Z-Arts Explorer
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Season 2 Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 pt-8 text-left">
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-orange-400">36 Eps</div>
+                    <div class="text-xs text-slate-400 mt-1">Kai Season 2 Frieza Saga (EP 01–36)</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-300">Super Saiyan</div>
+                    <div class="text-xs text-slate-400 mt-1">Goku Awakens After Krillin’s Loss</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-sky-400">7 Namek Balls</div>
+                    <div class="text-xs text-slate-400 mt-1">Porunga &amp; Three Wishes</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-fuchsia-300">4 Frieza Forms</div>
+                    <div class="text-xs text-slate-400 mt-1">From First Form to 100% Final Power</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">Planet Namek, Ginyu Force &amp; Frieza</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Season 2 Key Combatants</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                Select a character card to inspect their Frieza Saga role, signature technique, and iconic quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Character Spotlight Panel -->
+        <div id="characterSpotlight" class="mt-8 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Martial Arts & Ki Techniques Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-slate-950/75 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-sky-400 text-xs font-bold tracking-widest uppercase">Namekian Dragon Balls &amp; Super Saiyan</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Season 2 Techniques Explorer</h2>
+                </div>
+
+                <!-- Category Switcher Tabs -->
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-orange-500 text-zinc-950 shadow cursor-pointer">
+                        Super Saiyan, Spirit Bomb &amp; Kaioken
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Ginyu Force &amp; Namekian Tactics
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Frieza’s Transformations &amp; Death Arts
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Left Visual Summary Card -->
+                <div id="routineVisualCard" class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Right 6 Technique Cards -->
+                <div id="routineItemsList" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 36 Episodes Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">Complete Kai Season 2 Chronicle</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 36 Frieza Saga Episodes (EP 01 – EP 36)</h2>
+                <p class="text-slate-400 text-sm mt-2">Every episode of Dragon Ball Z Kai Season 2 (Frieza Saga) is displayed below with instant navigation, chapter filtering, and external links.</p>
+            </div>
+
+            <!-- Arc Filter & Search Controls -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search episode title or number..."
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-400 w-full sm:w-64">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-orange-400 cursor-pointer">
+                    <option value="ALL">All Kai Season 2 Chapters (36 Eps)</option>
+                    <option value="Namek & Ginyu Force">Part I: Planet Namek &amp; Ginyu Force (Ep 1–19)</option>
+                    <option value="Frieza & Super Saiyan">Part II: Frieza &amp; Super Saiyan (Ep 20–36)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Episode Jump Bar -->
+        <div class="mb-8 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-1.5" id="quickEpisodePills">
+                <!-- Populated by JS (EP 01 - EP 36 quick jump pills) -->
+            </div>
+            <div id="episodeNavIndicator" class="text-xs font-semibold text-orange-300 shrink-0">
+                Showing All Kai Season 2 Episodes 01 – 36
+            </div>
+        </div>
+
+        <!-- All 36 Episodes Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-slate-950/80 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-sky-400 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Themes, Trailers &amp; Official Pages</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Navigate directly to Dragon Ball Z Kai themes, trailers, and official series pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-slate-900/95 border border-orange-500/45 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-orange-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Changes save automatically to your browser and update all navigation cards immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <!-- 3-Column Admin Link Editors -->
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 4 Trailers & Themes Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-orange-400 mb-3">4 Kai Themes &amp; Trailer Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Related Pages Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-sky-400 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- All 36 Episodes Link Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Kai Season 2 Episode Links (EP 01 – 36)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Main Trailer & Theme Navigation Cards -->
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Official & Related Pages Bar -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-slate-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Battlefields & Factions -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">Planet Namek, Guru’s Elder &amp; Shattered Skies</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Iconic Worlds &amp; Factions</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left: Key Kai Season 2 Locations -->
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Legendary Frieza Saga Grounds</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Right: Kai Season 2 Roster -->
+            <div class="lg:col-span-7 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Key Figures of Kai Season 2</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-orange-500/15 text-orange-300 border border-orange-500/35 font-semibold">Frieza Saga Roster</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-sm text-slate-300 italic">
+                    Select any character above to read their Dragon Ball Z Kai Season 2 line.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-slate-800/90 bg-[#05080f] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-orange-400 font-bold">改</span>
+                <span>Dragon Ball Z Kai — Season 2 (Frieza Saga) Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-full bg-orange-500/20 border border-orange-400/45 flex items-center justify-center text-orange-300 font-bold text-xs">
+                    四星
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white tracking-widest focus:outline-none focus:border-orange-400">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-orange-500 hover:bg-orange-400 text-zinc-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. DRAGON BALL Z KAI SEASON 2 DATA (Characters, Techniques, 36 Episodes)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'dbz_kai_season2_frieza_saga_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'goku-ssj',
+                name: 'Son Goku (Super Saiyan)',
+                jpName: '孫悟空（伝説の超サイヤ人）',
+                role: 'Awakened Super Saiyan of Legend',
+                specialty: 'Super Saiyan, Kaioken x20 & Spirit Bomb',
+                apartment: 'Planet Namek',
+                accent: 'from-yellow-300 to-amber-500',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-400/50',
+                quote: 'I am the Saiyan who came all the way from Earth for the sole purpose of defeating you—I am Son Goku, a Super Saiyan!',
+                bio: 'Arriving on Namek after 100G gravity training, Goku pushes the Ginyu Force and Frieza to the brink before Krillin’s death ignites his legendary Super Saiyan transformation.'
+            },
+            {
+                id: 'frieza-kai',
+                name: 'Lord Frieza',
+                jpName: 'フリーザ（第一形態〜100%フルパワー）',
+                role: 'Tyrant Emperor of the Universe',
+                specialty: 'Death Beam, Death Ball & Four Transformations',
+                apartment: 'Frieza’s Spaceship / Planet Namek',
+                accent: 'from-fuchsia-500 to-purple-700',
+                badgeColor: 'bg-fuchsia-950/90 text-fuchsia-200 border-fuchsia-400/50',
+                quote: 'You’re nothing more than a cheeky little monkey—and I’m going to shatter your pride along with this planet!',
+                bio: 'Seeking eternal life from the Namekian Dragon Balls, Frieza cycles through four terrifying forms as his battle with Goku pushes Planet Namek to collapse.'
+            },
+            {
+                id: 'vegeta-namek',
+                name: 'Prince Vegeta (Namek)',
+                jpName: 'ベジータ（ナメック星）',
+                role: 'Rogue Saiyan Hunter',
+                specialty: 'Dirty Fireworks, Energy Volley & Zenkai Surge',
+                apartment: 'Planet Namek',
+                accent: 'from-sky-400 to-indigo-600',
+                badgeColor: 'bg-sky-950/90 text-sky-200 border-sky-400/50',
+                quote: 'Frieza has awakened the true legend of the Saiyans… and he’s sealed his own doom!',
+                bio: 'Stealing Frieza’s Dragon Balls and wiping out Cui, Dodoria, and Zarbon, Vegeta fights with ruthless cunning until Frieza’s Final Form overwhelms him.'
+            },
+            {
+                id: 'gohan-krillin',
+                name: 'Gohan & Krillin',
+                jpName: '孫悟飯 ＆ クリリン',
+                role: 'Namekian Dragon Ball Seekers',
+                specialty: 'Masenko, Destructo Disc & Solar Flare',
+                apartment: 'Grand Elder Guru’s Plateau',
+                accent: 'from-emerald-400 to-cyan-500',
+                badgeColor: 'bg-emerald-950/90 text-emerald-200 border-emerald-400/50',
+                quote: 'We’ve come this far for Piccolo and our friends—we won’t back down from Frieza!',
+                bio: 'With potential unlocked by Grand Elder Guru, Gohan and Krillin evade Frieza’s scouts, summon Porunga, and survive against the Ginyu Force and Frieza.'
+            },
+            {
+                id: 'piccolo-ginyu',
+                name: 'Piccolo & Ginyu Force',
+                jpName: 'ピッコロ ＆ ギニュー特戦隊',
+                role: 'Namekian Fusion & Elite Mercenaries',
+                specialty: 'Nail Fusion, Body Change & Fighting Pose',
+                apartment: 'Planet Namek',
+                accent: 'from-rose-500 to-amber-500',
+                badgeColor: 'bg-rose-950/90 text-rose-200 border-rose-400/50',
+                quote: 'We are the pose-striking, galaxy-conquering Ginyu Force!',
+                bio: 'Revived and fused with Nail, Piccolo briefly rivals Frieza’s second form, while Captain Ginyu and his squad test Goku and Vegeta’s limits.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'Super Saiyan, Spirit Bomb & Kaioken',
+                jp: '超サイヤ人覚醒・元気玉と界王拳x20',
+                desc: 'Pushed past every limit on Planet Namek, Goku combines gravity training, Kaioken x20, and the Spirit Bomb before awakening Super Saiyan.',
+                color: '#facc15',
+                items: [
+                    { num: '01', name: 'Super Saiyan Transformation', jp: '伝説の超サイヤ人', desc: 'Golden aura and emerald eyes erupt as Goku’s rage over Krillin’s fate shatters his limits.' },
+                    { num: '02', name: 'Kaioken x20', jp: '20倍界王拳', desc: 'A desperate twenty-fold surge that briefly staggers Final Form Frieza with a Kamehameha.' },
+                    { num: '03', name: 'Namek Spirit Bomb', jp: 'ナメック星の元気玉', desc: 'Goku draws life energy from Namek, nearby worlds, and the sun to strike Frieza.' },
+                    { num: '04', name: '100G Spaceship Training', jp: '100倍重力修行', desc: 'Training under a hundred times Earth’s gravity en route to Planet Namek.' },
+                    { num: '05', name: 'Angry Kamehameha', jp: '怒りのかめはめ波', desc: 'Super Saiyan Goku blasts Frieza straight through Planet Namek’s crust.' },
+                    { num: '06', name: 'Porunga’s Three Wishes', jp: 'ポルンガの3つの願い', desc: 'Dende speaks Namekian to summon Porunga and revive Piccolo.' }
+                ]
+            },
+            seasons: {
+                title: 'Ginyu Force & Namekian Tactics',
+                jp: 'ギニュー特戦隊とナメック星人の戦術',
+                desc: 'From Guldo’s time freeze to Piccolo’s fusion with Nail, Planet Namek’s battles demand speed, trickery, and courage.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: 'Time Freeze (Guldo)', jp: '金縛り・時間停止', desc: 'Guldo halts time while holding his breath until Vegeta strikes him down.' },
+                    { num: '02', name: 'Body Change (Captain Ginyu)', jp: 'ボディチェンジ', desc: 'Ginyu attempts to swap bodies with Goku before trickery swaps him into a Namekian frog.' },
+                    { num: '03', name: 'Namekian Assimilation', jp: '同化（ピッコロ＆ネイル）', desc: 'Fusing with Nail dramatically boosts Piccolo’s power to confront Frieza.' },
+                    { num: '04', name: 'Destructo Disc (Kienzan)', jp: '気円斬', desc: 'Krillin’s razor-sharp energy disc slices off Frieza’s tail during their standoff.' },
+                    { num: '05', name: 'Gohan’s Masenko Volley', jp: '悟飯の魔閃光', desc: 'Gohan unleashes fierce energy bursts against Recoome and Frieza.' },
+                    { num: '06', name: 'Scouter & Ki Sense Clash', jp: 'スカウターと気功の攻防', desc: 'Earth’s fighters mask and control their Ki while Frieza’s army relies on scouters.' }
+                ]
+            },
+            promises: {
+                title: 'Frieza’s Transformations & Death Arts',
+                jp: 'フリーザの変身とデス攻撃',
+                desc: 'Each transformation Frieza unlocks raises his power into another tier, culminating in his 100% Full Power state.',
+                color: '#f43f5e',
+                items: [
+                    { num: '01', name: 'Second Form Horned Surge', jp: '第二形態（巨大化）', desc: 'Frieza towers over Vegeta, Krillin, and Gohan with brutal physical strikes.' },
+                    { num: '02', name: 'Third Form Xenomorph Surge', jp: '第三形態', desc: 'Elongating his cranium, Frieza fires rapid barrages that overwhelm Piccolo.' },
+                    { num: '03', name: 'Final Form Death Beam', jp: 'デスビーム', desc: 'Pinpoint high-density energy beams fired effortlessly from Frieza’s finger.' },
+                    { num: '04', name: 'Death Ball Core Strike', jp: 'デスボール', desc: 'A dense orb of destructive energy aimed at Planet Namek’s core.' },
+                    { num: '05', name: '100% Full Power Form', jp: '100%フルパワー', desc: 'Bulking up his muscles to maximum output, Frieza clashes head-on with Super Saiyan Goku.' },
+                    { num: '06', name: 'Destructo Discs Pursuit', jp: '追尾気円斬', desc: 'Frieza conjures twin cutting discs that chase Goku across the crumbling battlefield.' }
+                ]
+            }
+        };
+
+        const defaultEpisodesData = [
+            { num: 1, arc: 'Namek & Ginyu Force', title: 'A New Stage of Battle! Frieza’s Spaceship Approaches Planet Namek!', jpTitle: '新たなる闘いの幕開け! フリーザの宇宙船がナメック星へ', synopsis: 'Arriving on lush Planet Namek, Gohan, Krillin, and Bulma sense Frieza’s terrifying presence as they search for the Namekian Dragon Balls.', highlight: 'The Namekian quest begins as Frieza’s forces hunt villages.', url: 'https://animetoonhindi.com/multiquality/?url=JbkQ9Yv5TpBdrmk' },
+            { num: 2, arc: 'Namek & Ginyu Force', title: 'The Enemy’s Pursuit! The Mystery of the Namekian Dragon Balls!', jpTitle: '迫りくる敵の影! ナメック星ドラゴンボールの謎', synopsis: 'Avoiding Frieza’s scouts, Gohan and Krillin rescue Dende from Dodoria and learn how Namekian Dragon Balls work.', highlight: 'Dende is saved from Dodoria and reveals the Namekian Dragon Ball secret.', url: 'https://animetoonhindi.com/multiquality/?url=ByMKsohJ40wsNEN' },
+            { num: 3, arc: 'Namek & Ginyu Force', title: 'Vegeta’s Rampage! A Monster Attacking the Same Enemy!', jpTitle: 'ベジータの逆襲! 同じ敵を襲う怪物', synopsis: 'Having healed from Earth, Vegeta arrives on Namek and eliminates Frieza’s elites Cui and Dodoria to claim Dragon Balls for himself.', highlight: 'Vegeta defeats Cui and Dodoria on Planet Namek.', url: 'https://animetoonhindi.com/multiquality/?url=qebrZ7wIANaACiT' },
+            { num: 4, arc: 'Namek & Ginyu Force', title: 'Dragon Balls Stolen! Zarbon’s Fierce Transformation!', jpTitle: '奪われたドラゴンボール! ザーボン変身の猛攻', synopsis: 'Zarbon transforms into a monstrous form to overpower Vegeta and recover the stolen Dragon Ball.', highlight: 'Transformed Zarbon defeats Vegeta near a Namekian village.', url: 'https://animetoonhindi.com/multiquality/?url=BsgsqR1bBujKLu7' },
+            { num: 5, arc: 'Namek & Ginyu Force', title: 'A Sudden Turn of Events! Vegeta’s Counterattack and Grand Elder Guru’s Secret!', jpTitle: '形勢逆転! ベジータの反撃と最長老の秘密', synopsis: 'Healing in Frieza’s medical pod, Vegeta ambushes Zarbon and claims the Dragon Ball while Gohan and Krillin visit Grand Elder Guru.', highlight: 'Vegeta defeats Zarbon; Guru unlocks Gohan and Krillin’s potential.', url: 'https://animetoonhindi.com/multiquality/?url=H19Ahr7MRPP3XLc' },
+            { num: 6, arc: 'Namek & Ginyu Force', title: 'Goku’s Ship Completes! 100-Fold Gravity Training Begins!', jpTitle: '悟空の宇宙船完成! 100倍重力修行スタート', synopsis: 'Recovering on Earth, Goku boards a gravity-equipped ship built by Dr. Briefs and trains under escalating gravity toward Namek.', highlight: 'Goku launches toward Namek under intense gravity training.', url: 'https://animetoonhindi.com/multiquality/?url=f8tLbnwb5ooVDvH' },
+            { num: 7, arc: 'Namek & Ginyu Force', title: 'A Fierce Clash on Namek! Vegeta vs. the Ginyu Force!', jpTitle: 'ナメック星の大激戦! ベジータ対ギニュー特戦隊', synopsis: 'Summoned by Frieza, the five-member Ginyu Force lands on Planet Namek and corners Vegeta, Gohan, and Krillin.', highlight: 'The Ginyu Force arrives on Planet Namek.', url: 'https://animetoonhindi.com/multiquality/?url=NAdefhDeJG6g4zY' },
+            { num: 8, arc: 'Namek & Ginyu Force', title: 'Guldo’s Time Freeze! Defeat the Ginyu Force!', jpTitle: 'グルドの時間停止! ギニュー特戦隊を打ち破れ', synopsis: 'Guldo freezes time to corner Gohan and Krillin until Vegeta intervenes and strikes him down.', highlight: 'Guldo’s time-freeze ability is overcome by Vegeta.', url: 'https://animetoonhindi.com/multiquality/?url=xKeBOKu0VlPyt0N' },
+            { num: 9, arc: 'Namek & Ginyu Force', title: 'Recoome’s Overwhelming Power! Son Goku Finally Arrives!', jpTitle: 'リクームの圧倒的パワー! 孫悟空ついに到着', synopsis: 'Recoome crushes Vegeta, Krillin, and Gohan in succession until Goku arrives at the last moment with newfound strength.', highlight: 'Goku arrives on Namek and effortlessly drops Recoome.', url: 'https://animetoonhindi.com/multiquality/?url=Vc7HfQ48nhCVRoH' },
+            { num: 10, arc: 'Namek & Ginyu Force', title: 'Goku’s Overwhelming Might! Burter and Jeice Defeated!', jpTitle: '悟空の圧倒的強さ! バータとジースを撃破', synopsis: 'Displaying speed beyond Burter’s claims and power beyond Jeice’s, Goku swiftly defeats both Ginyu Force members.', highlight: 'Goku overwhelms Burter and Jeice.', url: 'https://animetoonhindi.com/multiquality/?url=uU2HTW7gZAcEAcg' },
+            { num: 11, arc: 'Namek & Ginyu Force', title: 'Captain Ginyu Appears! The Desperate Body Change Technique!', jpTitle: 'ギニュー隊長登場! 絶体絶命のボディチェンジ', synopsis: 'Finding Goku’s strength too high to match directly, Captain Ginyu injures himself and attempts his Body Change technique.', highlight: 'Captain Ginyu takes over Goku’s body in a tense twist.', url: 'https://animetoonhindi.com/multiquality/?url=y5hEKOTMTY29YCU' },
+            { num: 12, arc: 'Namek & Ginyu Force', title: 'Goku Returns to His Body! Frieza’s Password Revealed!', jpTitle: '悟空が元の体へ! フリーザのパスワード判明', synopsis: 'Tricking Ginyu mid-swap, Goku regains his body while Gohan and Krillin use the Namekian password to access the Dragon Balls.', highlight: 'Goku reclaims his body and Ginyu ends up as a frog.', url: 'https://animetoonhindi.com/multiquality/?url=GujKJ3HR6wQ6beg' },
+            { num: 13, arc: 'Namek & Ginyu Force', title: 'Super Shenron? No, Porunga! Grant Our Three Wishes!', jpTitle: 'ポルンガ登場! 3つの願いを叶えろ', synopsis: 'Dende summons the massive Namekian dragon Porunga, and the group makes their first two wishes to revive Piccolo and bring him to Namek.', highlight: 'Porunga is summoned and Piccolo is revived.', url: 'https://animetoonhindi.com/multiquality/?url=smByDFBSIALxTFe' },
+            { num: 14, arc: 'Namek & Ginyu Force', title: 'Frieza’s Rage! The Final Wish Vanishes in Vain!', jpTitle: 'フリーザ激怒! 最後の願いが消える', synopsis: 'Frieza arrives at the Dragon Ball site just as Porunga’s third wish is lost with Grand Elder Guru’s passing.', highlight: 'Frieza confronts the Dragon Ball group before Porunga vanishes.', url: 'https://animetoonhindi.com/multiquality/?url=loq60PdLjaH53ha' },
+            { num: 15, arc: 'Namek & Ginyu Force', title: 'Frieza’s First Transformation! Terror Power 1,000,000!', jpTitle: 'フリーザ第一形態変身! 戦闘力100万の恐怖', synopsis: 'Refusing to hold back any longer, Frieza sheds his restraint and transforms into his towering second form.', highlight: 'Frieza transforms into his massive second form.', url: 'https://animetoonhindi.com/multiquality/?url=OF3ZWrL8PMbX8l0' },
+            { num: 16, arc: 'Namek & Ginyu Force', title: 'Piccolo’s Fierce Counterattack! Frieza’s Second Transformation!', jpTitle: 'ピッコロ反撃! フリーザ第二の変身', synopsis: 'Having fused with Nail, Piccolo battles Frieza’s second form evenly—forcing Frieza to transform a third time.', highlight: 'Fused Piccolo fights Frieza and triggers his third form.', url: 'https://animetoonhindi.com/multiquality/?url=avybBUwLsaPqBmL' },
+            { num: 17, arc: 'Namek & Ginyu Force', title: 'The Ultimate Transformation! Frieza’s True Form Awakens!', jpTitle: '究極の変身! フリーザ最終形態の覚醒', synopsis: 'After a relentless barrage from his third form, Frieza completes his transformation into his sleek, deceptively calm final form.', highlight: 'Frieza reveals his Final Form.', url: 'https://animetoonhindi.com/multiquality/?url=WTarteXI3ULHZGe' },
+            { num: 18, arc: 'Namek & Ginyu Force', title: 'Dende’s Healing Light! Vegeta’s Final Stand!', jpTitle: 'デンデの癒しの光! ベジータ最後の決戦', synopsis: 'Dende heals Vegeta to full strength with a Saiyan Zenkai boost, allowing Vegeta to challenge Final Form Frieza.', highlight: 'Vegeta receives a healing power boost to face Final Form Frieza.', url: 'https://animetoonhindi.com/multiquality/?url=TqLVNFgzbRazxfp' },
+            { num: 19, arc: 'Namek & Ginyu Force', title: 'Vegeta’s Tearful Farewell! Son Goku Finally Enters the Fray!', jpTitle: 'ベジータ涙の別れ! 孫悟空ついに参戦', synopsis: 'Mortally wounded by Frieza, Vegeta entrusts Goku with defeating the Saiyan race’s tyrant just as Goku finishes healing.', highlight: 'Vegeta passes his wish to Goku before falling.', url: 'https://animetoonhindi.com/multiquality/?url=FOdYAYR7ngQtGIk' },
+            { num: 20, arc: 'Frieza & Super Saiyan', title: 'Goku vs. Frieza! A Battle of Ultimate Pride!', jpTitle: '悟空対フリーザ! 誇りをかけた超決戦', synopsis: 'Goku and Final Form Frieza trade blows at blinding speed as Frieza matches Goku’s base strength without using his full power.', highlight: 'Goku and Final Form Frieza clash head-on.', url: 'https://animetoonhindi.com/multiquality/?url=Hgo3ZosLNM3VCSU' },
+            { num: 21, arc: 'Frieza & Super Saiyan', title: '20-Fold Kaioken! A Desperate All-Out Kamehameha!', jpTitle: '20倍界王拳! 捨て身の全開かめはめ波', synopsis: 'Realizing Frieza still hasn’t used half his power, Goku pushes to a 20-fold Kaioken and fires a desperate Kamehameha.', highlight: 'Goku unleashes Kaioken x20 against Frieza.', url: 'https://animetoonhindi.com/multiquality/?url=qA87lT3rjoiF4RZ' },
+            { num: 22, arc: 'Frieza & Super Saiyan', title: 'The Final Gamble! Gather Energy for the Giant Spirit Bomb!', jpTitle: '最後の賭け! 巨大元気玉に気を込めろ', synopsis: 'While Piccolo distracts Frieza, Goku gathers massive energy from across the cosmos to form a colossal Spirit Bomb.', highlight: 'Goku charges the giant Spirit Bomb with Piccolo’s support.', url: 'https://animetoonhindi.com/multiquality/?url=fRVBhjHFlMrU1kV' },
+            { num: 23, arc: 'Frieza & Super Saiyan', title: 'A Ray of Hope? The Spirit Bomb Strikes Frieza!', jpTitle: '希望の光か!? 元気玉がフリーザを直撃', synopsis: 'Goku hurls the giant Spirit Bomb at Frieza; though the blast seems to end the fight, Frieza emerges from the crater in rage.', highlight: 'The Spirit Bomb hits Frieza, but he survives.', url: 'https://animetoonhindi.com/multiquality/?url=z9T0aU56Lg6b5Q3' },
+            { num: 24, arc: 'Frieza & Super Saiyan', title: 'Cruel Tragedy! Piccolo Pierced and Krillin’s Fate!', jpTitle: '非情の悲劇! ピッコロ貫かれクリリンが…', synopsis: 'Frieza strikes down Piccolo and detonates Krillin in mid-air as Goku watches in shock.', highlight: 'Krillin’s defeat pushes Goku to his emotional breaking point.', url: 'https://animetoonhindi.com/multiquality/?url=mh0LueiRrXJm9xn' },
+            { num: 25, arc: 'Frieza & Super Saiyan', title: 'Rage Explodes! The Legendary Super Saiyan Awakens!', jpTitle: '怒り爆発! 伝説の超サイヤ人覚醒', synopsis: 'Consumed by fury and sorrow, Goku’s Ki ignites into a blinding golden flame as the legendary Super Saiyan awakens.', highlight: 'Goku transforms into a Super Saiyan for the first time.', url: 'https://animetoonhindi.com/multiquality/?url=y0QDJq8m0KpZrvx' },
+            { num: 26, arc: 'Frieza & Super Saiyan', title: 'The Super Saiyan’s Wrath! Frieza’s Desperate Counter!', jpTitle: '超サイヤ人の怒り! フリーザ必死の反撃', synopsis: 'Super Saiyan Goku overwhelms Final Form Frieza, prompting Frieza to fire a blast straight into Planet Namek’s core.', highlight: 'Super Saiyan Goku dominates Frieza as Namek’s core is struck.', url: 'https://animetoonhindi.com/multiquality/?url=7eDJmdgOHIj1Og1' },
+            { num: 27, arc: 'Frieza & Super Saiyan', title: 'Planet Namek Crumbles! Five Minutes Until Destruction!', jpTitle: 'ナメック星崩壊! 消滅まであと5分', synopsis: 'Frieza announces that Planet Namek will explode in five minutes while Gohan and the others try to escape.', highlight: 'The five-minute countdown to Planet Namek’s destruction begins.', url: 'https://animetoonhindi.com/multiquality/?url=uyZOjMbOF3ATpPB' },
+            { num: 28, arc: 'Frieza & Super Saiyan', title: 'Frieza’s 100% Full Power! A Climax Beyond Limits!', jpTitle: 'フリーザ100%フルパワー! 限界を超えた頂上決戦', synopsis: 'Bulking up to 100% full power, Frieza trades heavy blows with Super Saiyan Goku atop the erupting planet.', highlight: '100% Full Power Frieza clashes with Super Saiyan Goku.', url: 'https://animetoonhindi.com/multiquality/?url=XfcZnMC4IW6vS5c' },
+            { num: 29, arc: 'Frieza & Super Saiyan', title: 'The Tide Turns! Super Saiyan Goku’s Relentless Strike!', jpTitle: '戦局逆転! 超サイヤ人悟空の容赦なき一撃', synopsis: 'As Frieza’s 100% form rapidly drains its stamina, Super Saiyan Goku overtakes him in endurance and power.', highlight: 'Goku gains the upper hand over exhausting Frieza.', url: 'https://animetoonhindi.com/multiquality/?url=Avte1jCcgwrvQ8Y' },
+            { num: 30, arc: 'Frieza & Super Saiyan', title: 'Frieza’s Final Desperation! The Earthling Wish on Namek!', jpTitle: 'フリーザ最後のあがき! ナメック星に地球の願い', synopsis: 'Using the Namekian Dragon Balls, Earth’s wish transports everyone from Namek to Earth—except Goku and Frieza.', highlight: 'Earth’s Dragon Balls move the survivors away from exploding Namek.', url: 'https://animetoonhindi.com/multiquality/?url=K6aSRBIrCczFHfy' },
+            { num: 31, arc: 'Frieza & Super Saiyan', title: 'Planet Namek Vanishes! Did Son Goku Perish?!', jpTitle: 'ナメック星消滅! 孫悟空は散ったのか?!', synopsis: 'Caught by his own cutting discs as Namek implodes, Frieza is defeated while Goku escapes seconds before the explosion.', highlight: 'Planet Namek explodes as Goku’s fate hangs in the balance.', url: 'https://animetoonhindi.com/multiquality/?url=RRppnC5M6Mnx7HN' },
+            { num: 32, arc: 'Frieza & Super Saiyan', title: 'Peace Restored on Earth! A Miracle Wish for the Fallen!', jpTitle: '地球に平和が戻る! 仲間たちを蘇らせる奇跡の願い', synopsis: 'Back on Earth, the Dragon Balls are used to revive the friends killed by the Saiyans and Frieza’s forces.', highlight: 'The Z-Fighters killed by the Saiyans are revived on Earth.', url: 'https://animetoonhindi.com/multiquality/?url=WlTO5NDn6zF6tjM' },
+            { num: 33, arc: 'Frieza & Super Saiyan', title: 'A Shocking Return! Frieza and King Cold Approach Earth!', jpTitle: '衝撃の帰還! フリーザとコルド大王が地球へ', synopsis: 'Rebuilt with cybernetic parts and accompanied by his father King Cold, a vengeful Frieza heads toward Earth.', highlight: 'Cyborg Frieza and King Cold arrive near Earth.', url: 'https://animetoonhindi.com/multiquality/?url=TPMFTgMKMfeWbtC' },
+            { num: 34, arc: 'Frieza & Super Saiyan', title: 'Who Is That Youth?! A Mysterious Super Saiyan Appears!', jpTitle: 'あの少年は誰だ!? 謎の超サイヤ人登場', synopsis: 'Before Goku can return from Yardrat, a mysterious sword-wielding Super Saiyan youth intercepts Frieza’s army and cuts Frieza down.', highlight: 'Future Trunks defeats Frieza and King Cold in moments.', url: 'https://animetoonhindi.com/multiquality/?url=zURcUnAU4xbfHKX' },
+            { num: 35, arc: 'Frieza & Super Saiyan', title: 'Goku Returns! The Warning of Three Years Later!', jpTitle: '悟空帰還! 3年後の脅威を告げる警告', synopsis: 'Goku lands safely via Instant Transmission and learns from the mysterious youth that deadly Androids will appear in three years.', highlight: 'Goku returns and hears the warning about the Androids.', url: 'https://animetoonhindi.com/multiquality/?url=jBlWIL8OVBiHXIm' },
+            { num: 36, arc: 'Frieza & Super Saiyan', title: 'Train for Three Years! Each Warrior’s Resolve!', jpTitle: '3年間の修行! それぞれの決意', synopsis: 'As the Z-Fighters part ways to train for the coming threat, Season 2 closes with everyone preparing for the next battle.', highlight: 'Season 2 concludes as the Z-Fighters begin three years of training.', url: 'https://animetoonhindi.com/multiquality/?url=2t3yzOoYTPXpk7k' }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'Opening Theme',
+                title: 'Dragon Soul — Takayoshi Tanimoto',
+                jp: 'OP「Dragon Soul」谷本貴義',
+                desc: 'Navigate to the Dragon Ball Z Kai opening theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+Opening+Dragon+Soul'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Ending Theme',
+                title: 'Heart Song / Kokoro no Hane — Team Dragon from AKB48',
+                jp: 'ED「心の羽根」チームドラゴン from AKB48',
+                desc: 'Navigate to the Dragon Ball Z Kai Frieza Saga ending theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+Ending+Kokoro+no+Hane'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'Frieza Saga Clips',
+                title: 'Goku Awakens Super Saiyan vs. Frieza',
+                jp: 'ドラゴンボール改 伝説の超サイヤ人覚醒 悟空対フリーザ',
+                desc: 'Open Dragon Ball Z Kai highlights of Goku’s Super Saiyan transformation and clash with Frieza.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+Goku+Super+Saiyan+vs+Frieza'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Watch Dragon Ball Z Kai on Crunchyroll',
+                jp: 'ドラゴンボール改 配信ページ',
+                desc: 'Open the official Crunchyroll series page for Dragon Ball Z Kai.',
+                url: 'https://www.crunchyroll.com/series/G6K53ENKY/dragon-ball-z-kai'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Dragon Ball Official Site',
+                subtitle: 'en.dragon-ball-official.com — News, manga & anime',
+                url: 'https://en.dragon-ball-official.com/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Dragon Ball Z Kai Hub',
+                subtitle: 'Stream Dragon Ball Z Kai episodes',
+                url: 'https://www.crunchyroll.com/series/G6K53ENKY/dragon-ball-z-kai'
+            },
+            {
+                id: 'page-toei',
+                title: 'Toei Animation Dragon Ball Kai',
+                subtitle: 'Official studio archive & series overview',
+                url: 'https://www.toei-anim.co.jp/tv/dragonkai/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Dragon Ball Z Kai Entry',
+                subtitle: 'Cast, voice actors & episode listings',
+                url: 'https://myanimelist.net/anime/6033/Dragon_Ball_Kai'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: 'Planet Namek & Guru’s Plateau',
+                jp: '惑星ナメック星 ＆ 最長老の家',
+                tag: 'Three-Sun World',
+                detail: 'Namekian Dragon Ball Grounds',
+                desc: 'A verdant planet of turquoise waters and giant Namekian Dragon Balls where Frieza, Vegeta, and Earth’s heroes clash.'
+            },
+            {
+                name: 'Frieza’s Mothership & Healing Pods',
+                jp: 'フリーザ宇宙船 ＆ 医療ポッド',
+                tag: 'Tyrant Command',
+                detail: 'Orbiting Planet Namek',
+                desc: 'Frieza’s massive command vessel where Vegeta and Goku recover from grueling battles and gain Saiyan power surges.'
+            },
+            {
+                name: 'Shattered Namek & Earth Return',
+                jp: '崩壊するナメック星 ＆ 地球の空',
+                tag: 'Super Saiyan Climax',
+                detail: 'Five-Minute Countdown',
+                desc: 'Volcanic terrain torn apart by Frieza’s blasts as Super Saiyan Goku fights to survive before Namek’s destruction.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'Super Saiyan Goku', title: 'Legend Awakened', quote: 'I am Son Goku, a Super Saiyan!' },
+            { name: 'Lord Frieza', title: 'Emperor of the Universe', quote: 'You’re nothing more than a cheeky little monkey!' },
+            { name: 'Prince Vegeta', title: 'Saiyan Hunter', quote: 'Frieza has awakened the true legend of the Saiyans!' },
+            { name: 'Son Gohan', title: 'Potential Unleashed', quote: 'We won’t back down from Frieza!' },
+            { name: 'Krillin', title: 'Courageous Ally', quote: 'Goku, hang in there!' },
+            { name: 'Piccolo', title: 'Fused Namekian', quote: 'I’ll buy Goku every second I can!' }
+        ];
+
+        // =========================================================================
+        // 2. ADMIN LINK STATE & PERSISTENCE
+        // =========================================================================
+        let isAdminUnlocked = false;
+
+        function cloneDefaults() {
+            const episodesMap = {};
+            defaultEpisodesData.forEach(ep => {
+                episodesMap[ep.num] = ep.url;
+            });
+            return {
+                trailers: defaultTrailersData.map(t => ({ id: t.id, url: t.url })),
+                pages: defaultRelatedPagesData.map(p => ({ id: p.id, url: p.url })),
+                episodes: episodesMap
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach(item => {
+                        const target = base.trailers.find(t => t.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    parsed.pages.forEach(item => {
+                        const target = base.pages.find(p => p.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(parsed.episodes).forEach(k => {
+                        if (parsed.episodes[k]) base.episodes[k] = parsed.episodes[k];
+                    });
+                }
+            } catch (err) {
+                console.warn('Could not load saved links:', err);
+            }
+            return base;
+        }
+
+        let savedLinks = loadSavedLinks();
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (err) {
+                console.warn('Could not save links:', err);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        let selectedCharacterId = charactersData[0].id;
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-slate-900 border-orange-400 shadow-lg shadow-orange-950/40 ring-1 ring-orange-400/50'
+                                : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-white text-base mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-300 mb-1">${char.role}</div>
+                        <h3 class="font-serifDisplay font-bold text-base text-white">${char.name}</h3>
+                        <p class="font-jpSerif text-xs text-slate-400 mt-0.5">${char.jpName}</p>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.specialty}</span>
+                            <span class="text-xs text-slate-400">Base: ${current.apartment}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-slate-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm w-full p-5 rounded-2xl bg-slate-950/90 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-400 mb-2">Iconic Season 8 Line</div>
+                        <p class="text-sm text-slate-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER TECHNIQUES EXPLORER
+        // =========================================================================
+        let currentRoutineKey = 'cooking';
+
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const itemsList = document.getElementById('routineItemsList');
+            const data = routinesData[currentRoutineKey];
+            if (!visualCard || !itemsList || !data) return;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isSelected = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = isSelected
+                    ? 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-orange-500 text-zinc-950 shadow cursor-pointer'
+                    : 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer';
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4" style="background:${data.color}22; color:${data.color}; border:1px solid ${data.color}55;">
+                        ${data.jp}
+                    </span>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Kid Buu &amp; Finale Archive</span>
+                    <span class="font-bold" style="color:${data.color};">6 Signature Arts</span>
+                </div>
+            `;
+
+            itemsList.innerHTML = data.items.map(item => `
+                <div class="bg-slate-900/80 border border-slate-800 hover:border-orange-500/40 rounded-2xl p-5 transition-all">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black tracking-wider px-2.5 py-0.5 rounded-md bg-slate-950 text-orange-400 border border-slate-800">${item.num}</span>
+                        <span class="font-jpSerif text-xs text-slate-400">${item.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${item.name}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 38 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        // 5. RENDER ALL 34 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-950 hover:bg-orange-500 text-slate-300 hover:text-zinc-950 border border-slate-800 hover:border-orange-300 transition-colors cursor-pointer">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-orange-400');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-orange-400'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All Kai Season 2 Episodes 01 – 36'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Episodes`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center">
+                        <p class="text-slate-300 font-medium">No Dragon Ball Z Kai Season 2 episodes match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-orange-500 text-zinc-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `EP ${String(ep.num).padStart(2, '0')}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-slate-900/85 border border-slate-800 hover:border-orange-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-orange-500/15 border border-orange-400/35 text-orange-300 font-bold text-xs tracking-wider">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-sky-300/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `MOVIE ${String(ep.num).padStart(2, '0')}`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-orange-300 border border-orange-400/35">${epBadge}</span>
+                        <span class="text-xs text-slate-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-sky-300 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-300 mb-1">Key Movie Highlight</div>
+                        <p class="text-xs text-slate-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 1 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">← M${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < defaultEpisodesData.length ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">M${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-400 hover:to-amber-300 text-zinc-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Movie Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS, THEMES & OFFICIAL PAGES
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const href = current?.url || item.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group bg-slate-900/85 border border-slate-800 hover:border-orange-400/55 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-orange-500/15 text-orange-300 border border-orange-500/35">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-slate-400 group-hover:text-orange-300 transition-colors text-sm">↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-orange-200 transition-colors mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="font-jpSerif text-xs text-sky-300/90 mb-2">${item.jp}</p>
+                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-800/90 text-xs font-semibold text-orange-300 group-hover:translate-x-0.5 transition-transform">
+                                Navigate to External Page →
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const href = current?.url || page.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group p-4 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-sky-400/50 transition-all flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-sm text-white group-hover:text-sky-300 transition-colors">${page.title}</div>
+                                <div class="text-xs text-slate-400 mt-1">${page.subtitle}</div>
+                            </div>
+                            <span class="text-slate-400 group-hover:text-sky-300 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. RENDER BATTLEFIELDS & FACTIONS
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-orange-400">${loc.tag}</span>
+                            <span class="font-jpSerif text-xs text-slate-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-sky-300 font-medium mb-2">${loc.detail}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((member, idx) => `
+                    <button type="button" data-cast-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-orange-400/50 transition-all cursor-pointer">
+                        <div class="font-bold text-xs sm:text-sm text-white">${member.name}</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">${member.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-cast-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const member = castCircleData[Number(btn.getAttribute('data-cast-idx'))];
+                        if (member) {
+                            quoteBox.innerHTML = `<span class="text-orange-300 font-semibold not-italic">${member.name}:</span> “${member.quote}”`;
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 8. ADMIN LINK MANAGER (PIN 1960)
+        // =========================================================================
+        function showAdminBanner(msg) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = msg;
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin Active';
+            if (studio) {
+                studio.classList.remove('hidden');
+                renderAdminStudio();
+                studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin';
+            studio?.classList.add('hidden');
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const val = current?.url || item.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${item.title}</label>
+                            <input type="url" data-admin-trailer="${item.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-orange-400">
+                        </div>
+                    `;
+                }).join('');
+
+                trailersList.querySelectorAll('input[data-admin-trailer]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-trailer');
+                        const target = savedLinks.trailers.find(t => t.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Trailer / Theme navigation link updated.');
+                        }
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const val = current?.url || page.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${page.title}</label>
+                            <input type="url" data-admin-page="${page.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-sky-400">
+                        </div>
+                    `;
+                }).join('');
+
+                pagesList.querySelectorAll('input[data-admin-page]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-page');
+                        const target = savedLinks.pages.find(p => p.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Portal page URL updated.');
+                        }
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const val = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">M${String(ep.num).padStart(2, '0')} — ${ep.title}</label>
+                            <input type="url" data-admin-ep="${ep.num}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('input[data-admin-ep]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const epNum = Number(input.getAttribute('data-admin-ep'));
+                        if (epNum && input.value.trim()) {
+                            savedLinks.episodes[epNum] = input.value.trim();
+                            persistLinks();
+                            renderEpisodes();
+                            showAdminBanner(`Movie ${String(epNum).padStart(2, '0')} link updated.`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (Ki Embers / Blue Kamehameha Sparks)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.3;
+                p.y -= p.vy * 0.85;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(251, 113, 133, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.9, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(34, 211, 238, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        // Admin PIN Modal Controls
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Dragon Ball Z Kai Season 2 links restored.');
+        });
+
+        // Particle Theme Switcher
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'Kaioken Crimson Sparks' : 'Cyan Ki Sparks';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-rose-400 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-cyan-300 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+</body>
+</html>
