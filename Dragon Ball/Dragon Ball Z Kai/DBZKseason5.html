@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z Kai — Season 5 (The Final Chapters • 69 Episodes)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #090614;
+            color: #faf5ff;
+            overflow-x: clip;
+        }
+
+        /* Subtle SSJ3 golden aura & Majin magenta grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(250, 204, 21, 0.1) 1px, transparent 1px),
+                radial-gradient(rgba(244, 114, 182, 0.09) 1px, #090614 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        /* Super Saiyan 3 Gold, Majin Rose & Potara Cyan Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #fde047 0%, #f472b6 36%, #38bdf8 70%, #facc15 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.96); }
+            50% { opacity: 1; transform: scaleX(1.04); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090614;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #701a75;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #facc15;
+        }
+    </style>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-amber-300 selection:text-slate-950">
+
+    <!-- Ambient SSJ3 Gold & Majin Rose Spark Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-70"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#090614]/90 border-b border-fuchsia-400/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-yellow-300 via-pink-400 to-cyan-400 flex items-center justify-center shadow-lg shadow-fuchsia-950/70 border border-amber-200/50">
+                        <span class="font-jpSerif font-black text-slate-950 text-sm">改</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-amber-100 group-hover:text-pink-300 transition-colors">
+                            DRAGON BALL Z KAI
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-pink-300/80 font-jpSerif">
+                            ドラゴンボール改 — 魔人ブウ編 (第5期・全69話)
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#characters" class="hover:text-amber-300 transition-colors">Final Chapters Roster</a>
+                    <a href="#routines" class="hover:text-amber-300 transition-colors">Fusion &amp; Z-Arts</a>
+                    <a href="#episodes" class="hover:text-amber-300 transition-colors">69 Episodes</a>
+                    <a href="#videos" class="hover:text-amber-300 transition-colors">Themes &amp; Links</a>
+                    <a href="#circles" class="hover:text-amber-300 transition-colors">Realms &amp; Factions</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-950/65 hover:bg-amber-900/75 text-amber-200 border border-amber-400/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+                        <span id="particleLabel">SSJ3 Gold Sparks</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-amber-300 border border-amber-400/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-[2] overflow-hidden border-b border-fuchsia-950/80">
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] rounded-full bg-amber-300/14 blur-3xl"></div>
+            <div class="absolute top-16 left-1/4 w-[24rem] h-[24rem] rounded-full bg-pink-500/14 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#090614] via-[#090614]/85 to-transparent"></div>
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-50">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#86198f"/>
+                        <stop offset="100%" stop-color="#090614"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,195 L130,195 L175,115 L295,115 L340,185 L520,185 L575,90 L680,90 L735,175 L940,175 L995,110 L1145,110 L1195,190 L1440,190 L1440,280 L0,280 Z"/>
+                <circle cx="720" cy="72" r="24" fill="#f472b6" fill-opacity="0.24"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 text-center">
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-950/65 border border-amber-300/40 text-amber-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-fuchsia-950/50">
+                    <span class="font-jpSerif text-pink-300 font-black">改</span>
+                    <span>Dragon Ball Z Kai • Season 5</span>
+                    <span class="px-1.5 py-0.5 rounded bg-pink-500/15 border border-pink-400/30 font-jpSerif text-[11px] text-pink-200">魔人ブウ編 全69話</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4 text-center">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">DRAGON BALL Z KAI</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_26px_rgba(244,114,182,0.28)]">SEASON 5 • THE FINAL CHAPTERS</span>
+                </h1>
+
+                <div class="animate-hero-rise-delay-1 flex items-center justify-center gap-3 my-5 w-full">
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-l from-amber-300 via-pink-400 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.22em] text-amber-200/95 uppercase">ドラゴンボール改 · 天下一武道会、魔人ブウ復活、そして究極の元気玉</span>
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-r from-amber-300 via-pink-400 to-transparent animate-ribbon-pulse"></span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-slate-300 mb-6 text-center">
+                    ドラゴンボール改 第5期（全69話）— 偉大なサイヤマン、超サイヤ人3、合体戦士ベジット＆ゴテンクス、全宇宙の元気玉
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-center">
+                    Spanning all <strong class="text-amber-300">69 episodes</strong> (Series Episodes 99–167) of <strong class="text-pink-300">Dragon Ball Z Kai: The Final Chapters</strong>, seven years after the Cell Games, <strong class="text-yellow-300">Goku</strong> returns for the <strong class="text-cyan-300">25th World Tournament</strong> as <strong class="text-pink-300">Majin Buu</strong> awakens—leading to <strong class="text-amber-300">Super Saiyan 3</strong>, <strong class="text-sky-300">Gotenks</strong>, <strong class="text-cyan-300">Ultimate Gohan</strong>, <strong class="text-amber-300">Vegito</strong>, and the <strong class="text-yellow-300">Super Spirit Bomb</strong>.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-300 via-pink-400 to-cyan-400 hover:from-amber-200 hover:to-cyan-300 text-slate-950 font-bold text-sm shadow-lg shadow-fuchsia-950/50 transition-all">
+                        Explore All 69 Episodes
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-amber-200 border border-amber-400/35 font-semibold text-sm transition-all">
+                        ▶ Fight It Out! &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                        Fusion &amp; Z-Arts Explorer
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Season 5 Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 pt-8 text-left">
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-300">69 Eps</div>
+                    <div class="text-xs text-slate-400 mt-1">Season 5 (Kai EP 01–69 / #99–167)</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-pink-300">Majin Buu</div>
+                    <div class="text-xs text-slate-400 mt-1">Innocent, Super &amp; Kid Buu</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-cyan-300">SSJ3 &amp; Fusions</div>
+                    <div class="text-xs text-slate-400 mt-1">Gotenks, Ultimate Gohan &amp; Vegito</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-sky-300">Spirit Bomb</div>
+                    <div class="text-xs text-slate-400 mt-1">World of the Kais Finale</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">World Tournament, Babidi’s Ship &amp; Sacred World</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Season 5 Key Combatants</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                Select a character card to inspect their Season 5 role, signature technique, and iconic quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <div id="characterSpotlight" class="mt-8 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Martial Arts, Fusion & Ki Techniques Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-slate-950/75 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-pink-300 text-xs font-bold tracking-widest uppercase">SSJ3, Potara, Metamoran Fusion &amp; Genki-Dama</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Season 5 Techniques Explorer</h2>
+                </div>
+
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-300 text-slate-950 shadow cursor-pointer">
+                        SSJ3, Mystic &amp; Fusions
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Tournament &amp; Majin Pride
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Sacred World &amp; Spirit Bomb
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div id="routineVisualCard" class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div id="routineItemsList" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 69 Episodes Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Complete Kai Season 5 Chronicle (Episodes 99–167)</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 69 Episodes (EP 01 – EP 69)</h2>
+                <p class="text-slate-400 text-sm mt-2">Every episode of Dragon Ball Z Kai Season 5 (The Final Chapters) is displayed below with instant navigation, saga filtering, and external links.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search title, S5 EP (1–69) or Kai # (99–167)..."
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-300 w-full sm:w-72">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-amber-300 cursor-pointer">
+                    <option value="ALL">All Kai Season 5 Chapters (69 Eps)</option>
+                    <option value="World Tournament & Babidi">Part I: Great Saiyaman, Tournament &amp; Babidi (Ep 1–23)</option>
+                    <option value="Fusion & Super Buu">Part II: Majin Buu, Gotenks &amp; Ultimate Gohan (Ep 24–46)</option>
+                    <option value="Vegito & Kid Buu Finale">Part III: Vegito, Kid Buu &amp; Peaceful World (Ep 47–69)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Episode Jump Bar -->
+        <div class="mb-8 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-4">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Quick Jump to Episode (EP 01 – EP 69)</span>
+                <div id="episodeNavIndicator" class="text-xs font-semibold text-amber-300 shrink-0">
+                    Showing All Kai Season 5 Episodes 01 – 69
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5 max-h-32 overflow-y-auto pr-1" id="quickEpisodePills">
+                <!-- Populated by JS (EP 01 - EP 69 quick jump pills) -->
+            </div>
+        </div>
+
+        <!-- All 69 Episodes Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-slate-950/80 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-pink-300 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Final Chapters Themes &amp; Official Pages</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Navigate directly to Dragon Ball Z Kai Season 5 themes, highlights, and official series pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-slate-900/95 border border-amber-400/45 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Changes save automatically to your browser and update all 69 episode cards and theme links immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">4 Kai Season 5 Theme &amp; Clip Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-pink-300 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3">Kai Season 5 Episode Links (EP 01 – 69)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-slate-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Battlefields & Factions -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">25th Tournament, Hyperbolic Time Chamber &amp; Sacred World</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Iconic Worlds &amp; Factions</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Legendary Season 5 Grounds</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Key Figures of Kai Season 5</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-amber-400/15 text-amber-200 border border-amber-400/35 font-semibold">Final Chapters Roster</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-sm text-slate-300 italic">
+                    Select any character above to read their Dragon Ball Z Kai Season 5 line.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-slate-800/90 bg-[#05040b] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-amber-300 font-bold">改</span>
+                <span>Dragon Ball Z Kai — Season 5 (69 Episodes • The Final Chapters) Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-300/45 flex items-center justify-center text-amber-200 font-bold text-xs">
+                    改
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white tracking-widest focus:outline-none focus:border-amber-300">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-amber-300 hover:bg-amber-200 text-slate-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. DRAGON BALL Z KAI SEASON 5 DATA (69 Episodes, Characters, Techniques)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'dbz_kai_season5_69eps_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'goku-ssj3',
+                name: 'Son Goku (Super Saiyan 3)',
+                jpName: '超サイヤ人3 孫悟空',
+                role: 'Returning Hero & Spirit Bomb Bearer',
+                specialty: 'Super Saiyan 3, Fusion Dance & Super Spirit Bomb',
+                apartment: 'Other World & Sacred World of the Kais',
+                accent: 'from-yellow-300 to-amber-500',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-400/50',
+                quote: 'And this… is to go even further beyond! Super Saiyan 3!',
+                bio: 'Granted one day on Earth for the 25th World Tournament, Goku unveils Super Saiyan 3 against Majin Buu, teaches Goten and Trunks Fusion, merges into Vegito, and defeats Kid Buu with Earth’s Spirit Bomb.'
+            },
+            {
+                id: 'majin-buu',
+                name: 'Majin Buu (Innocent → Super → Kid)',
+                jpName: '魔人ブウ（無邪気〜悪〜純粋）',
+                role: 'Ancient Primordial Threat',
+                specialty: 'Candy Beam, Absorption, Regeneration & Planet Burst',
+                apartment: 'Babidi’s Cocoon & Sacred World',
+                accent: 'from-pink-400 to-rose-600',
+                badgeColor: 'bg-pink-950/90 text-pink-200 border-pink-400/50',
+                quote: 'Buu turn you into chocolate!',
+                bio: 'Awakened by Babidi’s dark magic, Majin Buu befriends Mr. Satan before splitting into his evil incarnations—culminating in relentless battles against Gotenks, Ultimate Gohan, Vegito, and Goku.'
+            },
+            {
+                id: 'majin-vegeta',
+                name: 'Vegeta (Majin & Eternal Rival)',
+                jpName: '魔人ベジータ ＆ 誇り高き王子',
+                role: 'Saiyan Prince & Strategic Partner',
+                specialty: 'Final Atonement, Potara Fusion & Kid Buu Stall',
+                apartment: '25th World Tournament & Sacred World',
+                accent: 'from-indigo-400 to-blue-600',
+                badgeColor: 'bg-indigo-950/90 text-indigo-200 border-indigo-400/50',
+                quote: 'Trunks, Bulma… I do this for you. And yes, even for you, Kakarot.',
+                bio: 'Driven by his rivalry with Goku, Vegeta unleashes Final Atonement against Majin Buu, fuses with Goku into Vegito, and devises the Namekian Dragon Ball & Spirit Bomb strategy.'
+            },
+            {
+                id: 'ultimate-gohan',
+                name: 'Son Gohan (Great Saiyaman & Ultimate)',
+                jpName: 'アルティメット孫悟飯',
+                role: 'Orange Star Student & Mystic Warrior',
+                specialty: 'Z-Sword Training, Elder Kai Ritual & Ultimate Burst',
+                apartment: 'Satan City & Sacred World of the Kais',
+                accent: 'from-emerald-400 to-teal-600',
+                badgeColor: 'bg-emerald-950/90 text-emerald-200 border-emerald-400/50',
+                quote: 'Fight you? No, I wanna kill you.',
+                bio: 'Balancing high school life in Satan City as the Great Saiyaman, Gohan trains with the Z-Sword and has his dormant power unlocked by Elder Kai to overwhelm Super Buu.'
+            },
+            {
+                id: 'vegito-gotenks',
+                name: 'Vegito & Gotenks (Fused Warriors)',
+                jpName: 'ベジット ＆ ゴテンクス',
+                role: 'Potara & Metamoran Trump Cards',
+                specialty: 'Spirit Sword, Final Kamehameha & Super Ghost Kamikaze',
+                apartment: 'Hyperbolic Time Chamber & Wasteland',
+                accent: 'from-cyan-400 to-amber-400',
+                badgeColor: 'bg-cyan-950/90 text-cyan-200 border-cyan-400/50',
+                quote: 'YOSHA!! Call me Vegito—the fusion of Vegeta and Kakarot!',
+                bio: 'Goten and Trunks master the Fusion Dance to become Super Saiyan 3 Gotenks, while Goku and Vegeta don the Potara Earrings to form the unstoppable Vegito.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'SSJ3, Mystic & Fusions',
+                jp: '超サイヤ人3・潜在能力解放・合体戦士',
+                desc: 'Season 5 introduces Dragon Ball Z’s iconic transformations and fusion arts to counter Majin Buu’s endless regeneration.',
+                color: '#facc15',
+                items: [
+                    { num: '01', name: 'Super Saiyan 3 Transformation', jp: '超サイヤ人3変身', desc: 'Goku shakes the Earth as his hair lengthens and golden lightning erupts.' },
+                    { num: '02', name: 'Metamoran Fusion Dance', jp: 'フュージョン（ゴテンクス）', desc: 'Goten and Trunks synchronize their poses to form Gotenks and Super Gotenks 3.' },
+                    { num: '03', name: 'Super Ghost Kamikaze Attack', jp: 'スーパーゴーストカミカゼアタック', desc: 'Gotenks creates explosive spectral duplicates inside the Time Chamber.' },
+                    { num: '04', name: 'Elder Kai Potential Unlock', jp: '老界王神の潜在能力解放', desc: 'Gohan awakens his Ultimate state without needing Super Saiyan strain.' },
+                    { num: '05', name: 'Potara Earring Fusion', jp: 'ポタラ合体（ベジット）', desc: 'Goku and Vegeta merge permanently in power to become Vegito.' },
+                    { num: '06', name: 'Vegito Spirit Sword', jp: 'スピリッツソード', desc: 'Vegito pierces Super Buu with an extendable blade of pure golden ki.' }
+                ]
+            },
+            seasons: {
+                title: 'Tournament & Majin Pride',
+                jp: '天下一武道会と魔人ベジータの誇り',
+                desc: 'From Gohan’s Great Saiyaman patrol to Vegeta’s Majin awakening and sacrifice, personal bonds drive the early chapters.',
+                color: '#f472b6',
+                items: [
+                    { num: '01', name: 'Great Saiyaman Justice Pose', jp: 'グレートサイヤマン登場', desc: 'Gohan protects Satan City in disguise while attending Orange Star High School.' },
+                    { num: '02', name: 'Bukujutsu Flight Lesson', jp: '舞空術の特訓', desc: 'Gohan teaches Videl and Goten how to channel ki and soar through the sky.' },
+                    { num: '03', name: '25th World Tournament', jp: '第25回天下一武道会', desc: 'Goku returns from the afterlife as the Z-Fighters reunite on the tournament stage.' },
+                    { num: '04', name: 'Majin Vegeta vs. Goku', jp: '宿命の対決・悟空対ベジータ', desc: 'Vegeta embraces Babidi’s spell to settle his long-awaited duel with Goku.' },
+                    { num: '05', name: 'Final Atonement Explosion', jp: 'ベジータ自爆の決意', desc: 'Vegeta bids farewell to Trunks, Bulma, and Goku in a blinding blast of pride.' },
+                    { num: '06', name: 'Mr. Satan & Innocent Buu', jp: 'ミスター・サタンとブウの友情', desc: 'Mr. Satan befriends Majin Buu and nearly reforms him through kindness.' }
+                ]
+            },
+            promises: {
+                title: 'Sacred World & Spirit Bomb',
+                jp: '界王神界の最終決戦と全宇宙の元気玉',
+                desc: 'On the Sacred World of the Kais, Vegeta’s two-wish strategy unites Earth, Namek, and the afterlife to vanquish Kid Buu.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: 'Inside Buu Rescue Mission', jp: 'ブウ体内からの救出作戦', desc: 'Goku and Vegeta shrink inside Super Buu to free Gohan, Goten, Trunks, and Piccolo.' },
+                    { num: '02', name: 'Kaioshin Kai Showdown', jp: '界王神界の頂上決戦', desc: 'Goku and Vegeta take turns facing the relentless initial form of Majin Buu.' },
+                    { num: '03', name: 'Vegeta’s One-Minute Stall', jp: 'ベジータ命がけの1分間', desc: 'Vegeta endures Kid Buu’s fury to buy Goku time to gather ki.' },
+                    { num: '04', name: 'Porunga’s Two Miracles', jp: 'ポルンガの2つの願い', desc: 'New Namek’s Dragon Balls restore Earth and revive every good-hearted person.' },
+                    { num: '05', name: 'Super Spirit Bomb', jp: '全人類の超元気玉', desc: 'Guided by Mr. Satan’s plea, all of Earth raises their hands to power Goku’s Spirit Bomb.' },
+                    { num: '06', name: 'Ten Years Later & Uub', jp: '10年後の天下一武道会とウーブ', desc: 'Goku meets Kid Buu’s reincarnation Uub and departs to train the next generation.' }
+                ]
+            }
+        };
+
+        const defaultEpisodesData = [
+            { num: 1, kaiNum: 99, arc: 'World Tournament & Babidi', title: 'Seven Years Later! Starting Today, Gohan Is a High School Student', jpTitle: 'あれから7年! 今日から悟飯は高校生', synopsis: 'Seven years after the Cell Games, Gohan enrolls at Orange Star High School in Satan City and adopts a masked superhero identity.', highlight: 'Gohan begins high school and debuts as the Golden Fighter.', url: 'https://animetoonhindi.com/multiquality/?url=EISK2RkpNbRYB3l' },
+            { num: 2, kaiNum: 100, arc: 'World Tournament & Babidi', title: 'A New Hero, Great Saiyaman, Is Born!', jpTitle: 'バレちゃった! 新ヒーローは孫悟飯', synopsis: 'Bulma builds Gohan a transforming watch suit, launching the heroic Great Saiyaman while Videl grows suspicious.', highlight: 'Debut of the Great Saiyaman suit and Videl’s investigation.', url: 'https://animetoonhindi.com/multiquality/?url=t4R7wWyagT6iyhJ' },
+            { num: 3, kaiNum: 101, arc: 'World Tournament & Babidi', title: 'Videl’s Crisis? Gohan’s Urgent Call-out!', jpTitle: 'ビーデル危機一髪! 悟飯の緊急出動!!', synopsis: 'Gohan rushes into action as the Great Saiyaman to help Videl stop a hijacking crisis in Satan City.', highlight: 'Great Saiyaman rescues Videl and the hostages.', url: 'https://animetoonhindi.com/multiquality/?url=SzUvJJDXpyNf92N' },
+            { num: 4, kaiNum: 102, arc: 'World Tournament & Babidi', title: 'A Monster is Taken Away! The Culprit is Great Saiyaman?', jpTitle: '連れ去られた怪獣! 犯人はグレートサイヤマン?', synopsis: 'Gohan rescues a baby pterodactyl from a circus, putting him at odds with Videl until the truth comes out.', highlight: 'Gohan protects the baby pterodactyl and clears the misunderstanding.', url: 'https://animetoonhindi.com/multiquality/?url=yqDah81dD1rGjiD' },
+            { num: 5, kaiNum: 103, arc: 'World Tournament & Babidi', title: 'Entering the World Martial Arts Tournament! Goten Shows Off His Explosive Power During Training!', jpTitle: '天下一武道会出場! 悟天の爆発パワー', synopsis: 'Goku announces he will return from the Other World for one day to enter the 25th World Martial Arts Tournament, and Goten reveals he can already go Super Saiyan.', highlight: 'Goku announces his return; Goten transforms into a Super Saiyan.', url: 'https://animetoonhindi.com/multiquality/?url=0Ijlotx6juzpZ5p' },
+            { num: 6, kaiNum: 104, arc: 'World Tournament & Babidi', title: 'Gohan the Teacher! Videl’s Flying Technique Tutorial', jpTitle: '悟飯が先生! ビーデルの舞空術入門', synopsis: 'To keep his secret identity safe, Gohan agrees to teach Videl and Goten how to fly using ki control.', highlight: 'Videl masters the basics of Bukujutsu flight.', url: 'https://animetoonhindi.com/multiquality/?url=BcJcVQMPzD0VnyQ' },
+            { num: 7, kaiNum: 105, arc: 'World Tournament & Babidi', title: 'The Dragon Team Fully Assembled! Goku Has Come Back!', jpTitle: 'ドラゴンチーム全員集合! 帰ってきた孫悟空!!', synopsis: 'The Z-Fighters reunite at the 25th World Tournament grounds as Goku returns to Earth for 24 hours and meets Goten.', highlight: 'Goku reunites with his family and friends at the tournament.', url: 'https://animetoonhindi.com/multiquality/?url=zvbCwFXs3ia2Vmd' },
+            { num: 8, kaiNum: 106, arc: 'World Tournament & Babidi', title: 'Who Is the World’s Greatest? The Tournament Preliminaries Begin!', jpTitle: '世界一は誰だ!? 予選バトル開始!!', synopsis: 'Competitors test their strength on the Punch Machine before the Junior Division and Adult Division brackets are drawn.', highlight: 'Vegeta shatters the Punch Machine during preliminaries.', url: 'https://animetoonhindi.com/multiquality/?url=LmGGqO5Zf3kv411' },
+            { num: 9, kaiNum: 107, arc: 'World Tournament & Babidi', title: 'Everyone is Surprised! Goten and Trunks’ Super Battle!', jpTitle: 'みんなビックリ! 悟天とトランクスの超バトル!!', synopsis: 'Goten and Trunks clash in the Junior Division finals, shocking the crowd with their Super Saiyan transformations.', highlight: 'Goten vs. Trunks in the Junior Division championship.', url: 'https://animetoonhindi.com/multiquality/?url=JFvzihY0eeQURN4' },
+            { num: 10, kaiNum: 108, arc: 'World Tournament & Babidi', title: 'The Junior Champ Is Finally Decided! Who Will Fight Against Mr. Satan?', jpTitle: '少年チャンプ決定! 勝つのはどっちだ!?', synopsis: 'Trunks narrowly wins the Junior Division title and faces Mr. Satan in a special exhibition match.', highlight: 'Trunks wins the Junior Division and knocks Mr. Satan out of the ring.', url: 'https://animetoonhindi.com/multiquality/?url=zOSkus4V9npzhwm' },
+            { num: 11, kaiNum: 109, arc: 'World Tournament & Babidi', title: 'Restless Foreboding; A Mysterious Warrior Appears!', jpTitle: '波乱の予感…謎の戦士現る!!', synopsis: 'Goten and Trunks disguise themselves as Mighty Mask while Shin and Kibito draw intense suspicion from Piccolo.', highlight: 'Shin’s mysterious aura unsettles Piccolo before the main bracket.', url: 'https://animetoonhindi.com/multiquality/?url=fGzW54YiKF2Awdn' },
+            { num: 12, kaiNum: 110, arc: 'World Tournament & Babidi', title: 'What Happened, Piccolo? An Unexpected Outcome in the First Round', jpTitle: 'どうしたピッコロ!! 一回戦での意外な結末', synopsis: 'Realizing Shin’s true identity as the Supreme Kai, Piccolo forfeits their first-round match.', highlight: 'Piccolo forfeits upon learning Shin is the Supreme Kai.', url: 'https://animetoonhindi.com/multiquality/?url=4GkchlL9GojZO3k' },
+            { num: 13, kaiNum: 111, arc: 'World Tournament & Babidi', title: 'An Eerie Entity; Who Exactly Is Spopovich?', jpTitle: '不気味な正体 謎の男スポポビッチ', synopsis: 'Videl faces the heavily muscled Spopovich in the ring, noticing an ominous Majin emblem on his forehead.', highlight: 'Videl battles Spopovich in a brutal tournament bout.', url: 'https://animetoonhindi.com/multiquality/?url=Ztd4MuDGjoWV7Ek' },
+            { num: 14, kaiNum: 112, arc: 'World Tournament & Babidi', title: 'Videl Battered! Gohan’s Fury Reaches Its Limit!', jpTitle: 'ビーデルボロボロ 悟飯の怒りも限界だ!!', synopsis: 'As Spopovich relentlessly batters Videl, Gohan nearly erupts until Yamu orders Spopovich to end the match.', highlight: 'Gohan rushes to heal Videl with a Senzu Bean from Korin.', url: 'https://animetoonhindi.com/multiquality/?url=POga2F8E7W0JNrH' },
+            { num: 15, kaiNum: 113, arc: 'World Tournament & Babidi', title: 'A Creeping Conspiracy! The Target is Gohan', jpTitle: '忍び寄る陰謀! 狙われた悟飯', synopsis: 'During Gohan’s match with Kibito, Spopovich and Yamu ambush Gohan and drain his Super Saiyan energy.', highlight: 'Spopovich and Yamu steal Gohan’s energy and flee the arena.', url: 'https://animetoonhindi.com/multiquality/?url=AhU00V3OZ9z8CWf' },
+            { num: 16, kaiNum: 114, arc: 'World Tournament & Babidi', title: 'Terrifying Secret of the Majin; The Mastermind Revealed!', jpTitle: '魔人の恐ろしき秘密 黒幕出現!!', synopsis: 'Supreme Kai leads Goku, Vegeta, Gohan, Piccolo, and Krillin in pursuit of Spopovich and Yamu, revealing Babidi’s plot to revive Majin Buu.', highlight: 'Supreme Kai reveals the legend of Bibidi, Babidi, and Majin Buu.', url: 'https://animetoonhindi.com/multiquality/?url=G7APfM1vTsDQI7c' },
+            { num: 17, kaiNum: 115, arc: 'World Tournament & Babidi', title: 'The Nefarious Wizard Babidi And Demon King Dabura’s Trap', jpTitle: '極悪魔導師バビディと暗黒魔界の王ダーブラの罠', synopsis: 'Outside Babidi’s hidden spaceship, Demon King Dabura turns Krillin and Piccolo to stone and forces the Saiyans inside.', highlight: 'Dabura petrifies Piccolo and Krillin; the heroes enter Babidi’s ship.', url: 'https://animetoonhindi.com/multiquality/?url=G1K9svIsCVdYF5J' },
+            { num: 18, kaiNum: 116, arc: 'World Tournament & Babidi', title: 'Don’t Sell Super Saiyans Short! Vegeta and Goku’s Full-Bore Power!', jpTitle: '超サイヤ人をナメるな! ベジータと悟空の全開パワー!', synopsis: 'Vegeta easily defeats Pui Pui on Stage 1, and Goku overwhelms Yakon on Stage 2 by bursting with Super Saiyan light.', highlight: 'Vegeta defeats Pui Pui and Goku overloads Yakon.', url: 'https://animetoonhindi.com/multiquality/?url=qfDUVGuhCuDUT9M' },
+            { num: 19, kaiNum: 117, arc: 'World Tournament & Babidi', title: 'Whither Victory? A Battle Royal Championship Match!', jpTitle: '優勝は誰の手に!? バトルロイヤル決定戦!!', synopsis: 'Back at the World Tournament, Mr. Satan turns the remaining fighters’ bracket into a chaotic Battle Royal.', highlight: 'Android 18, Mighty Mask, and Mr. Satan clash in the Battle Royal.', url: 'https://animetoonhindi.com/multiquality/?url=5zlB5DiIqUQTX2z' },
+            { num: 20, kaiNum: 118, arc: 'World Tournament & Babidi', title: 'Stunning Youngsters! No. 18’s Uphill Battle', jpTitle: 'チビッコ恐るべし!! 大苦戦の18号', synopsis: 'Android 18 uncovers Goten and Trunks inside the Mighty Mask costume and disqualifies them before striking a prize deal with Mr. Satan.', highlight: 'Mighty Mask is unmasked; Android 18 throws the final for double prize money.', url: 'https://animetoonhindi.com/multiquality/?url=D3pHTYXs89gGoma' },
+            { num: 21, kaiNum: 119, arc: 'World Tournament & Babidi', title: 'Enter the Main Event! The Looming Demon King!', jpTitle: '真打ち登場! 立ちはだかる魔王!!', synopsis: 'Gohan faces Demon King Dabura on Stage 3 of Babidi’s ship, while Dabura senses the pride and darkness in Vegeta’s heart.', highlight: 'Gohan battles Dabura; Dabura reports Vegeta’s vulnerability to Babidi.', url: 'https://animetoonhindi.com/multiquality/?url=2anBcEQQHyuPPCt' },
+            { num: 22, kaiNum: 120, arc: 'World Tournament & Babidi', title: 'A Wicked Heart Awakened; Vegeta, Prince of Destruction', jpTitle: 'よみがえる邪心 破壊王子ベジータ!', synopsis: 'Babidi casts his spell on Vegeta, unlocking Majin Vegeta and teleporting everyone back to the World Tournament stadium.', highlight: 'Majin Vegeta emerges and demands his long-awaited fight with Goku.', url: 'https://animetoonhindi.com/multiquality/?url=bbhiVaYeaDZmWlu' },
+            { num: 23, kaiNum: 121, arc: 'World Tournament & Babidi', title: 'I Am the Strongest! The Clash of Goku vs. Vegeta', jpTitle: 'オレが一番強い!! 激突 悟空VSベジータ', synopsis: 'Supreme Kai teleports Goku and Majin Vegeta to a barren wasteland where they clash at Super Saiyan 2.', highlight: 'Super Saiyan 2 Goku vs. Majin Vegeta begins in the rocky wasteland.', url: 'https://animetoonhindi.com/multiquality/?url=nRJpvY3LCiMOMih' },
+            { num: 24, kaiNum: 122, arc: 'Fusion & Super Buu', title: 'Countdown to Revival; Crush Babidi’s Ambitions!', jpTitle: '復活へのカウントダウン バビディの野望を打ち砕け!', synopsis: 'Gohan and Supreme Kai confront Babidi and Dabura in the ship’s chamber as Goku and Vegeta’s duel fills Buu’s energy meter.', highlight: 'Majin Buu’s sealed ball reaches full energy.', url: 'https://animetoonhindi.com/multiquality/?url=35ciPPzeuZv8DOq' },
+            { num: 25, kaiNum: 123, arc: 'Fusion & Super Buu', title: 'The Seal Is Broken?! Gohan’s Kamehameha of Resistance', jpTitle: '封印は解かれた!? 悟飯抵抗のかめはめ波', synopsis: 'Gohan fires full-power Kamehameha blasts at Majin Buu’s shell, only for the cocoon to split open in clouds of pink steam.', highlight: 'Majin Buu’s cocoon cracks open.', url: 'https://animetoonhindi.com/multiquality/?url=uMIERBmU2htGL7E' },
+            { num: 26, kaiNum: 124, arc: 'Fusion & Super Buu', title: 'A Straight Line to Despair?! Terror of the Majin Buu', jpTitle: '絶望へ一直線!? 魔人ブウの恐怖', synopsis: 'Majin Buu emerges in a deceptively playful form before effortlessly defeating Dabura, Gohan, and Supreme Kai.', highlight: 'Majin Buu awakens and overwhelms Dabura and Gohan.', url: 'https://animetoonhindi.com/multiquality/?url=tu020GxA0OnxTMK' },
+            { num: 27, kaiNum: 125, arc: 'Fusion & Super Buu', title: 'Turn Into Candy! A Hungry Majin’s Bizarre Power', jpTitle: 'お菓子になっちゃえ! 腹ペコ魔人の不気味パワー', synopsis: 'Majin Buu turns Dabura into a giant cookie and eats him, restoring Piccolo and Krillin from stone.', highlight: 'Buu uses the Candy Beam on Dabura; Piccolo and Krillin recover.', url: 'https://animetoonhindi.com/multiquality/?url=ToXaorJlqAvcGtz' },
+            { num: 28, kaiNum: 126, arc: 'Fusion & Super Buu', title: 'I’ll Take Care of the Majin; Vegeta’s Final Desperate Battle!', jpTitle: '魔人はオレがかたづける ベジータ最期の決死戦!', synopsis: 'Knocking Goku unconscious to take responsibility alone, Majin Vegeta confronts Majin Buu and prepares his ultimate sacrifice.', highlight: 'Vegeta fights Majin Buu alone and bids farewell to Trunks.', url: 'https://animetoonhindi.com/multiquality/?url=kR3Z90HG7Jt7QQA' },
+            { num: 29, kaiNum: 127, arc: 'Fusion & Super Buu', title: 'For the Sake of His Loved Ones... The End of the Proud Warrior!', jpTitle: '愛すべき者のために… 誇り高き戦士の最期!', synopsis: 'Vegeta unleashes Final Atonement in a massive explosion to destroy Majin Buu, turning to stone and crumbling into the wind.', highlight: 'Vegeta’s Final Atonement sacrifice.', url: 'https://animetoonhindi.com/multiquality/?url=sV192CaY8AVnQ1b' },
+            { num: 30, kaiNum: 128, arc: 'Fusion & Super Buu', title: 'The Nightmare Returns; The Immortal Monster, Majin Buu!', jpTitle: '悪夢再来 不死身の怪物 魔人ブウ!', synopsis: 'To everyone’s horror, Majin Buu’s scattered pieces regenerate, while Supreme Kai rescues an injured Gohan and takes him to the Sacred World.', highlight: 'Majin Buu regenerates; Gohan is brought to the Sacred World of the Kais.', url: 'https://animetoonhindi.com/multiquality/?url=GgjTiOzKpfPWdkE' },
+            { num: 31, kaiNum: 129, arc: 'Fusion & Super Buu', title: 'A Secret Plan to Defeat Buu; Its Name Is Fusion!', jpTitle: 'ブウを倒す秘策 その名はフュージョン!', synopsis: 'Regrouping at Kami’s Lookout, Goku proposes teaching Goten and Trunks the Metamoran Fusion Dance.', highlight: 'Goku introduces the Fusion Dance as Earth’s new hope.', url: 'https://animetoonhindi.com/multiquality/?url=6xNNiV3yBWM9s82' },
+            { num: 32, kaiNum: 130, arc: 'Fusion & Super Buu', title: 'A Faint Ray of Hope Is in Sight! Awaken, Warriors!!', jpTitle: '見えた! 仄かな希望 目を覚ませ戦士達!!', synopsis: 'While Shenron is summoned to revive the innocent tournament victims, Babidi broadcasts a terrifying ultimatum across Earth.', highlight: 'Babidi threatens Earth’s cities unless Piccolo, Goten, and Trunks appear.', url: 'https://animetoonhindi.com/multiquality/?url=ekCnCdTeyYBfbCZ' },
+            { num: 33, kaiNum: 131, arc: 'Fusion & Super Buu', title: 'Find the Nuisances; Babidi’s Retaliation Operation Begins!', jpTitle: '邪魔者を捜せ バビディの復讐作戦開始!', synopsis: 'On the Sacred World of the Kais, Gohan begins training with the legendary Z-Sword while Babidi and Buu rampage across Earth.', highlight: 'Gohan pulls the Z-Sword from the sacred mountain.', url: 'https://animetoonhindi.com/multiquality/?url=TRoIVK77I3n6VlH' },
+            { num: 34, kaiNum: 132, arc: 'Fusion & Super Buu', title: 'A Time of Ordeals; Lay Hold of the Legendary Power!', jpTitle: '試練の時 伝説の力を手に入れろ!', synopsis: 'Gohan trains with the heavy Z-Sword, while Trunks flies to West City to retrieve the Dragon Radar before Buu arrives.', highlight: 'Trunks races to Capsule Corp for the Dragon Radar.', url: 'https://animetoonhindi.com/multiquality/?url=vA5mW3QBUOmie98' },
+            { num: 35, kaiNum: 133, arc: 'Fusion & Super Buu', title: 'Hold Off Majin Buu; The Limit! Super Saiyan 3!!', jpTitle: '魔人ブウを食い止めろ 限界! 超サイヤ人3!!', synopsis: 'To buy Trunks time to find the Dragon Radar, Goku intercepts Babidi and Majin Buu and unveils Super Saiyan 3.', highlight: 'Goku debuts Super Saiyan 3 against Majin Buu.', url: 'https://animetoonhindi.com/multiquality/?url=opNxxfu1y9blRAu' },
+            { num: 36, kaiNum: 134, arc: 'Fusion & Super Buu', title: 'Standing Up for Himself; Buu’s Rebellion!', jpTitle: '見え始めた真価 反逆のブウ', synopsis: 'Tired of Babidi’s insults after Goku’s battle, Majin Buu turns on Babidi and destroys him, leaving Buu completely unchecked.', highlight: 'Majin Buu eliminates Babidi and begins building his house.', url: 'https://animetoonhindi.com/multiquality/?url=pRDsU1OfLew9PSt' },
+            { num: 37, kaiNum: 135, arc: 'Fusion & Super Buu', title: 'Awful Looking?! Special Training, Fusion Pose!', jpTitle: 'カッコ悪い!? 特訓、フュージョンポーズ!', synopsis: 'With his remaining time on Earth running out, Goku teaches Goten and Trunks the embarrassing Fusion Dance poses.', highlight: 'Goten and Trunks practice the Fusion Dance.', url: 'https://animetoonhindi.com/multiquality/?url=INLlKs7BPKF2EUm' },
+            { num: 38, kaiNum: 136, arc: 'Fusion & Super Buu', title: 'Bye-Bye Everyone!! Son Goku Returns to the Other World', jpTitle: 'バイバイみんな!! 孫悟空あの世に帰る', synopsis: 'Goku’s time on Earth expires; after a heartfelt goodbye to Gohan and his family, he returns to the Other World and reunites with Gohan on the Sacred World.', highlight: 'Goku returns to the Other World and senses Gohan on the Sacred World.', url: 'https://animetoonhindi.com/multiquality/?url=IeTOH6wsh0YUrg7' },
+            { num: 39, kaiNum: 137, arc: 'Fusion & Super Buu', title: 'Found You, Gohan! Fierce Training in the World of the Kais!', jpTitle: '見つけた、悟飯! 界王神界で猛特訓!', synopsis: 'Goku tests Gohan’s Z-Sword sharpness with a block of Katchin, accidentally shattering the blade and freeing Elder Kai.', highlight: 'The Z-Sword breaks and Elder Kai emerges.', url: 'https://animetoonhindi.com/multiquality/?url=nTNwW8AoAnOFY0z' },
+            { num: 40, kaiNum: 138, arc: 'Fusion & Super Buu', title: 'Birth! A Merged Super Warrior; His Name Is Gotenks!', jpTitle: '誕生! 合体超戦士 その名は、ゴテンクス!!', synopsis: 'Back at Kami’s Lookout, Goten and Trunks finally nail the Fusion Dance and form Gotenks.', highlight: 'Gotenks is born after two comedic misfires.', url: 'https://animetoonhindi.com/multiquality/?url=tD36RXvXvOPb4GP' },
+            { num: 41, kaiNum: 139, arc: 'Fusion & Super Buu', title: 'Who Will Be the One to Defeat Buu? The Mightiest of Men Moves Out!!', jpTitle: '魔人を倒すのは誰だ? 最強の男始動!!', synopsis: 'Elder Kai begins his ritual to draw out Gohan’s latent potential while Mr. Satan approaches Majin Buu’s house.', highlight: 'Elder Kai starts Gohan’s power-unlocking ritual.', url: 'https://animetoonhindi.com/multiquality/?url=MRm8DyHNe2P2kAc' },
+            { num: 42, kaiNum: 140, arc: 'Fusion & Super Buu', title: 'The Power-Up Continues?! Super Gotenks Is Achieved!', jpTitle: 'パワーアップは続く!? 完成! 超ゴテンクス!', synopsis: 'Goten and Trunks master fusing directly into Super Saiyan Gotenks as Mr. Satan surprisingly befriends Majin Buu.', highlight: 'Super Gotenks debuts; Mr. Satan bonds with Majin Buu.', url: 'https://animetoonhindi.com/multiquality/?url=wHiTDg2m5eIexTz' },
+            { num: 43, kaiNum: 141, arc: 'Fusion & Super Buu', title: 'That Which Anger Gives Rise To; Another Majin!', jpTitle: '怒りが産み出したもの もうひとりの魔人!', synopsis: 'When gunmen shoot Mr. Satan and his puppy Bee, Majin Buu’s rage expels an Evil Buu who absorbs Innocent Buu to become Super Buu.', highlight: 'Evil Buu absorbs Innocent Buu and transforms into Super Buu.', url: 'https://animetoonhindi.com/multiquality/?url=tUJwQTuIyRa6Hih' },
+            { num: 44, kaiNum: 142, arc: 'Fusion & Super Buu', title: 'Buu Eats Buu; A New Majin Attacks!!', jpTitle: 'ブウがブウを食べちゃった 新たな魔人襲来!!', synopsis: 'Sensing strong fighters, Super Buu flies straight to Kami’s Lookout and demands his promised match.', highlight: 'Super Buu arrives at Kami’s Lookout.', url: 'https://animetoonhindi.com/multiquality/?url=mCVjDiwpmGyDZmX' },
+            { num: 45, kaiNum: 143, arc: 'Fusion & Super Buu', title: 'Headlong Rush Into Catastrophe! A One-Hour Time Limit!!', jpTitle: '破局へまっしぐら! タイムリミットは1時間!!', synopsis: 'Piccolo stalls Super Buu and leads him into the Hyperbolic Time Chamber to buy Goten and Trunks extra training time.', highlight: 'Piccolo guides Super Buu into the Hyperbolic Time Chamber.', url: 'https://animetoonhindi.com/multiquality/?url=DniykR1GIMovKB2' },
+            { num: 46, kaiNum: 144, arc: 'Fusion & Super Buu', title: 'Special Training Completed! You’re Finished Now, Majin Buu!!', jpTitle: '特訓完了! これで終わりだ魔人ブウ!!', synopsis: 'Inside the Hyperbolic Time Chamber, Super Gotenks unleashes his playful barrage of named attacks against Super Buu.', highlight: 'Super Gotenks battles Super Buu inside the Time Chamber.', url: 'https://animetoonhindi.com/multiquality/?url=Jd2RbK6Lw5OmVm8' },
+            { num: 47, kaiNum: 145, arc: 'Vegito & Kid Buu Finale', title: 'Eliminating Buu With Ghosts: A Knockout Kamikaze Attack!', jpTitle: 'オバケでブウ退治 必殺! カミカゼアタック!!', synopsis: 'Gotenks traps Super Buu with the Super Ghost Kamikaze Attack, prompting Piccolo to destroy the Time Chamber exit.', highlight: 'Super Ghost Kamikaze Attack and sealing the Time Chamber door.', url: 'https://animetoonhindi.com/multiquality/?url=9gLXQ6PiOwmVjOY' },
+            { num: 48, kaiNum: 146, arc: 'Vegito & Kid Buu Finale', title: 'Gotenks’ Ace in the Hole! Transformation! Super Gotenks 3!!', jpTitle: 'ゴテンクスのとっておき 変身! 超ゴテンクス3!!', synopsis: 'After Super Buu screams open a dimensional tear to escape, Gotenks turns Super Saiyan 3 and blasts his way back to Earth.', highlight: 'Super Saiyan 3 Gotenks breaks out of the Hyperbolic Time Chamber.', url: 'https://animetoonhindi.com/multiquality/?url=LF03ucDwgr2AbiH' },
+            { num: 49, kaiNum: 147, arc: 'Vegito & Kid Buu Finale', title: 'On a Roll! Buu-Buu-Volleyball!', jpTitle: 'ノリノリ! ブウブウバレーボール!', synopsis: 'Super Gotenks 3 pummels Super Buu with Piccolo’s help using the Buu-Buu-Volleyball spike, just before his fusion timer runs out.', highlight: 'Buu-Buu-Volleyball spike; Gotenks’ fusion timer expires.', url: 'https://animetoonhindi.com/multiquality/?url=64egF3MUxzl4aas' },
+            { num: 50, kaiNum: 148, arc: 'Vegito & Kid Buu Finale', title: 'Thanks for Waiting, Everyone! A Reborn Gohan Heads for Earth!', jpTitle: 'お待たせみんな! 新生悟飯、地球へ!!', synopsis: 'Completing Elder Kai’s ritual, Ultimate Gohan returns to Earth in his classic orange gi to face Super Buu.', highlight: 'Ultimate Gohan arrives on Earth.', url: 'https://animetoonhindi.com/multiquality/?url=DdPLrsQRBDuv3Ej' },
+            { num: 51, kaiNum: 149, arc: 'Vegito & Kid Buu Finale', title: 'Buu Overwhelmed! Ultimate Gohan’s Super Power!', jpTitle: 'ブウを圧倒! アルティメット悟飯の超パワー!!', synopsis: 'Ultimate Gohan completely dominates Super Buu without breaking a sweat, forcing Buu to self-detonate and hide.', highlight: 'Ultimate Gohan overwhelms Super Buu in hand-to-hand combat.', url: 'https://animetoonhindi.com/multiquality/?url=e5WPIJFeCSAMW3F' },
+            { num: 52, kaiNum: 150, arc: 'Vegito & Kid Buu Finale', title: 'Buu’s Sinister Scheme; Gotenks Is Absorbed?!', jpTitle: 'ブウの悪巧み ゴテンクス吸収!?', synopsis: 'Super Buu baits Goten and Trunks into fusing again and ambushes them, absorbing Super Saiyan 3 Gotenks and Piccolo.', highlight: 'Super Buu absorbs Gotenks and Piccolo, gaining overwhelming power.', url: 'https://animetoonhindi.com/multiquality/?url=yHinMtw8LsxFv5b' },
+            { num: 53, kaiNum: 151, arc: 'Vegito & Kid Buu Finale', title: 'The Elder Kai’s Brainstorm! Return to Life, Goku!!', jpTitle: '大界王神の妙案! よみがえれ孫悟空!!', synopsis: 'Elder Kai gives up his own life to revive Goku and hands him the Potara Earrings so he can fuse with Gohan on Earth.', highlight: 'Goku is revived and receives the Potara Earrings.', url: 'https://animetoonhindi.com/multiquality/?url=wAAawUwh5OrWLLH' },
+            { num: 54, kaiNum: 152, arc: 'Vegito & Kid Buu Finale', title: 'Miracles Happen Once... Will Goku and He Make the Ultimate Combination?', jpTitle: '奇跡は一度…なるか悟空とアイツの超合体', synopsis: 'After Super Buu absorbs Gohan as well, Goku discovers King Yemma sent Vegeta back to Earth and persuades Vegeta to wear the Potara.', highlight: 'Goku and Vegeta put on the Potara Earrings.', url: 'https://animetoonhindi.com/multiquality/?url=m5QVIoQXTH2v1wj' },
+            { num: 55, kaiNum: 153, arc: 'Vegito & Kid Buu Finale', title: 'Invincible! The Ultimate Warrior Vegito!', jpTitle: '無敵! 究極の戦士ベジット!', synopsis: 'Goku and Vegeta merge into Vegito, effortlessly outclassing Buuhan at every turn.', highlight: 'Vegito debuts and dominates Super Buu.', url: 'https://animetoonhindi.com/multiquality/?url=EwbPoRqFvSPNoEv' },
+            { num: 56, kaiNum: 154, arc: 'Vegito & Kid Buu Finale', title: 'Buu’s Ace in the Hole! The Warriors Are Absorbed!!', jpTitle: 'ブウの奥の手! 吸収された戦士たち!!', synopsis: 'Lowering his energy barrier intentionally, Vegito allows himself to be absorbed so he can rescue Gohan and the others from inside Buu.', highlight: 'Vegito enters Super Buu’s body and splits back into Goku and Vegeta.', url: 'https://animetoonhindi.com/multiquality/?url=M8QsowcD9HOT0fa' },
+            { num: 57, kaiNum: 155, arc: 'Vegito & Kid Buu Finale', title: 'Rescue Gohan and the Others! Goku and Vegeta’s Infiltration Mission!', jpTitle: '悟飯たちを助け出せ! 悟空とベジータの潜入作戦!', synopsis: 'Navigating inside Super Buu’s body, Goku and Vegeta free Gohan, Goten, Trunks, and Piccolo—and spot Innocent Buu’s pod.', highlight: 'Goku and Vegeta sever the pods of their friends inside Buu.', url: 'https://animetoonhindi.com/multiquality/?url=2aG35IPQ1PhpwWB' },
+            { num: 58, kaiNum: 156, arc: 'Vegito & Kid Buu Finale', title: 'Emergency Escape from the Body! Buu’s Retrogression Into Evil!!', jpTitle: '体内から緊急脱出! ブウ最悪への逆変身!!', synopsis: 'Vegeta rips free Innocent Buu’s pod; Goku and Vegeta escape with their unconscious friends as Buu reverts into pure, unrestrained Kid Buu.', highlight: 'Kid Buu emerges as Majin Buu’s original, chaotic form.', url: 'https://animetoonhindi.com/multiquality/?url=2MSvajEqAQRBBOu' },
+            { num: 59, kaiNum: 157, arc: 'Vegito & Kid Buu Finale', title: 'Earth Destroyed! The Initial Buu’s Nefarious Strike!!', jpTitle: '地球消滅!! 始まりのブウの凶悪な一撃', synopsis: 'Kid Buu hurls a massive energy sphere that destroys Earth while Kibito Kai teleports Goku, Vegeta, Dende, and Mr. Satan to the Sacred World.', highlight: 'Kid Buu destroys Earth; survivors reach the Sacred World of the Kais.', url: 'https://animetoonhindi.com/multiquality/?url=F8nkiy7Dwrf8nJ8' },
+            { num: 60, kaiNum: 158, arc: 'Vegito & Kid Buu Finale', title: 'A Final Showdown at the Summit! Face-Off in the World of the Kais!!', jpTitle: '最後の頂上決戦! 界王神界で決着だ!!', synopsis: 'Raising their ki to lure Kid Buu to the Sacred World of the Kais, Goku begins the final battle in Super Saiyan 2 and Super Saiyan 3.', highlight: 'The final battle begins on the Sacred World of the Kais.', url: 'https://animetoonhindi.com/multiquality/?url=Z5VJjbDiYmJjHRv' },
+            { num: 61, kaiNum: 159, arc: 'Vegito & Kid Buu Finale', title: 'Hang in There, Kakarot! You Are No. 1!!', jpTitle: '頑張れカカロット! お前がNo.1だ!!', synopsis: 'Watching Goku push himself against Kid Buu, Vegeta acknowledges Goku as the true number one and steps in to relieve him.', highlight: 'Vegeta’s iconic monologue recognizing Goku as Number One.', url: 'https://animetoonhindi.com/multiquality/?url=EIetmOwbnxYfEF7' },
+            { num: 62, kaiNum: 160, arc: 'Vegito & Kid Buu Finale', title: 'A One-Minute Match-Up! Vegeta’s Life-Threatening Stall for Time!', jpTitle: '勝負は1分間 ベジータ命懸けの時間稼ぎ!', synopsis: 'Goku tries to gather full Super Saiyan 3 power while Vegeta and Innocent Buu (spit out by Kid Buu) desperately hold Kid Buu off.', highlight: 'Vegeta and Good Buu stall Kid Buu; Goku loses his SSJ3 energy.', url: 'https://animetoonhindi.com/multiquality/?url=ee6xmSuX5fRNTbQ' },
+            { num: 63, kaiNum: 161, arc: 'Vegito & Kid Buu Finale', title: 'An Inspired Strategy; Make Two Wishes Come True!', jpTitle: '閃いた秘策 2つの願いを叶えたまえ!', synopsis: 'Vegeta contacts Dende and the Namekians to summon Porunga, restoring Earth and reviving all good people to power a Super Spirit Bomb.', highlight: 'Porunga restores Earth and revives humanity for Vegeta’s Spirit Bomb plan.', url: 'https://animetoonhindi.com/multiquality/?url=SmuMTQMnKs2NLEK' },
+            { num: 64, kaiNum: 162, arc: 'Vegito & Kid Buu Finale', title: 'Share Your Spirit Energy With Me! I’m Making a Huge Spirit Bomb!!', jpTitle: 'オラに元気を分けてくれ! 作るぜでっかい元気玉!!', synopsis: 'Goku raises his arms to gather energy from Earth’s revived citizens, though most humans hesitate until Gohan, Piccolo, and their friends send theirs.', highlight: 'Goku begins forming the Super Spirit Bomb.', url: 'https://animetoonhindi.com/multiquality/?url=V3s6mx2wYqzXW4g' },
+            { num: 65, kaiNum: 163, arc: 'Vegito & Kid Buu Finale', title: 'You Are the Savior of the World! Everybody’s Spirit Bomb Completed!!', jpTitle: '世界の救世主はおまえだ! みんなの元気玉完成!!', synopsis: 'Mr. Satan broadcasts to the entire planet, inspiring everyone on Earth to raise their hands and complete the Super Spirit Bomb.', highlight: 'Mr. Satan rallies Earth to complete the Super Spirit Bomb.', url: 'https://animetoonhindi.com/multiquality/?url=nwoFdOgzJs5Xftj' },
+            { num: 66, kaiNum: 164, arc: 'Vegito & Kid Buu Finale', title: 'You Really Are the Greatest, Goku!! The Demise of Majin Buu', jpTitle: 'やっぱり最強孫悟空!! 魔人ブウ消滅', synopsis: 'Porunga’s third wish restores Goku’s stamina, allowing Super Saiyan Goku to push the Super Spirit Bomb through Kid Buu and obliterate him.', highlight: 'Goku’s Super Spirit Bomb destroys Kid Buu.', url: 'https://animetoonhindi.com/multiquality/?url=va0Hjr2Tooq0655' },
+            { num: 67, kaiNum: 165, arc: 'Vegito & Kid Buu Finale', title: 'Peace Returns! A Time of Rest for the Warriors!', jpTitle: '平和が戻った! 戦士たちの休息の時!', synopsis: 'With Kid Buu defeated and Shenron erasing humanity’s fearful memories of Buu, Mr. Buu joins Mr. Satan in peaceful celebration.', highlight: 'Peace returns to Earth and the Dragon Balls erase memories of Evil Buu.', url: 'https://animetoonhindi.com/multiquality/?url=lixd5sm3XjghEFM' },
+            { num: 68, kaiNum: 166, arc: 'Vegito & Kid Buu Finale', title: 'And So, Ten Years Later... A Long-Awaited World Martial Arts Tournament!', jpTitle: 'そして10年後…久しぶりの天下一武道会!', synopsis: 'Ten years after Kid Buu’s defeat, Goku, Pan, and the Z-Fighters enter the 28th World Martial Arts Tournament, where Goku senses Kid Buu’s gentle reincarnation, Uub.', highlight: 'Ten-year timeskip; Goku meets Uub at the 28th World Tournament.', url: 'https://animetoonhindi.com/multiquality/?url=Jy1SYqN8ySBZiUv' },
+            { num: 69, kaiNum: 167, arc: 'Vegito & Kid Buu Finale', title: 'Even Stronger! Goku’s Dream is Never-Ending!', jpTitle: 'もっと強く! 悟空の夢は終わらない!!', synopsis: 'After testing Uub’s hidden potential in the ring, Goku flies off with Uub to train him as Earth’s future protector, concluding Dragon Ball Z Kai.', highlight: 'Goku departs with Uub to train the next generation; series finale.', url: 'https://animetoonhindi.com/multiquality/?url=Qb7G23TsH3XZbPb' }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'International OP',
+                title: 'Fight It Out! — Masatoshi Ono',
+                jp: '海外版OP「Fight It Out!」小野正利',
+                desc: 'Navigate to the international opening theme for Dragon Ball Z Kai: The Final Chapters.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+The+Final+Chapters+Opening+Fight+It+Out'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Japanese OP',
+                title: 'Kuu-Zen-Zetsu-Go — Takayoshi Tanimoto',
+                jp: '日本版OP「空・前・絶・後 Kuu-Zen-Zetsu-Go」谷本貴義',
+                desc: 'Navigate to the Japanese Majin Buu Saga opening theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Kai+Kuu+Zen+Zetsu+Go+Takayoshi+Tanimoto'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'Ending Theme',
+                title: 'Never Give Up!!! / Haikei, Zarathustra',
+                jp: 'ED「Never Give Up!!!」／「拝啓、ツラツストラ」',
+                desc: 'Explore the ending themes from Dragon Ball Z Kai Season 5.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+The+Final+Chapters+Ending+Theme'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Watch Dragon Ball Z Kai on Crunchyroll',
+                jp: 'ドラゴンボール改 配信ページ',
+                desc: 'Open the official Crunchyroll series page for Dragon Ball Z Kai.',
+                url: 'https://www.crunchyroll.com/series/G6K53ENKY/dragon-ball-z-kai'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Dragon Ball Official Site',
+                subtitle: 'en.dragon-ball-official.com — News, manga & anime',
+                url: 'https://en.dragon-ball-official.com/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Dragon Ball Z Kai Hub',
+                subtitle: 'Stream Dragon Ball Z Kai episodes',
+                url: 'https://www.crunchyroll.com/series/G6K53ENKY/dragon-ball-z-kai'
+            },
+            {
+                id: 'page-toei',
+                title: 'Toei Animation Dragon Ball Kai',
+                subtitle: 'Official studio archive & Majin Buu arc overview',
+                url: 'https://www.toei-anim.co.jp/tv/dragonkai/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Dragon Ball Z Kai: The Final Chapters',
+                subtitle: 'Cast, voice actors & all 69 episode listings',
+                url: 'https://myanimelist.net/anime/22777/Dragon_Ball_Kai_2014'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: '25th World Martial Arts Tournament',
+                jp: '第25回天下一武道会会場',
+                tag: 'Grand Reunion',
+                detail: 'Papaya Island',
+                desc: 'Where Goku returns from the afterlife, Goten and Trunks clash in the Junior finals, and Majin Vegeta awakens.'
+            },
+            {
+                name: 'Hyperbolic Time Chamber',
+                jp: '精神と時の部屋',
+                tag: 'Dimension Realm',
+                detail: 'Kami’s Lookout',
+                desc: 'Where Goten and Trunks master Super Saiyan 3 Gotenks and battle Super Buu across dimensional walls.'
+            },
+            {
+                name: 'Sacred World of the Kais',
+                jp: '界王神界',
+                tag: 'Final Battlefield',
+                detail: 'Realm Above the Universe',
+                desc: 'Where Gohan trains with the Z-Sword and Goku’s Super Spirit Bomb destroys Kid Buu.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'SSJ3 Son Goku', title: 'Spirit Bomb Hero', quote: 'And this… is to go even further beyond!' },
+            { name: 'Majin Vegeta', title: 'Proud Saiyan Prince', quote: 'Hang in there, Kakarot! You are Number One!' },
+            { name: 'Ultimate Gohan', title: 'Mystic Warrior', quote: 'Fight you? No, I wanna kill you.' },
+            { name: 'Vegito & Gotenks', title: 'Fused Trump Cards', quote: 'YOSHA!! Call me Vegito!' },
+            { name: 'Majin Buu', title: 'Primordial Chaos', quote: 'Buu turn you into chocolate!' },
+            { name: 'Mr. Satan & Uub', title: 'World Savior & Heir', quote: 'Everyone on Earth, raise your hands to the sky!' }
+        ];
+
+        // =========================================================================
+        // 2. ADMIN LINK STATE & PERSISTENCE
+        // =========================================================================
+        let isAdminUnlocked = false;
+
+        function cloneDefaults() {
+            const episodesMap = {};
+            defaultEpisodesData.forEach(ep => {
+                episodesMap[ep.num] = ep.url;
+            });
+            return {
+                trailers: defaultTrailersData.map(t => ({ id: t.id, url: t.url })),
+                pages: defaultRelatedPagesData.map(p => ({ id: p.id, url: p.url })),
+                episodes: episodesMap
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach(item => {
+                        const target = base.trailers.find(t => t.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    parsed.pages.forEach(item => {
+                        const target = base.pages.find(p => p.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(parsed.episodes).forEach(k => {
+                        if (parsed.episodes[k]) base.episodes[k] = parsed.episodes[k];
+                    });
+                }
+            } catch (err) {
+                console.warn('Could not load saved links:', err);
+            }
+            return base;
+        }
+
+        let savedLinks = loadSavedLinks();
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (err) {
+                console.warn('Could not save links:', err);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        let selectedCharacterId = charactersData[0].id;
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-slate-900 border-amber-300 shadow-lg shadow-fuchsia-950/40 ring-1 ring-amber-300/50'
+                                : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-slate-950 text-base mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-pink-300 mb-1">${char.role}</div>
+                        <h3 class="font-serifDisplay font-bold text-base text-white">${char.name}</h3>
+                        <p class="font-jpSerif text-xs text-slate-400 mt-0.5">${char.jpName}</p>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.specialty}</span>
+                            <span class="text-xs text-slate-400">Base: ${current.apartment}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-slate-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm w-full p-5 rounded-2xl bg-slate-950/90 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-2">Iconic Kai Season 5 Line</div>
+                        <p class="text-sm text-slate-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER TECHNIQUES EXPLORER
+        // =========================================================================
+        let currentRoutineKey = 'cooking';
+
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const itemsList = document.getElementById('routineItemsList');
+            const data = routinesData[currentRoutineKey];
+            if (!visualCard || !itemsList || !data) return;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isSelected = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = isSelected
+                    ? 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-300 text-slate-950 shadow cursor-pointer'
+                    : 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer';
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4" style="background:${data.color}22; color:${data.color}; border:1px solid ${data.color}55;">
+                        ${data.jp}
+                    </span>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Kai Season 5 Arts Archive</span>
+                    <span class="font-bold" style="color:${data.color};">6 Signature Arts</span>
+                </div>
+            `;
+
+            itemsList.innerHTML = data.items.map(item => `
+                <div class="bg-slate-900/80 border border-slate-800 hover:border-amber-300/40 rounded-2xl p-5 transition-all">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black tracking-wider px-2.5 py-0.5 rounded-md bg-slate-950 text-amber-300 border border-slate-800">${item.num}</span>
+                        <span class="font-jpSerif text-xs text-slate-400">${item.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${item.name}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 69 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-950 hover:bg-amber-300 text-slate-300 hover:text-slate-950 border border-slate-800 hover:border-amber-200 transition-colors cursor-pointer"
+                        title="Season 5 EP ${label} (Kai #${ep.kaiNum})">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-amber-300');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-amber-300'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num} #${ep.kaiNum} kai ${ep.kaiNum}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All Kai Season 5 Episodes 01 – 69 (Series #99 – #167)'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Episodes`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center">
+                        <p class="text-slate-300 font-medium">No Dragon Ball Z Kai Season 5 episodes match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-amber-300 text-slate-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `EP ${String(ep.num).padStart(2, '0')} • #${ep.kaiNum}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-slate-900/85 border border-slate-800 hover:border-amber-300/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-400/15 border border-amber-300/35 text-amber-200 font-bold text-xs tracking-wider shrink-0">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-pink-300/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-300 hover:bg-amber-200 text-slate-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `SEASON 5 EPISODE ${String(ep.num).padStart(2, '0')} (KAI #${ep.kaiNum})`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-400/15 text-amber-200 border border-amber-300/35">${epBadge}</span>
+                        <span class="text-xs text-slate-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-pink-300 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-1">Key Episode Highlight</div>
+                        <p class="text-xs text-slate-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 1 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">← EP ${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < defaultEpisodesData.length ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">EP ${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-300 to-pink-400 hover:from-amber-200 hover:to-pink-300 text-slate-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Episode Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS, THEMES & OFFICIAL PAGES
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const href = current?.url || item.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group bg-slate-900/85 border border-slate-800 hover:border-amber-300/55 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-400/15 text-amber-200 border border-amber-400/35">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-slate-400 group-hover:text-amber-300 transition-colors text-sm">↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-amber-200 transition-colors mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="font-jpSerif text-xs text-pink-300/90 mb-2">${item.jp}</p>
+                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-800/90 text-xs font-semibold text-amber-300 group-hover:translate-x-0.5 transition-transform">
+                                Navigate to External Page →
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const href = current?.url || page.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group p-4 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-pink-300/50 transition-all flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-sm text-white group-hover:text-pink-300 transition-colors">${page.title}</div>
+                                <div class="text-xs text-slate-400 mt-1">${page.subtitle}</div>
+                            </div>
+                            <span class="text-slate-400 group-hover:text-pink-300 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. RENDER BATTLEFIELDS & FACTIONS
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-300">${loc.tag}</span>
+                            <span class="font-jpSerif text-xs text-slate-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-pink-300 font-medium mb-2">${loc.detail}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((member, idx) => `
+                    <button type="button" data-cast-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-amber-300/50 transition-all cursor-pointer">
+                        <div class="font-bold text-xs sm:text-sm text-white">${member.name}</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">${member.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-cast-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const member = castCircleData[Number(btn.getAttribute('data-cast-idx'))];
+                        if (member) {
+                            quoteBox.innerHTML = `<span class="text-amber-300 font-semibold not-italic">${member.name}:</span> “${member.quote}”`;
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 8. ADMIN LINK MANAGER (PIN 1960)
+        // =========================================================================
+        function showAdminBanner(msg) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = msg;
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin Active';
+            if (studio) {
+                studio.classList.remove('hidden');
+                renderAdminStudio();
+                studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin';
+            studio?.classList.add('hidden');
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const val = current?.url || item.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${item.title}</label>
+                            <input type="url" data-admin-trailer="${item.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-300">
+                        </div>
+                    `;
+                }).join('');
+
+                trailersList.querySelectorAll('input[data-admin-trailer]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-trailer');
+                        const target = savedLinks.trailers.find(t => t.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Trailer / Theme navigation link updated.');
+                        }
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const val = current?.url || page.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${page.title}</label>
+                            <input type="url" data-admin-page="${page.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-pink-300">
+                        </div>
+                    `;
+                }).join('');
+
+                pagesList.querySelectorAll('input[data-admin-page]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-page');
+                        const target = savedLinks.pages.find(p => p.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Portal page URL updated.');
+                        }
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const val = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">EP ${String(ep.num).padStart(2, '0')} (#${ep.kaiNum}) — ${ep.title}</label>
+                            <input type="url" data-admin-ep="${ep.num}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-cyan-300">
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('input[data-admin-ep]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const epNum = Number(input.getAttribute('data-admin-ep'));
+                        if (epNum && input.value.trim()) {
+                            savedLinks.episodes[epNum] = input.value.trim();
+                            persistLinks();
+                            renderEpisodes();
+                            showAdminBanner(`Season 5 Episode ${String(epNum).padStart(2, '0')} link updated.`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (SSJ3 Gold Sparks / Majin Rose Sparks)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.3;
+                p.y -= p.vy * 0.85;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(250, 204, 21, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.9, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(244, 114, 182, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Dragon Ball Z Kai Season 5 links restored.');
+        });
+
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'SSJ3 Gold Sparks' : 'Majin Rose Sparks';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-amber-300 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-pink-400 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+</body>
+</html>
