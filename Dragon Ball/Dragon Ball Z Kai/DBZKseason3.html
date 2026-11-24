@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z Kai — Season 3 (Androids &amp; Cell Games Sagas)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060d14;
+            color: #f0f9ff;
+            overflow-x: clip;
+        }
+
+        /* Subtle emerald bio-spark & golden aura grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(52, 211, 153, 0.1) 1px, transparent 1px),
+                radial-gradient(rgba(250, 204, 21, 0.08) 1px, #060d14 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        /* Super Saiyan Gold, Emerald Cell & Cyan Ki Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #facc15 0%, #34d399 38%, #38bdf8 70%, #fde047 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.96); }
+            50% { opacity: 1; transform: scaleX(1.04); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060d14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #065f46;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #facc15;
+        }
+    </style>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-emerald-400 selection:text-slate-950">
+
+    <!-- Ambient Bio-Emerald & Super Saiyan Spark Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-70"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#060d14]/90 border-b border-emerald-400/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-300 via-emerald-400 to-cyan-400 flex items-center justify-center shadow-lg shadow-emerald-950/70 border border-amber-200/50">
+                        <span class="font-jpSerif font-black text-slate-950 text-sm">改</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-emerald-100 group-hover:text-amber-300 transition-colors">
+                            DRAGON BALL Z KAI
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-emerald-300/75 font-jpSerif">
+                            ドラゴンボール改 — 人造人間・セル編 (第3期)
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#characters" class="hover:text-amber-300 transition-colors">Androids &amp; Z-Roster</a>
+                    <a href="#routines" class="hover:text-amber-300 transition-colors">Kai &amp; Z-Arts</a>
+                    <a href="#episodes" class="hover:text-amber-300 transition-colors">44 Episodes</a>
+                    <a href="#videos" class="hover:text-amber-300 transition-colors">Themes &amp; Links</a>
+                    <a href="#circles" class="hover:text-amber-300 transition-colors">Arenas &amp; Factions</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-950/75 hover:bg-emerald-900/80 text-emerald-200 border border-emerald-400/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span id="particleLabel">Cell Bio Sparks</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-amber-300 border border-amber-400/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section (Centered Title & Super Saiyan / Cell Games Stage) -->
+    <section class="relative z-[2] overflow-hidden border-b border-emerald-950/80">
+        <!-- Horizon & Nebula Glow -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] rounded-full bg-emerald-400/14 blur-3xl"></div>
+            <div class="absolute top-16 left-1/4 w-[24rem] h-[24rem] rounded-full bg-amber-300/14 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#060d14] via-[#060d14]/85 to-transparent"></div>
+            <!-- Stylized Arena & Mountain Silhouette -->
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-50">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#065f46"/>
+                        <stop offset="100%" stop-color="#060d14"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,195 L130,195 L175,115 L295,115 L340,185 L520,185 L575,90 L680,90 L735,175 L940,175 L995,110 L1145,110 L1195,190 L1440,190 L1440,280 L0,280 Z"/>
+                <circle cx="720" cy="72" r="24" fill="#facc15" fill-opacity="0.22"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 text-center">
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-400/40 text-emerald-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-emerald-950/50">
+                    <span class="font-jpSerif text-amber-300 font-black">改</span>
+                    <span>Dragon Ball Z Kai • Season 3</span>
+                    <span class="px-1.5 py-0.5 rounded bg-amber-400/15 border border-amber-300/30 font-jpSerif text-[11px] text-amber-200">人造人間・セル編 全44話</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4 text-center">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">DRAGON BALL Z KAI</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_26px_rgba(52,211,153,0.28)]">SEASON 3 • ANDROIDS &amp; CELL GAMES</span>
+                </h1>
+
+                <!-- Centered Ki Energy Ribbon Divider -->
+                <div class="animate-hero-rise-delay-1 flex items-center justify-center gap-3 my-5 w-full">
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-l from-emerald-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.24em] text-amber-200/95 uppercase">ドラゴンボール改 · 未来のトランクス、人造人間と超サイヤ人2悟飯</span>
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-r from-emerald-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-slate-300 mb-6 text-center">
+                    ドラゴンボール改 第3期 — 人造人間の脅威、精神と時の部屋、セルゲームと悟飯の覚醒
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-center">
+                    In <strong class="text-amber-300">Dragon Ball Z Kai Season 3</strong>, <strong class="text-cyan-300">Future Trunks</strong> warns of <strong class="text-rose-300">Dr. Gero’s Androids</strong> and <strong class="text-emerald-300">Cell</strong>, leading through the Hyperbolic Time Chamber to <strong class="text-yellow-300">Gohan’s Super Saiyan 2</strong> triumph at the Cell Games.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-emerald-400 to-cyan-400 hover:from-amber-300 hover:to-cyan-300 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-950/50 transition-all">
+                        Explore All 44 Episodes
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-emerald-200 border border-emerald-500/35 font-semibold text-sm transition-all">
+                        ▶ Dragon Soul &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                        Kai &amp; Z-Arts Explorer
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Season 3 Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 pt-8 text-left">
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-emerald-400">29 Eps</div>
+                    <div class="text-xs text-slate-400 mt-1">Androids Saga Chronicle (EP 01–29)</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-300">SSJ2 Gohan</div>
+                    <div class="text-xs text-slate-400 mt-1">Father-Son Kamehameha Climax</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-cyan-300">Future Trunks</div>
+                    <div class="text-xs text-slate-400 mt-1">Time Travel &amp; Future Peace</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-rose-300">Androids &amp; Cell</div>
+                    <div class="text-xs text-slate-400 mt-1">16, 17, 18, 19, 20 &amp; Perfect Cell</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-emerald-400 text-xs font-bold tracking-widest uppercase">Red Ribbon Legacy, Time Chamber &amp; Cell Games</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Season 3 Key Combatants</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                Select a character card to inspect their Season 3 role, signature technique, and iconic quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Character Spotlight Panel -->
+        <div id="characterSpotlight" class="mt-8 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Martial Arts & Ki Techniques Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-slate-950/75 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Hyperbolic Time Chamber &amp; Cell Games</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Season 3 Techniques Explorer</h2>
+                </div>
+
+                <!-- Category Switcher Tabs -->
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-400 text-slate-950 shadow cursor-pointer">
+                        Super Saiyan 2 &amp; Father-Son
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Time Chamber &amp; Ascended Saiyans
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Androids &amp; Cell Evolution
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Left Visual Summary Card -->
+                <div id="routineVisualCard" class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Right 6 Technique Cards -->
+                <div id="routineItemsList" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 44 Episodes Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-emerald-400 text-xs font-bold tracking-widest uppercase">Complete Kai Season 3 Chronicle</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 29 Episodes (EP 01 – EP 29)</h2>
+                <p class="text-slate-400 text-sm mt-2">Every episode of the 29-episode Androids Saga run is displayed below with instant navigation, chapter filtering, and external links.</p>
+            </div>
+
+            <!-- Arc Filter & Search Controls -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search episode title or number..."
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-400 w-full sm:w-64">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-emerald-400 cursor-pointer">
+                    <option value="ALL">All Androids Saga Chapters (29 Eps)</option>
+                    <option value="Androids & Cell Saga">Part I: Androids &amp; Cell Emergence (Ep 1–19)</option>
+                    <option value="Cell Games Saga">Part II: Time Chamber &amp; Cell Clash (Ep 20–29)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Episode Jump Bar -->
+        <div class="mb-8 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-1.5" id="quickEpisodePills">
+                <!-- Populated by JS (EP 01 - EP 29 quick jump pills) -->
+            </div>
+            <div id="episodeNavIndicator" class="text-xs font-semibold text-emerald-300 shrink-0">
+                Showing All 29 Androids Saga Episodes 01 – 29
+            </div>
+        </div>
+
+        <!-- All 29 Episodes Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-slate-950/80 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Kai Themes, Trailers &amp; Official Pages</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Navigate directly to Dragon Ball Z Kai themes, trailers, and official series pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-slate-900/95 border border-emerald-500/45 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-300">
+                            <span class="w-2 h-2 rounded-full bg-amber-300"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Changes save automatically to your browser and update all navigation cards immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <!-- 3-Column Admin Link Editors -->
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 4 Trailers & Themes Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">4 Kai Themes &amp; Trailer Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Related Pages Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- All 44 Episodes Link Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3">Androids Saga Episode Links (EP 01 – 29)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Main Trailer & Theme Navigation Cards -->
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Official & Related Pages Bar -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-slate-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Battlefields & Factions -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-emerald-400 text-xs font-bold tracking-widest uppercase">Kami’s Lookout, Time Chamber &amp; Cell Ring</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Iconic Worlds &amp; Factions</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left: Key Kai Season 3 Locations -->
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Legendary Cell Arc Grounds</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Right: Kai Season 3 Roster -->
+            <div class="lg:col-span-7 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Key Figures of Kai Season 3</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/35 font-semibold">Cell Arc Roster</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-sm text-slate-300 italic">
+                    Select any character above to read their Dragon Ball Z Kai Season 3 line.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-slate-800/90 bg-[#05080f] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-emerald-400 font-bold">改</span>
+                <span>Dragon Ball Z Kai — Season 3 (Androids &amp; Cell Games Sagas) Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/45 flex items-center justify-center text-emerald-300 font-bold text-xs">
+                    四星
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white tracking-widest focus:outline-none focus:border-emerald-400">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-emerald-400 hover:bg-emerald-300 text-slate-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. DRAGON BALL Z KAI SEASON 3 DATA (Characters, Techniques, 44 Episodes)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'dbz_kai_season3_cell_games_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'gohan-ssj2',
+                name: 'Son Gohan (Super Saiyan 2)',
+                jpName: '超サイヤ人2 孫悟飯',
+                role: 'Victor of the Cell Games',
+                specialty: 'Super Saiyan 2 & Father-Son Kamehameha',
+                apartment: 'Hyperbolic Time Chamber & Cell Ring',
+                accent: 'from-yellow-300 to-amber-500',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-400/50',
+                quote: 'I won’t let you hurt anyone else, Cell! This ends right now!',
+                bio: 'Trained by Goku in the Hyperbolic Time Chamber, Gohan unlocks Super Saiyan 2 during the Cell Games and overpowers Super Perfect Cell with a Father-Son Kamehameha.'
+            },
+            {
+                id: 'cell-perfect',
+                name: 'Cell (Imperfect → Super Perfect)',
+                jpName: 'セル（第一形態〜超完全体）',
+                role: 'Bio-Android & Cell Games Host',
+                specialty: 'Solar Kamehameha, Cell Juniors & Regeneration',
+                apartment: 'Cell Games Arena',
+                accent: 'from-emerald-400 to-lime-600',
+                badgeColor: 'bg-emerald-950/90 text-emerald-200 border-emerald-400/50',
+                quote: 'Welcome to the Cell Games—show me if any of you can match perfection!',
+                bio: 'Absorbing Androids 17 and 18 to reach his Perfect form, Cell hosts a tournament for Earth’s warriors and returns even stronger after surviving his explosion.'
+            },
+            {
+                id: 'future-trunks',
+                name: 'Future Trunks',
+                jpName: '未来のトランクス',
+                role: 'Time Traveler & Future Liberator',
+                specialty: 'Super Saiyan Grade 3 & Future Peace',
+                apartment: 'Capsule Corp & Future Earth',
+                accent: 'from-cyan-400 to-indigo-600',
+                badgeColor: 'bg-cyan-950/90 text-cyan-200 border-cyan-400/50',
+                quote: 'Now my future can finally know peace—thank you, Goku and Gohan!',
+                bio: 'Arriving to warn of the Androids, Trunks trains in the Time Chamber, fights at the Cell Games, and returns home to defeat his timeline’s Androids and Cell.'
+            },
+            {
+                id: 'goku-cell',
+                name: 'Son Goku',
+                jpName: '孫悟空（セルゲーム）',
+                role: 'Challenger & Mentor to Gohan',
+                specialty: 'Instant Kamehameha & Guiding Gohan',
+                apartment: 'Cell Games Ring / Other World',
+                accent: 'from-orange-400 to-amber-500',
+                badgeColor: 'bg-orange-950/90 text-orange-200 border-orange-400/50',
+                quote: 'You’ve got what it takes, Gohan—let your power loose and finish him!',
+                bio: 'Goku tests Cell’s strength in a thrilling duel, entrusts the victory to Gohan, and teleports self-destructing Cell away to save Earth.'
+            },
+            {
+                id: 'vegeta-16-piccolo',
+                name: 'Vegeta, Piccolo & Android 16',
+                jpName: 'ベジータ・ピッコロ・人造人間16号',
+                role: 'Allies Against Perfection',
+                specialty: 'Final Flash, Hellzone Grenade & Hell’s Flash',
+                apartment: 'Earth & Cell Arena',
+                accent: 'from-rose-500 to-emerald-500',
+                badgeColor: 'bg-rose-950/90 text-rose-200 border-rose-400/50',
+                quote: 'Protect the life and nature I loved… let go of your restraint, Gohan.',
+                bio: 'From Kamiccolo and Android 16’s early clashes to Vegeta’s Final Flash and distraction blast, Earth’s fighters rally behind Gohan at the climax.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'Super Saiyan 2 & Father-Son',
+                jp: '超サイヤ人2覚醒と親子かめはめ波',
+                desc: 'At the Cell Games, Gohan’s hidden strength erupts into Super Saiyan 2 and overpowers Super Perfect Cell in a decisive beam clash.',
+                color: '#facc15',
+                items: [
+                    { num: '01', name: 'Super Saiyan 2 Awakening', jp: '超サイヤ人2覚醒', desc: 'Crackling golden lightning surrounds Gohan as he surpasses the limits of Super Saiyan.' },
+                    { num: '02', name: 'Father-Son Kamehameha', jp: '親子かめはめ波', desc: 'Gohan and Goku’s spirit pour everything into a Kamehameha that defeats Super Perfect Cell.' },
+                    { num: '03', name: 'Cell Junior Sweep', jp: 'セルジュニア撃破', desc: 'Super Saiyan 2 Gohan takes down the seven Cell Juniors to rescue his friends.' },
+                    { num: '04', name: 'Goku’s Sacrifice Teleport', jp: '瞬間移動の決断', desc: 'Goku teleports a swelling Cell away from Earth in a bid to save everyone.' },
+                    { num: '05', name: 'Vegeta’s Counter-Blast', jp: 'ベジータの援護攻撃', desc: 'Vegeta strikes Super Perfect Cell from behind, shifting momentum back to Gohan.' },
+                    { num: '06', name: 'Future Timeline Restoration', jp: '未来の平和奪還', desc: 'Trunks defeats Future Androids 17, 18, and Cell to bring peace to his world.' }
+                ]
+            },
+            seasons: {
+                title: 'Time Chamber & Ascended Saiyans',
+                jp: '精神と時の部屋と超サイヤ人超越',
+                desc: 'Inside Kami’s Lookout’s Hyperbolic Time Chamber, the Saiyans push beyond standard Super Saiyan power.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: 'Final Flash', jp: 'ファイナルフラッシュ', desc: 'Vegeta concentrates massive energy into a wide beam aimed straight at Perfect Cell.' },
+                    { num: '02', name: 'Super Saiyan Grade 2', jp: '超サイヤ人第2段階', desc: 'An ascended surge of strength and power used to overwhelm Semi-Perfect Cell.' },
+                    { num: '03', name: 'Super Saiyan Grade 3', jp: '超サイヤ人第3段階', desc: 'Maximum raw muscle power that trades away speed against Perfect Cell.' },
+                    { num: '04', name: 'Full-Power Super Saiyan', jp: '超サイヤ人フルパワー', desc: 'Goku and Gohan train to keep Super Saiyan effortless and composed.' },
+                    { num: '05', name: 'Instant Kamehameha', jp: '瞬間移動かめはめ波', desc: 'Goku teleports right in front of Cell at the moment of firing a point-blank Kamehameha.' },
+                    { num: '06', name: 'Neo Tri-Beam (Shin Kikoho)', jp: '新気功砲', desc: 'Tien fires repeated shockwaves to hold Semi-Perfect Cell back.' }
+                ]
+            },
+            promises: {
+                title: 'Androids & Cell Evolution',
+                jp: '人造人間とセルの進化',
+                desc: 'From Dr. Gero’s Androids to Cell’s transformations, each stage escalates the threat to Earth.',
+                color: '#34d399',
+                items: [
+                    { num: '01', name: 'Android 19 & 20 Drain', jp: 'エネルギー吸収', desc: 'Dr. Gero and Android 19 absorb energy from blasts and opponents.' },
+                    { num: '02', name: 'Hellzone Grenade', jp: '魔空包囲弾', desc: 'Piccolo surrounds Android 17 with suspended Ki orbs before detoning them together.' },
+                    { num: '03', name: 'Hell’s Flash', jp: 'ヘルズフラッシュ', desc: 'Android 16’s heavy arm-cannon blast unleashed against Cell.' },
+                    { num: '04', name: 'Semi-Perfect Transformation', jp: '第二形態への変身', desc: 'Cell absorbs Android 17 and grows taller and more powerful.' },
+                    { num: '05', name: 'Perfect Form Evolution', jp: '完全体への進化', desc: 'Absorbing Android 18 brings Cell to his sleek Perfect state.' },
+                    { num: '06', name: 'Solar Kamehameha', jp: '太陽系破壊かめはめ波', desc: 'Super Perfect Cell charges a massive blast threatening the entire solar system.' }
+                ]
+            }
+        };
+
+        const season3BaseEpisodes = [
+            { num: 1, arc: 'Androids & Cell Saga', title: 'There Is Planet Earth, Father! Frieza and King Cold Strike Back!', jpTitle: 'ここが地球かお父さん! フリーザ親子の逆襲', synopsis: 'Rebuilt and accompanied by King Cold, Frieza arrives near Earth seeking vengeance before a mysterious youth intervenes.', highlight: 'Frieza and King Cold target Earth.', url: 'https://animetoonhindi.com/multiquality/?url=gki9MenYE2Mc1cD' },
+            { num: 2, arc: 'Androids & Cell Saga', title: 'I Will Defeat Frieza! Another Super Saiyan!', jpTitle: 'フリーザはボクが倒す! もう一人の超サイヤ人', synopsis: 'A sword-wielding Super Saiyan youth defeats Frieza and King Cold in moments and reveals he comes from the future.', highlight: 'Future Trunks defeats Frieza and King Cold.', url: 'https://animetoonhindi.com/multiquality/?url=ajKFonjnW8DeLcP' },
+            { num: 3, arc: 'Androids & Cell Saga', title: 'Welcome Back, Goku! Confessions of the Mysterious Youth, Trunks!', jpTitle: 'おかえり孫悟空! 謎の少年トランクスの告白', synopsis: 'Goku returns via Instant Transmission and hears Trunks’ warning about deadly Androids arriving in three years.', highlight: 'Trunks warns of the Android threat.', url: 'https://animetoonhindi.com/multiquality/?url=OsRNrXxR5FrXf2U' },
+            { num: 4, arc: 'Androids & Cell Saga', title: 'Goku’s New Move, Instant Transmission! The Three-Year Training Session Begins!', jpTitle: '悟空の新技・瞬間移動! 3年後の決戦に備えろ', synopsis: 'Demonstrating Instant Transmission, Goku joins the Z-Fighters in preparing for the three-year countdown.', highlight: 'Three years of training begins.', url: 'https://animetoonhindi.com/multiquality/?url=wcBiX2EHFWqwnnG' },
+            { num: 5, arc: 'Androids & Cell Saga', title: 'Fierce Attack on the Androids! Goku, Super Saiyan!', jpTitle: '人造人間襲撃! 悟空、超サイヤ人へ', synopsis: 'Three years later, Androids 19 and 20 attack near South City as Goku and the Z-Fighters confront them.', highlight: 'Androids 19 and 20 appear on Earth.', url: 'https://animetoonhindi.com/multiquality/?url=qOu04I0B0I9mO3v' },
+            { num: 6, arc: 'Androids & Cell Saga', title: 'Vegeta’s Arrival! A Super Saiyan of Unrivaled Power!', jpTitle: 'ベジータ参上! 誇り高き超サイヤ人の力', synopsis: 'As Goku struggles with a heart condition, Vegeta arrives as a Super Saiyan and turns the battle around.', highlight: 'Vegeta enters the clash against the Androids.', url: 'https://animetoonhindi.com/multiquality/?url=74fWboxL6Z4MkCi' },
+            { num: 7, arc: 'Androids & Cell Saga', title: 'Undetectable Monsters! The Androids Appear!', jpTitle: '気配なき怪物! 人造人間17号・18号起動', synopsis: 'Retreating to his laboratory, Dr. Gero’s plan backfires as Androids 17 and 18—alongside Android 16—awaken.', highlight: 'Androids 17, 18, and 16 activate.', url: 'https://animetoonhindi.com/multiquality/?url=aT83JkXqWVfYQ5V' },
+            { num: 8, arc: 'Androids & Cell Saga', title: 'Piccolo’s Assault! Android 20 and the Twisted Future!', jpTitle: 'ピッコロ強襲! 17号・18号の猛威', synopsis: 'The newly awakened Androids easily overwhelm the Z-Fighters while Trunks learns this timeline differs from his own.', highlight: 'The Z-Fighters face the overwhelming Androids.', url: 'https://animetoonhindi.com/multiquality/?url=MaFyUnMuXl8yvEX' },
+            { num: 9, arc: 'Androids & Cell Saga', title: 'Goku’s Recovery! A New Path Beyond Super Saiyan!', jpTitle: '悟空回復! 超サイヤ人を超える修行へ', synopsis: 'With Goku recovering from his illness, the warriors seek a way to surpass their current Super Saiyan limits.', highlight: 'Goku wakes up and plans the next step.', url: 'https://animetoonhindi.com/multiquality/?url=cfn7kiwLeRWwDIp' },
+            { num: 10, arc: 'Androids & Cell Saga', title: 'The Monster Goes into Motion... Strike of the Super Namekian!', jpTitle: '動き出した怪物… 超ナメック星人の一撃', synopsis: 'Investigating a deserted town, Piccolo fuses with Kami and confronts a mysterious creature draining energy.', highlight: 'Piccolo and Kami fuse into a Super Namekian.', url: 'https://animetoonhindi.com/multiquality/?url=4medYDabiokTTbL' },
+            { num: 11, arc: 'Androids & Cell Saga', title: 'I Am Your Brother! The Monster With Goku’s Energy!', jpTitle: 'お前が兄か! 悟空の気を持つ怪物セル', synopsis: 'The creature reveals himself as Cell, a bio-android created with cells from Goku and Earth’s top fighters.', highlight: 'Cell reveals his origins and goal.', url: 'https://animetoonhindi.com/multiquality/?url=ySUSZzqHzf4IDAB' },
+            { num: 12, arc: 'Androids & Cell Saga', title: 'The Dizzying Deception and the Daring Escape! Defeat the Android Cell!', jpTitle: '驚愕の真実と脱出! 怪物セルを倒せ', synopsis: 'Cell escapes to absorb more energy and reach his goal of absorbing Androids 17 and 18.', highlight: 'Cell begins hunting for perfection.', url: 'https://animetoonhindi.com/multiquality/?url=8Q2RfClGTEXQWkZ' },
+            { num: 13, arc: 'Androids & Cell Saga', title: 'Piccolo vs. Android 17! A Battle of Limitless Stamina!', jpTitle: 'ピッコロ対17号! 無限のスタミナ対決', synopsis: 'Piccolo battles Android 17 fiercely on an island as Cell draws closer.', highlight: 'Piccolo and Android 17 duel at full power.', url: 'https://animetoonhindi.com/multiquality/?url=1G4MpcZfeMt8mCC' },
+            { num: 14, arc: 'Androids & Cell Saga', title: 'Android 16 Enters the Fray! Cell’s Evolution Begins!', jpTitle: '16号参戦! セルの変身が始まる', synopsis: 'Android 16 steps into the fight before Cell absorbs Android 17 to transform into his second form.', highlight: 'Cell absorbs Android 17.', url: 'https://animetoonhindi.com/multiquality/?url=RhzYRQVRv9DUTYR' },
+            { num: 15, arc: 'Androids & Cell Saga', title: 'Tien’s Desperate Attack! Save Your Friends, Goku!', jpTitle: '天津飯決死の気功砲! 悟空よ仲間を救え', synopsis: 'Tien holds Semi-Perfect Cell back with repeated Tri-Beams until Goku rescues them.', highlight: 'Tien buys vital time against Semi-Perfect Cell.', url: 'https://animetoonhindi.com/multiquality/?url=L4eQahgYeo5HQ84' },
+            { num: 16, arc: 'Androids & Cell Saga', title: 'Vegeta and Trunks Emerge! Super Vegeta’s Overwhelming Might!', jpTitle: 'ベジータ・トランクス出撃! 超ベジータの圧倒的パワー', synopsis: 'Emerging from the Hyperbolic Time Chamber, Vegeta and Trunks confront Cell with ascended power.', highlight: 'Super Vegeta dominates Semi-Perfect Cell.', url: 'https://animetoonhindi.com/multiquality/?url=sNZypKSWhpolyRU' },
+            { num: 17, arc: 'Androids & Cell Saga', title: 'Gohan’s Super Saiyan Awakening! Inside the Time Chamber!', jpTitle: '悟飯の超サイヤ人覚醒! 精神と時の部屋', synopsis: 'Inside the Hyperbolic Time Chamber, Gohan unlocks Super Saiyan alongside Goku.', highlight: 'Gohan transforms into a Super Saiyan.', url: 'https://animetoonhindi.com/multiquality/?url=HCBhKATtL31ZwMo' },
+            { num: 18, arc: 'Androids & Cell Saga', title: 'Cell on the Verge of Defeat! Krillin, Destroy Android 18!', jpTitle: 'セル絶体絶命! クリリン、18号を破壊せよ', synopsis: 'With Cell pursuing Android 18, Krillin faces a difficult choice with the shutdown remote.', highlight: 'Krillin makes his choice regarding Android 18.', url: 'https://animetoonhindi.com/multiquality/?url=pDhybd7Zs1myWOO' },
+            { num: 19, arc: 'Androids & Cell Saga', title: 'The Battle Turns for the Worst! Cell Attacks Android 18!', jpTitle: '最悪の事態! セルが18号を吸収', synopsis: 'Allowing Cell his chance out of pride, Vegeta watches Cell absorb Android 18 to reach his Perfect form.', highlight: 'Cell achieves his Perfect form.', url: 'https://animetoonhindi.com/multiquality/?url=LAKfcrmCohLdzcM' },
+            { num: 20, arc: 'Androids & Cell Saga', title: 'The Tables Are Turned! Witness the Power of Perfection!', jpTitle: '形勢逆転! 完全体の恐るべき力', synopsis: 'Perfect Cell easily repels Vegeta’s attacks and displays speed and power far above the current fighters.', highlight: 'Perfect Cell overpowers Vegeta.', url: 'https://animetoonhindi.com/multiquality/?url=1xVga6WkTKXXuaf' },
+            { num: 21, arc: 'Androids & Cell Saga', title: 'Vegeta’s Final Push! Defeat the Invincible Cell!', jpTitle: 'ベジータ起死回生のファイナルフラッシュ!', synopsis: 'Vegeta unleashes a massive Final Flash against Cell, forcing Cell to regenerate.', highlight: 'Vegeta fires the Final Flash.', url: 'https://animetoonhindi.com/multiquality/?url=dxJrGGB82mDnco4' },
+            { num: 22, arc: 'Androids & Cell Saga', title: 'The Strongest Super Saiyan! Trunks’ Power Unleashed!', jpTitle: '最強の超サイヤ人! トランクスの力解放', synopsis: 'Trunks unleashes a powerful muscular form against Cell as Cell points out its speed drawback.', highlight: 'Trunks tests his heavy ascended power.', url: 'https://animetoonhindi.com/multiquality/?url=QFavRcagHpMbEt7' },
+            { num: 23, arc: 'Androids & Cell Saga', title: 'Cell Invades the Airwaves! Announcing, "The Cell Games"!', jpTitle: 'セルがテレビジャック! 「セルゲーム」開催宣言', synopsis: 'Rather than end things immediately, Perfect Cell announces a tournament—the Cell Games—in ten days.', highlight: 'The Cell Games are officially announced.', url: 'https://animetoonhindi.com/multiquality/?url=BB1zS6pFGZhUK3a' },
+            { num: 24, arc: 'Androids & Cell Saga', title: 'Training Complete! Goku Sizes Up the Competition!', jpTitle: '修行完了! 悟空が測るセルの実力', synopsis: 'Goku and Gohan exit the Time Chamber in a calm, full-power Super Saiyan state ahead of the tournament.', highlight: 'Goku and Gohan complete their Time Chamber training.', url: 'https://animetoonhindi.com/multiquality/?url=NGXSgRyTOyGOria' },
+            { num: 25, arc: 'Androids & Cell Saga', title: 'The Truce Is Broken! The Defense Force Strikes Back at Cell!', jpTitle: '休戦破り! 軍隊がセルに総攻撃', synopsis: 'Military forces attack Cell before the tournament begins, only to be brushed aside as the countdown nears zero.', highlight: 'The military assault on Cell fails.', url: 'https://animetoonhindi.com/multiquality/?url=1qtoUu1fo4adfi8' },
+            { num: 26, arc: 'Androids & Cell Saga', title: 'A New Guardian! The Return of the Dragon Balls!', jpTitle: '新しい神様! ドラゴンボール復活', synopsis: 'Dende is brought to become Earth’s new Guardian and restores the Dragon Balls before the Cell Games.', highlight: 'Dende becomes Earth’s new Guardian.', url: 'https://animetoonhindi.com/multiquality/?url=3GWb1txG0b0rshB' },
+            { num: 27, arc: 'Androids & Cell Saga', title: 'Hercule Takes the Stage! The Curtain Rises on the Cell Games!', jpTitle: 'サタン登場! セルゲームの幕が上がる', synopsis: 'The Cell Games begin at the arena as Mr. Satan steps forward before Goku faces Cell.', highlight: 'The Cell Games open.', url: 'https://animetoonhindi.com/multiquality/?url=9Y698DOtymM5XZR' },
+            { num: 28, arc: 'Androids & Cell Saga', title: 'Showdown! Cell vs. Goku!', jpTitle: '頂上決戦! セル対孫悟空', synopsis: 'Goku steps into the ring and clashes evenly with Perfect Cell in a high-speed duel.', highlight: 'Goku and Cell begin their tournament match.', url: 'https://animetoonhindi.com/multiquality/?url=gQBVXVVfR8XWxG8' },
+            { num: 29, arc: 'Cell Games Saga', title: 'Battle at the Highest Level! Goku Goes All Out!', jpTitle: '最高レベルの闘い! 全力の悟空', synopsis: 'Goku and Cell push each other to top form, culminating in Goku’s Instant Kamehameha.', highlight: 'Goku surprises Cell with Instant Kamehameha.', url: 'https://animetoonhindi.com/multiquality/?url=3X4nDov7Zgy454j' }
+        ];
+
+        const defaultEpisodesData = season3BaseEpisodes;
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'Opening Theme',
+                title: 'Dragon Soul — Takayoshi Tanimoto',
+                jp: 'OP「Dragon Soul」谷本貴義',
+                desc: 'Navigate to the Dragon Ball Z Kai opening theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+Opening+Dragon+Soul'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Ending Theme',
+                title: 'Kokoro no Hane — Team Dragon from AKB48',
+                jp: 'ED「心の羽根」チームドラゴン from AKB48',
+                desc: 'Navigate to the Dragon Ball Z Kai Cell Games ending theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+Ending+Kokoro+no+Hane'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'Cell Games Clips',
+                title: 'Gohan Super Saiyan 2 vs. Cell Highlights',
+                jp: 'ドラゴンボール改 超サイヤ人2悟飯 対 セル',
+                desc: 'Open Dragon Ball Z Kai highlights of Gohan’s Super Saiyan 2 awakening and final Kamehameha.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Kai+Gohan+Super+Saiyan+2+vs+Cell'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Watch Dragon Ball Z Kai on Crunchyroll',
+                jp: 'ドラゴンボール改 配信ページ',
+                desc: 'Open the official Crunchyroll series page for Dragon Ball Z Kai.',
+                url: 'https://www.crunchyroll.com/series/G6K53ENKY/dragon-ball-z-kai'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Dragon Ball Official Site',
+                subtitle: 'en.dragon-ball-official.com — News, manga & anime',
+                url: 'https://en.dragon-ball-official.com/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Dragon Ball Z Kai Hub',
+                subtitle: 'Stream Dragon Ball Z Kai episodes',
+                url: 'https://www.crunchyroll.com/series/G6K53ENKY/dragon-ball-z-kai'
+            },
+            {
+                id: 'page-toei',
+                title: 'Toei Animation Dragon Ball Kai',
+                subtitle: 'Official studio archive & series overview',
+                url: 'https://www.toei-anim.co.jp/tv/dragonkai/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Dragon Ball Z Kai Entry',
+                subtitle: 'Cast, voice actors & episode listings',
+                url: 'https://myanimelist.net/anime/6033/Dragon_Ball_Kai'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: 'Kami’s Lookout & Time Chamber',
+                jp: '神の神殿 ＆ 精神と時の部屋',
+                tag: 'Training Sanctum',
+                detail: 'Above Earth’s Clouds',
+                desc: 'Where Dende becomes Guardian and Saiyans train inside the Hyperbolic Time Chamber to surpass their limits.'
+            },
+            {
+                name: 'The Cell Games Ring',
+                jp: 'セルゲーム会場',
+                tag: 'Decisive Tournament',
+                detail: 'Rocky Wasteland Arena',
+                desc: 'The stage for Goku vs. Cell and Gohan’s Super Saiyan 2 awakening to protect Earth.'
+            },
+            {
+                name: 'Future Earth',
+                jp: '未来の地球',
+                tag: 'Hope Restored',
+                detail: 'Trunks’ Timeline',
+                desc: 'Where Future Trunks returns to defeat his timeline’s Androids and Cell and bring peace.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'SSJ2 Son Gohan', title: 'Cell Games Champion', quote: 'I won’t let you hurt anyone else, Cell!' },
+            { name: 'Perfect Cell', title: 'Bio-Android', quote: 'Welcome to the Cell Games!' },
+            { name: 'Future Trunks', title: 'Future Warrior', quote: 'Now my future can finally know peace!' },
+            { name: 'Son Goku', title: 'Full-Power Saiyan', quote: 'You’ve got what it takes, Gohan!' },
+            { name: 'Vegeta', title: 'Saiyan Prince', quote: 'Show me everything you’ve got!' },
+            { name: 'Android 16', title: 'Gentle Guardian', quote: 'Protect the life and nature I loved.' }
+        ];
+
+        // =========================================================================
+        // 2. ADMIN LINK STATE & PERSISTENCE
+        // =========================================================================
+        let isAdminUnlocked = false;
+
+        function cloneDefaults() {
+            const episodesMap = {};
+            defaultEpisodesData.forEach(ep => {
+                episodesMap[ep.num] = ep.url;
+            });
+            return {
+                trailers: defaultTrailersData.map(t => ({ id: t.id, url: t.url })),
+                pages: defaultRelatedPagesData.map(p => ({ id: p.id, url: p.url })),
+                episodes: episodesMap
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach(item => {
+                        const target = base.trailers.find(t => t.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    parsed.pages.forEach(item => {
+                        const target = base.pages.find(p => p.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(parsed.episodes).forEach(k => {
+                        if (parsed.episodes[k]) base.episodes[k] = parsed.episodes[k];
+                    });
+                }
+            } catch (err) {
+                console.warn('Could not load saved links:', err);
+            }
+            return base;
+        }
+
+        let savedLinks = loadSavedLinks();
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (err) {
+                console.warn('Could not save links:', err);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        let selectedCharacterId = charactersData[0].id;
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-slate-900 border-amber-300 shadow-lg shadow-emerald-950/40 ring-1 ring-amber-300/50'
+                                : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-slate-950 text-base mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-300 mb-1">${char.role}</div>
+                        <h3 class="font-serifDisplay font-bold text-base text-white">${char.name}</h3>
+                        <p class="font-jpSerif text-xs text-slate-400 mt-0.5">${char.jpName}</p>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.specialty}</span>
+                            <span class="text-xs text-slate-400">Base: ${current.apartment}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-slate-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm w-full p-5 rounded-2xl bg-slate-950/90 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-2">Iconic Kai Season 3 Line</div>
+                        <p class="text-sm text-slate-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER TECHNIQUES EXPLORER
+        // =========================================================================
+        let currentRoutineKey = 'cooking';
+
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const itemsList = document.getElementById('routineItemsList');
+            const data = routinesData[currentRoutineKey];
+            if (!visualCard || !itemsList || !data) return;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isSelected = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = isSelected
+                    ? 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-400 text-slate-950 shadow cursor-pointer'
+                    : 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer';
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4" style="background:${data.color}22; color:${data.color}; border:1px solid ${data.color}55;">
+                        ${data.jp}
+                    </span>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Kai Season 3 Arts Archive</span>
+                    <span class="font-bold" style="color:${data.color};">6 Signature Arts</span>
+                </div>
+            `;
+
+            itemsList.innerHTML = data.items.map(item => `
+                <div class="bg-slate-900/80 border border-slate-800 hover:border-emerald-400/40 rounded-2xl p-5 transition-all">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black tracking-wider px-2.5 py-0.5 rounded-md bg-slate-950 text-amber-300 border border-slate-800">${item.num}</span>
+                        <span class="font-jpSerif text-xs text-slate-400">${item.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${item.name}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 44 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-950 hover:bg-amber-400 text-slate-300 hover:text-slate-950 border border-slate-800 hover:border-amber-200 transition-colors cursor-pointer">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-amber-300');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-amber-300'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All 29 Androids Saga Episodes 01 – 29'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Episodes`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center">
+                        <p class="text-slate-300 font-medium">No Dragon Ball Z Kai Season 3 episodes match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `EP ${String(ep.num).padStart(2, '0')}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-slate-900/85 border border-slate-800 hover:border-emerald-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 font-bold text-xs tracking-wider">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-amber-200/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `EPISODE ${String(ep.num).padStart(2, '0')}`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-400/35">${epBadge}</span>
+                        <span class="text-xs text-slate-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-amber-200 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-300 mb-1">Key Episode Highlight</div>
+                        <p class="text-xs text-slate-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 1 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">← EP ${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < defaultEpisodesData.length ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">EP ${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-emerald-400 hover:from-amber-300 hover:to-emerald-300 text-slate-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Episode Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS, THEMES & OFFICIAL PAGES
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const href = current?.url || item.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group bg-slate-900/85 border border-slate-800 hover:border-emerald-400/55 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/35">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-slate-400 group-hover:text-amber-300 transition-colors text-sm">↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-amber-200 transition-colors mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="font-jpSerif text-xs text-emerald-300/90 mb-2">${item.jp}</p>
+                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-800/90 text-xs font-semibold text-amber-300 group-hover:translate-x-0.5 transition-transform">
+                                Navigate to External Page →
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const href = current?.url || page.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group p-4 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-amber-300/50 transition-all flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-sm text-white group-hover:text-amber-300 transition-colors">${page.title}</div>
+                                <div class="text-xs text-slate-400 mt-1">${page.subtitle}</div>
+                            </div>
+                            <span class="text-slate-400 group-hover:text-amber-300 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. RENDER BATTLEFIELDS & FACTIONS
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">${loc.tag}</span>
+                            <span class="font-jpSerif text-xs text-slate-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-amber-300 font-medium mb-2">${loc.detail}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((member, idx) => `
+                    <button type="button" data-cast-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-emerald-400/50 transition-all cursor-pointer">
+                        <div class="font-bold text-xs sm:text-sm text-white">${member.name}</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">${member.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-cast-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const member = castCircleData[Number(btn.getAttribute('data-cast-idx'))];
+                        if (member) {
+                            quoteBox.innerHTML = `<span class="text-amber-300 font-semibold not-italic">${member.name}:</span> “${member.quote}”`;
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 8. ADMIN LINK MANAGER (PIN 1960)
+        // =========================================================================
+        function showAdminBanner(msg) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = msg;
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin Active';
+            if (studio) {
+                studio.classList.remove('hidden');
+                renderAdminStudio();
+                studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin';
+            studio?.classList.add('hidden');
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const val = current?.url || item.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${item.title}</label>
+                            <input type="url" data-admin-trailer="${item.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-emerald-400">
+                        </div>
+                    `;
+                }).join('');
+
+                trailersList.querySelectorAll('input[data-admin-trailer]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-trailer');
+                        const target = savedLinks.trailers.find(t => t.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Trailer / Theme navigation link updated.');
+                        }
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const val = current?.url || page.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${page.title}</label>
+                            <input type="url" data-admin-page="${page.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-300">
+                        </div>
+                    `;
+                }).join('');
+
+                pagesList.querySelectorAll('input[data-admin-page]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-page');
+                        const target = savedLinks.pages.find(p => p.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Portal page URL updated.');
+                        }
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const val = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">EP ${String(ep.num).padStart(2, '0')} — ${ep.title}</label>
+                            <input type="url" data-admin-ep="${ep.num}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-cyan-300">
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('input[data-admin-ep]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const epNum = Number(input.getAttribute('data-admin-ep'));
+                        if (epNum && input.value.trim()) {
+                            savedLinks.episodes[epNum] = input.value.trim();
+                            persistLinks();
+                            renderEpisodes();
+                            showAdminBanner(`Episode ${String(epNum).padStart(2, '0')} link updated.`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (Cell Bio Sparks / Super Saiyan Gold Sparks)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.3;
+                p.y -= p.vy * 0.85;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(52, 211, 153, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.9, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(250, 204, 21, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        // Admin PIN Modal Controls
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Dragon Ball Z Kai Season 3 links restored.');
+        });
+
+        // Particle Theme Switcher
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'Cell Bio Sparks' : 'SSJ2 Gold Sparks';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-amber-300 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+</body>
+</html>
