@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z — Season 7 (World Tournament &amp; Babidi Sagas)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070b14;
+            color: #f4f4f5;
+            overflow-x: clip;
+        }
+
+        /* Subtle cosmic Ki grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(249, 115, 22, 0.09) 1px, transparent 1px),
+                radial-gradient(rgba(56, 189, 248, 0.07) 1px, #070b14 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        /* Saiyan Gold & Ki Flame Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #fef08a 0%, #f97316 36%, #ef4444 68%, #facc15 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.96); }
+            50% { opacity: 1; transform: scaleX(1.04); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070b14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f97316;
+        }
+    </style>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-orange-500 selection:text-zinc-950">
+
+    <!-- Ambient Ki Aura & Dragon Ball Spark Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-70"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#070b14]/88 border-b border-orange-500/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-300 via-orange-500 to-red-600 flex items-center justify-center shadow-lg shadow-orange-950/60 border border-amber-200/60">
+                        <span class="font-jpSerif font-black text-red-900 text-sm">四星</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-orange-100 group-hover:text-amber-300 transition-colors">
+                            DRAGON BALL Z
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-slate-400 font-jpSerif">
+                            ドラゴンボールZ — 天下一武道会・バビディ編 (第7期)
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#characters" class="hover:text-orange-400 transition-colors">Z-Fighters</a>
+                    <a href="#routines" class="hover:text-orange-400 transition-colors">Techniques</a>
+                    <a href="#episodes" class="hover:text-orange-400 transition-colors">25 Episodes</a>
+                    <a href="#videos" class="hover:text-orange-400 transition-colors">Trailers &amp; Links</a>
+                    <a href="#circles" class="hover:text-orange-400 transition-colors">Worlds &amp; Factions</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-orange-950/70 hover:bg-orange-900/80 text-orange-200 border border-orange-500/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
+                        <span id="particleLabel">Ki Embers</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-amber-300 border border-amber-400/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section (Centered Title & Saiyan Aura Stage) -->
+    <section class="relative z-[2] overflow-hidden border-b border-slate-800/90">
+        <!-- Rocky Wasteland & Saiyan Pod Horizon Glow -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[38rem] h-[38rem] rounded-full bg-orange-500/15 blur-3xl"></div>
+            <div class="absolute top-16 left-1/4 w-[24rem] h-[24rem] rounded-full bg-sky-500/12 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#070b14] via-[#070b14]/85 to-transparent"></div>
+            <!-- Stylized Wasteland Mesa Silhouette -->
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-50">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#1e293b"/>
+                        <stop offset="100%" stop-color="#070b14"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,195 L130,195 L175,115 L295,115 L340,185 L520,185 L575,90 L680,90 L735,175 L940,175 L995,110 L1145,110 L1195,190 L1440,190 L1440,280 L0,280 Z"/>
+                <circle cx="720" cy="72" r="22" fill="#f97316" fill-opacity="0.22"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 text-center">
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-orange-950/70 border border-orange-400/40 text-orange-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-orange-950/50">
+                    <span class="font-jpSerif text-amber-300 font-black">Z</span>
+                    <span>Season 7 Complete Guide</span>
+                    <span class="px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-400/30 font-jpSerif text-[11px] text-sky-200">天下一武道会・バビディ編 全25話</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4 text-center">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">DRAGON BALL Z</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_26px_rgba(249,115,22,0.3)]">SEASON 7 • WORLD TOURNAMENT &amp; BABIDI</span>
+                </h1>
+
+                <!-- Centered Ki Energy Ribbon Divider -->
+                <div class="animate-hero-rise-delay-1 flex items-center justify-center gap-3 my-5 w-full">
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-l from-orange-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.24em] text-amber-200/95 uppercase">ドラゴンボールZ · 悟空の一日帰還と魔導師バビディの陰謀</span>
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-r from-orange-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-slate-300 mb-6 text-center">
+                    ドラゴンボールZ 第7期 — 7年ぶりの天下一武道会とバビディの宇宙船、そして魔人ブウ復活へ
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-center">
+                    Seven years after the Cell Games, <strong class="text-amber-300">Son Goku</strong> returns from the Other World for one day as <strong class="text-sky-300">Gohan, Goten, and Trunks</strong> enter the World Tournament—only for <strong class="text-violet-300">Babidi and Dabura</strong> to gather energy to awaken <strong class="text-pink-300">Majin Buu</strong>.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-400 hover:from-orange-400 hover:to-yellow-300 text-zinc-950 font-bold text-sm shadow-lg shadow-orange-950/50 transition-all">
+                        Explore All 25 Episodes
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-orange-200 border border-orange-500/35 font-semibold text-sm transition-all">
+                        ▶ We Gotta Power &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                        Tournament &amp; Babidi Arts
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Season 7 Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 pt-8 text-left">
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-orange-400">25 Eps</div>
+                    <div class="text-xs text-slate-400 mt-1">Season 7 TV Run (Ep 195–219)</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-300">7 Years Later</div>
+                    <div class="text-xs text-slate-400 mt-1">25th World Martial Arts Tournament</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-violet-400">Babidi’s Ship</div>
+                    <div class="text-xs text-slate-400 mt-1">Pui Pui, Yakon &amp; Dabura</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-pink-300">Majin Buu</div>
+                    <div class="text-xs text-slate-400 mt-1">Cocoon Charge &amp; Buu Awakens</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">Next Generation &amp; Majin Threat</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Season 7 Key Combatants</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                Select a character card to inspect their Season 7 role, signature technique, and iconic quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Character Spotlight Panel -->
+        <div id="characterSpotlight" class="mt-8 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Martial Arts & Ki Techniques Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-slate-950/75 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-sky-400 text-xs font-bold tracking-widest uppercase">World Tournament &amp; Babidi’s Spaceship</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Season 7 Techniques Explorer</h2>
+                </div>
+
+                <!-- Category Switcher Tabs -->
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-orange-500 text-zinc-950 shadow cursor-pointer">
+                        Tournament &amp; Young Saiyans
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Babidi’s Ship &amp; Majin Power
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Majin Buu &amp; Final Atonement
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Left Visual Summary Card -->
+                <div id="routineVisualCard" class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Right 6 Technique Cards -->
+                <div id="routineItemsList" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 25 Episodes Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">Complete Season 7 Chronicle</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 25 Episodes (EP 01 – EP 25)</h2>
+                <p class="text-slate-400 text-sm mt-2">Every Season 7 episode (TV 195–219) is displayed below with instant episode navigation, sub-arc filtering, and external episode links.</p>
+            </div>
+
+            <!-- Arc Filter & Search Controls -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search episode title or number..."
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-400 w-full sm:w-64">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-orange-400 cursor-pointer">
+                    <option value="ALL">All Season 7 Chapters (25 Eps)</option>
+                    <option value="World Tournament Saga">Part I: 25th World Tournament (Ep 1–10)</option>
+                    <option value="Babidi & Majin Buu Saga">Part II: Babidi’s Ship &amp; Buu Awakens (Ep 11–25)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Episode Jump Bar -->
+        <div class="mb-8 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-1.5" id="quickEpisodePills">
+                <!-- Populated by JS (EP 01 - 25 quick jump pills) -->
+            </div>
+            <div id="episodeNavIndicator" class="text-xs font-semibold text-orange-300 shrink-0">
+                Showing All Season 7 Episodes 01 – 25
+            </div>
+        </div>
+
+        <!-- All 25 Episodes Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-slate-950/80 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-sky-400 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Trailers, Themes &amp; Official Pages</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Navigate directly to Dragon Ball Z Season 7 trailers, classic themes, and official pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-slate-900/95 border border-orange-500/45 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-orange-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Changes save automatically to your browser and update all navigation cards immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <!-- 3-Column Admin Link Editors -->
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 4 Trailers & Themes Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-orange-400 mb-3">4 Trailers &amp; Theme Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Related Pages Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-sky-400 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- All 25 Episodes Link Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Season 7 Episode Links (EP 01 – 25)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Main Trailer & Theme Navigation Cards -->
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Official & Related Pages Bar -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-slate-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Battlefields & Factions -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">World Tournament Stadium, Babidi’s Ship &amp; Wastelands</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Iconic Worlds &amp; Factions</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left: Key Season 7 Locations -->
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Legendary Season 7 Grounds</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Right: World Tournament & Majin Buu Factions -->
+            <div class="lg:col-span-7 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Key Figures of Season 7</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-orange-500/15 text-orange-300 border border-orange-500/35 font-semibold">Season 7 Roster</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-sm text-slate-300 italic">
+                    Select any character above to read their Season 7 line.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-slate-800/90 bg-[#05080f] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-orange-400 font-bold">四星</span>
+                <span>Dragon Ball Z — Season 7 (World Tournament &amp; Babidi Sagas) Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-full bg-orange-500/20 border border-orange-400/45 flex items-center justify-center text-orange-300 font-bold text-xs">
+                    四星
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white tracking-widest focus:outline-none focus:border-orange-400">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-orange-500 hover:bg-orange-400 text-zinc-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. DRAGON BALL Z SEASON 7 DATA (Characters, Techniques, 37 Episodes, Links)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'dbz_season7_world_tournament_babidi_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'majin-vegeta',
+                name: 'Majin Vegeta',
+                jpName: '魔人ベジータ',
+                role: 'Pride-Driven Saiyan & Final Atonement',
+                specialty: 'Final Explosion, Big Bang Attack & Super Saiyan 2',
+                apartment: 'Babidi’s Ship & Rocky Wastelands',
+                accent: 'from-violet-500 to-indigo-600',
+                badgeColor: 'bg-violet-950/90 text-violet-200 border-violet-400/50',
+                quote: 'Goodbye, Bulma… Trunks… and best of all, Kakarot.',
+                bio: 'Allowing Babidi to unleash his dormant evil so he can fight Goku one last time, Vegeta realizes Majin Buu’s true terror and detonates his own life force in a final act of redemption.'
+            },
+            {
+                id: 'goku-ssj2',
+                name: 'Son Goku (One-Day Return)',
+                jpName: '孫悟空（7年ぶりの帰還・超サイヤ人2）',
+                role: 'Tournament Challenger & Majin Duelist',
+                specialty: 'Super Saiyan 2 Clash & Instant Transmission',
+                apartment: 'World Tournament Arena & Babidi’s Ship',
+                accent: 'from-orange-400 to-amber-500',
+                badgeColor: 'bg-orange-950/90 text-orange-200 border-orange-400/50',
+                quote: 'I came back for one day to see everyone—and to fight you at full strength, Vegeta!',
+                bio: 'Granted a single day on Earth to attend the 25th World Martial Arts Tournament, Goku clashes in a breathtaking Super Saiyan 2 duel with Majin Vegeta.'
+            },
+            {
+                id: 'majin-buu',
+                name: 'Innocent Majin Buu',
+                jpName: '魔人ブウ（善・無邪気な魔人）',
+                role: 'Awakened Ancient Demon',
+                specialty: 'Candy Beam, Elastic Regeneration & Devastating Ki',
+                apartment: 'Babidi’s Ship & West City',
+                accent: 'from-pink-400 to-rose-500',
+                badgeColor: 'bg-pink-950/90 text-pink-200 border-pink-400/50',
+                quote: 'Buu wants candy! Buu turn you into chocolate and eat you!',
+                bio: 'Hatched from Babidi’s cocoon after energy is gathered from Goku and Vegeta’s clash, Buu appears childlike and playful yet overwhelms Dabura, Gohan, and Majin Vegeta.'
+            },
+            {
+                id: 'goten-trunks',
+                name: 'Goten & Young Trunks',
+                jpName: '孫悟天 ＆ トランクス（少年期）',
+                role: 'Junior Super Saiyans & Mighty Mask',
+                specialty: 'Childhood Super Saiyan & Tournament Trickery',
+                apartment: 'Capsule Corp & World Tournament',
+                accent: 'from-sky-400 to-cyan-500',
+                badgeColor: 'bg-sky-950/90 text-sky-200 border-sky-400/50',
+                quote: 'Whoa, we’re both Super Saiyans already! The junior division won’t even be fair!',
+                bio: 'Astonishing everyone with their natural Super Saiyan transformations at age seven and eight, Goten and Trunks sneak into the adult tournament disguised as Mighty Mask.'
+            },
+            {
+                id: 'gohan-babidi',
+                name: 'Gohan, Dabura & Babidi',
+                jpName: '孫悟飯 ＆ ダーブラ ＆ バビディ',
+                role: 'Tournament Contenders & Dark Sorcerer',
+                specialty: 'Stone Spit, Dark Magic & Pui Pui’s 10x Gravity',
+                apartment: 'Babidi’s Underground Spaceship',
+                accent: 'from-amber-400 to-fuchsia-500',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-400/50',
+                quote: 'My power isn’t what it used to be after seven years of peace—I have to push myself!',
+                bio: 'Babidi’s minions—Pui Pui, Yakon, and Demon King Dabura—draw the Z-Fighters into a multi-level spaceship battle where Dabura turns Krillin and Piccolo to stone.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'Tournament & Young Saiyans',
+                jp: '第25回天下一武道会と少年超サイヤ人',
+                desc: 'After seven peaceful years, old rivals and young Super Saiyans gather at the rebuilt tournament stadium.',
+                color: '#facc15',
+                items: [
+                    { num: '01', name: 'Mighty Mask Disguise', jp: 'マイティマスク変装', desc: 'Goten and Trunks team up inside a tournament costume to battle Android 18 in the main bracket.' },
+                    { num: '02', name: 'Junior Division Super Saiyans', jp: '少年部超サイヤ人激突', desc: 'Goten and Trunks clash with golden auras in the kids’ tournament, stunning the stadium crowd.' },
+                    { num: '03', name: 'Videl’s Flight Training', jp: 'ビーデルの舞空術修行', desc: 'Gohan teaches Hercule’s daughter Videl how to sense and control Ki to achieve flight.' },
+                    { num: '04', name: 'Spopovich & Yamu’s Energy Drain', jp: 'スポポビッチ＆ヤムーの吸収', desc: 'Majin-controlled fighters ambush Gohan at the tournament to siphon his energy into Babidi’s ball.' },
+                    { num: '05', name: 'Supreme Kai’s Intervention', jp: '界王神の登場', desc: 'Shin and Kibito arrive at the tournament to warn the Z-Fighters about the wizard Babidi.' },
+                    { num: '06', name: 'Punch Machine Record', jp: 'パンチングマシーン記録更新', desc: 'Vegeta shatters the tournament punch machine with a single strike to show off his strength.' }
+                ]
+            },
+            seasons: {
+                title: 'Babidi’s Ship & Majin Power',
+                jp: 'バビディの宇宙船と魔人の呪印',
+                desc: 'Descending into Babidi’s multi-tiered ship, Goku, Gohan, Vegeta, and Supreme Kai face lethal traps and sorcery.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: '10x Gravity Stage (Pui Pui)', jp: '10倍重力ステージ', desc: 'Babidi shifts gravity to ten times Earth’s normal pull—only to find Vegeta trains at hundreds of Gs.' },
+                    { num: '02', name: 'Darkness Stage (Yakon)', jp: '暗黒ステージ', desc: 'Yakon devours light and energy until Goku overloads him by powering up into a Super Saiyan.' },
+                    { num: '03', name: 'Dabura’s Stone Spit', jp: 'ダーブラの石化唾', desc: 'The Demon King turns Piccolo and Krillin to stone, forcing the warriors to press forward.' },
+                    { num: '04', name: 'Majin Spell Awakening', jp: '魔人の呪印覚醒', desc: 'Babidi’s mark boosts power while taming dark hearts—though Vegeta bends the spell to his own will.' },
+                    { num: '05', name: 'Goku vs. Majin Vegeta (SSJ2)', jp: '超サイヤ人2対決・悟空対ベジータ', desc: 'An explosive clash of Super Saiyan 2 pride and fury that fills Majin Buu’s energy meter.' },
+                    { num: '06', name: 'Kibito’s Healing & Revival', jp: 'キビトの治癒と復活', desc: 'Supreme Kai’s attendant heals Gohan’s drained energy before Dabura strikes him down.' }
+                ]
+            },
+            promises: {
+                title: 'Majin Buu & Final Atonement',
+                jp: '魔人ブウ復活とベジータの自己犠牲',
+                desc: 'Once Buu breaks free from his cocoon, the Z-Fighters confront a terrifyingly unpredictable foe.',
+                color: '#10b981',
+                items: [
+                    { num: '01', name: 'Buu’s Cocoon Hatching', jp: '魔人ブウの繭覚醒', desc: 'Accumulated battle energy erupts into Babidi’s ship, birthing the round, cheerful Majin Buu.' },
+                    { num: '02', name: 'Dabura Turned to Cookie', jp: 'ダーブラお菓子化', desc: 'Buu’s beam transforms even Demon King Dabura into a treat and eats him whole.' },
+                    { num: '03', name: 'Final Explosion (Atonement)', jp: 'ファイナルエクスプロージョン', desc: 'Vegeta knocks out Trunks and Goten, apologizes to his family, and unleashes a blinding Ki detonation.' },
+                    { num: '04', name: 'Buu’s Elastic Regeneration', jp: 'ブウの驚異の再生力', desc: 'Even shattered into pieces by Vegeta’s ultimate blast, Buu pulls his fragments back together.' },
+                    { num: '05', name: 'Supreme Kai Defeated', jp: '界王神の危機', desc: 'Buu batters Supreme Kai nearly to death before Gohan enters the fray.' },
+                    { num: '06', name: 'The Search for Dragon Balls', jp: 'ドラゴンボール争奪戦', desc: 'With Buu rampaging across the world, the race begins to locate the Dragon Balls and stop him.' }
+                ]
+            }
+        };
+
+        const defaultEpisodesData = [
+            { num: 1, arc: 'World Tournament Saga', title: 'Who Will Win the World Tournament?', jpTitle: '誰が優勝する!? 天下一武道会への招待', synopsis: 'Seven years after defeating Cell, Goku gets a one-day pass from the Other World to enter the 25th World Martial Arts Tournament.', highlight: 'Goku’s one-day return to Earth is revealed.', url: 'https://animetoonhindi.com/multiquality/?url=ykZBOBjIVzRF2YU' },
+            { num: 2, arc: 'World Tournament Saga', title: 'Gohan’s First Day of High School', jpTitle: '悟飯の高校生活!! ヒーローは大変だ', synopsis: 'Now a high schooler in Satan City, Gohan fights crime as the Great Saiyaman while training for the upcoming tournament.', highlight: 'Gohan balances school life and superhero duties.', url: 'https://animetoonhindi.com/multiquality/?url=H97Udqn1huNY7Sd' },
+            { num: 3, arc: 'World Tournament Saga', title: 'Videl’s Crisis', jpTitle: 'ビーデル危機一髪!? 悟飯の猛特訓', synopsis: 'Impressed by Gohan’s strength, Videl demands that he teach her how to fly using Ki energy.', highlight: 'Gohan begins teaching Videl Ki control and flight.', url: 'https://animetoonhindi.com/multiquality/?url=zWnyPMrnuP0oIGr' },
+            { num: 4, arc: 'World Tournament Saga', title: 'The Dragon Team Assembles', jpTitle: '7年ぶりの再会!! 悟空がやって来た', synopsis: 'Arriving at the tournament stadium, Goku reunites with his friends and meets his second son, Goten, for the first time.', highlight: 'Goku meets Goten and reunites with the Z-Fighters.', url: 'https://animetoonhindi.com/multiquality/?url=x7DaDUFxTeWrPoQ' },
+            { num: 5, arc: 'World Tournament Saga', title: 'Goten’s Hidden Power', jpTitle: '悟天も超サイヤ人!? 驚愕の武道会', synopsis: 'Training with Gohan before the matches, young Goten effortlessly transforms into a Super Saiyan.', highlight: 'Goten reveals he can already turn Super Saiyan.', url: 'https://animetoonhindi.com/multiquality/?url=oGmdu1GStIIzLkk' },
+            { num: 6, arc: 'World Tournament Saga', title: 'The Junior Division Showdown', jpTitle: '少年部決勝!! トランクス対悟天', synopsis: 'Goten and Trunks face off in the junior finals, shocking the crowd with Super Saiyan speed and energy blasts.', highlight: 'Trunks wins the junior tournament against Goten.', url: 'https://animetoonhindi.com/multiquality/?url=MCu0QzfkfdocMox' },
+            { num: 7, arc: 'World Tournament Saga', title: 'A Strange Pair', jpTitle: '謎の二人組登場!! 界王神の警告', synopsis: 'At the main tournament, Supreme Kai and Kibito appear while strange fighters begin draining Gohan’s energy.', highlight: 'Supreme Kai steps in as Gohan’s energy is stolen.', url: 'https://animetoonhindi.com/multiquality/?url=gaIKnKwGrRHYZhD' },
+            { num: 8, arc: 'World Tournament Saga', title: 'The Mysterious Menace', jpTitle: '奪われたエネルギー!! 魔導師バビディの狙い', synopsis: 'Following the energy thieves, Goku, Gohan, Vegeta, and Supreme Kai discover the evil wizard Babidi and his spaceship.', highlight: 'Babidi’s plan to awaken Majin Buu is uncovered.', url: 'https://animetoonhindi.com/multiquality/?url=nFalihuk89zafTb' },
+            { num: 9, arc: 'World Tournament Saga', title: 'Mighty Mask’s Secret', jpTitle: 'マイティマスクの正体!! 18号の大苦戦', synopsis: 'Inside the Mighty Mask costume, Goten and Trunks battle Android 18 in the ring until their disguise is blown.', highlight: 'Android 18 defeats the disguised Goten and Trunks.', url: 'https://animetoonhindi.com/multiquality/?url=C1mTrbjl6V3bKZy' },
+            { num: 10, arc: 'World Tournament Saga', title: '18’s Victory', jpTitle: '18号の勝利宣言!! サタンとの賭け', synopsis: 'Android 18 takes control of the tournament situation while tension rises around Babidi’s dark ship.', highlight: 'The tournament pauses as the threat escalates.', url: 'https://animetoonhindi.com/multiquality/?url=pPeRoa0fgMREBMy' },
+            { num: 11, arc: 'World Tournament Saga', title: 'Into the Spaceship', jpTitle: '宇宙船突入!! バビディの恐るべき罠', synopsis: 'Goku, Gohan, Vegeta, and Supreme Kai enter Babidi’s subterranean spaceship to prevent Majin Buu’s awakening.', highlight: 'The heroes descend into Babidi’s ship.', url: 'https://animetoonhindi.com/multiquality/?url=nuS4dP3QF1OxXwd' },
+            { num: 12, arc: 'World Tournament Saga', title: 'Pui Pui’s Trap', jpTitle: 'プイプイの10倍重力!! ベジータ一蹴', synopsis: 'Babidi teleports the fighters to a planet with ten times Earth’s gravity, where Vegeta easily crushes Pui Pui.', highlight: 'Vegeta defeats Pui Pui without breaking a sweat.', url: 'https://animetoonhindi.com/multiquality/?url=Ux875eufHEBciGz' },
+            { num: 13, arc: 'World Tournament Saga', title: 'Yakon’s Feast', jpTitle: '暗黒の魔獣ヤコン!! 悟空の超パワー炸裂', synopsis: 'Sent to a pitch-black world where Yakon feeds on energy, Goku powers up into a Super Saiyan and overloads the monster.', highlight: 'Goku defeats Yakon using Super Saiyan energy.', url: 'https://animetoonhindi.com/multiquality/?url=ByiAY7s09Rn8iSW' },
+            { num: 14, arc: 'World Tournament Saga', title: 'Dabura’s Challenge', jpTitle: '魔王ダーブラ登場!! 悟飯との死闘', synopsis: 'Demon King Dabura steps forward as Babidi’s strongest warrior, clashing fiercely with Gohan in the ship.', highlight: 'Gohan battles Demon King Dabura.', url: 'https://animetoonhindi.com/multiquality/?url=lJh5Ptppmx7PeUo' },
+            { num: 15, arc: 'Babidi & Majin Buu Saga', title: 'Evil in the Heart', jpTitle: 'ダーブラの唾!! クリリンとピッコロが石に', synopsis: 'Dabura’s spit turns Krillin and Piccolo to stone, and Babidi senses a spark of darkness inside Vegeta’s heart.', highlight: 'Piccolo and Krillin are petrified by Dabura.', url: 'https://animetoonhindi.com/multiquality/?url=rwv1Ndqg9i4NvCH' },
+            { num: 16, arc: 'Babidi & Majin Buu Saga', title: 'Vegeta’s Choice', jpTitle: 'ベジータの選択!! 魔人化への道', synopsis: 'Frustrated by his peaceful life and rival gap with Goku, Vegeta lets Babidi’s spell awaken his dormant power.', highlight: 'Vegeta becomes Majin Vegeta.', url: 'https://animetoonhindi.com/multiquality/?url=TQtZsvNiDzscyBO' },
+            { num: 17, arc: 'Babidi & Majin Buu Saga', title: 'The Pride of a Warrior', jpTitle: '誇り高きサイヤ人!! ベジータの宣言', synopsis: 'Majin Vegeta defies Babidi’s orders and demands that Goku fight him at full power in the wastelands.', highlight: 'Majin Vegeta forces a duel with Goku.', url: 'https://animetoonhindi.com/multiquality/?url=olfSGaf7065J7dC' },
+            { num: 18, arc: 'Babidi & Majin Buu Saga', title: 'Super Saiyan 2 Clash', jpTitle: '激突・超サイヤ人2!! 悟空対ベジータ', synopsis: 'Goku and Majin Vegeta unleash Super Saiyan 2 in a colossal battle that feeds energy straight into Majin Buu’s ball.', highlight: 'Goku and Majin Vegeta clash at Super Saiyan 2.', url: 'https://animetoonhindi.com/multiquality/?url=0ZDFdzfQA0c2Zhc' },
+            { num: 19, arc: 'Babidi & Majin Buu Saga', title: 'Buu Awakens', jpTitle: '魔人ブウ復活!! 恐ろしき繭の解放', synopsis: 'The energy from Goku and Vegeta’s duel completes Majin Buu’s charge, breaking open the cocoon to reveal the demon.', highlight: 'Majin Buu hatches from his cocoon.', url: 'https://animetoonhindi.com/multiquality/?url=ZfTgC6O11RHlJRk' },
+            { num: 20, arc: 'Babidi & Majin Buu Saga', title: 'The Terror of Buu', jpTitle: '無邪気すぎる怪物!! ダーブラも絶望', synopsis: 'Despite his playful demeanor, Majin Buu effortlessly overpowers Dabura and turns him into candy.', highlight: 'Buu defeats Dabura and turns him into candy.', url: 'https://animetoonhindi.com/multiquality/?url=ZqsmhqDFb8NgNZQ' },
+            { num: 21, arc: 'Babidi & Majin Buu Saga', title: 'Gohan’s Desperate Stand', jpTitle: '悟飯の苦戦!! 魔人ブウの圧倒的再生力', synopsis: 'Trying to stop Majin Buu before he grows stronger, Gohan is battered by Buu’s relentless blows and regeneration.', highlight: 'Gohan struggles against Majin Buu’s power.', url: 'https://animetoonhindi.com/multiquality/?url=KCkF8MQVHesFeYs' },
+            { num: 22, arc: 'Babidi & Majin Buu Saga', title: 'A Farewell to Arms', jpTitle: 'ベジータの決意!! すべてを懸けた一撃', synopsis: 'Realizing his battle with Goku helped unleash Buu, Vegeta knocks out Trunks and Goten to confront Buu alone.', highlight: 'Vegeta resolves to end Majin Buu himself.', url: 'https://animetoonhindi.com/multiquality/?url=r9RMtSODPSdlD31' },
+            { num: 23, arc: 'Babidi & Majin Buu Saga', title: 'Vegeta’s Sacrifice', jpTitle: 'さらば愛する者よ!! ベジータ散る', synopsis: 'Saying farewell to Bulma, Trunks, and Goku, Majin Vegeta detonates his entire life energy in a massive Final Explosion.', highlight: 'Majin Vegeta performs his Final Explosion.', url: 'https://animetoonhindi.com/multiquality/?url=DrOcvagv1ZIg7zA' },
+            { num: 24, arc: 'Babidi & Majin Buu Saga', title: 'Buu Reforms', jpTitle: '驚愕の再生!! 魔人ブウが元通りに…', synopsis: 'To everyone’s horror, Majin Buu’s scattered pieces pull themselves back together, leaving him completely unharmed.', highlight: 'Buu regenerates from Vegeta’s Final Explosion.', url: 'https://animetoonhindi.com/multiquality/?url=XGg8Gh3mwI9dqga' },
+            { num: 25, arc: 'Babidi & Majin Buu Saga', title: 'The Search for Dragon Balls', jpTitle: 'バビディの逆襲!! ドラゴンボール争奪戦', synopsis: 'With Buu at his side, Babidi forces the world to hand over the Dragon Balls while the Z-Fighters race to protect them.', highlight: 'Babidi uses global threats to hunt the Dragon Balls.', url: 'https://animetoonhindi.com/multiquality/?url=qEXXtzZ1VmgVdyd' }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'Opening Theme',
+                title: 'We Gotta Power — Hironobu Kageyama',
+                jp: 'OP「WE GOTTA POWER」影山ヒロノブ',
+                desc: 'Navigate to the Dragon Ball Z second opening theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+We+Gotta+Power+Opening'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Classic Theme',
+                title: 'Cha-La Head-Cha-La — Hironobu Kageyama',
+                jp: 'OP「CHA-LA HEAD-CHA-LA」影山ヒロノブ',
+                desc: 'Navigate to the iconic Dragon Ball Z opening theme sequence.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Cha-La+Head-Cha-La+Opening'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'Season 7 Highlights',
+                title: 'Majin Vegeta vs. Goku & Buu Awakening',
+                jp: 'ドラゴンボールZ 魔人ベジータ対悟空・魔人ブウ復活',
+                desc: 'Open Super Saiyan 2 Goku vs. Majin Vegeta and Majin Buu awakening clips.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Majin+Vegeta+vs+Goku+Super+Saiyan+2'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Watch Dragon Ball Z on Crunchyroll',
+                jp: 'ドラゴンボールZ 配信ページ',
+                desc: 'Open the official Crunchyroll series page for Dragon Ball Z.',
+                url: 'https://www.crunchyroll.com/series/G9VHN9PPW/dragon-ball-z'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Dragon Ball Official Site',
+                subtitle: 'en.dragon-ball-official.com — News, manga & anime',
+                url: 'https://en.dragon-ball-official.com/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Dragon Ball Z Hub',
+                subtitle: 'Stream Dragon Ball Z episodes',
+                url: 'https://www.crunchyroll.com/series/G9VHN9PPW/dragon-ball-z'
+            },
+            {
+                id: 'page-toei',
+                title: 'Toei Animation Dragon Ball Z',
+                subtitle: 'Official studio archive & character guide',
+                url: 'https://www.toei-anim.co.jp/tv/dragonz/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Dragon Ball Z Entry',
+                subtitle: 'Cast, voice actors & episode guide',
+                url: 'https://myanimelist.net/anime/813/Dragon_Ball_Z'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: '25th World Tournament Arena',
+                jp: '第25回天下一武道会会場',
+                tag: '7 Years Later',
+                detail: 'Papaya Island Stadium',
+                desc: 'Rebuilt and packed with spectators as Goku returns for one day and young Goten and Trunks stun the crowd.'
+            },
+            {
+                name: 'Babidi’s Underground Spaceship',
+                jp: 'バビディの宇宙船',
+                tag: 'Multi-Stage Trials',
+                detail: 'Deep Beneath Earth’s Surface',
+                desc: 'A dark fortress of gravity traps, shadow arenas, and sorcery where energy is gathered to awaken Majin Buu.'
+            },
+            {
+                name: 'Rocky Wastelands & Sacred World',
+                jp: '荒野の決戦地 ＆ 界王神界',
+                tag: 'Majin Clash & Z-Sword',
+                detail: 'Earth Badlands & Kai Realm',
+                desc: 'Where Goku and Majin Vegeta wage a Super Saiyan 2 clash while Gohan journeys to the Sacred World of the Kais.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'Majin Vegeta', title: 'Final Atonement', quote: 'Goodbye, Bulma… Trunks… and best of all, Kakarot.' },
+            { name: 'Son Goku', title: 'One-Day Challenger', quote: 'I came back to see everyone—and to fight you at full strength, Vegeta!' },
+            { name: 'Majin Buu', title: 'Awakened Demon', quote: 'Buu wants candy! Buu turn you into chocolate!' },
+            { name: 'Goten & Trunks', title: 'Young Super Saiyans', quote: 'We can turn Super Saiyan too—watch this!' },
+            { name: 'Gohan & Supreme Kai', title: 'Ship & Kai Realm', quote: 'We have to stop Babidi before Majin Buu breaks free!' },
+            { name: 'Mr. Satan', title: 'Unexpected Friend', quote: 'Hold on, Buu—let’s talk things over like friends!' }
+        ];
+
+        // =========================================================================
+        // 2. ADMIN LINK STATE & PERSISTENCE
+        // =========================================================================
+        let isAdminUnlocked = false;
+
+        function cloneDefaults() {
+            const episodesMap = {};
+            defaultEpisodesData.forEach(ep => {
+                episodesMap[ep.num] = ep.url;
+            });
+            return {
+                trailers: defaultTrailersData.map(t => ({ id: t.id, url: t.url })),
+                pages: defaultRelatedPagesData.map(p => ({ id: p.id, url: p.url })),
+                episodes: episodesMap
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach(item => {
+                        const target = base.trailers.find(t => t.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    parsed.pages.forEach(item => {
+                        const target = base.pages.find(p => p.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(parsed.episodes).forEach(k => {
+                        if (parsed.episodes[k]) base.episodes[k] = parsed.episodes[k];
+                    });
+                }
+            } catch (err) {
+                console.warn('Could not load saved links:', err);
+            }
+            return base;
+        }
+
+        let savedLinks = loadSavedLinks();
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (err) {
+                console.warn('Could not save links:', err);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        let selectedCharacterId = charactersData[0].id;
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-slate-900 border-orange-400 shadow-lg shadow-orange-950/40 ring-1 ring-orange-400/50'
+                                : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-white text-base mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-300 mb-1">${char.role}</div>
+                        <h3 class="font-serifDisplay font-bold text-base text-white">${char.name}</h3>
+                        <p class="font-jpSerif text-xs text-slate-400 mt-0.5">${char.jpName}</p>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.specialty}</span>
+                            <span class="text-xs text-slate-400">Base: ${current.apartment}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-slate-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm w-full p-5 rounded-2xl bg-slate-950/90 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-400 mb-2">Iconic Season 6 Line</div>
+                        <p class="text-sm text-slate-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER TECHNIQUES EXPLORER
+        // =========================================================================
+        let currentRoutineKey = 'cooking';
+
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const itemsList = document.getElementById('routineItemsList');
+            const data = routinesData[currentRoutineKey];
+            if (!visualCard || !itemsList || !data) return;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isSelected = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = isSelected
+                    ? 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-orange-500 text-zinc-950 shadow cursor-pointer'
+                    : 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer';
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4" style="background:${data.color}22; color:${data.color}; border:1px solid ${data.color}55;">
+                        ${data.jp}
+                    </span>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Cell Games &amp; Afterlife Archive</span>
+                    <span class="font-bold" style="color:${data.color};">6 Signature Arts</span>
+                </div>
+            `;
+
+            itemsList.innerHTML = data.items.map(item => `
+                <div class="bg-slate-900/80 border border-slate-800 hover:border-orange-500/40 rounded-2xl p-5 transition-all">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black tracking-wider px-2.5 py-0.5 rounded-md bg-slate-950 text-orange-400 border border-slate-800">${item.num}</span>
+                        <span class="font-jpSerif text-xs text-slate-400">${item.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${item.name}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 29 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-950 hover:bg-orange-500 text-slate-300 hover:text-zinc-950 border border-slate-800 hover:border-orange-300 transition-colors cursor-pointer">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-orange-400');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-orange-400'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All Season 7 Episodes 01 – 25'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Episodes`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center">
+                        <p class="text-slate-300 font-medium">No Season 7 episodes match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-orange-500 text-zinc-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `EP ${String(ep.num).padStart(2, '0')}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-slate-900/85 border border-slate-800 hover:border-orange-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-orange-500/15 border border-orange-400/35 text-orange-300 font-bold text-xs tracking-wider">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-sky-300/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `EPISODE ${String(ep.num).padStart(2, '0')}`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-orange-300 border border-orange-400/35">${epBadge}</span>
+                        <span class="text-xs text-slate-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-sky-300 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-300 mb-1">Key Battle Highlight</div>
+                        <p class="text-xs text-slate-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 1 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">← EP ${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < defaultEpisodesData.length ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">EP ${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-400 hover:to-amber-300 text-zinc-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Episode Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS, THEMES & OFFICIAL PAGES
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const href = current?.url || item.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group bg-slate-900/85 border border-slate-800 hover:border-orange-400/55 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-orange-500/15 text-orange-300 border border-orange-500/35">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-slate-400 group-hover:text-orange-300 transition-colors text-sm">↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-orange-200 transition-colors mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="font-jpSerif text-xs text-sky-300/90 mb-2">${item.jp}</p>
+                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-800/90 text-xs font-semibold text-orange-300 group-hover:translate-x-0.5 transition-transform">
+                                Navigate to External Page →
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const href = current?.url || page.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group p-4 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-sky-400/50 transition-all flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-sm text-white group-hover:text-sky-300 transition-colors">${page.title}</div>
+                                <div class="text-xs text-slate-400 mt-1">${page.subtitle}</div>
+                            </div>
+                            <span class="text-slate-400 group-hover:text-sky-300 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. RENDER BATTLEFIELDS & FACTIONS
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-orange-400">${loc.tag}</span>
+                            <span class="font-jpSerif text-xs text-slate-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-sky-300 font-medium mb-2">${loc.detail}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((member, idx) => `
+                    <button type="button" data-cast-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-orange-400/50 transition-all cursor-pointer">
+                        <div class="font-bold text-xs sm:text-sm text-white">${member.name}</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">${member.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-cast-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const member = castCircleData[Number(btn.getAttribute('data-cast-idx'))];
+                        if (member) {
+                            quoteBox.innerHTML = `<span class="text-orange-300 font-semibold not-italic">${member.name}:</span> “${member.quote}”`;
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 8. ADMIN LINK MANAGER (PIN 1960)
+        // =========================================================================
+        function showAdminBanner(msg) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = msg;
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin Active';
+            if (studio) {
+                studio.classList.remove('hidden');
+                renderAdminStudio();
+                studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin';
+            studio?.classList.add('hidden');
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const val = current?.url || item.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${item.title}</label>
+                            <input type="url" data-admin-trailer="${item.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-orange-400">
+                        </div>
+                    `;
+                }).join('');
+
+                trailersList.querySelectorAll('input[data-admin-trailer]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-trailer');
+                        const target = savedLinks.trailers.find(t => t.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Trailer / Theme navigation link updated.');
+                        }
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const val = current?.url || page.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${page.title}</label>
+                            <input type="url" data-admin-page="${page.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-sky-400">
+                        </div>
+                    `;
+                }).join('');
+
+                pagesList.querySelectorAll('input[data-admin-page]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-page');
+                        const target = savedLinks.pages.find(p => p.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Portal page URL updated.');
+                        }
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const val = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">EP ${String(ep.num).padStart(2, '0')} — ${ep.title}</label>
+                            <input type="url" data-admin-ep="${ep.num}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('input[data-admin-ep]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const epNum = Number(input.getAttribute('data-admin-ep'));
+                        if (epNum && input.value.trim()) {
+                            savedLinks.episodes[epNum] = input.value.trim();
+                            persistLinks();
+                            renderEpisodes();
+                            showAdminBanner(`Episode ${String(epNum).padStart(2, '0')} link updated.`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (Ki Embers / Blue Kamehameha Sparks)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.3;
+                p.y -= p.vy * 0.85;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(249, 115, 22, 0.6)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.9, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        // Admin PIN Modal Controls
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Dragon Ball Z Season 7 links restored.');
+        });
+
+        // Particle Theme Switcher
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'Ki Embers' : 'Kamehameha Sparks';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-orange-400 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-sky-400 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+</body>
+</html>
