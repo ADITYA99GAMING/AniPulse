@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z — All 15 Theatrical Movies Showcase</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0714;
+            color: #f5f3ff;
+            overflow-x: clip;
+        }
+
+        /* Subtle cinema projector & cosmic nebula grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(168, 85, 247, 0.12) 1px, transparent 1px),
+                radial-gradient(rgba(250, 204, 21, 0.08) 1px, #0b0714 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        /* God Aura Violet, Magenta & Cinema Gold Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #e879f9 0%, #a855f7 35%, #facc15 68%, #38bdf8 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.96); }
+            50% { opacity: 1; transform: scaleX(1.04); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0714;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b2f54;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+    </style>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-fuchsia-500 selection:text-white">
+
+    <!-- Ambient Cinema Reel & God Ki Spark Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-70"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0b0714]/90 border-b border-fuchsia-500/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-fuchsia-400 via-purple-600 to-amber-400 flex items-center justify-center shadow-lg shadow-purple-950/70 border border-fuchsia-200/50">
+                        <span class="font-jpSerif font-black text-white text-sm">映</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-fuchsia-100 group-hover:text-amber-300 transition-colors">
+                            DBZ CINEMA ARCHIVE
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-purple-300/75 font-jpSerif">
+                            ドラゴンボールZ — 劇場版 全15作品
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#characters" class="hover:text-orange-400 transition-colors">Movie Icons</a>
+                    <a href="#routines" class="hover:text-orange-400 transition-colors">Forms &amp; Arts</a>
+                    <a href="#episodes" class="hover:text-orange-400 transition-colors">15 Movies</a>
+                    <a href="#videos" class="hover:text-orange-400 transition-colors">Trailers &amp; Links</a>
+                    <a href="#circles" class="hover:text-orange-400 transition-colors">Worlds &amp; Rivals</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-purple-950/75 hover:bg-purple-900/80 text-fuchsia-200 border border-fuchsia-500/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse"></span>
+                        <span id="particleLabel">God Aura Sparks</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-amber-300 border border-amber-400/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section (Centered Title & Cinema God Aura Stage) -->
+    <section class="relative z-[2] overflow-hidden border-b border-purple-900/60">
+        <!-- Cinema Spotlight & Nebula Horizon Glow -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] rounded-full bg-fuchsia-600/15 blur-3xl"></div>
+            <div class="absolute top-16 left-1/4 w-[24rem] h-[24rem] rounded-full bg-amber-400/12 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#0b0714] via-[#0b0714]/85 to-transparent"></div>
+            <!-- Stylized Cinema Stage & Mountain Silhouette -->
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-50">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#2e1a47"/>
+                        <stop offset="100%" stop-color="#0b0714"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,195 L130,195 L175,115 L295,115 L340,185 L520,185 L575,90 L680,90 L735,175 L940,175 L995,110 L1145,110 L1195,190 L1440,190 L1440,280 L0,280 Z"/>
+                <circle cx="720" cy="72" r="24" fill="#e879f9" fill-opacity="0.22"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 text-center">
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-orange-950/70 border border-orange-400/40 text-orange-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-orange-950/50">
+                    <span class="font-jpSerif text-amber-300 font-black">Z</span>
+                    <span>Complete Theatrical Film Guide</span>
+                    <span class="px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-400/30 font-jpSerif text-[11px] text-sky-200">劇場版 全15作</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4 text-center">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">DRAGON BALL Z</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_26px_rgba(249,115,22,0.3)]">ALL 15 THEATRICAL MOVIES</span>
+                </h1>
+
+                <!-- Centered Ki Energy Ribbon Divider -->
+                <div class="animate-hero-rise-delay-1 flex items-center justify-center gap-3 my-5 w-full">
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-l from-orange-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.24em] text-amber-200/95 uppercase">ドラゴンボールZ · デッドゾーンから神と神・復活の「F」まで全15作</span>
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-r from-orange-400 via-amber-300 to-transparent animate-ribbon-pulse"></span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-slate-300 mb-6 text-center">
+                    ドラゴンボールZ 映画コレクション — ガーリックJr.、ブロリー、ジャネンバ、ビルス、ゴールデンフリーザ
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-center">
+                    From <strong class="text-orange-300">Dead Zone (1989)</strong> and <strong class="text-emerald-300">Broly: The Legendary Super Saiyan</strong> to <strong class="text-violet-300">Fusion Reborn</strong>, <strong class="text-sky-300">Battle of Gods</strong>, and <strong class="text-amber-300">Resurrection ‘F’</strong>, explore all <strong class="text-yellow-300">15 Dragon Ball Z theatrical films</strong> in one place.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-400 hover:from-orange-400 hover:to-yellow-300 text-zinc-950 font-bold text-sm shadow-lg shadow-orange-950/50 transition-all">
+                        Explore All 15 Movies
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-orange-200 border border-orange-500/35 font-semibold text-sm transition-all">
+                        ▶ Movie Trailers &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                        Movie Forms &amp; Arts
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick 15 Movies Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 pt-8 text-left">
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-orange-400">15 Films</div>
+                    <div class="text-xs text-slate-400 mt-1">DBZ Movies 01 – 15 (1989–2015)</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-emerald-300">Legendary SSJ</div>
+                    <div class="text-xs text-slate-400 mt-1">Broly Trilogy &amp; Bio-Warrior</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-violet-300">Super Gogeta</div>
+                    <div class="text-xs text-slate-400 mt-1">Stardust Breaker vs. Janemba</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-sky-400">SSG &amp; Blue</div>
+                    <div class="text-xs text-slate-400 mt-1">Battle of Gods &amp; Resurrection ‘F’</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">Theatrical Champions &amp; Rivals</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Movie Spotlight Figures</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                Select a character card to inspect their DBZ movie highlights, signature moves, and iconic quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Character Spotlight Panel -->
+        <div id="characterSpotlight" class="mt-8 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Martial Arts & Ki Techniques Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-slate-950/75 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-sky-400 text-xs font-bold tracking-widest uppercase">Theatrical Transformations &amp; Finishing Moves</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">DBZ Movies Forms &amp; Arts</h2>
+                </div>
+
+                <!-- Category Switcher Tabs -->
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-orange-500 text-zinc-950 shadow cursor-pointer">
+                        Classic &amp; Cooler / Broly Arts
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Gogeta, Dragon Fist &amp; Tapion
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Super Saiyan God &amp; Blue Era
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Left Visual Summary Card -->
+                <div id="routineVisualCard" class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Right 6 Technique Cards -->
+                <div id="routineItemsList" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 15 Movies Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">Complete Theatrical Filmography</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 15 Dragon Ball Z Movies (M01 – M15)</h2>
+                <p class="text-slate-400 text-sm mt-2">Every Dragon Ball Z theatrical movie from 1989 to 2015 is displayed below with instant movie navigation, era filtering, and external links.</p>
+            </div>
+
+            <!-- Arc Filter & Search Controls -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search movie title, villain, or number..."
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-400 w-full sm:w-64">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-orange-400 cursor-pointer">
+                    <option value="ALL">All 15 DBZ Movies (M01–M15)</option>
+                    <option value="Saiyan & Frieza Era">Era I: Saiyan &amp; Frieza Era (M01–M06)</option>
+                    <option value="Cell & Buu Era">Era II: Cell &amp; Buu Era (M07–M13)</option>
+                    <option value="Modern God Era">Era III: Battle of Gods &amp; Revival ‘F’ (M14–M15)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Movie Jump Bar -->
+        <div class="mb-8 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-1.5" id="quickEpisodePills">
+                <!-- Populated by JS (M01 - M15 quick jump pills) -->
+            </div>
+            <div id="episodeNavIndicator" class="text-xs font-semibold text-orange-300 shrink-0">
+                Showing All 15 DBZ Movies 01 – 15
+            </div>
+        </div>
+
+        <!-- All 15 Movies Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-slate-950/80 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-sky-400 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Movie Trailers, Themes &amp; Official Pages</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Navigate directly to Dragon Ball Z movie trailers, classic themes, and official pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-slate-900/95 border border-orange-500/45 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-orange-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Changes save automatically to your browser and update all navigation cards immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <!-- 3-Column Admin Link Editors -->
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 4 Trailers & Themes Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-orange-400 mb-3">4 Trailers &amp; Theme Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- Related Pages Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-sky-400 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <!-- All 15 Movies Link Editor -->
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">All 15 Movie Links (M01 – M15)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Main Trailer & Theme Navigation Cards -->
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Official & Related Pages Bar -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-slate-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Battlefields & Factions -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-orange-400 text-xs font-bold tracking-widest uppercase">New Planet Vegeta, Afterlife &amp; Beerus’s World</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Theatrical Worlds &amp; Rivals</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left: Key Movie Locations -->
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Iconic Movie Settings</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Right: Movie Icons & Villains -->
+            <div class="lg:col-span-7 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Key Figures Across the 15 Movies</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-orange-500/15 text-orange-300 border border-orange-500/35 font-semibold">Movie Roster</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-sm text-slate-300 italic">
+                    Select any character above to read their DBZ movie line.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-slate-800/90 bg-[#05080f] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-orange-400 font-bold">四星</span>
+                <span>Dragon Ball Z — All 15 Theatrical Movies Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-full bg-orange-500/20 border border-orange-400/45 flex items-center justify-center text-orange-300 font-bold text-xs">
+                    四星
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white tracking-widest focus:outline-none focus:border-orange-400">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-orange-500 hover:bg-orange-400 text-zinc-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. DRAGON BALL Z ALL 15 MOVIES DATA (Characters, Forms, 15 Films, Links)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'dbz_all_15_movies_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'goku-movies',
+                name: 'Son Goku (Movie Hero)',
+                jpName: '孫悟空（劇場版）',
+                role: 'Savior Across All 15 Films',
+                specialty: 'Spirit Bomb, Super Dragon Fist & Super Saiyan God',
+                apartment: 'Earth, Afterlife & Beerus’s Planet',
+                accent: 'from-yellow-300 to-orange-500',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-400/50',
+                quote: 'Even if the odds are stacked against us, there’s always a way to push past our limits!',
+                bio: 'From rescuing Gohan from Garlic Jr. and defeating Cooler and Broly to unleashing Super Dragon Fist against Hirudegarn and ascending to Super Saiyan God against Beerus, Goku anchors every DBZ film.'
+            },
+            {
+                id: 'broly-lssj',
+                name: 'Broly (Legendary Super Saiyan)',
+                jpName: 'ブロリー（伝説の超サイヤ人）',
+                role: 'Overflowing Saiyan Power',
+                specialty: 'Gigantic Meteor, Eraser Cannon & Boundless Ki',
+                apartment: 'New Planet Vegeta & Tropical Bio-Lab',
+                accent: 'from-lime-400 to-emerald-600',
+                badgeColor: 'bg-emerald-950/90 text-emerald-200 border-emerald-400/50',
+                quote: 'My power is overflowing… Kakarot!!',
+                bio: 'Born with an astronomical power level tied to Goku’s crying as an infant, Broly overwhelms the Z-Fighters across three movies before falling to a combined Spirit Bomb in Second Coming.'
+            },
+            {
+                id: 'gogeta-janemba',
+                name: 'Super Gogeta & Janemba',
+                jpName: '超ゴジータ ＆ スーパージャネンバ',
+                role: 'Fusion Champion & Afterlife Demon',
+                specialty: 'Stardust Breaker (Soul Punisher) & Dimension Rifts',
+                apartment: 'Afterlife & King Yemma’s Palace',
+                accent: 'from-violet-400 to-amber-300',
+                badgeColor: 'bg-violet-950/90 text-violet-200 border-violet-400/50',
+                quote: 'I am neither Goku nor Vegeta—I am the one who will destroy you!',
+                bio: 'When an afterlife soul-cleansing accident transforms a young ogre into Janemba, Goku and Vegeta perform the Fusion Dance to become Super Gogeta and purify him with Stardust Breaker.'
+            },
+            {
+                id: 'beerus-whis',
+                name: 'Lord Beerus & Whis',
+                jpName: '破壊神ビルス ＆ ウイス',
+                role: 'God of Destruction & Angel Attendant',
+                specialty: 'Sphere of Destruction & Temporal Rewind',
+                apartment: 'Beerus’s World & Capsule Corp',
+                accent: 'from-purple-500 to-indigo-400',
+                badgeColor: 'bg-purple-950/90 text-purple-200 border-purple-400/50',
+                quote: 'Before creation comes destruction—and I haven’t even used seventy percent of my power.',
+                bio: 'Awakening from a decades-long nap in search of the Super Saiyan God, Beerus tests Goku on Earth while Whis guides Goku and Vegeta’s training and rewinds time when Earth is threatened.'
+            },
+            {
+                id: 'cooler-frieza',
+                name: 'Cooler & Golden Frieza',
+                jpName: 'クウラ ＆ ゴールデンフリーザ',
+                role: 'Frieza’s Brother & Resurrected Tyrant',
+                specialty: 'Meta-Cooler Core & Golden Super Evolution',
+                apartment: 'Namekian Planet & Earth Skies',
+                accent: 'from-fuchsia-500 to-amber-400',
+                badgeColor: 'bg-fuchsia-950/90 text-fuchsia-200 border-fuchsia-400/50',
+                quote: 'You may have surpassed me once, Goku—now witness my Golden evolution!',
+                bio: 'Cooler invades Earth and New Namek in Final Form and Meta-Cooler guises, while Frieza is revived by the Dragon Balls in Resurrection ‘F’ to unveil his radiant Golden form.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'Classic & Cooler / Broly Arts',
+                jp: '初期劇場版・クウラ・ブロリーの必殺技',
+                desc: 'Early DBZ films paired classic martial arts with dramatic transformations like Cooler’s Final Form and Broly’s Legendary Super Saiyan.',
+                color: '#f97316',
+                items: [
+                    { num: '01', name: 'Dead Zone Spirit Bomb', jp: 'デッドゾーンの元気玉', desc: 'Goku and Piccolo team up to defeat Garlic Jr. and seal his Dead Zone vortex.' },
+                    { num: '02', name: 'Cooler’s Final Form & Supernova', jp: 'クウラ最終形態・スーパーノヴァ', desc: 'Cooler dons an armored mask and hurls a massive energy star to destroy Goku and the planet.' },
+                    { num: '03', name: 'Big Gete Star Swarm', jp: 'ビッグゲテスターの分身軍団', desc: 'Hundreds of Meta-Coolers repair themselves using the Big Gete Star’s energy network.' },
+                    { num: '04', name: 'Gigantic Meteor', jp: 'ギガンティックミーティア', desc: 'Legendary Super Saiyan Broly charges a dense emerald-gold sphere that detonates on impact.' },
+                    { num: '05', name: 'Family Kamehameha', jp: '親子三大かめはめ波', desc: 'Goku, Gohan, and Goten combine their beams to send Broly flying into the sun.' },
+                    { num: '06', name: 'Bojack’s Galactic Buster', jp: 'ボージャックの銀河決戦', desc: 'Escaped Hera Clan pirates battle the Z-Fighters at a tournament before Gohan breaks through.' }
+                ]
+            },
+            seasons: {
+                title: 'Gogeta, Dragon Fist & Tapion',
+                jp: '超ゴジータ・龍拳・タピオンの伝説',
+                desc: 'Late Z films introduced Fusion Reborn’s Super Gogeta and Wrath of the Dragon’s golden Dragon Fist against Hirudegarn.',
+                color: '#a855f7',
+                items: [
+                    { num: '01', name: 'Stardust Breaker (Soul Punisher)', jp: 'ソウルパニッシャー', desc: 'Super Gogeta forms a prism of rainbow light that dissolves evil Ki and purifies Janemba.' },
+                    { num: '02', name: 'Super Dragon Fist', jp: '龍拳爆発', desc: 'Super Saiyan 3 Goku punches through Hirudegarn with a roaring golden Dragon of energy.' },
+                    { num: '03', name: 'Tapion’s Ocarina & Hirudegarn', jp: 'タピオンのオカリナとヒルデガーン', desc: 'A mystical flute seals the giant phantom monster Hirudegarn inside Tapion’s body.' },
+                    { num: '04', name: 'Broly’s Second Coming Clash', jp: 'ブロリー二作目の激突', desc: 'Unfrozen on Earth, Broly battles Goten, Trunks, Videl, and Gohan before the final blast.' },
+                    { num: '05', name: 'Bio-Broly Containment', jp: 'バイオブロリーの撃破', desc: 'A clone of Broly is defeated using seawater against his bio-engineered sludge body.' },
+                    { num: '06', name: 'Janemba’s Dimension Blade', jp: 'ジャネンバの次元刀', desc: 'Janemba bends reality and wields a reality-warping blade in the altered afterlife.' }
+                ]
+            },
+            promises: {
+                title: 'Super Saiyan God & Blue Era',
+                jp: '超サイヤ人ゴッド・ゴッドSSの覚醒',
+                desc: 'Movies 14 and 15 ushered in divine transformations, God of Destruction Beerus, and Golden Frieza.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: 'Super Saiyan God Ritual', jp: '超サイヤ人ゴッドの儀式', desc: 'Six righteous Saiyans channel their light into Goku to unlock crimson-haired divine Ki.' },
+                    { num: '02', name: 'Beerus’s Sphere of Destruction', jp: '破壊神ビルスの破壊玉', desc: 'A dense purple energy orb capable of erasing matter and testing Earth’s limits.' },
+                    { num: '03', name: 'Super Saiyan God Super Saiyan (Blue)', jp: '超サイヤ人ゴッド超サイヤ人', desc: 'Combining Super Saiyan with God Ki gives Goku and Vegeta serene, high-control power.' },
+                    { num: '04', name: 'Golden Frieza Evolution', jp: 'ゴールデンフリーザ', desc: 'After four months of training, Frieza adopts a radiant gold form rivaling Super Saiyan Blue.' },
+                    { num: '05', name: 'Whis’s Temporal Rewind', jp: 'ウイスの時戻し', desc: 'Whis rewinds time by three minutes after Earth is destroyed so Goku can finish Frieza.' },
+                    { num: '06', name: 'Beerus’s Birthday Banquet', jp: 'ビルス様のお誕生日会', desc: 'A lighthearted clash between a God of Destruction and Earth’s warriors ends in celebration.' }
+                ]
+            }
+        };
+
+        const defaultEpisodesData = [
+            { num: 1, arc: 'Saiyan & Frieza Era', title: 'Dead Zone (1989)', jpTitle: 'ドラゴンボールZ（オラの悟飯をかえせ!!）', synopsis: 'Garlic Jr. kidnaps Gohan to claim his Dragon Ball hat and open the Dead Zone, forcing Goku and Piccolo into an uneasy alliance.', highlight: 'Goku and Piccolo team up to defeat Garlic Jr. and seal the Dead Zone.', url: 'https://animetoonhindi.com/multiquality/?url=pseaC77a60uliAx' },
+            { num: 2, arc: 'Saiyan & Frieza Era', title: 'The World’s Strongest (1990)', jpTitle: 'ドラゴンボールZ この世で一番強いヤツ', synopsis: 'Dr. Wheelo’s discarnate brain abducts Master Roshi and Goku to transfer their bodies, culminating in a Spirit Bomb in the snow.', highlight: 'Goku fires a Spirit Bomb from the sky to defeat Dr. Wheelo.', url: 'https://animetoonhindi.com/multiquality/?url=0NApk5cjBc2NYZf' },
+            { num: 3, arc: 'Saiyan & Frieza Era', title: 'The Tree of Might (1990)', jpTitle: 'ドラゴンボールZ 地球まるごと超決戦', synopsis: 'Turles plants the Tree of Might on Earth to harvest its power fruit, pushing Goku to draw energy from the planet and the tree itself.', highlight: 'Goku channels the Tree of Might’s energy into a Spirit Bomb against Turles.', url: 'https://animetoonhindi.com/multiquality/?url=0KjFoVfjKXdiknN' },
+            { num: 4, arc: 'Saiyan & Frieza Era', title: 'Lord Slug (1991)', jpTitle: 'ドラゴンボールZ 超サイヤ人だ孫悟空', synopsis: 'A giant evil Namekian named Lord Slug invades Earth to restore his youth; Goku briefly enters an early Super Saiyan state (Pseudo Super Saiyan).', highlight: 'Goku triggers Pseudo Super Saiyan and defeats Lord Slug with a Spirit Bomb.', url: 'https://animetoonhindi.com/multiquality/?url=yf4FYtjx4rvAoMR' },
+            { num: 5, arc: 'Saiyan & Frieza Era', title: 'Cooler’s Revenge (1991)', jpTitle: 'ドラゴンボールZ とびっきりの最強対最強', synopsis: 'Frieza’s older brother Cooler tracks Goku to Earth and unleashes a fourth transformation—Final Form Cooler—leading to Goku’s Super Saiyan breakthrough.', highlight: 'Super Saiyan Goku blasts Cooler’s Supernova into the sun.', url: 'https://animetoonhindi.com/multiquality/?url=ipPBWQwy3BiECg5' },
+            { num: 6, arc: 'Saiyan & Frieza Era', title: 'The Return of Cooler (1992)', jpTitle: 'ドラゴンボールZ 激突!!100億パワーの戦士たち', synopsis: 'When New Namek is attacked by the Big Gete Star, Goku and Vegeta unite to fight legions of Meta-Coolers and the giant core.', highlight: 'Goku and Vegeta team up against the Big Gete Star core.', url: 'https://animetoonhindi.com/multiquality/?url=ZsrMI3HYHtK8BVl' },
+            { num: 7, arc: 'Cell & Buu Era', title: 'Super Android 13! (1992)', jpTitle: 'ドラゴンボールZ 極限バトル!!三大超サイヤ人', synopsis: 'Dr. Gero’s remaining supercomputer activates Androids 13, 14, and 15; Goku, Vegeta, and Trunks fight until Goku absorbs a Spirit Bomb.', highlight: 'Spirit Bomb Super Saiyan Goku defeats Super Android 13.', url: 'https://animetoonhindi.com/multiquality/?url=wJKUFzZt3UIp03r' },
+            { num: 8, arc: 'Cell & Buu Era', title: 'Broly — The Legendary Super Saiyan (1993)', jpTitle: 'ドラゴンボールZ 燃えつきろ!!熱戦・烈戦・超激戦', synopsis: 'Paragus lures the Z-Fighters to New Planet Vegeta as part of his revenge plot, only for his own son Broly to erupt as the Legendary Super Saiyan.', highlight: 'Broly’s Legendary Super Saiyan debut against Goku and the Z-Fighters.', url: 'https://animetoonhindi.com/multiquality/?url=Jg2fu5pkKq5kUZU' },
+            { num: 9, arc: 'Cell & Buu Era', title: 'Bojack Unbound (1993)', jpTitle: 'ドラゴンボールZ 銀河ギリギリ!!ぶっちぎりの凄い奴', synopsis: 'Freed when Goku sacrificed himself against Cell, Bojack and the Hera Clan crash a martial arts tournament until Super Saiyan 2 Gohan takes charge.', highlight: 'Super Saiyan 2 Gohan defeats Bojack with a massive Kamehameha.', url: 'https://animetoonhindi.com/multiquality/?url=7lg7ByazYS9x9Lq' },
+            { num: 10, arc: 'Cell & Buu Era', title: 'Broly — Second Coming (1994)', jpTitle: 'ドラゴンボールZ 危険なふたり!超戦士はねむれない', synopsis: 'Broly’s pod crashes onto Earth near a village visited by Goten, Trunks, and Videl, culminating in a three-generation Family Kamehameha.', highlight: 'Goku, Gohan, and Goten unite for the Family Kamehameha.', url: 'https://animetoonhindi.com/multiquality/?url=h0rdngOMo1nzkLF' },
+            { num: 11, arc: 'Cell & Buu Era', title: 'Bio-Broly (1994)', jpTitle: 'ドラゴンボールZ 超戦士撃破!!勝つのはオレだ', synopsis: 'A wealthy lord’s bio-engineering lab clones Broly with unstable culture fluid, forcing Android 18, Krillin, Goten, and Trunks to fight back.', highlight: 'Android 18 and the young Saiyans stop Bio-Broly.', url: 'https://animetoonhindi.com/multiquality/?url=ryszcj3eBZdeOPd' },
+            { num: 12, arc: 'Cell & Buu Era', title: 'Fusion Reborn (1995)', jpTitle: 'ドラゴンボールZ 復活のフュージョン!!悟空とベジータ', synopsis: 'An afterlife accident twists the Other World into Janemba; Goku and Vegeta fuse into Super Gogeta to defeat him with Stardust Breaker.', highlight: 'Super Gogeta debuts and purifies Janemba.', url: 'https://animetoonhindi.com/multiquality/?url=FiSNbSIREgRQ4oL' },
+            { num: 13, arc: 'Cell & Buu Era', title: 'Wrath of the Dragon (1995)', jpTitle: 'ドラゴンボールZ 龍拳爆発!!悟空がやらねば誰がやる', synopsis: 'Mysterious warrior Tapion arrives with a music box sealing Hirudegarn; Goku unleashes Super Saiyan 3 and the Dragon Fist to save the city.', highlight: 'Super Saiyan 3 Goku finishes Hirudegarn with the Dragon Fist.', url: 'https://animetoonhindi.com/multiquality/?url=lGWCo911qG2Z9dk' },
+            { num: 14, arc: 'Modern God Era', title: 'Battle of Gods (2013)', jpTitle: 'ドラゴンボールZ 神と神', synopsis: 'Beerus, the God of Destruction, visits Earth seeking the Super Saiyan God, pushing Goku to unlock divine crimson power in a battle of gods.', highlight: 'Goku awakens Super Saiyan God and battles Lord Beerus.', url: 'https://animetoonhindi.com/multiquality/?url=h7HGEUZWIPZZ0sR' },
+            { num: 15, arc: 'Modern God Era', title: 'Resurrection ‘F’ (2015)', jpTitle: 'ドラゴンボールZ 復活の「F」', synopsis: 'Frieza is revived by his remnants and returns to Earth with Golden Frieza power, leading to Super Saiyan Blue clashes and Whis’s time rewind.', highlight: 'Super Saiyan Blue Goku and Vegeta confront Golden Frieza.', url: 'https://animetoonhindi.com/multiquality/?url=6ayFxG34NNrbfKV' }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'Movie Theme',
+                title: 'Cha-La Head-Cha-La — Hironobu Kageyama',
+                jp: '劇場版テーマ「CHA-LA HEAD-CHA-LA」',
+                desc: 'Navigate to the signature Dragon Ball Z movie theme song.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Movies+Cha-La+Head-Cha-La'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Broly & Gogeta',
+                title: 'Broly & Super Gogeta Movie Highlights',
+                jp: '劇場版 ブロリー・超ゴジータ 名場面',
+                desc: 'Open highlights featuring Broly and Super Gogeta’s Stardust Breaker.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Super+Gogeta+Broly+Movie'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'God Era Films',
+                title: 'Battle of Gods & Resurrection ‘F’ Trailers',
+                jp: '神と神・復活の「F」予告編',
+                desc: 'Open trailers and clips for Battle of Gods and Resurrection ‘F’.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Z+Battle+of+Gods+Resurrection+F+Trailer'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Watch Dragon Ball Z on Crunchyroll',
+                jp: 'ドラゴンボールZ 配信ページ',
+                desc: 'Open the official Crunchyroll series page for Dragon Ball Z.',
+                url: 'https://www.crunchyroll.com/series/G9VHN9PPW/dragon-ball-z'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Dragon Ball Official Site',
+                subtitle: 'en.dragon-ball-official.com — News, manga & anime',
+                url: 'https://en.dragon-ball-official.com/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Dragon Ball Z Hub',
+                subtitle: 'Stream Dragon Ball Z episodes & specials',
+                url: 'https://www.crunchyroll.com/series/G9VHN9PPW/dragon-ball-z'
+            },
+            {
+                id: 'page-toei',
+                title: 'Toei Animation Dragon Ball Z',
+                subtitle: 'Official studio archive & movie history',
+                url: 'https://www.toei-anim.co.jp/tv/dragonz/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Dragon Ball Z Entry',
+                subtitle: 'Cast, staff & theatrical film listings',
+                url: 'https://myanimelist.net/anime/813/Dragon_Ball_Z'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: 'New Planet Vegeta & Tropical Labs',
+                jp: '新惑星ベジータ ＆ バイオ研究所',
+                tag: 'Broly Trilogy Grounds',
+                detail: 'Outer Space & Earth Islands',
+                desc: 'Settings of Broly’s Legendary Super Saiyan rampages and bio-engineered clashes across the Broly film trilogy.'
+            },
+            {
+                name: 'Altered Afterlife & King Yemma’s World',
+                jp: '異変のあの世 ＆ 閻魔大王の館',
+                tag: 'Fusion Reborn & Dragon Fist',
+                detail: 'Spirit Realm & City Ruins',
+                desc: 'Where Janemba’s distortion takes hold, Super Gogeta purifies evil Ki, and Goku unleashes the Dragon Fist against Hirudegarn.'
+            },
+            {
+                name: 'Beerus’s Planet & Earth Skies',
+                jp: 'ビルス星 ＆ 地球上空',
+                tag: 'Battle of Gods & Revival ‘F’',
+                detail: 'Divine & Modern Era',
+                desc: 'Where Goku trains for Super Saiyan God and faces Golden Frieza alongside Vegeta, Beerus, and Whis.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'Son Goku', title: '15-Movie Hero', quote: 'Let’s see how far we can push our power together!' },
+            { name: 'Broly', title: 'Legendary Super Saiyan', quote: 'My power is overflowing… Kakarot!!' },
+            { name: 'Super Gogeta', title: 'Fusion Reborn', quote: 'Every ounce of evil in you ends right here!' },
+            { name: 'Lord Beerus', title: 'God of Destruction', quote: 'A Super Saiyan God at last—this might actually be fun.' },
+            { name: 'Golden Frieza', title: 'Resurrection ‘F’', quote: 'Witness the terror of my Golden evolution!' },
+            { name: 'Tapion', title: 'Wrath of the Dragon', quote: 'Play the ocarina and keep Hirudegarn sealed away!' }
+        ];
+
+        // =========================================================================
+        // 2. ADMIN LINK STATE & PERSISTENCE
+        // =========================================================================
+        let isAdminUnlocked = false;
+
+        function cloneDefaults() {
+            const episodesMap = {};
+            defaultEpisodesData.forEach(ep => {
+                episodesMap[ep.num] = ep.url;
+            });
+            return {
+                trailers: defaultTrailersData.map(t => ({ id: t.id, url: t.url })),
+                pages: defaultRelatedPagesData.map(p => ({ id: p.id, url: p.url })),
+                episodes: episodesMap
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach(item => {
+                        const target = base.trailers.find(t => t.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    parsed.pages.forEach(item => {
+                        const target = base.pages.find(p => p.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(parsed.episodes).forEach(k => {
+                        if (parsed.episodes[k]) base.episodes[k] = parsed.episodes[k];
+                    });
+                }
+            } catch (err) {
+                console.warn('Could not load saved links:', err);
+            }
+            return base;
+        }
+
+        let savedLinks = loadSavedLinks();
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (err) {
+                console.warn('Could not save links:', err);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        let selectedCharacterId = charactersData[0].id;
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-slate-900 border-orange-400 shadow-lg shadow-orange-950/40 ring-1 ring-orange-400/50'
+                                : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-white text-base mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-300 mb-1">${char.role}</div>
+                        <h3 class="font-serifDisplay font-bold text-base text-white">${char.name}</h3>
+                        <p class="font-jpSerif text-xs text-slate-400 mt-0.5">${char.jpName}</p>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.specialty}</span>
+                            <span class="text-xs text-slate-400">Base: ${current.apartment}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-slate-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm w-full p-5 rounded-2xl bg-slate-950/90 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-400 mb-2">Iconic Season 8 Line</div>
+                        <p class="text-sm text-slate-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER TECHNIQUES EXPLORER
+        // =========================================================================
+        let currentRoutineKey = 'cooking';
+
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const itemsList = document.getElementById('routineItemsList');
+            const data = routinesData[currentRoutineKey];
+            if (!visualCard || !itemsList || !data) return;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isSelected = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = isSelected
+                    ? 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-orange-500 text-zinc-950 shadow cursor-pointer'
+                    : 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer';
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4" style="background:${data.color}22; color:${data.color}; border:1px solid ${data.color}55;">
+                        ${data.jp}
+                    </span>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Kid Buu &amp; Finale Archive</span>
+                    <span class="font-bold" style="color:${data.color};">6 Signature Arts</span>
+                </div>
+            `;
+
+            itemsList.innerHTML = data.items.map(item => `
+                <div class="bg-slate-900/80 border border-slate-800 hover:border-orange-500/40 rounded-2xl p-5 transition-all">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black tracking-wider px-2.5 py-0.5 rounded-md bg-slate-950 text-orange-400 border border-slate-800">${item.num}</span>
+                        <span class="font-jpSerif text-xs text-slate-400">${item.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${item.name}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 38 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        // 5. RENDER ALL 34 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-950 hover:bg-orange-500 text-slate-300 hover:text-zinc-950 border border-slate-800 hover:border-orange-300 transition-colors cursor-pointer">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-orange-400');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-orange-400'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All 15 DBZ Movies 01 – 15'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Movies`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center">
+                        <p class="text-slate-300 font-medium">No Dragon Ball Z movies match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-orange-500 text-zinc-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `M${String(ep.num).padStart(2, '0')}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-slate-900/85 border border-slate-800 hover:border-orange-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-orange-500/15 border border-orange-400/35 text-orange-300 font-bold text-xs tracking-wider">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-sky-300/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `MOVIE ${String(ep.num).padStart(2, '0')}`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-orange-300 border border-orange-400/35">${epBadge}</span>
+                        <span class="text-xs text-slate-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-sky-300 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-orange-300 mb-1">Key Movie Highlight</div>
+                        <p class="text-xs text-slate-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 1 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">← M${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < defaultEpisodesData.length ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">M${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-400 hover:to-amber-300 text-zinc-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Movie Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS, THEMES & OFFICIAL PAGES
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const href = current?.url || item.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group bg-slate-900/85 border border-slate-800 hover:border-orange-400/55 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-orange-500/15 text-orange-300 border border-orange-500/35">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-slate-400 group-hover:text-orange-300 transition-colors text-sm">↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-orange-200 transition-colors mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="font-jpSerif text-xs text-sky-300/90 mb-2">${item.jp}</p>
+                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-800/90 text-xs font-semibold text-orange-300 group-hover:translate-x-0.5 transition-transform">
+                                Navigate to External Page →
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const href = current?.url || page.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group p-4 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-sky-400/50 transition-all flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-sm text-white group-hover:text-sky-300 transition-colors">${page.title}</div>
+                                <div class="text-xs text-slate-400 mt-1">${page.subtitle}</div>
+                            </div>
+                            <span class="text-slate-400 group-hover:text-sky-300 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. RENDER BATTLEFIELDS & FACTIONS
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-orange-400">${loc.tag}</span>
+                            <span class="font-jpSerif text-xs text-slate-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-sky-300 font-medium mb-2">${loc.detail}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((member, idx) => `
+                    <button type="button" data-cast-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-orange-400/50 transition-all cursor-pointer">
+                        <div class="font-bold text-xs sm:text-sm text-white">${member.name}</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">${member.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-cast-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const member = castCircleData[Number(btn.getAttribute('data-cast-idx'))];
+                        if (member) {
+                            quoteBox.innerHTML = `<span class="text-orange-300 font-semibold not-italic">${member.name}:</span> “${member.quote}”`;
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 8. ADMIN LINK MANAGER (PIN 1960)
+        // =========================================================================
+        function showAdminBanner(msg) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = msg;
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin Active';
+            if (studio) {
+                studio.classList.remove('hidden');
+                renderAdminStudio();
+                studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin';
+            studio?.classList.add('hidden');
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const val = current?.url || item.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${item.title}</label>
+                            <input type="url" data-admin-trailer="${item.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-orange-400">
+                        </div>
+                    `;
+                }).join('');
+
+                trailersList.querySelectorAll('input[data-admin-trailer]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-trailer');
+                        const target = savedLinks.trailers.find(t => t.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Trailer / Theme navigation link updated.');
+                        }
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const val = current?.url || page.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${page.title}</label>
+                            <input type="url" data-admin-page="${page.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-sky-400">
+                        </div>
+                    `;
+                }).join('');
+
+                pagesList.querySelectorAll('input[data-admin-page]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-page');
+                        const target = savedLinks.pages.find(p => p.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Portal page URL updated.');
+                        }
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const val = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">M${String(ep.num).padStart(2, '0')} — ${ep.title}</label>
+                            <input type="url" data-admin-ep="${ep.num}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('input[data-admin-ep]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const epNum = Number(input.getAttribute('data-admin-ep'));
+                        if (epNum && input.value.trim()) {
+                            savedLinks.episodes[epNum] = input.value.trim();
+                            persistLinks();
+                            renderEpisodes();
+                            showAdminBanner(`Movie ${String(epNum).padStart(2, '0')} link updated.`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (Ki Embers / Blue Kamehameha Sparks)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.3;
+                p.y -= p.vy * 0.85;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(217, 70, 239, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.9, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(250, 204, 21, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        // Admin PIN Modal Controls
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Dragon Ball Z All 15 Movies links restored.');
+        });
+
+        // Particle Theme Switcher
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'God Aura Sparks' : 'Cinema Gold Dust';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-amber-300 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+</body>
+</html>
