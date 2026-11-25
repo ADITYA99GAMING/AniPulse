@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Super — Season 2 (Golden Frieza Saga • 9 Episodes)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0914;
+            color: #fef9c3;
+            overflow-x: clip;
+        }
+
+        /* Golden Frieza amber-gold & royal violet grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(250, 204, 21, 0.11) 1px, transparent 1px),
+                radial-gradient(rgba(168, 85, 247, 0.10) 1px, #0b0914 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        /* Golden Frieza Gold, Royal Violet & Super Saiyan Blue Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #facc15 0%, #c084fc 38%, #38bdf8 74%, #f59e0b 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.96); }
+            50% { opacity: 1; transform: scaleX(1.04); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0914;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a16207;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #facc15;
+        }
+    </style>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-amber-400 selection:text-slate-950">
+
+    <!-- Ambient Golden Spark & Violet Aura Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-70"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#0b0914]/90 border-b border-amber-400/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-300 via-purple-400 to-sky-400 flex items-center justify-center shadow-lg shadow-amber-950/70 border border-amber-200/50">
+                        <span class="font-jpSerif font-black text-slate-950 text-sm">超</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-amber-100 group-hover:text-amber-300 transition-colors">
+                            DRAGON BALL SUPER
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-purple-300/80 font-jpSerif">
+                            ドラゴンボール超 — ゴールデンフリーザ編 (第2期・全9話)
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#characters" class="hover:text-amber-300 transition-colors">Key Figures</a>
+                    <a href="#routines" class="hover:text-amber-300 transition-colors">Revival &amp; Gold Arts</a>
+                    <a href="#episodes" class="hover:text-amber-300 transition-colors">9 Episodes</a>
+                    <a href="#videos" class="hover:text-amber-300 transition-colors">Themes &amp; Links</a>
+                    <a href="#circles" class="hover:text-amber-300 transition-colors">Worlds &amp; Factions</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-950/70 hover:bg-amber-900/75 text-amber-200 border border-amber-400/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+                        <span id="particleLabel">Golden Frieza Sparks</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-purple-300 border border-purple-400/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-[2] overflow-hidden border-b border-amber-950/80">
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] rounded-full bg-amber-500/14 blur-3xl"></div>
+            <div class="absolute top-16 left-1/4 w-[24rem] h-[24rem] rounded-full bg-purple-500/14 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#0b0914] via-[#0b0914]/85 to-transparent"></div>
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-50">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#78350f"/>
+                        <stop offset="100%" stop-color="#0b0914"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,195 L130,195 L175,115 L295,115 L340,185 L520,185 L575,90 L680,90 L735,175 L940,175 L995,110 L1145,110 L1195,190 L1440,190 L1440,280 L0,280 Z"/>
+                <circle cx="720" cy="72" r="24" fill="#facc15" fill-opacity="0.24"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 text-center">
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-950/65 border border-amber-300/40 text-amber-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-amber-950/50">
+                    <span class="font-jpSerif text-purple-300 font-black">超</span>
+                    <span>Dragon Ball Super • Season 2</span>
+                    <span class="px-1.5 py-0.5 rounded bg-purple-500/15 border border-purple-400/30 font-jpSerif text-[11px] text-purple-200">ゴールデンフリーザ編 全9話</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4 text-center">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">DRAGON BALL SUPER</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_26px_rgba(250,204,21,0.28)]">SEASON 2 • GOLDEN FRIEZA</span>
+                </h1>
+
+                <div class="animate-hero-rise-delay-1 flex items-center justify-center gap-3 my-5 w-full">
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-l from-amber-300 via-purple-400 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.22em] text-amber-200/95 uppercase">ドラゴンボール超 · 悪の帝王フリーザ復活、1000人の兵士、黄金の決戦</span>
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-r from-amber-300 via-purple-400 to-transparent animate-ribbon-pulse"></span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-slate-300 mb-6 text-center">
+                    ドラゴンボール超 第2期（全9話）— フリーザ復活、1000人軍団襲来、ゴールデンフリーザ対孫悟空
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-center">
+                    Across all <strong class="text-amber-300">9 episodes</strong> of <strong class="text-purple-300">Dragon Ball Super Season 2</strong>, <strong class="text-amber-300">Frieza</strong> is revived and invades Earth with <strong class="text-rose-300">1,000 soldiers</strong> while <strong class="text-sky-300">Gohan</strong> and the defenders hold out until <strong class="text-sky-300">Goku</strong> and <strong class="text-indigo-300">Vegeta</strong> return for a climactic showdown.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-300 via-purple-400 to-sky-400 hover:from-amber-200 hover:to-sky-300 text-slate-950 font-bold text-sm shadow-lg shadow-amber-950/50 transition-all">
+                        Explore All 9 Episodes
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-amber-200 border border-amber-400/35 font-semibold text-sm transition-all">
+                        ▶ Chōzetsu Dynamic &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                        Revival &amp; Gold Arts Explorer
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Season 2 Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 pt-8 text-left">
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-300">9 Eps</div>
+                    <div class="text-xs text-slate-400 mt-1">Super Season 2 (EP 19–27)</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-yellow-300">Golden Form</div>
+                    <div class="text-xs text-slate-400 mt-1">Frieza’s New Evolution</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-rose-300">1,000 Troops</div>
+                    <div class="text-xs text-slate-400 mt-1">Frieza Force Invasion</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-sky-300">Earth Stand</div>
+                    <div class="text-xs text-slate-400 mt-1">Gohan, Allies &amp; Goku</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Revival, Invasion &amp; Golden Rematch</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Super Season 2 Key Figures</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                Select a character card to inspect their Season 2 role, signature trait, and iconic quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <div id="characterSpotlight" class="mt-8 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Revival, Invasion & Golden Showdown Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-slate-950/75 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-purple-300 text-xs font-bold tracking-widest uppercase">Dragon Ball Revival, Army Clash &amp; Golden Clash</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Super Season 2 Arts Explorer</h2>
+                </div>
+
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-400 text-slate-950 shadow cursor-pointer">
+                        Revival &amp; Invasion
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Earth Defense &amp; Ginyu
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Golden Frieza Showdown
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div id="routineVisualCard" class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div id="routineItemsList" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 9 Episodes Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Complete Super Season 2 Chronicle</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 9 Episodes (EP 19 – EP 27)</h2>
+                <p class="text-slate-400 text-sm mt-2">Every episode of Dragon Ball Super Season 2 is displayed below with instant navigation, phase filtering, and external links.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search episode title or number..."
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400 w-full sm:w-64">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-amber-400 cursor-pointer">
+                    <option value="ALL">All Super Season 2 Phases (9 Eps)</option>
+                    <option value="Army Invasion">Part I: Revival &amp; Earth Army Clash (Ep 19–23)</option>
+                    <option value="Golden Showdown">Part II: Goku vs. Golden Frieza (Ep 24–27)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Episode Jump Bar -->
+        <div class="mb-8 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-1.5" id="quickEpisodePills">
+                <!-- Populated by JS (EP 19 - EP 27 quick jump pills) -->
+            </div>
+            <div id="episodeNavIndicator" class="text-xs font-semibold text-amber-300 shrink-0">
+                Showing All Super Season 2 Episodes 19 – 27
+            </div>
+        </div>
+
+        <!-- All 9 Episodes Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-slate-950/80 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-purple-300 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Super Themes, Clips &amp; Official Pages</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Navigate directly to Dragon Ball Super themes, clips, and official series pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-slate-900/95 border border-amber-400/45 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Changes save automatically to your browser and update all navigation cards immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">4 Super Theme &amp; Clip Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-purple-300 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-rose-300 mb-3">Super Season 2 Episode Links (EP 19 – 27)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-slate-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Battlefields & Factions -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Earth, Frieza’s Force &amp; Beerus’s World</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Season 2 Frontlines &amp; Factions</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Key Season 2 Grounds</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Key Figures of Super Season 2</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-amber-400/15 text-amber-200 border border-amber-400/35 font-semibold">Golden Frieza Roster</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-sm text-slate-300 italic">
+                    Select any character above to read their Dragon Ball Super Season 2 line.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-slate-800/90 bg-[#07050e] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-amber-300 font-bold">超</span>
+                <span>Dragon Ball Super — Season 2 (9 Episodes • Golden Frieza Saga) Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-300/45 flex items-center justify-center text-amber-200 font-bold text-xs">
+                    超
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white tracking-widest focus:outline-none focus:border-amber-400">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-amber-400 hover:bg-amber-300 text-slate-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. DRAGON BALL SUPER SEASON 2 DATA (9 Episodes: EP 19 - EP 27)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'dbz_super_season2_9eps_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'golden-frieza',
+                name: 'Golden Frieza',
+                jpName: 'ゴールデンフリーザ',
+                role: 'Resurrected Emperor of Evil',
+                specialty: 'Golden Evolution, Training Gains & Desperate Strike',
+                apartment: 'Frieza’s Army & Earth',
+                accent: 'from-amber-300 to-yellow-500',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-400/50',
+                quote: 'I’ve trained to surpass you—witness my Golden form!',
+                bio: 'Revived using the Dragon Balls and tempered by training, Frieza invades Earth with 1,000 soldiers and unveils his Golden evolution against Goku.'
+            },
+            {
+                id: 'goku-s2',
+                name: 'Son Goku',
+                jpName: '孫悟空',
+                role: 'Earth’s Returning Defender',
+                specialty: 'High-Speed Rematch, Counterattack & Kamehameha',
+                apartment: 'Beerus’s Planet & Earth',
+                accent: 'from-sky-300 to-blue-600',
+                badgeColor: 'bg-sky-950/90 text-sky-200 border-sky-400/50',
+                quote: 'Let’s see everything that training gave you, Frieza!',
+                bio: 'Returning from Beerus’s planet as Frieza’s invasion escalates, Goku faces Golden Frieza in an intense clash where stamina and timing turn the tide.'
+            },
+            {
+                id: 'gohan-allies',
+                name: 'Gohan & Earth Defenders',
+                jpName: '孫悟飯 ＆ 地球の戦士たち',
+                role: 'Vanguard Against 1,000 Soldiers',
+                specialty: 'Army Defense, Team Resolve & Survival',
+                apartment: 'Earth',
+                accent: 'from-purple-400 to-indigo-600',
+                badgeColor: 'bg-purple-950/90 text-purple-200 border-purple-400/50',
+                quote: 'We have to hold out until Goku gets here!',
+                bio: 'Gohan, Piccolo, Krillin, Tien, Master Roshi, and Jaco confront Frieza’s 1,000-soldier force to protect Earth until Goku and Vegeta arrive.'
+            },
+            {
+                id: 'vegeta-s2',
+                name: 'Vegeta',
+                jpName: 'ベジータ',
+                role: 'Saiyan Prince & Reinforcements',
+                specialty: 'Rapid Arrival & Backup for Earth',
+                apartment: 'Beerus’s Planet & Earth',
+                accent: 'from-indigo-400 to-blue-700',
+                badgeColor: 'bg-indigo-950/90 text-indigo-200 border-indigo-400/50',
+                quote: 'Don’t get ahead of yourself, Frieza!',
+                bio: 'Training with Goku when word of Frieza’s return reaches them, Vegeta rushes back to Earth ready to settle scores.'
+            },
+            {
+                id: 'sorbet-ginyu',
+                name: 'Sorbet, Tagoma & Ginyu',
+                jpName: 'ソルベ・タゴマ・ギニュー',
+                role: 'Revival Planners & Invasion Officers',
+                specialty: 'Dragon Ball Wish, Army Command & Body Change',
+                apartment: 'Frieza’s Spaceship & Earth',
+                accent: 'from-rose-400 to-purple-600',
+                badgeColor: 'bg-rose-950/90 text-rose-200 border-rose-400/50',
+                quote: 'Change! Now this body belongs to Ginyu!',
+                bio: 'Sorbet orchestrates Frieza’s revival, Tagoma leads the charge, and Captain Ginyu makes a startling return through Body Change.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'Revival & Invasion',
+                jp: 'フリーザ復活と1000人軍団襲来',
+                desc: 'Season 2 begins with Frieza’s resurrection and Jaco’s urgent warning as an army of 1,000 soldiers closes in on Earth.',
+                color: '#facc15',
+                items: [
+                    { num: '01', name: 'Dragon Ball Revival', jp: 'ドラゴンボールによる復活', desc: 'Frieza’s remnants gather the Dragon Balls to restore their emperor.' },
+                    { num: '02', name: 'Galactic Patrol Warning', jp: '銀河パトロールの警告', desc: 'Jaco rushes to Earth to alert everyone of Frieza’s approaching invasion.' },
+                    { num: '03', name: '1,000-Soldier Vanguard', jp: '1000人の兵士たち', desc: 'Frieza’s massive force descends upon Earth seeking revenge.' },
+                    { num: '04', name: 'Training Far Away', jp: '修行中の悟空とベジータ', desc: 'Goku and Vegeta are away training when the invasion first strikes.' },
+                    { num: '05', name: 'Urgent Call Back', jp: '地球への急行', desc: 'Crisis on Earth forces Goku and Vegeta to hurry back.' },
+                    { num: '06', name: 'Revenge Begins', jp: '復讐の始まり', desc: 'Old grudges ignite as Frieza’s forces move against Earth’s defenders.' }
+                ]
+            },
+            seasons: {
+                title: 'Earth Defense & Ginyu',
+                jp: '地球防衛戦とギニューの帰還',
+                desc: 'With Goku and Vegeta en route, Gohan and his allies fight desperately against overwhelming numbers and Captain Ginyu’s return.',
+                color: '#c084fc',
+                items: [
+                    { num: '01', name: 'Gohan’s Frontline Stand', jp: '悟飯の防衛戦', desc: 'Gohan steps up to lead the defense against Frieza’s soldiers.' },
+                    { num: '02', name: 'Veteran Allies Unite', jp: '地球の仲間たちの奮戦', desc: 'Piccolo, Krillin, Tien, Master Roshi, and Jaco fight side by side.' },
+                    { num: '03', name: 'Captain Ginyu’s Return', jp: 'ギニューのボディチェンジ', desc: 'Ginyu returns in a frog’s body and swaps bodies with Tagoma.' },
+                    { num: '04', name: 'Desperate Holdout', jp: '絶体絶命の攻防', desc: 'Earth’s fighters endure heavy pressure while waiting for Goku.' },
+                    { num: '05', name: 'Instant Arrival', jp: '孫悟空の帰還', desc: 'Goku arrives just in time to shift the battle on Earth.' },
+                    { num: '06', name: 'Emperor Meets Champion', jp: 'フリーザと悟空の再戦', desc: 'Frieza and Goku come face to face once again.' }
+                ]
+            },
+            promises: {
+                title: 'Golden Frieza Showdown',
+                jp: 'ゴールデンフリーザとの決戦',
+                desc: 'Frieza unleashes his Golden evolution, leading to a high-stakes battle of stamina, counterattacks, and a dramatic finish.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: 'Training Gains Revealed', jp: '修行の成果', desc: 'Frieza showcases the power he gained from training for the first time.' },
+                    { num: '02', name: 'Golden Frieza Evolution', jp: 'ゴールデンフリーザ変身', desc: 'Frieza transforms into his gleaming Golden form to overwhelm Goku.' },
+                    { num: '03', name: 'Stamina Drain', jp: '持久力の駆け引き', desc: 'Sustaining intense power begins to tax Frieza’s stamina in battle.' },
+                    { num: '04', name: 'Counteroffensive Opening', jp: '反撃のチャンス', desc: 'Goku spots a crucial opening and launches a counterattack.' },
+                    { num: '05', name: 'Last-Resort Strike', jp: '捨て身の一撃', desc: 'Cornered in defeat, Frieza resorts to a desperate attack.' },
+                    { num: '06', name: 'Decisive Kamehameha', jp: '決着のかめはめ波', desc: 'A climactic Kamehameha brings the Golden Frieza clash to its finale.' }
+                ]
+            }
+        };
+
+        const defaultEpisodesData = [
+            { num: 19, arc: 'Army Invasion', title: 'Despair Redux! The Return of the Evil Emperor, Frieza!', jpTitle: '絶望ふたたび! 悪の帝王・フリーザの復活!', synopsis: 'Remnants of Frieza’s army gather the Dragon Balls to revive Frieza, who sets his sights on revenge against Goku.', highlight: 'Frieza is revived using the Dragon Balls.', url: 'https://animetoonhindi.com/multiquality/?url=BKQI4Cc15NCiv3T' },
+            { num: 20, arc: 'Army Invasion', title: 'A Warning from Jaco! Frieza and 1,000 Soldiers Close In', jpTitle: 'ジャコからの警告! 迫り来るフリーザと1000人の兵士達', synopsis: 'Galactic Patrol officer Jaco arrives on Earth to warn that Frieza and 1,000 soldiers are heading straight for the planet.', highlight: 'Jaco warns Earth of Frieza’s approaching 1,000-soldier force.', url: 'https://animetoonhindi.com/multiquality/?url=gb8ic7BqUInUx36' },
+            { num: 21, arc: 'Army Invasion', title: 'The Start of Vengeance! The Frieza Force’s Malice Strikes Gohan!', jpTitle: '復讐のはじまり! フリーザ軍の悪意が悟飯を撃つ!', synopsis: 'Gohan, Piccolo, Krillin, Tien, Master Roshi, and Jaco battle Frieza’s invading force while Goku and Vegeta are far away.', highlight: 'Earth’s defenders clash with Frieza’s invading army.', url: 'https://animetoonhindi.com/multiquality/?url=sibF6WyaX6Z0fHh' },
+            { num: 22, arc: 'Army Invasion', title: 'Change! An Unexpected Return! His Name Is Ginyu!!', jpTitle: 'チェーンジ! まさかの復活! その名はギニュー!!', synopsis: 'Captain Ginyu returns in a frog’s body and uses his Body Change technique to take over Tagoma’s body.', highlight: 'Captain Ginyu switches bodies with Tagoma.', url: 'https://animetoonhindi.com/multiquality/?url=VQ52kQ1SxtCcQ7m' },
+            { num: 23, arc: 'Army Invasion', title: 'Earth! Gohan! Both on the Ropes! Hurry and Get Here, Goku!!', jpTitle: '地球! 悟飯! 絶体絶命! 早く来てくれ孫悟空!!', synopsis: 'With Gohan and the others pushed to the brink against Frieza’s forces, Goku and Vegeta race back to Earth.', highlight: 'Goku and Vegeta hurry back as Gohan faces danger.', url: 'https://animetoonhindi.com/multiquality/?url=NXJKyuLdghVktD5' },
+            { num: 24, arc: 'Golden Showdown', title: 'Clash! Frieza vs. Goku: This Is the Result of My Training!', jpTitle: '激突! フリーザVS孫悟空 これがオラの修行の成果だ!', synopsis: 'Goku and Frieza finally face off one-on-one as Frieza boasts of the power he gained from training.', highlight: 'Goku and Frieza begin their rematch on Earth.', url: 'https://animetoonhindi.com/multiquality/?url=ET6tTTZ9beqjXIk' },
+            { num: 25, arc: 'Golden Showdown', title: 'A Full-Throttle Battle! The Vengeful Golden Frieza', jpTitle: '全開バトル! 復讐のゴールデンフリーザ', synopsis: 'Frieza transforms into Golden Frieza, unleashing overwhelming speed and power against Goku.', highlight: 'Golden Frieza debuts in battle against Goku.', url: 'https://animetoonhindi.com/multiquality/?url=2uvsRtX1DdFZtkp' },
+            { num: 26, arc: 'Golden Showdown', title: 'A Chance Appears in a Tight Spot! Launch a Counteroffensive, Goku!', jpTitle: '大ピンチに活路が見えた! 反撃開始だ孫悟空!', synopsis: 'As Golden Frieza’s stamina begins to falter, Goku looks for an opening to mount a counterattack.', highlight: 'Goku finds a counterattack opening as Golden Frieza tires.', url: 'https://animetoonhindi.com/multiquality/?url=CFUTAjMvIChanZl' },
+            { num: 27, arc: 'Golden Showdown', title: 'The Earth Explodes?! A Decisive Kamehameha!', jpTitle: '地球が消える!? 決着のかめはめ波', synopsis: 'In a desperate final act, Frieza strikes the planet as the battle reaches its dramatic Season 2 climax.', highlight: 'Climactic Kamehameha and Season 2 finale.', url: 'https://animetoonhindi.com/multiquality/?url=vYs3O1rUkvvuMQT' }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'Opening Theme',
+                title: 'Chōzetsu Dynamic! — Kazuya Yoshii',
+                jp: 'OP「超絶☆ダイナミック!」吉井和哉',
+                desc: 'Navigate to the Dragon Ball Super opening theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Super+Opening+Chozetsu+Dynamic+Kazuya+Yoshii'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Golden Frieza Clips',
+                title: 'Goku vs. Golden Frieza Battle Clips',
+                jp: 'ドラゴンボール超 ゴールデンフリーザ戦',
+                desc: 'Explore clips from the Golden Frieza showdown in Dragon Ball Super.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Super+Goku+vs+Golden+Frieza'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'Invasion & Allies',
+                title: 'Gohan & Earth Defenders vs. Frieza Force',
+                jp: 'フリーザ軍と地球の戦士たち',
+                desc: 'Explore highlights from Frieza’s army invasion on Earth.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Super+Frieza+Force+invades+Earth+Gohan'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Watch Dragon Ball Super on Crunchyroll',
+                jp: 'ドラゴンボール超 配信ページ',
+                desc: 'Open the official Crunchyroll series page for Dragon Ball Super.',
+                url: 'https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Dragon Ball Official Site',
+                subtitle: 'en.dragon-ball-official.com — News, manga & anime',
+                url: 'https://en.dragon-ball-official.com/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Dragon Ball Super Hub',
+                subtitle: 'Stream Dragon Ball Super episodes',
+                url: 'https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super'
+            },
+            {
+                id: 'page-kanzenshuu',
+                title: 'Kanzenshuu Dragon Ball Super Guide',
+                subtitle: 'Episode listings, staff & series archive',
+                url: 'https://www.kanzenshuu.com/episode/super/list/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Dragon Ball Super Entry',
+                subtitle: 'Cast, voice actors & episode guide',
+                url: 'https://myanimelist.net/anime/30694/Dragon_Ball_Super'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: 'Earth Battleground',
+                jp: '地球の戦場',
+                tag: 'Invasion & Showdown',
+                detail: 'Universe 7',
+                desc: 'Where Frieza’s 1,000 soldiers clash with Earth’s defenders before Goku and Frieza face off.'
+            },
+            {
+                name: 'Frieza’s Spaceship & Forces',
+                jp: 'フリーザ軍・宇宙船',
+                tag: 'Revival & Remnants',
+                detail: 'Universe 7',
+                desc: 'Where Frieza is restored with the Dragon Balls and launches his campaign of vengeance.'
+            },
+            {
+                name: 'Beerus’s Planet',
+                jp: 'ビルス星',
+                tag: 'Training Grounds',
+                detail: 'Universe 7',
+                desc: 'Where Goku and Vegeta are training when word of Frieza’s return reaches them.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'Golden Frieza', title: 'Resurrected Emperor', quote: 'I’ve trained to surpass you—witness my Golden form!' },
+            { name: 'Son Goku', title: 'Earth’s Defender', quote: 'Let’s see everything that training gave you, Frieza!' },
+            { name: 'Son Gohan', title: 'Earth Vanguard', quote: 'We have to hold out until Goku gets here!' },
+            { name: 'Vegeta', title: 'Saiyan Prince', quote: 'Don’t get ahead of yourself, Frieza!' },
+            { name: 'Jaco', title: 'Galactic Patrol', quote: 'Frieza and 1,000 soldiers are heading for Earth!' },
+            { name: 'Captain Ginyu', title: 'Ginyu Force', quote: 'Change! Now this body belongs to Ginyu!' }
+        ];
+
+        // =========================================================================
+        // 2. ADMIN LINK STATE & PERSISTENCE
+        // =========================================================================
+        let isAdminUnlocked = false;
+
+        function cloneDefaults() {
+            const episodesMap = {};
+            defaultEpisodesData.forEach(ep => {
+                episodesMap[ep.num] = ep.url;
+            });
+            return {
+                trailers: defaultTrailersData.map(t => ({ id: t.id, url: t.url })),
+                pages: defaultRelatedPagesData.map(p => ({ id: p.id, url: p.url })),
+                episodes: episodesMap
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach(item => {
+                        const target = base.trailers.find(t => t.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    parsed.pages.forEach(item => {
+                        const target = base.pages.find(p => p.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(parsed.episodes).forEach(k => {
+                        if (parsed.episodes[k]) base.episodes[k] = parsed.episodes[k];
+                    });
+                }
+            } catch (err) {
+                console.warn('Could not load saved links:', err);
+            }
+            return base;
+        }
+
+        let savedLinks = loadSavedLinks();
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (err) {
+                console.warn('Could not save links:', err);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        let selectedCharacterId = charactersData[0].id;
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-slate-900 border-amber-400 shadow-lg shadow-amber-950/40 ring-1 ring-amber-400/50'
+                                : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-slate-950 text-base mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-purple-300 mb-1">${char.role}</div>
+                        <h3 class="font-serifDisplay font-bold text-base text-white">${char.name}</h3>
+                        <p class="font-jpSerif text-xs text-slate-400 mt-0.5">${char.jpName}</p>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.specialty}</span>
+                            <span class="text-xs text-slate-400">Frontline: ${current.apartment}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-slate-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm w-full p-5 rounded-2xl bg-slate-950/90 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-2">Iconic Super Season 2 Line</div>
+                        <p class="text-sm text-slate-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER TECHNIQUES EXPLORER
+        // =========================================================================
+        let currentRoutineKey = 'cooking';
+
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const itemsList = document.getElementById('routineItemsList');
+            const data = routinesData[currentRoutineKey];
+            if (!visualCard || !itemsList || !data) return;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isSelected = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = isSelected
+                    ? 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-400 text-slate-950 shadow cursor-pointer'
+                    : 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer';
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4" style="background:${data.color}22; color:${data.color}; border:1px solid ${data.color}55;">
+                        ${data.jp}
+                    </span>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Super Season 2 Arts Archive</span>
+                    <span class="font-bold" style="color:${data.color};">6 Signature Beats</span>
+                </div>
+            `;
+
+            itemsList.innerHTML = data.items.map(item => `
+                <div class="bg-slate-900/80 border border-slate-800 hover:border-amber-400/40 rounded-2xl p-5 transition-all">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black tracking-wider px-2.5 py-0.5 rounded-md bg-slate-950 text-amber-300 border border-slate-800">${item.num}</span>
+                        <span class="font-jpSerif text-xs text-slate-400">${item.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${item.name}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 9 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-950 hover:bg-amber-400 text-slate-300 hover:text-slate-950 border border-slate-800 hover:border-amber-300 transition-colors cursor-pointer">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-amber-400');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-amber-400'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All Super Season 2 Episodes 19 – 27'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Episodes`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center">
+                        <p class="text-slate-300 font-medium">No Dragon Ball Super Season 2 episodes match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `EP ${String(ep.num).padStart(2, '0')}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-slate-900/85 border border-slate-800 hover:border-amber-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-400/15 border border-amber-300/35 text-amber-200 font-bold text-xs tracking-wider">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-purple-300/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `EPISODE ${String(ep.num).padStart(2, '0')}`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-400/15 text-amber-200 border border-amber-300/35">${epBadge}</span>
+                        <span class="text-xs text-slate-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-purple-300 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-amber-300 mb-1">Key Episode Highlight</div>
+                        <p class="text-xs text-slate-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 19 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">← EP ${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < 27 ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">EP ${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-300 to-purple-400 hover:from-amber-200 hover:to-purple-300 text-slate-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Episode Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS, THEMES & OFFICIAL PAGES
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const href = current?.url || item.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group bg-slate-900/85 border border-slate-800 hover:border-amber-400/55 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-400/15 text-amber-200 border border-amber-400/35">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-slate-400 group-hover:text-amber-300 transition-colors text-sm">↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-amber-200 transition-colors mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="font-jpSerif text-xs text-purple-300/90 mb-2">${item.jp}</p>
+                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-800/90 text-xs font-semibold text-amber-300 group-hover:translate-x-0.5 transition-transform">
+                                Navigate to External Page →
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const href = current?.url || page.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group p-4 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-purple-300/50 transition-all flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-sm text-white group-hover:text-purple-300 transition-colors">${page.title}</div>
+                                <div class="text-xs text-slate-400 mt-1">${page.subtitle}</div>
+                            </div>
+                            <span class="text-slate-400 group-hover:text-purple-300 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. RENDER BATTLEFIELDS & FACTIONS
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-300">${loc.tag}</span>
+                            <span class="font-jpSerif text-xs text-slate-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-purple-300 font-medium mb-2">${loc.detail}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((member, idx) => `
+                    <button type="button" data-cast-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-amber-400/50 transition-all cursor-pointer">
+                        <div class="font-bold text-xs sm:text-sm text-white">${member.name}</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">${member.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-cast-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const member = castCircleData[Number(btn.getAttribute('data-cast-idx'))];
+                        if (member) {
+                            quoteBox.innerHTML = `<span class="text-amber-300 font-semibold not-italic">${member.name}:</span> “${member.quote}”`;
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 8. ADMIN LINK MANAGER (PIN 1960)
+        // =========================================================================
+        function showAdminBanner(msg) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = msg;
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin Active';
+            if (studio) {
+                studio.classList.remove('hidden');
+                renderAdminStudio();
+                studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin';
+            studio?.classList.add('hidden');
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const val = current?.url || item.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${item.title}</label>
+                            <input type="url" data-admin-trailer="${item.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                    `;
+                }).join('');
+
+                trailersList.querySelectorAll('input[data-admin-trailer]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-trailer');
+                        const target = savedLinks.trailers.find(t => t.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Trailer / Theme navigation link updated.');
+                        }
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const val = current?.url || page.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${page.title}</label>
+                            <input type="url" data-admin-page="${page.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-purple-300">
+                        </div>
+                    `;
+                }).join('');
+
+                pagesList.querySelectorAll('input[data-admin-page]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-page');
+                        const target = savedLinks.pages.find(p => p.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Portal page URL updated.');
+                        }
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const val = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">EP ${String(ep.num).padStart(2, '0')} — ${ep.title}</label>
+                            <input type="url" data-admin-ep="${ep.num}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-rose-300">
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('input[data-admin-ep]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const epNum = Number(input.getAttribute('data-admin-ep'));
+                        if (epNum && input.value.trim()) {
+                            savedLinks.episodes[epNum] = input.value.trim();
+                            persistLinks();
+                            renderEpisodes();
+                            showAdminBanner(`Super Episode ${String(epNum).padStart(2, '0')} link updated.`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (Golden Frieza Gold / Royal Violet Sparks)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.3;
+                p.y -= p.vy * 0.85;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(250, 204, 21, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.9, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(192, 132, 252, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Dragon Ball Super Season 2 links restored.');
+        });
+
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'Golden Frieza Sparks' : 'Royal Violet Sparks';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-amber-300 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-purple-400 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+</body>
+</html>
