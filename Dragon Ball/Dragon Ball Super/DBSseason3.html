@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Super — Season 3 (Universe 6 Tournament • 19 Episodes)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel, Inter, and Noto Serif JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serifDisplay: ['Cinzel', 'serif'],
+                        jpSerif: ['Noto Serif JP', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060b16;
+            color: #e0f2fe;
+            overflow-x: clip;
+        }
+
+        /* Super Saiyan Blue cyan & Universe 6 cobalt grid texture */
+        .warm-pattern {
+            background-image:
+                radial-gradient(rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+                radial-gradient(rgba(129, 140, 248, 0.10) 1px, #060b16 1px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        /* Super Saiyan Blue Cyan, God Ki Indigo & Tournament Gold Gradient Text */
+        .text-angel-gradient {
+            background: linear-gradient(120deg, #38bdf8 0%, #818cf8 38%, #facc15 74%, #22d3ee 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: angelShimmer 6s ease-in-out infinite;
+        }
+
+        @keyframes angelShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroRise {
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-rise {
+            animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .animate-hero-rise-delay-1 {
+            animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+        }
+
+        .animate-hero-rise-delay-2 {
+            animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        @keyframes ribbonPulse {
+            0%, 100% { opacity: 0.75; transform: scaleX(0.96); }
+            50% { opacity: 1; transform: scaleX(1.04); }
+        }
+
+        .animate-ribbon-pulse {
+            transform-origin: center;
+            animation: ribbonPulse 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060b16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284c7;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+    </style>
+</head>
+<body class="warm-pattern font-sans antialiased selection:bg-sky-400 selection:text-slate-950">
+
+    <!-- Ambient Super Saiyan Blue & Universe 6 Spark Canvas -->
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-70"></canvas>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#060b16]/90 border-b border-sky-400/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-400 via-indigo-400 to-amber-300 flex items-center justify-center shadow-lg shadow-sky-950/70 border border-sky-200/50">
+                        <span class="font-jpSerif font-black text-slate-950 text-sm">超</span>
+                    </div>
+                    <div>
+                        <span class="font-serifDisplay font-bold tracking-wider text-sm sm:text-base text-sky-100 group-hover:text-sky-300 transition-colors">
+                            DRAGON BALL SUPER
+                        </span>
+                        <span class="hidden md:inline-block ml-2 text-xs text-indigo-300/80 font-jpSerif">
+                            ドラゴンボール超 — 第6宇宙破壊神編 (第3期・全19話)
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#characters" class="hover:text-sky-300 transition-colors">Tournament Roster</a>
+                    <a href="#routines" class="hover:text-sky-300 transition-colors">Blue &amp; Arena Arts</a>
+                    <a href="#episodes" class="hover:text-sky-300 transition-colors">19 Episodes</a>
+                    <a href="#videos" class="hover:text-sky-300 transition-colors">Themes &amp; Links</a>
+                    <a href="#circles" class="hover:text-sky-300 transition-colors">Worlds &amp; Factions</a>
+                </nav>
+
+                <!-- Particle Mode Toggle & Admin Button -->
+                <div class="flex items-center gap-2">
+                    <button id="particleToggleBtn" type="button"
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-sky-950/70 hover:bg-sky-900/75 text-sky-200 border border-sky-400/40 transition-all cursor-pointer">
+                        <span id="particleDot" class="w-2 h-2 rounded-full bg-sky-300 animate-pulse"></span>
+                        <span id="particleLabel">Super Saiyan Blue Sparks</span>
+                    </button>
+
+                    <button id="adminToggleBtn" type="button"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-indigo-300 border border-indigo-400/35 transition-all cursor-pointer"
+                        title="Admin Link Manager">
+                        <svg id="adminLockIcon" class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span id="adminBtnText">Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-[2] overflow-hidden border-b border-sky-950/80">
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] rounded-full bg-sky-500/14 blur-3xl"></div>
+            <div class="absolute top-16 left-1/4 w-[24rem] h-[24rem] rounded-full bg-indigo-500/14 blur-3xl"></div>
+            <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-[#060b16] via-[#060b16]/85 to-transparent"></div>
+            <svg viewBox="0 0 1440 280" preserveAspectRatio="none" class="absolute bottom-0 inset-x-0 w-full h-44 sm:h-56 opacity-50">
+                <defs>
+                    <linearGradient id="skylineGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#0369a1"/>
+                        <stop offset="100%" stop-color="#060b16"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#skylineGrad)" d="M0,195 L130,195 L175,115 L295,115 L340,185 L520,185 L575,90 L680,90 L735,175 L940,175 L995,110 L1145,110 L1195,190 L1440,190 L1440,280 L0,280 Z"/>
+                <circle cx="720" cy="72" r="24" fill="#38bdf8" fill-opacity="0.24"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 text-center">
+            <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <div class="animate-hero-rise inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-sky-950/65 border border-sky-300/40 text-sky-200 text-xs font-semibold tracking-wider uppercase mb-6 shadow-sm shadow-sky-950/50">
+                    <span class="font-jpSerif text-indigo-300 font-black">超</span>
+                    <span>Dragon Ball Super • Season 3</span>
+                    <span class="px-1.5 py-0.5 rounded bg-indigo-500/15 border border-indigo-400/30 font-jpSerif text-[11px] text-indigo-200">第6宇宙破壊神編 全19話</span>
+                </div>
+
+                <h1 class="animate-hero-rise-delay-1 font-serifDisplay font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.06] mb-4 text-center">
+                    <span class="text-white block drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">DRAGON BALL SUPER</span>
+                    <span class="text-angel-gradient block drop-shadow-[0_4px_26px_rgba(56,189,248,0.28)]">SEASON 3 • UNIVERSE 6</span>
+                </h1>
+
+                <div class="animate-hero-rise-delay-1 flex items-center justify-center gap-3 my-5 w-full">
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-l from-sky-300 via-indigo-400 to-transparent animate-ribbon-pulse"></span>
+                    <span class="font-jpSerif text-xs tracking-[0.22em] text-sky-200/95 uppercase">ドラゴンボール超 · 第6宇宙との格闘試合、超サイヤ人ブルー、ヒットと全王</span>
+                    <span class="h-[2px] w-16 sm:w-28 rounded-full bg-gradient-to-r from-sky-300 via-indigo-400 to-transparent animate-ribbon-pulse"></span>
+                </div>
+
+                <p class="font-jpSerif text-lg sm:text-xl text-slate-300 mb-6 text-center">
+                    ドラゴンボール超 第3期（全19話）— 破壊神シャンパ、第6宇宙選抜、殺し屋ヒット、全王登場
+                </p>
+
+                <p class="animate-hero-rise-delay-2 text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8 text-center">
+                    Across all <strong class="text-sky-300">19 episodes</strong> of <strong class="text-indigo-300">Dragon Ball Super Season 3</strong>, <strong class="text-purple-300">Champa</strong> challenges <strong class="text-rose-300">Beerus</strong> to a tournament between <strong class="text-sky-300">Universe 7 and Universe 6</strong>, unveiling <strong class="text-cyan-300">Super Saiyan Blue</strong>, <strong class="text-amber-300">Cabba</strong>, <strong class="text-indigo-300">Hit</strong>, and the arrival of <strong class="text-amber-200">Zen-Oh</strong>.
+                </p>
+
+                <div class="animate-hero-rise-delay-2 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#episodes" class="px-6 py-3 rounded-xl bg-gradient-to-r from-sky-400 via-indigo-400 to-amber-300 hover:from-sky-300 hover:to-amber-200 text-slate-950 font-bold text-sm shadow-lg shadow-sky-950/50 transition-all">
+                        Explore All 19 Episodes
+                    </a>
+                    <a href="#videos" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-sky-200 border border-sky-400/35 font-semibold text-sm transition-all">
+                        ▶ Chōzetsu Dynamic &amp; Links
+                    </a>
+                    <a href="#routines" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                        Blue &amp; Arena Arts Explorer
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Season 3 Stats Bar -->
+            <div class="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-slate-800/80 pt-8 text-left">
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-sky-300">19 Eps</div>
+                    <div class="text-xs text-slate-400 mt-1">Super Season 3 (EP 28–46)</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-cyan-300">SSJ Blue</div>
+                    <div class="text-xs text-slate-400 mt-1">Goku &amp; Vegeta’s Blue Form</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-indigo-300">U6 vs. U7</div>
+                    <div class="text-xs text-slate-400 mt-1">Nameless Planet Tournament</div>
+                </div>
+                <div class="bg-slate-900/70 border border-slate-800/90 rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-serifDisplay font-bold text-amber-300">Hit &amp; Zen-Oh</div>
+                    <div class="text-xs text-slate-400 mt-1">Time-Skip &amp; King of All</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Main Characters -->
+    <section id="characters" class="relative z-[2] py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-sky-300 text-xs font-bold tracking-widest uppercase">Universe 6 vs. Universe 7 Tournament</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Super Season 3 Key Figures</h2>
+            </div>
+            <p class="text-slate-400 text-sm max-w-md">
+                Select a character card to inspect their Season 3 role, signature trait, and iconic quote.
+            </p>
+        </div>
+
+        <div id="charactersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <!-- Populated by JS -->
+        </div>
+
+        <div id="characterSpotlight" class="mt-8 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Section 2: Super Saiyan Blue, Tournament & Techniques Explorer -->
+    <section id="routines" class="relative z-[2] py-24 lg:py-28 bg-slate-950/75 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div class="min-w-0">
+                    <span class="text-indigo-300 text-xs font-bold tracking-widest uppercase">Super Saiyan Blue, Time-Skip &amp; Super Dragon Balls</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Super Season 3 Arts Explorer</h2>
+                </div>
+
+                <div class="inline-flex flex-wrap p-1.5 rounded-2xl bg-slate-900 border border-slate-800 gap-1.5">
+                    <button type="button" data-routine="cooking" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-sky-400 text-slate-950 shadow cursor-pointer">
+                        Tournament &amp; SSJ Blue
+                    </button>
+                    <button type="button" data-routine="seasons" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Universe 6 Rivals
+                    </button>
+                    <button type="button" data-routine="promises" class="routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer">
+                        Hit’s Time-Skip &amp; Zen-Oh
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div id="routineVisualCard" class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div id="routineItemsList" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 19 Episodes Guide & Navigation -->
+    <section id="episodes" class="relative z-[2] py-24 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-clip">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-6">
+            <div>
+                <span class="text-sky-300 text-xs font-bold tracking-widest uppercase">Complete Super Season 3 Chronicle</span>
+                <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">All 19 Episodes (EP 28 – EP 46)</h2>
+                <p class="text-slate-400 text-sm mt-2">Every episode of Dragon Ball Super Season 3 is displayed below with instant navigation, phase filtering, and external links.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <input id="episodeSearch" type="text" placeholder="Search episode title or number..."
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-400 w-full sm:w-64">
+
+                <select id="arcFilter"
+                    class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-sky-400 cursor-pointer">
+                    <option value="ALL">All Super Season 3 Phases (19 Eps)</option>
+                    <option value="Tournament Prelude">Part I: Champa &amp; Tournament Setup (Ep 28–32)</option>
+                    <option value="Tournament Matches">Part II: U6 vs. U7 Tournament &amp; Hit (Ep 33–41)</option>
+                    <option value="Post-Tournament">Part III: Super Dragon Balls &amp; Zen-Oh (Ep 42–46)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Quick Episode Jump Bar -->
+        <div class="mb-8 bg-slate-900/80 border border-slate-800/90 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-1.5" id="quickEpisodePills">
+                <!-- Populated by JS (EP 28 - EP 46 quick jump pills) -->
+            </div>
+            <div id="episodeNavIndicator" class="text-xs font-semibold text-sky-300 shrink-0">
+                Showing All Super Season 3 Episodes 28 – 46
+            </div>
+        </div>
+
+        <!-- All 19 Episodes Grid -->
+        <div id="episodesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated immediately by JS -->
+        </div>
+    </section>
+
+    <!-- Section 4: Trailers, Opening & External Navigation Links (+ Admin Studio) -->
+    <section id="videos" class="relative z-[2] py-24 lg:py-28 bg-slate-950/80 border-y border-slate-800/80 overflow-x-clip">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-indigo-300 text-xs font-bold tracking-widest uppercase">External Navigation Hub</span>
+                    <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Super Themes, Clips &amp; Official Pages</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Navigate directly to Dragon Ball Super themes, clips, and official series pages in a new tab.
+                </p>
+            </div>
+
+            <!-- Admin Link Studio (Hidden until PIN 1960 is verified) -->
+            <div id="adminLinkStudio" class="hidden mb-10 bg-slate-900/95 border border-sky-400/45 rounded-2xl p-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Admin Link Manager Unlocked
+                        </div>
+                        <h3 class="font-serifDisplay text-xl font-bold text-white mt-1">Edit External Navigation Links</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Changes save automatically to your browser and update all navigation cards immediately.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button id="resetAllAdminLinksBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors cursor-pointer">
+                            Reset Defaults
+                        </button>
+                        <button id="lockAdminBtn" type="button"
+                            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-700/50 transition-colors cursor-pointer">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <div id="adminFeedbackBanner" class="hidden mt-4 px-4 py-2.5 rounded-xl bg-emerald-950/70 border border-emerald-600/40 text-emerald-200 text-xs font-medium"></div>
+
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-sky-300 mb-3">4 Super Theme &amp; Clip Links</h4>
+                        <div id="adminTrailersLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-300 mb-3">Official &amp; Related Pages</h4>
+                        <div id="adminPagesLinksList" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-slate-950/85 border border-slate-800 rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Super Season 3 Episode Links (EP 28 – 46)</h4>
+                        <div id="adminEpisodesLinksList" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="trailersNavGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-lg font-bold text-white">Official Portals &amp; Series Pages</h3>
+                    <span class="text-xs text-slate-400">Opens external page</span>
+                </div>
+                <div id="relatedPagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Battlefields & Factions -->
+    <section id="circles" class="relative z-[2] py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <span class="text-sky-300 text-xs font-bold tracking-widest uppercase">Nameless Planet Arena, Universe 6 &amp; Universe 7</span>
+            <h2 class="font-serifDisplay text-3xl sm:text-4xl font-bold text-white mt-1">Tournament Grounds &amp; Factions</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Legendary Season 3 Grounds</h3>
+                <div id="settingsList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-slate-900/85 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-serifDisplay text-xl font-bold text-white">Key Figures of Super Season 3</h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-sky-400/15 text-sky-200 border border-sky-400/35 font-semibold">Universe 6 &amp; 7</span>
+                </div>
+                <div id="castCircleGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="circleQuoteBox" class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 text-sm text-slate-300 italic">
+                    Select any character above to read their Dragon Ball Super Season 3 line.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-[2] border-t border-slate-800/90 bg-[#040710] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-jpSerif text-sky-300 font-bold">超</span>
+                <span>Dragon Ball Super — Season 3 (19 Episodes • Universe 6 Tournament) Showcase</span>
+            </div>
+            <div>
+                Fan tribute interface • All links open external pages
+            </div>
+        </div>
+    </footer>
+
+    <!-- Episode Detail Modal -->
+    <div id="episodeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeEpisodeModal" type="button"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div id="episodeModalContent">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Modal -->
+    <div id="adminPinModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button id="closePinModalBtn" type="button"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="w-8 h-8 rounded-full bg-sky-400/20 border border-sky-300/45 flex items-center justify-center text-sky-200 font-bold text-xs">
+                    超
+                </div>
+                <h3 class="font-serifDisplay text-lg font-bold text-white">Admin Link Access</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Enter the administrator PIN to manage external navigation URLs.</p>
+            <form id="adminPinForm" class="space-y-3">
+                <input id="adminPinInput" type="password" inputmode="numeric" maxlength="8" placeholder="Enter PIN"
+                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white tracking-widest focus:outline-none focus:border-sky-400">
+                <p id="adminPinError" class="hidden text-xs text-red-400 font-medium">Incorrect PIN. Please try again.</p>
+                <div class="flex justify-end gap-2 pt-1">
+                    <button type="button" id="cancelPinBtn"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-5 py-2 rounded-xl text-xs font-bold bg-sky-400 hover:bg-sky-300 text-slate-950 cursor-pointer">
+                        Unlock
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. DRAGON BALL SUPER SEASON 3 DATA (19 Episodes: EP 28 - EP 46)
+        // =========================================================================
+        const ADMIN_PIN = '1960';
+        const STORAGE_KEY = 'dbz_super_season3_19eps_nav_links_v1';
+
+        const charactersData = [
+            {
+                id: 'goku-blue',
+                name: 'Son Goku (Super Saiyan Blue)',
+                jpName: '超サイヤ人ブルー 孫悟空',
+                role: 'Universe 7 Tournament Ace',
+                specialty: 'Super Saiyan Blue, Kaio-ken Surge & Kamehameha',
+                apartment: 'Universe 7 • Tournament Arena',
+                accent: 'from-sky-400 to-blue-600',
+                badgeColor: 'bg-sky-950/90 text-sky-200 border-sky-400/50',
+                quote: 'I’m going to show you everything I’ve got, Hit!',
+                bio: 'Competing for Universe 7 against Champa’s team, Goku pushes Super Saiyan Blue to new heights and matches wits with Universe 6’s legendary assassin Hit.'
+            },
+            {
+                id: 'hit-u6',
+                name: 'Hit',
+                jpName: 'ヒット',
+                role: 'Universe 6’s Ace Assassin',
+                specialty: 'Time-Skip & Precision Strikes',
+                apartment: 'Universe 6 Team',
+                accent: 'from-indigo-400 to-purple-700',
+                badgeColor: 'bg-indigo-950/90 text-indigo-200 border-indigo-400/50',
+                quote: 'My time-skip improves with every fraction of a second.',
+                bio: 'A calm, lethal fighter from Universe 6 whose Time-Skip technique overwhelms opponents until Goku adapts to its rhythm.'
+            },
+            {
+                id: 'champa-vados',
+                name: 'Champa & Vados',
+                jpName: 'シャンパ ＆ ヴァドス',
+                role: 'Universe 6 Destroyer & Attendant',
+                specialty: 'Tournament Wager & Super Dragon Balls',
+                apartment: 'Universe 6',
+                accent: 'from-purple-400 to-fuchsia-600',
+                badgeColor: 'bg-purple-950/90 text-purple-200 border-purple-400/50',
+                quote: 'Let’s settle this with a martial arts tournament!',
+                bio: 'Beerus’s twin brother Champa and attendant Vados propose the Universe 6 vs. Universe 7 tournament with planet-sized Super Dragon Balls on the line.'
+            },
+            {
+                id: 'cabba-u6',
+                name: 'Cabba',
+                jpName: 'キャベ',
+                role: 'Universe 6 Saiyan Warrior',
+                specialty: 'Saiyan Pride & Spark of Evolution',
+                apartment: 'Planet Sadala • Universe 6',
+                accent: 'from-amber-300 to-orange-500',
+                badgeColor: 'bg-amber-950/90 text-amber-200 border-amber-400/50',
+                quote: 'I want to learn how to reach that power too, Master Vegeta!',
+                bio: 'A noble Saiyan from Universe 6 who crosses paths with Vegeta in the tournament and gains a fierce mentor-pupil bond.'
+            },
+            {
+                id: 'zen-oh',
+                name: 'Zen-Oh (King of All)',
+                jpName: '全王',
+                role: 'Supreme Ruler of All Universes',
+                specialty: 'Absolute Authority & Unpredictable Arrival',
+                apartment: 'Realm of All Universes',
+                accent: 'from-cyan-200 to-sky-400',
+                badgeColor: 'bg-cyan-950/90 text-cyan-200 border-cyan-300/50',
+                quote: 'That tournament looked really fun!',
+                bio: 'Appearing unexpectedly after the tournament, the childlike King of All leaves both Gods of Destruction in awe and hints at an even grander tournament ahead.'
+            }
+        ];
+
+        const routinesData = {
+            cooking: {
+                title: 'Tournament & SSJ Blue',
+                jp: '格闘試合と超サイヤ人ブルー',
+                desc: 'Champa’s wager brings Universe 6 and Universe 7 together on a nameless planet where Super Saiyan Blue takes center stage.',
+                color: '#38bdf8',
+                items: [
+                    { num: '01', name: 'Champa’s Challenge', jp: 'シャンパの挑戦', desc: 'Champa arrives seeking Super Dragon Balls and proposes a five-on-five tournament.' },
+                    { num: '02', name: 'Super Dragon Ball Hunt', jp: '超ドラゴンボールの探索', desc: 'Planet-sized Dragon Balls scattered across Universes 6 and 7 serve as the prize.' },
+                    { num: '03', name: 'Tournament Written Exam', jp: '格闘試合の筆記試験', desc: 'Before the bouts begin, fighters must pass a surprising written test.' },
+                    { num: '04', name: 'Super Saiyan Blue Debut', jp: '超サイヤ人ブルーの力', desc: 'Goku and Vegeta wield Super Saiyan Blue as the tournament heats up.' },
+                    { num: '05', name: 'Vegeta vs. Universe 6', jp: 'ベジータの第6宇宙戦', desc: 'Vegeta powers through Universe 6 challengers with pride and precision.' },
+                    { num: '06', name: 'Monaka’s Mystery', jp: 'モナカの正体!?', desc: 'Beerus’s mysterious pick Monaka keeps everyone guessing about his true strength.' }
+                ]
+            },
+            seasons: {
+                title: 'Universe 6 Rivals',
+                jp: '第6宇宙の個性的な戦士たち',
+                desc: 'Universe 6 fields a diverse lineup of fighters who push Universe 7’s roster to adapt on the fly.',
+                color: '#818cf8',
+                items: [
+                    { num: '01', name: 'Botamo’s Rubber Guard', jp: 'ボタモの弾力防御', desc: 'Botamo shrugs off physical strikes with his elastic body.' },
+                    { num: '02', name: 'Frost’s Deception', jp: 'フロストの策略', desc: 'Frost’s apparent kindness masks underhanded tactics in the ring.' },
+                    { num: '03', name: 'Magetta’s Furnace Heat', jp: 'マゲッタのマグマと怒り', desc: 'Magetta’s metal frame and rising heat test ring-out strategy.' },
+                    { num: '04', name: 'Cabba’s Saiyan Spirit', jp: 'キャベの誇りと覚醒', desc: 'Cabba fights with honor and pushes himself toward Super Saiyan.' },
+                    { num: '05', name: 'Vegeta’s Tough Lesson', jp: 'ベジータの厳しい指導', desc: 'Vegeta spurs Cabba onward with a harsh, motivating clash.' },
+                    { num: '06', name: 'Ring-Out Strategy', jp: '場外負けの駆け引き', desc: 'Strict tournament rules make positioning and composure vital.' }
+                ]
+            },
+            promises: {
+                title: 'Hit’s Time-Skip & Zen-Oh',
+                jp: 'ヒットの「時とばし」と全王登場',
+                desc: 'Goku faces Hit’s Time-Skip in a thrilling clash before the Super Dragon Balls are summoned and Zen-Oh makes his entrance.',
+                color: '#facc15',
+                items: [
+                    { num: '01', name: 'Time-Skip Technique', jp: 'ヒットの「時とばし」', desc: 'Hit skips forward in time to strike before opponents can react.' },
+                    { num: '02', name: 'Predicting the Skip', jp: '時とばしの攻略', desc: 'Goku reads Hit’s movement patterns to counter his timing.' },
+                    { num: '03', name: 'Super Shenron Summoned', jp: '超神龍の降臨', desc: 'The giant Super Dragon Balls are gathered to grant the winner’s wish.' },
+                    { num: '04', name: 'Beerus’s Wish for Peace', jp: 'ビルス様が願ったこと', desc: 'Beerus uses the wish in a way that preserves Universe 6’s Earth.' },
+                    { num: '05', name: 'Arrival of Zen-Oh', jp: '全王様あらわる', desc: 'The King of All appears and stuns the gathered gods and fighters.' },
+                    { num: '06', name: 'Seed of Future Tournaments', jp: '新たな大会への予感', desc: 'Zen-Oh’s interest sets the stage for future multi-universe clashes.' }
+                ]
+            }
+        };
+
+        const defaultEpisodesData = [
+            { num: 28, arc: 'Tournament Prelude', title: 'Even the Sixth Universe Has Him! His Name Is Champa, the God of Destruction!', jpTitle: '第6宇宙にもアイツがいる! 破壊神の名はシャンパ', synopsis: 'Beerus and Champa meet and clash over food while Champa reveals plans for a tournament between Universe 6 and Universe 7.', highlight: 'Champa and Vados introduce Universe 6 and the tournament idea.', url: 'https://animetoonhindi.com/multiquality/?url=dyYHUJBf4afrQD5Q' },
+            { num: 29, arc: 'Tournament Prelude', title: 'A Martial Arts Match Held?! The Captain Is Stronger Than Goku?!', jpTitle: '格闘試合開催決定!? 主将は悟空よりも強いヤツ!?', synopsis: 'Beerus and Champa finalize the rules for the tournament and Beerus mentions a warrior named Monaka.', highlight: 'Tournament rules are set and Beerus hypes up Monaka.', url: 'https://animetoonhindi.com/multiquality/?url=8HrXq9MLdFDW5GK' },
+            { num: 30, arc: 'Tournament Prelude', title: 'Reconnaissance for the Martial Arts Match! Who Are the Remaining Two Members?!', jpTitle: '格闘試合へ向けた腕試し 残り二人のメンバーは誰だ!?', synopsis: 'Goku and Vegeta search for strong teammates as the Universe 7 lineup takes shape ahead of the clash with Universe 6.', highlight: 'Assembling the Universe 7 tournament squad.', url: 'https://animetoonhindi.com/multiquality/?url=H89Yld7JYYIMLIg' },
+            { num: 31, arc: 'Tournament Prelude', title: 'Off to Lord Zuno! Find Out Where the Super Dragon Balls Are!', jpTitle: 'ズノー様のもとへ! 超ドラゴンボールのありかを聞き出せ!', synopsis: 'Jaco and Bulma visit Zuno to learn how to locate the planet-sized Super Dragon Balls.', highlight: 'Learning the secret of the Super Dragon Balls.', url: 'https://animetoonhindi.com/multiquality/?url=MyfI7SPluBna7xI' },
+            { num: 32, arc: 'Tournament Prelude', title: 'The Match Begins! We’re All Going to the “Nameless Planet”!', jpTitle: '試合開始だ! みんなで「名前のない星」へ!', synopsis: 'Both teams gather at the nameless planet arena as the Universe 6 vs. Universe 7 tournament officially gets underway.', highlight: 'Arrival at the nameless planet tournament arena.', url: 'hhttps://animetoonhindi.com/multiquality/?url=HMfWXZzH7NrcYzJ' },
+            { num: 33, arc: 'Tournament Matches', title: 'Surprised, Sixth Universe! This Is Son Goku, Super Saiyan!', jpTitle: '驚愕せよ第6宇宙! これが超サイヤ人・孫悟空だ!', synopsis: 'The tournament matches kick off as Goku faces Universe 6’s fighters and shows off his power.', highlight: 'Opening matches of the Universe 6 vs. Universe 7 tournament.', url: 'https://animetoonhindi.com/multiquality/?url=hTlKZMTgF0p5e8H' },
+            { num: 34, arc: 'Tournament Matches', title: 'Piccolo vs. Frost! Put Everything on the Makankosappo!', jpTitle: 'ピッコロVSフロスト 魔貫光殺砲にすべてを賭けろ!', synopsis: 'Piccolo faces Frost in a tense match where hidden tricks change the course of the battle.', highlight: 'Piccolo battles Frost in the tournament ring.', url: 'https://animetoonhindi.com/multiquality/?url=hLk3uPftwKgM4ji' },
+            { num: 35, arc: 'Tournament Matches', title: 'Turn Your Anger into Strength! Vegeta’s Full-Bore Fight!', jpTitle: '怒りを力に変えろ! ベジータの全開バトル!', synopsis: 'After Frost’s true nature comes to light, Goku steps back in and Vegeta prepares to take the stage with full intensity.', highlight: 'Frost’s deception is exposed and Vegeta steps up.', url: 'https://animetoonhindi.com/multiquality/?url=xPtqCZJX17lN1a0' },
+            { num: 36, arc: 'Tournament Matches', title: 'We Have a Surprisingly Tough Opponent! Vegeta’s Explosion of Anger!', jpTitle: 'まさかの大苦戦! ベジータ怒りの大爆発!', synopsis: 'Vegeta faces Magetta’s heavy blows and rising heat in a grueling test of endurance.', highlight: 'Vegeta battles Magetta in a fiery ring clash.', url: 'hhttps://animetoonhindi.com/multiquality/?url=cviqBtmXtvHlulU' },
+            { num: 37, arc: 'Tournament Matches', title: 'Don’t Forget Your Saiyan Pride! Vegeta vs. the Sixth Universe Saiyan!', jpTitle: 'サイヤ人の誇りを忘れるな! ベジータVS第6宇宙のサイヤ人!', synopsis: 'Vegeta faces Universe 6 Saiyan Cabba and pushes him to unlock new strength.', highlight: 'Vegeta clashes with Universe 6 Saiyan Cabba.', url: 'https://animetoonhindi.com/multiquality/?url=mpQTMjvm3T9Mxp1' },
+            { num: 38, arc: 'Tournament Matches', title: 'The Sixth Universe’s Strongest Warrior! The Assassin Named Hit Appears!!', jpTitle: '第6宇宙最強の戦士! 殺し屋ヒット見参!!', synopsis: 'Hit steps into the arena for Universe 6, displaying calm precision and speed that put Vegeta on the defensive.', highlight: 'Universe 6’s ace fighter Hit enters the tournament.', url: 'https://animetoonhindi.com/multiquality/?url=7C1ZwCUOEQYvKdO' },
+            { num: 39, arc: 'Tournament Matches', title: 'A Developed “Time-Skip” Counterattack?! Will Goku’s New Technique Come Out?!', jpTitle: '成長した「時とばし」の反撃!? 出るか!? 悟空の新たな技!', synopsis: 'Goku faces Hit and studies his Time-Skip ability while looking for a way to counter it.', highlight: 'Goku confronts Hit’s Time-Skip ability.', url: 'https://animetoonhindi.com/multiquality/?url=Rf0MOq7sL82F8w7' },
+            { num: 40, arc: 'Tournament Matches', title: 'A Conclusion at Last! Will Beerus Win? Or Will Champa Win?', jpTitle: 'ついに決着! ビルスが勝つか? シャンパが勝つか?', synopsis: 'Goku and Hit push each other to their limits as the tournament reaches its thrilling climax.', highlight: 'Climactic showdown between Goku and Hit.', url: 'https://animetoonhindi.com/multiquality/?url=5QfP7rUSB6Q6RBX' },
+            { num: 41, arc: 'Tournament Matches', title: 'Come Forth, Dragon of the Gods, and Grant My Wish, Peachewan!', jpTitle: '出でよ神の龍 そして願いを叶えてちょんまげ!', synopsis: 'With the tournament concluded, the Super Dragon Balls are gathered to summon Super Shenron.', highlight: 'Summoning the Super Dragon Balls after the tournament.', url: 'https://animetoonhindi.com/multiquality/?url=wuf0DBF1YcIgOpJ' },
+            { num: 42, arc: 'Post-Tournament', title: 'A Chaotic Victory Banquet?! Monaka vs. Goku at Last?!', jpTitle: '波乱の祝勝会!? 対決! モナカVS孫悟空', synopsis: 'Celebrations after the tournament take a lively turn as Goku finally gets his wish for a match with Monaka.', highlight: 'Post-tournament banquet and Monaka’s match.', url: 'https://animetoonhindi.com/multiquality/?url=4SZNOb3UYYUuMlh' },
+            { num: 43, arc: 'Post-Tournament', title: 'Goku’s Ki Is Out of Control?! Taking Care of Pan Is Tough Work!', jpTitle: '悟空の「気」が制御不能!? パンのお世話で大騒ぎ!', synopsis: 'Back on Earth, Goku deals with lingering ki fluctuations while helping care for baby Pan.', highlight: 'Everyday life and ki control back on Earth.', url: https://animetoonhindi.com/multiquality/?url=OJCmn5QfeME3XSS' },
+            { num: 44, arc: 'Post-Tournament', title: 'The Seal of Planet Potaufeu and the Secrets of the “Superhuman Water”!', jpTitle: 'ポタウフ星の封印と解き放たれた「超人水」の秘密!', synopsis: 'Goten, Trunks, and Monaka get drawn into a mystery involving Superhuman Water on Planet Potaufeu.', highlight: 'Adventure on Planet Potaufeu.', url: 'https://animetoonhindi.com/multiquality/?url=0d5rXZnDsBjh15q' },
+            { num: 45, arc: 'Post-Tournament', title: 'Vegeta Disappears?! The Threat of a Duplicated Vegeta!', jpTitle: 'ベジータが消える!? 複製ベジータの脅威!', synopsis: 'Goku and the others confront a crisis triggered by the Superhuman Water on Planet Potaufeu.', highlight: 'High-stakes clash on Planet Potaufeu.', url: 'https://animetoonhindi.com/multiquality/?url=9jfRGYCNtAakXbF' },
+            { num: 46, arc: 'Post-Tournament', title: 'Goku vs. the Duplicated Vegeta! Which One Is Going to Win?!', jpTitle: '悟空VS複製ベジータ! 勝つのはどっちだ!?', synopsis: 'Goku faces off against the duplicate threat in a dramatic finale that wraps up Season 3.', highlight: 'Season 3 climax on Planet Potaufeu.', url: 'https://animetoonhindi.com/multiquality/?url=4YgNatHy5b8amM6' }
+        ];
+
+        const defaultTrailersData = [
+            {
+                id: 'trailer-pv',
+                tag: 'Opening Theme',
+                title: 'Chōzetsu Dynamic! — Kazuya Yoshii',
+                jp: 'OP「超絶☆ダイナミック!」吉井和哉',
+                desc: 'Navigate to the Dragon Ball Super opening theme.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Super+Opening+Chozetsu+Dynamic+Kazuya+Yoshii'
+            },
+            {
+                id: 'opening-theme',
+                tag: 'Universe 6 Clips',
+                title: 'Goku vs. Hit Tournament Highlights',
+                jp: 'ドラゴンボール超 悟空VSヒット',
+                desc: 'Explore highlights from the Universe 6 vs. Universe 7 tournament.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Super+Goku+vs+Hit+Universe+6+Tournament'
+            },
+            {
+                id: 'ending-theme',
+                tag: 'Saiyan Clash',
+                title: 'Vegeta vs. Cabba & Super Saiyan Blue',
+                jp: 'ベジータVSキャベ 超サイヤ人ブルー',
+                desc: 'Explore clips from Vegeta’s tournament battles in Season 3.',
+                url: 'https://www.youtube.com/results?search_query=Dragon+Ball+Super+Vegeta+vs+Cabba'
+            },
+            {
+                id: 'season-digest',
+                tag: 'Streaming Hub',
+                title: 'Watch Dragon Ball Super on Crunchyroll',
+                jp: 'ドラゴンボール超 配信ページ',
+                desc: 'Open the official Crunchyroll series page for Dragon Ball Super.',
+                url: 'https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super'
+            }
+        ];
+
+        const defaultRelatedPagesData = [
+            {
+                id: 'page-official',
+                title: 'Dragon Ball Official Site',
+                subtitle: 'en.dragon-ball-official.com — News, manga & anime',
+                url: 'https://en.dragon-ball-official.com/'
+            },
+            {
+                id: 'page-crunchyroll',
+                title: 'Crunchyroll Dragon Ball Super Hub',
+                subtitle: 'Stream Dragon Ball Super episodes',
+                url: 'https://www.crunchyroll.com/series/GR19V7816/dragon-ball-super'
+            },
+            {
+                id: 'page-kanzenshuu',
+                title: 'Kanzenshuu Dragon Ball Super Guide',
+                subtitle: 'Episode listings, staff & series archive',
+                url: 'https://www.kanzenshuu.com/episode/super/list/'
+            },
+            {
+                id: 'page-mal',
+                title: 'MyAnimeList Dragon Ball Super Entry',
+                subtitle: 'Cast, voice actors & episode guide',
+                url: 'https://myanimelist.net/anime/30694/Dragon_Ball_Super'
+            }
+        ];
+
+        const settingsData = [
+            {
+                name: 'Nameless Planet Arena',
+                jp: '名前のない星・格闘会場',
+                tag: 'Tournament Stage',
+                detail: 'Between U6 & U7',
+                desc: 'The neutral tournament stage where Universe 6 and Universe 7 face off for the Super Dragon Balls.'
+            },
+            {
+                name: 'Universe 6 & Planet Sadala',
+                jp: '第6宇宙・惑星サダラ',
+                tag: 'Twin Universe',
+                detail: 'Universe 6',
+                desc: 'Home to Champa, Vados, Cabba, and Hit, mirroring Universe 7 across the multiverse.'
+            },
+            {
+                name: 'Planet Potaufeu & Earth',
+                jp: 'ポタウフ星・地球',
+                tag: 'Post-Tournament Grounds',
+                detail: 'Universe 7',
+                desc: 'Where the fighters return after the tournament and face the Superhuman Water crisis.'
+            }
+        ];
+
+        const castCircleData = [
+            { name: 'SSJ Blue Goku', title: 'U7 Tournament Ace', quote: 'I’m going to show you everything I’ve got, Hit!' },
+            { name: 'Hit', title: 'U6 Assassin', quote: 'My time-skip improves with every fraction of a second.' },
+            { name: 'Champa', title: 'U6 God of Destruction', quote: 'Let’s settle this with a martial arts tournament!' },
+            { name: 'Cabba', title: 'U6 Saiyan', quote: 'I want to learn how to reach that power too, Master Vegeta!' },
+            { name: 'Vegeta', title: 'U7 Saiyan Prince', quote: 'Don’t forget your pride as a Saiyan!' },
+            { name: 'Zen-Oh', title: 'King of All', quote: 'That tournament looked really fun!' }
+        ];
+
+        // =========================================================================
+        // 2. ADMIN LINK STATE & PERSISTENCE
+        // =========================================================================
+        let isAdminUnlocked = false;
+
+        function cloneDefaults() {
+            const episodesMap = {};
+            defaultEpisodesData.forEach(ep => {
+                episodesMap[ep.num] = ep.url;
+            });
+            return {
+                trailers: defaultTrailersData.map(t => ({ id: t.id, url: t.url })),
+                pages: defaultRelatedPagesData.map(p => ({ id: p.id, url: p.url })),
+                episodes: episodesMap
+            };
+        }
+
+        function loadSavedLinks() {
+            const base = cloneDefaults();
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return base;
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.trailers)) {
+                    parsed.trailers.forEach(item => {
+                        const target = base.trailers.find(t => t.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (Array.isArray(parsed.pages)) {
+                    parsed.pages.forEach(item => {
+                        const target = base.pages.find(p => p.id === item.id);
+                        if (target && item.url) target.url = item.url;
+                    });
+                }
+                if (parsed.episodes && typeof parsed.episodes === 'object') {
+                    Object.keys(parsed.episodes).forEach(k => {
+                        if (parsed.episodes[k]) base.episodes[k] = parsed.episodes[k];
+                    });
+                }
+            } catch (err) {
+                console.warn('Could not load saved links:', err);
+            }
+            return base;
+        }
+
+        let savedLinks = loadSavedLinks();
+
+        function persistLinks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(savedLinks));
+            } catch (err) {
+                console.warn('Could not save links:', err);
+            }
+        }
+
+        // =========================================================================
+        // 3. RENDER CHARACTERS & SPOTLIGHT
+        // =========================================================================
+        let selectedCharacterId = charactersData[0].id;
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            const spotlight = document.getElementById('characterSpotlight');
+            if (!grid || !spotlight) return;
+
+            grid.innerHTML = charactersData.map(char => {
+                const active = char.id === selectedCharacterId;
+                return `
+                    <button type="button" data-char-id="${char.id}"
+                        class="text-left rounded-2xl p-5 border transition-all cursor-pointer ${
+                            active
+                                ? 'bg-slate-900 border-sky-400 shadow-lg shadow-sky-950/40 ring-1 ring-sky-400/50'
+                                : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                        }">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br ${char.accent} flex items-center justify-center font-jpSerif font-black text-slate-950 text-base mb-4 shadow">
+                            ${char.jpName.charAt(0)}
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-300 mb-1">${char.role}</div>
+                        <h3 class="font-serifDisplay font-bold text-base text-white">${char.name}</h3>
+                        <p class="font-jpSerif text-xs text-slate-400 mt-0.5">${char.jpName}</p>
+                    </button>
+                `;
+            }).join('');
+
+            grid.querySelectorAll('button[data-char-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedCharacterId = btn.getAttribute('data-char-id');
+                    renderCharacters();
+                });
+            });
+
+            const current = charactersData.find(c => c.id === selectedCharacterId) || charactersData[0];
+            spotlight.innerHTML = `
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${current.badgeColor}">${current.specialty}</span>
+                            <span class="text-xs text-slate-400">Side: ${current.apartment}</span>
+                        </div>
+                        <h3 class="font-serifDisplay text-2xl sm:text-3xl font-bold text-white">
+                            ${current.name} <span class="font-jpSerif text-base font-normal text-slate-400 ml-2">${current.jpName}</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${current.bio}</p>
+                    </div>
+                    <div class="lg:max-w-sm w-full p-5 rounded-2xl bg-slate-950/90 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300 mb-2">Iconic Super Season 3 Line</div>
+                        <p class="text-sm text-slate-200 italic leading-relaxed">“${current.quote}”</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 4. RENDER TECHNIQUES EXPLORER
+        // =========================================================================
+        let currentRoutineKey = 'cooking';
+
+        function renderRoutines() {
+            const visualCard = document.getElementById('routineVisualCard');
+            const itemsList = document.getElementById('routineItemsList');
+            const data = routinesData[currentRoutineKey];
+            if (!visualCard || !itemsList || !data) return;
+
+            document.querySelectorAll('.routine-tab').forEach(tab => {
+                const isSelected = tab.getAttribute('data-routine') === currentRoutineKey;
+                tab.className = isSelected
+                    ? 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-sky-400 text-slate-950 shadow cursor-pointer'
+                    : 'routine-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white cursor-pointer';
+            });
+
+            visualCard.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4" style="background:${data.color}22; color:${data.color}; border:1px solid ${data.color}55;">
+                        ${data.jp}
+                    </span>
+                    <h3 class="font-serifDisplay text-2xl font-bold text-white mb-3">${data.title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <span>Super Season 3 Arts Archive</span>
+                    <span class="font-bold" style="color:${data.color};">6 Signature Beats</span>
+                </div>
+            `;
+
+            itemsList.innerHTML = data.items.map(item => `
+                <div class="bg-slate-900/80 border border-slate-800 hover:border-sky-400/40 rounded-2xl p-5 transition-all">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black tracking-wider px-2.5 py-0.5 rounded-md bg-slate-950 text-sky-300 border border-slate-800">${item.num}</span>
+                        <span class="font-jpSerif text-xs text-slate-400">${item.jp}</span>
+                    </div>
+                    <h4 class="font-serifDisplay font-bold text-base text-white mb-1.5">${item.name}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // 5. RENDER ALL 19 EPISODES IMMEDIATELY WITH NAVIGATION
+        // =========================================================================
+        const episodesGrid = document.getElementById('episodesGrid');
+        const episodeSearch = document.getElementById('episodeSearch');
+        const arcFilter = document.getElementById('arcFilter');
+        const quickEpisodePills = document.getElementById('quickEpisodePills');
+        const episodeNavIndicator = document.getElementById('episodeNavIndicator');
+
+        function renderQuickEpisodePills() {
+            if (!quickEpisodePills) return;
+            quickEpisodePills.innerHTML = defaultEpisodesData.map(ep => {
+                const label = String(ep.num).padStart(2, '0');
+                return `
+                    <button type="button" data-jump-ep="${ep.num}"
+                        class="px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-950 hover:bg-sky-400 text-slate-300 hover:text-slate-950 border border-slate-800 hover:border-sky-300 transition-colors cursor-pointer">
+                        EP ${label}
+                    </button>
+                `;
+            }).join('');
+
+            quickEpisodePills.querySelectorAll('button[data-jump-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-jump-ep'));
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                    const card = document.getElementById(`episode-card-${epNum}`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('ring-2', 'ring-sky-400');
+                        setTimeout(() => card.classList.remove('ring-2', 'ring-sky-400'), 1600);
+                    }
+                });
+            });
+        }
+
+        function getFilteredEpisodes() {
+            const q = (episodeSearch?.value || '').trim().toLowerCase();
+            const arc = arcFilter?.value || 'ALL';
+
+            return defaultEpisodesData.filter(ep => {
+                const matchesArc = arc === 'ALL' || ep.arc === arc;
+                const epCode = `ep ${String(ep.num).padStart(2, '0')} episode ${ep.num}`;
+                const matchesQuery = !q ||
+                    ep.title.toLowerCase().includes(q) ||
+                    ep.jpTitle.toLowerCase().includes(q) ||
+                    ep.synopsis.toLowerCase().includes(q) ||
+                    epCode.includes(q);
+                return matchesArc && matchesQuery;
+            });
+        }
+
+        function renderEpisodes() {
+            if (!episodesGrid) return;
+            const list = getFilteredEpisodes();
+
+            if (episodeNavIndicator) {
+                episodeNavIndicator.textContent = list.length === defaultEpisodesData.length
+                    ? 'Showing All Super Season 3 Episodes 28 – 46'
+                    : `Showing ${list.length} of ${defaultEpisodesData.length} Episodes`;
+            }
+
+            if (list.length === 0) {
+                episodesGrid.innerHTML = `
+                    <div class="col-span-full bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center">
+                        <p class="text-slate-300 font-medium">No Dragon Ball Super Season 3 episodes match your search.</p>
+                        <button id="clearEpisodeFiltersBtn" type="button" class="mt-3 px-4 py-2 rounded-xl bg-sky-400 text-slate-950 text-xs font-bold cursor-pointer">
+                            Reset Filter
+                        </button>
+                    </div>
+                `;
+                document.getElementById('clearEpisodeFiltersBtn')?.addEventListener('click', () => {
+                    if (episodeSearch) episodeSearch.value = '';
+                    if (arcFilter) arcFilter.value = 'ALL';
+                    renderEpisodes();
+                });
+                return;
+            }
+
+            episodesGrid.innerHTML = list.map(ep => {
+                const epBadge = `EP ${String(ep.num).padStart(2, '0')}`;
+                const epUrl = savedLinks.episodes[ep.num] || ep.url;
+                return `
+                    <article id="episode-card-${ep.num}"
+                        class="h-full bg-slate-900/85 border border-slate-800 hover:border-sky-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-sky-400/15 border border-sky-300/35 text-sky-200 font-bold text-xs tracking-wider">
+                                    ${epBadge}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400 truncate">${ep.arc}</span>
+                            </div>
+
+                            <h3 class="font-serifDisplay font-bold text-base text-white leading-snug mb-1">
+                                ${ep.title}
+                            </h3>
+                            <p class="font-jpSerif text-xs text-indigo-300/90 mb-3">${ep.jpTitle}</p>
+                            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                                ${ep.synopsis}
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800/90 flex items-center justify-between gap-2">
+                            <button type="button" data-open-ep="${ep.num}"
+                                class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer">
+                                Details
+                            </button>
+                            <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 text-xs font-bold transition-colors">
+                                <span>Open Page</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            episodesGrid.querySelectorAll('button[data-open-ep]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const epNum = Number(btn.getAttribute('data-open-ep'));
+                    openEpisodeDetailModal(epNum);
+                });
+            });
+        }
+
+        function openEpisodeDetailModal(epNum) {
+            const modal = document.getElementById('episodeModal');
+            const content = document.getElementById('episodeModalContent');
+            const ep = defaultEpisodesData.find(item => item.num === epNum);
+            if (!modal || !content || !ep) return;
+
+            const epUrl = savedLinks.episodes[ep.num] || ep.url;
+            const epBadge = `EPISODE ${String(ep.num).padStart(2, '0')}`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-sky-400/15 text-sky-200 border border-sky-300/35">${epBadge}</span>
+                        <span class="text-xs text-slate-400">${ep.arc}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serifDisplay text-2xl font-bold text-white">${ep.title}</h3>
+                        <p class="font-jpSerif text-sm text-indigo-300 mt-1">${ep.jpTitle}</p>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">${ep.synopsis}</p>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300 mb-1">Key Episode Highlight</div>
+                        <p class="text-xs text-slate-200">${ep.highlight}</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            ${ep.num > 28 ? `<button type="button" data-modal-nav="${ep.num - 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">← EP ${String(ep.num - 1).padStart(2, '0')}</button>` : ''}
+                            ${ep.num < 46 ? `<button type="button" data-modal-nav="${ep.num + 1}" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 cursor-pointer">EP ${String(ep.num + 1).padStart(2, '0')} →</button>` : ''}
+                        </div>
+                        <a href="${epUrl}" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-400 hover:from-sky-300 hover:to-indigo-300 text-slate-950 font-bold text-xs shadow-lg">
+                            <span>Navigate to Episode Page</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            content.querySelectorAll('button[data-modal-nav]').forEach(navBtn => {
+                navBtn.addEventListener('click', () => {
+                    openEpisodeDetailModal(Number(navBtn.getAttribute('data-modal-nav')));
+                });
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // =========================================================================
+        // 6. RENDER TRAILERS, THEMES & OFFICIAL PAGES
+        // =========================================================================
+        function renderTrailersAndPages() {
+            const trailersGrid = document.getElementById('trailersNavGrid');
+            const pagesGrid = document.getElementById('relatedPagesGrid');
+
+            if (trailersGrid) {
+                trailersGrid.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const href = current?.url || item.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group bg-slate-900/85 border border-slate-800 hover:border-sky-400/55 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-lg">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-sky-400/15 text-sky-200 border border-sky-400/35">
+                                        ${item.tag}
+                                    </span>
+                                    <span class="text-slate-400 group-hover:text-sky-300 transition-colors text-sm">↗</span>
+                                </div>
+                                <h3 class="font-serifDisplay font-bold text-base text-white group-hover:text-sky-200 transition-colors mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="font-jpSerif text-xs text-indigo-300/90 mb-2">${item.jp}</p>
+                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-800/90 text-xs font-semibold text-sky-300 group-hover:translate-x-0.5 transition-transform">
+                                Navigate to External Page →
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            if (pagesGrid) {
+                pagesGrid.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const href = current?.url || page.url;
+                    return `
+                        <a href="${href}" target="_blank" rel="noopener noreferrer"
+                            class="group p-4 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-indigo-300/50 transition-all flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-sm text-white group-hover:text-indigo-300 transition-colors">${page.title}</div>
+                                <div class="text-xs text-slate-400 mt-1">${page.subtitle}</div>
+                            </div>
+                            <span class="text-slate-400 group-hover:text-indigo-300 text-sm shrink-0">↗</span>
+                        </a>
+                    `;
+                }).join('');
+            }
+        }
+
+        // =========================================================================
+        // 7. RENDER BATTLEFIELDS & FACTIONS
+        // =========================================================================
+        function renderCircles() {
+            const settingsList = document.getElementById('settingsList');
+            const castGrid = document.getElementById('castCircleGrid');
+            const quoteBox = document.getElementById('circleQuoteBox');
+
+            if (settingsList) {
+                settingsList.innerHTML = settingsData.map(loc => `
+                    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-sky-300">${loc.tag}</span>
+                            <span class="font-jpSerif text-xs text-slate-400">${loc.jp}</span>
+                        </div>
+                        <h4 class="font-serifDisplay font-bold text-lg text-white">${loc.name}</h4>
+                        <div class="text-xs text-indigo-300 font-medium mb-2">${loc.detail}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${loc.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (castGrid && quoteBox) {
+                castGrid.innerHTML = castCircleData.map((member, idx) => `
+                    <button type="button" data-cast-idx="${idx}"
+                        class="text-left p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-sky-400/50 transition-all cursor-pointer">
+                        <div class="font-bold text-xs sm:text-sm text-white">${member.name}</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">${member.title}</div>
+                    </button>
+                `).join('');
+
+                castGrid.querySelectorAll('button[data-cast-idx]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const member = castCircleData[Number(btn.getAttribute('data-cast-idx'))];
+                        if (member) {
+                            quoteBox.innerHTML = `<span class="text-sky-300 font-semibold not-italic">${member.name}:</span> “${member.quote}”`;
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 8. ADMIN LINK MANAGER (PIN 1960)
+        // =========================================================================
+        function showAdminBanner(msg) {
+            const banner = document.getElementById('adminFeedbackBanner');
+            if (!banner) return;
+            banner.textContent = msg;
+            banner.classList.remove('hidden');
+            setTimeout(() => banner.classList.add('hidden'), 2600);
+        }
+
+        function unlockAdminSession() {
+            isAdminUnlocked = true;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin Active';
+            if (studio) {
+                studio.classList.remove('hidden');
+                renderAdminStudio();
+                studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function lockAdminSession() {
+            isAdminUnlocked = false;
+            const studio = document.getElementById('adminLinkStudio');
+            const btnText = document.getElementById('adminBtnText');
+            if (btnText) btnText.textContent = 'Admin';
+            studio?.classList.add('hidden');
+        }
+
+        function renderAdminStudio() {
+            const trailersList = document.getElementById('adminTrailersLinksList');
+            const pagesList = document.getElementById('adminPagesLinksList');
+            const episodesList = document.getElementById('adminEpisodesLinksList');
+
+            if (trailersList) {
+                trailersList.innerHTML = defaultTrailersData.map(item => {
+                    const current = savedLinks.trailers.find(t => t.id === item.id);
+                    const val = current?.url || item.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${item.title}</label>
+                            <input type="url" data-admin-trailer="${item.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-sky-400">
+                        </div>
+                    `;
+                }).join('');
+
+                trailersList.querySelectorAll('input[data-admin-trailer]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-trailer');
+                        const target = savedLinks.trailers.find(t => t.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Trailer / Theme navigation link updated.');
+                        }
+                    });
+                });
+            }
+
+            if (pagesList) {
+                pagesList.innerHTML = defaultRelatedPagesData.map(page => {
+                    const current = savedLinks.pages.find(p => p.id === page.id);
+                    const val = current?.url || page.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">${page.title}</label>
+                            <input type="url" data-admin-page="${page.id}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-indigo-300">
+                        </div>
+                    `;
+                }).join('');
+
+                pagesList.querySelectorAll('input[data-admin-page]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const id = input.getAttribute('data-admin-page');
+                        const target = savedLinks.pages.find(p => p.id === id);
+                        if (target && input.value.trim()) {
+                            target.url = input.value.trim();
+                            persistLinks();
+                            renderTrailersAndPages();
+                            showAdminBanner('Portal page URL updated.');
+                        }
+                    });
+                });
+            }
+
+            if (episodesList) {
+                episodesList.innerHTML = defaultEpisodesData.map(ep => {
+                    const val = savedLinks.episodes[ep.num] || ep.url;
+                    return `
+                        <div class="space-y-1">
+                            <label class="block text-[11px] font-semibold text-slate-300">EP ${String(ep.num).padStart(2, '0')} — ${ep.title}</label>
+                            <input type="url" data-admin-ep="${ep.num}" value="${val}"
+                                class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-300">
+                        </div>
+                    `;
+                }).join('');
+
+                episodesList.querySelectorAll('input[data-admin-ep]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const epNum = Number(input.getAttribute('data-admin-ep'));
+                        if (epNum && input.value.trim()) {
+                            savedLinks.episodes[epNum] = input.value.trim();
+                            persistLinks();
+                            renderEpisodes();
+                            showAdminBanner(`Super Episode ${String(epNum).padStart(2, '0')} link updated.`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // =========================================================================
+        // 9. AMBIENT PARTICLE CANVAS (Super Saiyan Blue Cyan / Indigo Sparks)
+        // =========================================================================
+        let particleMode = 'sakura';
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initParticles() {
+            if (!canvas) return;
+            particles = Array.from({ length: 34 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: 2 + Math.random() * 4,
+                vx: -0.4 + Math.random() * 0.9,
+                vy: 0.4 + Math.random() * 0.9,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.03
+            }));
+        }
+
+        function animateParticles() {
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx + Math.sin(p.angle) * 0.3;
+                p.y -= p.vy * 0.85;
+                p.angle += p.spin;
+
+                if (p.y > canvas.height + 10) p.y = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle);
+                if (particleMode === 'sakura') {
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.9, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = 'rgba(129, 140, 248, 0.65)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.r * 0.85, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // =========================================================================
+        // 10. EVENT BINDINGS & INITIALIZATION
+        // =========================================================================
+        document.querySelectorAll('.routine-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentRoutineKey = tab.getAttribute('data-routine') || 'cooking';
+                renderRoutines();
+            });
+        });
+
+        episodeSearch?.addEventListener('input', renderEpisodes);
+        arcFilter?.addEventListener('change', renderEpisodes);
+
+        document.getElementById('closeEpisodeModal')?.addEventListener('click', () => {
+            const modal = document.getElementById('episodeModal');
+            modal?.classList.add('hidden');
+            modal?.classList.remove('flex');
+        });
+
+        document.getElementById('episodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'episodeModal') {
+                e.currentTarget.classList.add('hidden');
+                e.currentTarget.classList.remove('flex');
+            }
+        });
+
+        const adminPinModal = document.getElementById('adminPinModal');
+        const adminPinInput = document.getElementById('adminPinInput');
+        const adminPinError = document.getElementById('adminPinError');
+
+        function closePinModal() {
+            adminPinModal?.classList.add('hidden');
+            adminPinModal?.classList.remove('flex');
+            if (adminPinInput) adminPinInput.value = '';
+            adminPinError?.classList.add('hidden');
+        }
+
+        document.getElementById('adminToggleBtn')?.addEventListener('click', () => {
+            if (isAdminUnlocked) {
+                const studio = document.getElementById('adminLinkStudio');
+                studio?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            adminPinModal?.classList.remove('hidden');
+            adminPinModal?.classList.add('flex');
+            setTimeout(() => adminPinInput?.focus(), 50);
+        });
+
+        document.getElementById('closePinModalBtn')?.addEventListener('click', closePinModal);
+        document.getElementById('cancelPinBtn')?.addEventListener('click', closePinModal);
+
+        document.getElementById('adminPinForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ((adminPinInput?.value || '').trim() === ADMIN_PIN) {
+                closePinModal();
+                unlockAdminSession();
+            } else {
+                adminPinError?.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('lockAdminBtn')?.addEventListener('click', lockAdminSession);
+
+        document.getElementById('resetAllAdminLinksBtn')?.addEventListener('click', () => {
+            if (!isAdminUnlocked) return;
+            savedLinks = cloneDefaults();
+            persistLinks();
+            renderAdminStudio();
+            renderTrailersAndPages();
+            renderEpisodes();
+            showAdminBanner('Default Dragon Ball Super Season 3 links restored.');
+        });
+
+        document.getElementById('particleToggleBtn')?.addEventListener('click', () => {
+            particleMode = particleMode === 'sakura' ? 'sunlight' : 'sakura';
+            const label = document.getElementById('particleLabel');
+            const dot = document.getElementById('particleDot');
+            if (label) label.textContent = particleMode === 'sakura' ? 'Super Saiyan Blue Sparks' : 'Universe 6 Indigo Sparks';
+            if (dot) {
+                dot.className = particleMode === 'sakura'
+                    ? 'w-2 h-2 rounded-full bg-sky-300 animate-pulse'
+                    : 'w-2 h-2 rounded-full bg-indigo-400 animate-pulse';
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderCharacters();
+            renderRoutines();
+            renderQuickEpisodePills();
+            renderEpisodes();
+            renderTrailersAndPages();
+            renderCircles();
+        });
+    </script>
+</body>
+</html>
